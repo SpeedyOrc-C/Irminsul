@@ -4,27 +4,27 @@
 module Root.Teyvat.Liyue where
 -- 璃月
 
-import Irminsul (Entity(Atom))
+import Irminsul (Entity(Atom), AtomType (Character))
 
-character_Xiangling = Atom "Character_Xiangling"
-character_Xingqiu = Atom "Character_Xingqiu"
-character_Chongyun = Atom "Character_Chongyun"
-character_YunJin = Atom "Character_YunJin"
-character_Xinyan = Atom "Character_Xinyan"
-character_Ningguang = Atom "Character_Ningguang"
-character_Keqing = Atom "Character_Keqing"
-character_Qiqi = Atom "Character_Qiqi"
-character_Hutao = Atom "Character_Hutao"
-character_Ganyu = Atom "Character_Ganyu"
-character_Yelan = Atom "Character_Yelan"
-character_Beidou = Atom "Character_Beidou"
-character_Yaoyao = Atom "Character_Yaoyao"
-character_Yanfei = Atom "Character_Yanfei"
+xiangling = Atom "Xiangling" Character
+xingqiu = Atom "Xingqiu" Character
+chongyun = Atom "Chongyun" Character
+yunJin = Atom "YunJin" Character
+xinyan = Atom "Xinyan" Character
+ningguang = Atom "Ningguang" Character
+keqing = Atom "Keqing" Character
+qiqi = Atom "Qiqi" Character
+hutao = Atom "Hutao" Character
+ganyu = Atom "Ganyu" Character
+yelan = Atom "Yelan" Character
+beidou = Atom "Beidou" Character
+yaoyao = Atom "Yaoyao" Character
+yanfei = Atom "Yanfei" Character
 
-character_XiaoAlatus = Atom "Character_XiaoAlatus"
-character_Bosacius = Atom "Character_Bosacius"
-character_Indarias = Atom "Character_Indarias"
-character_Bonanus = Atom "Character_Bonanus"
-character_Menogias = Atom "Character_Menogias"
-character_Pervases = Atom "Character_Pervases"
+xiaoAlatus = Atom "XiaoAlatus" Character
+bosacius = Atom "Bosacius" Character
+indarias = Atom "Indarias" Character
+bonanus = Atom "Bonanus" Character
+menogias = Atom "Menogias" Character
+pervases = Atom "Pervases" Character
 

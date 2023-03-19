@@ -3,17 +3,14 @@
 
 module Root.Gender where
     
-import Irminsul (Entity(Cluster))
-import Root.Teyvat.Mondstadt (character_Venti)
+import Irminsul (Entity(Cluster), ClusterType (Property))
 
 cluster_Male :: Entity
 cluster_Male =
-    Cluster "Cluster_Male" males []
-    where males = [
-            ]
+    Cluster "Cluster_Male" Property [
+    ] []
 
 cluster_Female :: Entity
 cluster_Female =
-    Cluster "Cluster_Female" females []
-    where females = [
-            ]
+    Cluster "Cluster_Female" Property [
+    ] []

@@ -5,8 +5,8 @@ module Root where
 
 import Irminsul (Entity(Atom))
 
-character_Lumine = Atom "Character_Lumine"
-character_Aether = Atom "Character_Aether"
+character_Lumine = Atom "Lumine"
+character_Aether = Atom "Aether"
 
-character_Alloy = Atom "Character_Alloy"
-character_Rost = Atom "Character_Rost"
+character_Alloy = Atom "Alloy"
+character_Rost = Atom "Rost"

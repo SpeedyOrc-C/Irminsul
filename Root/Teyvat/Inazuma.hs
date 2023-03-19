@@ -4,19 +4,18 @@
 module Root.Teyvat.Inazuma where
 -- 稲妻
 
-import Irminsul (Entity(Atom))
+import Irminsul (Entity(Atom), AtomType (Character))
 
-character_EiRaiden = Atom "Character_EiRaiden"
-character_MakotoRaiden = Atom "Character_MakotoRaiden"
+eiRaiden = Atom "EiRaiden" Character
+makotoRaiden = Atom "MakotoRaiden" Character
 
-character_AyakaKamisato = Atom "Character_AyakaKamisato"
-character_AyatoKamisato = Atom "Character_AyatoKamisato"
-character_Sayu = Atom "Character_Sayu"
-character_MikoYae = Atom "Character_MikoYae"
-character_SaraKujo = Atom "Character_SaraKujo"
-character_ShinobuKuki = Atom "Character_ShinobuKuki"
-character_IttoArataki = Atom "Character_IttoArataki"
-
-character_YoimiyaNaganohara = Atom "Character_YoimiyaNaganohara"
-character_KokomiSangonomiya = Atom "Character_KokomiSangonomiya"
+ayakaKamisato = Atom "AyakaKamisato" Character
+ayatoKamisato = Atom "AyatoKamisato" Character
+sayu = Atom "Sayu" Character
+mikoYae = Atom "MikoYae" Character
+saraKujo = Atom "SaraKujo" Character
+shinobuKuki = Atom "ShinobuKuki" Character
+ittoArataki = Atom "IttoArataki" Character
+yoimiyaNaganohara = Atom "YoimiyaNaganohara" Character
+kokomiSangonomiya = Atom "KokomiSangonomiya" Character
 

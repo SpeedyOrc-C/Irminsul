@@ -3,7 +3,7 @@
 
 module Root.Teyvat.Khaenriah where
 
-import Irminsul (Entity(Atom))
+import Irminsul (Entity(Atom), AtomType (Character))
 
-character_Albedo = Atom "Character_Albedo"
-character_AlberichKaeya = Atom "Character_AlberichKaeya"
+albedo = Atom "Albedo" Character
+kaeyaAlberich = Atom "KaeyaAlberich" Character

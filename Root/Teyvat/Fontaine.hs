@@ -3,6 +3,6 @@
 
 module Root.Teyvat.Fontaine where
 
-import Irminsul (Entity(Atom), AtomType (Character))
+import Irminsul
 
-megistusAstrologistMona = Atom "MegistusAstrologistMona" Character
+monaAstrologistMegistus = Atom "MonaAstrologistMegistus" Character

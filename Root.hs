@@ -3,10 +3,22 @@
 
 module Root where
 
-import Irminsul (Entity(Atom))
+import Irminsul
+import Root.Teyvat (teyvat)
 
-character_Lumine = Atom "Lumine"
-character_Aether = Atom "Aether"
+lumine = Atom "Lumine" Character
+aether = Atom "Aether" Character
 
-character_Alloy = Atom "Alloy"
-character_Rost = Atom "Rost"
+alloy = Atom "Alloy" Character
+rost = Atom "Rost" Character
+
+root = clusterNode "Root" Root
+    [
+        
+    ]
+    [
+
+    ]
+    [
+        teyvat
+    ]

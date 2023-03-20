@@ -1,19 +1,17 @@
-module Root.Teyvat.Liyue.WanminRestaurant where
--- 万民堂
+module Root.Teyvat.Hexenzirkel where
 
 import Irminsul
+import Root.Teyvat.Khaenriah (rhinedottir)
 
 -- TODO: Topmost atoms goes here
-xiangling = Atom "Xiangling" Character
-guoba = Atom "Guoba" Character;
-    marchosius = guoba
+
 
 -- TODO: Topmost relations goes here
 
 
 thisAtoms = [
-    xiangling,
-    guoba
+    rhinedottir
+    -- TODO: Put all topmost atoms into this list
     ]
 
 thisRelations = [
@@ -24,8 +22,8 @@ thisChildClusters = [
     -- TODO: Put all child clusters into this list
     ]
 
-wanminRestaurant = mergeFromChildClusters
-    (Cluster "WanminRestaurant" Organization thisAtoms thisRelations)
+hexenzirkel = mergeFromChildClusters
+    (Cluster "Hexenzirkel" Organization thisAtoms thisRelations)
     thisChildClusters
 
 index = generateIndex thisChildClusters

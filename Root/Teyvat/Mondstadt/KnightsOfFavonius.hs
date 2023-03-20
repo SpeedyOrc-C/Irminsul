@@ -6,17 +6,15 @@ noelle = Atom "Noelle" Character
 jeanGunnhildr = Atom "JeanGunnhildr" Character
 eulaLaurence = Atom "EulaLaurence" Character
 
-thisAtoms = [
-    noelle,
-    jeanGunnhildr,
-    eulaLaurence
+knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
+    [
+        noelle,
+        jeanGunnhildr,
+        eulaLaurence
     ]
+    [
 
-thisRelations = [
-    
     ]
+    [
 
-knightsOfFavonius = Cluster
-    "KnightsOfFavonius" Organization thisAtoms thisRelations
-
-index = ClusterIndex []
+    ]

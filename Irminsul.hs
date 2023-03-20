@@ -1,10 +1,12 @@
 module Irminsul where
 
 import Milestone
+import Data.List (nub)
 
 data Language
     = ZhCn
     | EnUs
+    deriving (Eq, Show)
 
 class Unique object => Translatable object where
     translate :: Language -> object -> Information
@@ -18,39 +20,41 @@ instance Unique Entity where
     uniqueId (Atom id t) = show t ++ "-" ++ id
     uniqueId (Cluster id t _ _) = show t ++ "-" ++ id
 
+instance Eq Entity where
+    (==) :: Entity -> Entity -> Bool
+    (Atom id1 type1) == (Atom id2 type2) = id1 == id2 && type1 == type2
+    (Cluster id1 type1 _ _) == (Cluster id2 type2 _ _) = id1 == id2 && type1 == type2
+    _ == _ = False
+
 instance Unique Action where
     uniqueId :: Action -> String
-    uniqueId = actionIdentifier
+    uniqueId (Action id) = id
 
 instance Unique Relation where
+    uniqueId :: Relation -> String
     uniqueId (Relation action from to) =
         show action ++ "_"
         ++ show from ++ "."
         ++ show to
 
 
-newtype Action = Action {
-        actionIdentifier :: String
-    }
+newtype Action = Action String deriving (Eq)
 
 instance Show Action where
-    show = actionIdentifier
+    show :: Action -> String
+    show (Action id) = id
 
 
 data Relation =
     Relation Action Entity Entity
+    deriving Eq
 
 instance Show Relation where
+    show :: Relation -> String
     show (Relation action from to) =
         show action ++ "("
         ++ show from ++ ", "
         ++ show to ++ ")"
-
-mother = Relation $ Action "Mother"
-father = Relation $ Action "Father"
-child = Relation $ Action "Child"
-youngerSister = Relation $ Action "YoungerSister"
-elderSister = Relation $ Action "ElderSister"
 
 
 data Time
@@ -59,30 +63,48 @@ data Time
     deriving Show
 
 data Existence
-    = Before Time
-    | UntilNow
+    = Always
+    | Before Time
     | After Time
     | Time `Between` Time
-    | Always
+    | UntilNow
     | Unknown
     deriving Show
 
+data Alias = Alias {
+        alias :: String,
+        explanation :: String
+    } deriving Show
+
 data Information = Information {
         name :: String,
+        aliases :: [Alias],
         existence :: Existence,
-        introduction :: String
+        detail :: String
     } deriving Show
 
 data AtomType
     = Character
     | Object
-    deriving Show
+    deriving (Eq, Show)
 
 data ClusterType
-    = Country
+    = Root
+    | World
+    | Country
     | Organization
     | Property
-    deriving Show
+    deriving (Eq, Show)
+
+data IndexedSetFamily a = IndexedSetFamily {
+    indices :: [a],
+    elements :: [a]
+}
+
+instance Show a => Show (IndexedSetFamily a) where
+  show :: Show a => IndexedSetFamily a -> String
+  show = show . indices
+
 
 data Entity
     = Atom {
@@ -92,8 +114,8 @@ data Entity
     | Cluster {
         entityIdentifier :: String,
         clusterType :: ClusterType,
-        entities :: [Entity],
-        relations :: [Relation]
+        entities :: IndexedSetFamily Entity,
+        relations :: IndexedSetFamily Relation
     }
 
 instance Show Entity where
@@ -110,15 +132,37 @@ newtype ClusterIndex = ClusterIndex [String] deriving Show
 generateIndex :: [Entity] -> ClusterIndex
 generateIndex = ClusterIndex . map entityIdentifier
 
+clusterNode ::
+        String      -- node name
+    ->  ClusterType -- node type
+    ->  [Entity]    -- entities
+    ->  [Relation]  -- relations
+    ->  [Entity]    -- child clusters
+    ->  Entity
 {-
-Merge a parent cluster's children into their parent.
-Only merge entities and relations,
-identifier and type still follows parent's.
+    Create a new cluster node, where all entities and relations from children
+    are appended to this new node.
 -}
-mergeFromChildClusters :: Entity -> [Entity] -> Entity
-mergeFromChildClusters
-    (Cluster parentIdentifier parentType parentEntities parentRelations)
-    children
-    = Cluster parentIdentifier parentType
-        (concat $ parentEntities : map entities children)
-        (concat $ parentRelations : map relations children)
+clusterNode name clusterType pEntities pRelations children =
+    Cluster name clusterType
+        (IndexedSetFamily
+            (pEntities ++ children)
+            (nub $ concatMap (elements . entities) children))
+        (IndexedSetFamily
+            pRelations
+            (nub $ concatMap (elements . relations) children))
+
+
+clusterLeaf ::
+        String      -- leaf name
+    ->  ClusterType -- leaf type
+    ->  [Entity]    -- entities
+    ->  [Relation]  -- relations
+    ->  Entity
+{-
+    Create a new leaf node, which it has no children.
+-}
+clusterLeaf name clusterType entities relations =
+    Cluster name clusterType
+        (IndexedSetFamily entities entities)
+        (IndexedSetFamily relations relations)

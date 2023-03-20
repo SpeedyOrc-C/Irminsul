@@ -4,10 +4,13 @@
 module Root.Teyvat.Mondstadt where
 
 import Irminsul
+import CommonRelations
 import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius, jeanGunnhildr)
 import Root.Teyvat.Mondstadt.FavoniusChurch (favoniusChurch, barbaraGunnhildr)
+import Root.Teyvat.Fontaine (monaAstrologistMegistus)
 
-venti = Atom "Venti" Character
+venti = Atom "venti" Character;
+    barbatos = venti
 
 amber = Atom "Amber" Character
 lisa = Atom "Lisa" Character
@@ -17,28 +20,23 @@ bennett = Atom "Bennett" Character
 thoma = Atom "Thoma" Character
 fischlVonLuftschlossNarfidort = Atom "FischlVonLuftschlossNarfidort" Character
 
-thisAtoms = [
-    venti,
-    amber,
-    lisa,
-    sucrose,
-    razor,
-    bennett,
-    thoma,
-    fischlVonLuftschlossNarfidort
+mondstadt = clusterNode "Mondstadt" Country
+    [
+        barbatos,
+        amber,
+        lisa,
+        sucrose,
+        razor,
+        bennett,
+        thoma,
+        fischlVonLuftschlossNarfidort,
+        monaAstrologistMegistus
     ]
-
-thisRelations = [
-    barbaraGunnhildr `youngerSister` jeanGunnhildr
+    [
+        barbaraGunnhildr `youngerSister` jeanGunnhildr,
+        jeanGunnhildr `elderSister` barbaraGunnhildr
     ]
-
-thisChildClusters = [
-    favoniusChurch,
-    knightsOfFavonius
+    [
+        favoniusChurch,
+        knightsOfFavonius
     ]
-
-mondstadt = mergeFromChildClusters
-    (Cluster "Mondstadt" Country thisAtoms thisRelations)
-    thisChildClusters
-
-index = generateIndex thisChildClusters

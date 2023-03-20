@@ -4,9 +4,12 @@
 module Root.Teyvat.Liyue where
 -- 璃月
 
-import Irminsul (Entity(Atom), AtomType (Character))
+import Irminsul
+import Root.Teyvat.Liyue.Adepti (adepti)
 
-xiangling = Atom "Xiangling" Character
+zhongli = Atom "Zhongli" Character;
+    morax = zhongli
+
 xingqiu = Atom "Xingqiu" Character
 chongyun = Atom "Chongyun" Character
 yunJin = Atom "YunJin" Character
@@ -21,10 +24,26 @@ beidou = Atom "Beidou" Character
 yaoyao = Atom "Yaoyao" Character
 yanfei = Atom "Yanfei" Character
 
-xiaoAlatus = Atom "XiaoAlatus" Character
-bosacius = Atom "Bosacius" Character
-indarias = Atom "Indarias" Character
-bonanus = Atom "Bonanus" Character
-menogias = Atom "Menogias" Character
-pervases = Atom "Pervases" Character
+liyue = clusterNode "Liyue" Country
+    [
+        morax,
+        xingqiu,
+        chongyun,
+        yunJin,
+        xinyan,
+        ningguang,
+        keqing,
+        qiqi,
+        hutao,
+        ganyu,
+        yelan,
+        beidou,
+        yaoyao,
+        yanfei
+    ]
+    [
 
+    ]
+    [
+        adepti
+    ]

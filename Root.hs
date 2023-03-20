@@ -6,9 +6,6 @@ module Root where
 import Irminsul
 import Root.Teyvat (teyvat)
 
-lumine = Atom "Lumine" Character
-aether = Atom "Aether" Character
-
 alloy = Atom "Alloy" Character
 rost = Atom "Rost" Character
 

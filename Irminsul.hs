@@ -147,10 +147,10 @@ clusterNode name clusterType pEntities pRelations children =
     Cluster name clusterType
         (IndexedSetFamily
             (pEntities ++ children)
-            (nub $ concatMap (elements . entities) children))
+            (pEntities ++ children ++ nub (concatMap (elements . entities) children)))
         (IndexedSetFamily
             pRelations
-            (nub $ concatMap (elements . relations) children))
+            (pRelations ++ nub (concatMap (elements . relations) children)))
 
 
 clusterLeaf ::

@@ -3,14 +3,10 @@
 
 module Root.Gender where
     
-import Irminsul (Entity(Cluster), ClusterType (Property))
+import Irminsul
 
-cluster_Male :: Entity
-cluster_Male =
-    Cluster "Cluster_Male" Property [
+male = clusterLeaf "Cluster_Male" Property [
     ] []
 
-cluster_Female :: Entity
-cluster_Female =
-    Cluster "Cluster_Female" Property [
+female = clusterLeaf "Cluster_Female" Property [
     ] []

@@ -1,6 +1,6 @@
 module CommonRelations where
 
-import Irminsul (Relation(Relation), Action (Action))
+import Irminsul
 
 ra = Relation . Action
 
@@ -15,3 +15,5 @@ elderBrother = ra "ElderBrother"
 
 liveIn = ra "LiveIn"
 love = ra "Love"
+create = ra "Create"
+kill = ra "Kill"

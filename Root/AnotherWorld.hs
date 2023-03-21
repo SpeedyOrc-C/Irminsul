@@ -2,10 +2,10 @@ module Root.AnotherWorld where
     
 import Irminsul
 
-travellerArchonSide = Atom "TravellerArchonSide" Character
-travellerAbyssSide = Atom "TravellerAbyssSide" Character
-lumine = Atom "Lumine" Character
-aether = Atom "Aether" Character
+travellerArchonSide = ach "TravellerArchonSide"
+travellerAbyssSide = ach "TravellerAbyssSide"
+lumine = ach "Lumine"
+aether = ach "Aether"
 
 anotherWorld = clusterNode "AnotherWorld" World
     [

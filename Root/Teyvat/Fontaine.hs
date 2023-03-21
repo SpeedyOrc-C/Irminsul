@@ -5,4 +5,4 @@ module Root.Teyvat.Fontaine where
 
 import Irminsul
 
-monaAstrologistMegistus = Atom "MonaAstrologistMegistus" Character
+monaAstrologistMegistus = ach "MonaAstrologistMegistus"

@@ -6,24 +6,24 @@ module Root.Teyvat.Inazuma where
 
 import Irminsul
 
-eiRaiden = Atom "EiRaiden" Character;
+eiRaiden = ach "EiRaiden";
     beelzebul = eiRaiden
-raidenShogun = Atom "RaidenShogun" Character
-makotoRaiden = Atom "MakotoRaiden" Character;
+raidenShogun = ach "RaidenShogun"
+makotoRaiden = ach "MakotoRaiden";
     baal = makotoRaiden
-kunikuzushiRaiden = Atom "KunikuzushiRaiden" Character;
+kunikuzushiRaiden = ach "KunikuzushiRaiden";
     wanderer = kunikuzushiRaiden;
     scaramouche = kunikuzushiRaiden
 
-ayakaKamisato = Atom "AyakaKamisato" Character
-ayatoKamisato = Atom "AyatoKamisato" Character
-sayu = Atom "Sayu" Character
-mikoYae = Atom "MikoYae" Character
-saraKujo = Atom "SaraKujo" Character
-shinobuKuki = Atom "ShinobuKuki" Character
-ittoArataki = Atom "IttoArataki" Character
-yoimiyaNaganohara = Atom "YoimiyaNaganohara" Character
-kokomiSangonomiya = Atom "KokomiSangonomiya" Character
+ayakaKamisato = ach "AyakaKamisato"
+ayatoKamisato = ach "AyatoKamisato"
+sayu = ach "Sayu"
+mikoYae = ach "MikoYae"
+saraKujo = ach "SaraKujo"
+shinobuKuki = ach "ShinobuKuki"
+ittoArataki = ach "IttoArataki"
+yoimiyaNaganohara = ach "YoimiyaNaganohara"
+kokomiSangonomiya = ach "KokomiSangonomiya"
 
 inazuma = clusterNode "Inazuma" Country
     [

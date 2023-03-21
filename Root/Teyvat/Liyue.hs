@@ -7,22 +7,22 @@ module Root.Teyvat.Liyue where
 import Irminsul
 import Root.Teyvat.Liyue.Adepti (adepti)
 
-zhongli = Atom "Zhongli" Character;
+zhongli = ach "Zhongli";
     morax = zhongli
 
-xingqiu = Atom "Xingqiu" Character
-chongyun = Atom "Chongyun" Character
-yunJin = Atom "YunJin" Character
-xinyan = Atom "Xinyan" Character
-ningguang = Atom "Ningguang" Character
-keqing = Atom "Keqing" Character
-qiqi = Atom "Qiqi" Character
-hutao = Atom "Hutao" Character
-ganyu = Atom "Ganyu" Character
-yelan = Atom "Yelan" Character
-beidou = Atom "Beidou" Character
-yaoyao = Atom "Yaoyao" Character
-yanfei = Atom "Yanfei" Character
+xingqiu = ach "Xingqiu"
+chongyun = ach "Chongyun"
+yunJin = ach "YunJin"
+xinyan = ach "Xinyan"
+ningguang = ach "Ningguang"
+keqing = ach "Keqing"
+qiqi = ach "Qiqi"
+hutao = ach "Hutao"
+ganyu = ach "Ganyu"
+yelan = ach "Yelan"
+beidou = ach "Beidou"
+yaoyao = ach "Yaoyao"
+yanfei = ach "Yanfei"
 
 liyue = clusterNode "Liyue" Country
     [

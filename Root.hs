@@ -6,8 +6,8 @@ module Root where
 import Irminsul
 import Root.Teyvat (teyvat)
 
-alloy = Atom "Alloy" Character
-rost = Atom "Rost" Character
+alloy = ach "Alloy"
+rost = ach "Rost"
 
 root = clusterNode "Root" Root
     [

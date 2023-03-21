@@ -4,10 +4,10 @@ import Irminsul
 import Root.Teyvat.Khaenriah (rhinedottir)
 import CommonRelations (mother)
 
-alice = Atom "Alice" Character
-iIvanovnaN = Atom "IIvanonaN" Character
-andersdotter = Atom "Andersdotter" Character
-barbeloth = Atom "Barbeloth" Character
+alice = ach "Alice"
+iIvanovnaN = ach "IIvanonaN"
+andersdotter = ach "Andersdotter"
+barbeloth = ach "Barbeloth"
 
 
 hexenzirkel = clusterNode "Hexenzirkel" Organization

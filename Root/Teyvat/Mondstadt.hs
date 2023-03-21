@@ -9,16 +9,16 @@ import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius, jeanGunnhildr
 import Root.Teyvat.Mondstadt.FavoniusChurch (favoniusChurch, barbaraGunnhildr)
 import Root.Teyvat.Fontaine (monaAstrologistMegistus)
 
-venti = Atom "venti" Character;
+venti = ach "venti";
     barbatos = venti
 
-amber = Atom "Amber" Character
-lisa = Atom "Lisa" Character
-sucrose = Atom "Sucrose" Character
-razor = Atom "Razor" Character
-bennett = Atom "Bennett" Character
-thoma = Atom "Thoma" Character
-fischlVonLuftschlossNarfidort = Atom "FischlVonLuftschlossNarfidort" Character
+amber = ach "Amber"
+lisa = ach "Lisa"
+sucrose = ach "Sucrose"
+razor = ach "Razor"
+bennett = ach "Bennett"
+thoma = ach "Thoma"
+fischlVonLuftschlossNarfidort = ach "FischlVonLuftschlossNarfidort"
 
 mondstadt = clusterNode "Mondstadt" Country
     [

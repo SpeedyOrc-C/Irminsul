@@ -132,6 +132,10 @@ newtype ClusterIndex = ClusterIndex [String] deriving Show
 generateIndex :: [Entity] -> ClusterIndex
 generateIndex = ClusterIndex . map entityIdentifier
 
+{- |
+    Create a new cluster node, where all entities and relations from children
+    are appended to this new node.
+-}
 clusterNode ::
         String      -- node name
     ->  ClusterType -- node type
@@ -139,10 +143,6 @@ clusterNode ::
     ->  [Relation]  -- relations
     ->  [Entity]    -- child clusters
     ->  Entity
-{-
-    Create a new cluster node, where all entities and relations from children
-    are appended to this new node.
--}
 clusterNode name clusterType pEntities pRelations children =
     Cluster name clusterType
         (IndexedSetFamily
@@ -152,17 +152,19 @@ clusterNode name clusterType pEntities pRelations children =
             pRelations
             (pRelations ++ nub (concatMap (elements . relations) children)))
 
-
+{- |
+    Create a new leaf node, which it has no children.
+-}
 clusterLeaf ::
         String      -- leaf name
     ->  ClusterType -- leaf type
     ->  [Entity]    -- entities
     ->  [Relation]  -- relations
     ->  Entity
-{-
-    Create a new leaf node, which it has no children.
--}
 clusterLeaf name clusterType entities relations =
     Cluster name clusterType
         (IndexedSetFamily entities entities)
         (IndexedSetFamily relations relations)
+
+-- | Shortcut of creating a Atom Character
+ach = (`Atom` Character)

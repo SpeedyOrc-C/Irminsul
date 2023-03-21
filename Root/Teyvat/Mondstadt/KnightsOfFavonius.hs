@@ -4,10 +4,10 @@ import Irminsul
 import CommonRelations (daughter)
 import Root.AnotherWorld (travellerArchonSide)
 
-noelle = Atom "Noelle" Character
-jeanGunnhildr = Atom "JeanGunnhildr" Character
-eulaLaurence = Atom "EulaLaurence" Character
-klee = Atom "Klee" Character
+noelle = ach "Noelle"
+jeanGunnhildr = ach "JeanGunnhildr"
+eulaLaurence = ach "EulaLaurence"
+klee = ach "Klee"
 
 knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
     [

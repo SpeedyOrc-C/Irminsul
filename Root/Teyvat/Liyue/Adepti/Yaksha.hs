@@ -3,13 +3,13 @@ module Root.Teyvat.Liyue.Adepti.Yaksha where
 
 import Irminsul
 
-xiao = Atom "Xiao" Character;
+xiao = ach "Xiao";
     alatus = xiao
-bosacius = Atom "Bosacius" Character
-indarias = Atom "Indarias" Character
-bonanus = Atom "Bonanus" Character
-menogias = Atom "Menogias" Character
-pervases = Atom "Pervases" Character
+bosacius = ach "Bosacius"
+indarias = ach "Indarias"
+bonanus = ach "Bonanus"
+menogias = ach "Menogias"
+pervases = ach "Pervases"
 
 yaksha = clusterLeaf "Yaksha" Organization
     [

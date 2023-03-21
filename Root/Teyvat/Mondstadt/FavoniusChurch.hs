@@ -2,8 +2,8 @@ module Root.Teyvat.Mondstadt.FavoniusChurch where
 
 import Irminsul
 
-barbaraGunnhildr = Atom "BarbaraGunnhildr" Character
-rosaria = Atom "Rosaria" Character
+barbaraGunnhildr = ach "BarbaraGunnhildr"
+rosaria = ach "Rosaria"
 
 favoniusChurch = clusterLeaf "FavoniusChurch"
     Organization

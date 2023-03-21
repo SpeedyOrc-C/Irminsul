@@ -2,7 +2,7 @@ module Root.Teyvat.Sumeru where
 
 import Irminsul
 
-nahida = Atom "Nahida" Character;
+nahida = ach "Nahida";
     buer = nahida
 
 sumeru = clusterNode "Sumeru" Country

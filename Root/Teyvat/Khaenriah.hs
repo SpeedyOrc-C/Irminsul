@@ -6,13 +6,13 @@ module Root.Teyvat.Khaenriah where
 import Irminsul
 import CommonRelations
 
-albedo = Atom "Albedo" Character
-rhinedottir = Atom "Rhinedottir" Character
+albedo = ach "Albedo"
+rhinedottir = ach "Rhinedottir"
 
-kaeyaAlberich = Atom "KaeyaAlberich" Character
-chlotharAlberich = Atom "ChlotharAlberich" Character
+kaeyaAlberich = ach "KaeyaAlberich"
+chlotharAlberich = ach "ChlotharAlberich"
 
-dainsleif = Atom "Dainsleif" Character
+dainsleif = ach "Dainsleif"
 
 khaenriah = clusterNode "Khaenriah" Country
     [

@@ -4,8 +4,8 @@ module Root.Teyvat.Liyue.WanminRestaurant where
 import Irminsul
 
 -- TODO: Topmost atoms goes here
-xiangling = Atom "Xiangling" Character
-guoba = Atom "Guoba" Character;
+xiangling = ach "Xiangling"
+guoba = ach "Guoba";
     marchosius = guoba
 
 -- TODO: Topmost relations goes here

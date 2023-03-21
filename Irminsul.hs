@@ -45,17 +45,27 @@ instance Show Action where
     show (Action id) = id
 
 
-data Relation =
-    Relation Action Entity Entity
-    deriving Eq
+data Relation
+    -- | Unidirectional relation
+    = Relation Action Entity Entity
+    -- | Bidirectional relation
+    | BiRelation Action Entity Entity
+    deriving (Eq)
+
+expandBiRelation :: [Relation] -> [Relation]
+expandBiRelation relations = do
+    relation <- relations
+    p relation
+    where
+        p r@(Relation {}) = [r]
+        p r@(BiRelation action a b) = [Relation action a b, Relation action b a]
 
 instance Show Relation where
     show :: Relation -> String
     show (Relation action from to) =
-        show action ++ "("
-        ++ show from ++ ", "
-        ++ show to ++ ")"
-
+        show from ++ " --" ++ show action ++ "-> " ++ show to
+    show (BiRelation action a b) =
+        show a ++ " <-" ++ show action ++ "-> " ++ show b
 
 data Time
     = YearsAgo Integer

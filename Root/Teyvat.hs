@@ -1,6 +1,7 @@
 module Root.Teyvat where
 
 import Irminsul
+import Shortcut
 import CommonRelations
 
 import Root.Teyvat.Mondstadt (mondstadt)

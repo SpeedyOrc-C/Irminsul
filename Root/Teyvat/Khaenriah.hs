@@ -4,6 +4,7 @@
 module Root.Teyvat.Khaenriah where
 
 import Irminsul
+import Shortcut
 import CommonRelations
 
 albedo = ach "Albedo"

@@ -2,6 +2,7 @@ module Root.Teyvat.Liyue.WangshengFuneralParlor where
 -- 往生堂
 
 import Irminsul
+import Shortcut
 
 zhongli = ach "Zhongli";
     morax = zhongli

@@ -1,6 +1,7 @@
 module Root.Teyvat.Hexenzirkel where
 
 import Irminsul
+import Shortcut
 import Root.Teyvat.Khaenriah (rhinedottir)
 import CommonRelations (mother)
 

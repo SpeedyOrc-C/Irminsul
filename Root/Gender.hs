@@ -4,6 +4,7 @@
 module Root.Gender where
     
 import Irminsul
+import Shortcut
 
 male = clusterLeaf "Cluster_Male" Property [
     ] []

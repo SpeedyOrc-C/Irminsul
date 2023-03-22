@@ -5,6 +5,7 @@ module Root.Teyvat.Inazuma where
 -- 稲妻
 
 import Irminsul
+import Shortcut
 import Root.Teyvat.Inazuma.TriCommission.YashiroCommission (yashiroCommission)
 import Root.Teyvat.Inazuma.AratakiGang (aratakiGang)
 import Root.Teyvat.Inazuma.TriCommission (triCommission)

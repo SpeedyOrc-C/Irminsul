@@ -13,8 +13,10 @@ instance Unique Entity where
 
 instance Eq Entity where
     (==) :: Entity -> Entity -> Bool
-    (Atom id1 type1) == (Atom id2 type2) = id1 == id2 && type1 == type2
-    (Cluster id1 type1 _ _) == (Cluster id2 type2 _ _) = id1 == id2 && type1 == type2
+    (Atom id1 type1) == (Atom id2 type2) =
+        id1 == id2 && type1 == type2
+    (Cluster id1 type1 _ _) == (Cluster id2 type2 _ _) =
+        id1 == id2 && type1 == type2
     _ == _ = False
 
 instance Unique Action where
@@ -44,9 +46,7 @@ data Relation
     deriving (Eq)
 
 expandBiRelation :: [Relation] -> [Relation]
-expandBiRelation relations = do
-    relation <- relations
-    p relation
+expandBiRelation relations = relations >>= p
     where
         p r@(Relation {}) = [r]
         p r@(BiRelation action a b) = [Relation action a b, Relation action b a]
@@ -54,9 +54,10 @@ expandBiRelation relations = do
 instance Show Relation where
     show :: Relation -> String
     show (Relation action from to) =
-        show from ++ " --" ++ show action ++ "-> " ++ show to
+        uniqueId from ++ " --" ++ show action ++ "-> " ++ uniqueId to
     show (BiRelation action a b) =
-        show a ++ " <-" ++ show action ++ "-> " ++ show b
+        uniqueId a ++ " <-" ++ show action ++ "-> " ++ uniqueId b
+
 
 data Time
     = YearsAgo Integer
@@ -79,7 +80,7 @@ data Alias = Alias {
 
 data Information = Information {
         name :: String,
-        aliases :: [Alias],
+        aliases :: [String],
         existence :: Existence,
         detail :: String
     } deriving Show
@@ -93,6 +94,7 @@ instance Show AtomType where
     show :: AtomType -> String
     show Character = "CHR"
     show Object = "OBJ"
+
 
 data ClusterType
     = Root
@@ -139,40 +141,3 @@ newtype ClusterIndex = ClusterIndex [String] deriving Show
 
 generateIndex :: [Entity] -> ClusterIndex
 generateIndex = ClusterIndex . map entityIdentifier
-
-{- |
-    Create a new cluster node, where all entities and relations from children
-    are appended to this new node.
--}
-clusterNode ::
-        String      -- node name
-    ->  ClusterType -- node type
-    ->  [Entity]    -- entities
-    ->  [Relation]  -- relations
-    ->  [Entity]    -- child clusters
-    ->  Entity
-clusterNode name clusterType pEntities pRelations children =
-    Cluster name clusterType
-        (IndexedSetFamily
-            (pEntities ++ children)
-            (pEntities ++ children ++ nub (concatMap (elements . entities) children)))
-        (IndexedSetFamily
-            pRelations
-            (pRelations ++ nub (concatMap (elements . relations) children)))
-
-{- |
-    Create a new leaf node, which it has no children.
--}
-clusterLeaf ::
-        String      -- leaf name
-    ->  ClusterType -- leaf type
-    ->  [Entity]    -- entities
-    ->  [Relation]  -- relations
-    ->  Entity
-clusterLeaf name clusterType entities relations =
-    Cluster name clusterType
-        (IndexedSetFamily entities entities)
-        (IndexedSetFamily relations relations)
-
--- | Shortcut of creating a Atom Character
-ach = (`Atom` Character)

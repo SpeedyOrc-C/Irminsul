@@ -1,6 +1,7 @@
 module Root.Teyvat.Mondstadt.FavoniusChurch where
 
 import Irminsul
+import Shortcut
 
 barbaraGunnhildr = ach "BarbaraGunnhildr"
 rosaria = ach "Rosaria"

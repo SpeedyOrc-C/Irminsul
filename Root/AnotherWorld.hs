@@ -1,6 +1,7 @@
 module Root.AnotherWorld where
     
 import Irminsul
+import Shortcut
 
 travellerArchonSide = ach "TravellerArchonSide"
 travellerAbyssSide = ach "TravellerAbyssSide"

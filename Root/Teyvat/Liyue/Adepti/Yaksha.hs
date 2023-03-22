@@ -2,6 +2,7 @@ module Root.Teyvat.Liyue.Adepti.Yaksha where
 -- 夜叉
 
 import Irminsul
+import Shortcut
 
 xiao = ach "Xiao";
     alatus = xiao

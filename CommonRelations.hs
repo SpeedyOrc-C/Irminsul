@@ -1,10 +1,8 @@
 module CommonRelations where
 
 import Irminsul
+import Shortcut
 
--- Shortcuts
-ra = Relation . Action
-ba = BiRelation . Action
 
 -- Unidirectional relations
 
@@ -17,10 +15,23 @@ elderSister = ra "ElderSister"
 youngerBrother = ra "YoungerBrother"
 elderBrother = ra "ElderBrother"
 
+student = ra "Student"
+teacher = ra "Teacher"
+guardian = ra "Guardian"
+captain = ra "Captain"
+
 liveIn = ra "LiveIn"
 love = ra "Love"
 create = ra "Create"
 kill = ra "Kill"
+
+foster relation x y = Relation (Action ("Foster" ++ id)) x y where
+    (Relation (Action id) _ _) = relation x y
+
+acting relation x y = Relation (Action ("Acting" ++ id)) x y where
+    (Relation (Action id) _ _) = relation x y
+
+samsara = ra "Samsara"
 
 -- Bidirectional relations
 

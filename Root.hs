@@ -4,7 +4,8 @@
 module Root where
 
 import Irminsul
-import Root.Teyvat (teyvat)
+import Shortcut
+import Root.Teyvat
 
 alloy = ach "Alloy"
 rost = ach "Rost"

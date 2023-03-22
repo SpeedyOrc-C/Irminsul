@@ -4,5 +4,6 @@
 module Root.Teyvat.Fontaine where
 
 import Irminsul
+import Shortcut
 
 monaAstrologistMegistus = ach "MonaAstrologistMegistus"

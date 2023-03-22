@@ -3,11 +3,19 @@ module Translation.ZhCn.Entity where
 import Irminsul
 import Translation
 
-instance Translatable Relation where
-    translate :: Language -> Relation -> Maybe Information
-    translate ZhCn = translatorRelationZhCn
+import Root.AnotherWorld
 
-
-translatorRelationZhCn :: Relation -> Maybe Information
-translatorRelationZhCn r
-    | otherwise = Nothing
+instance Translatable Entity where
+    translate :: Language -> Entity -> Maybe Information
+    translate ZhCn e = lookup e [
+        ip aether
+            "空"
+            []
+            UntilNow
+            "",
+        ip lumine
+            "荧"
+            []
+            UntilNow
+            ""
+        ]

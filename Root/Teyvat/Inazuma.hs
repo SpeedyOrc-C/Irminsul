@@ -5,6 +5,11 @@ module Root.Teyvat.Inazuma where
 -- 稲妻
 
 import Irminsul
+import Root.Teyvat.Inazuma.TriCommission.YashiroCommission (yashiroCommission)
+import Root.Teyvat.Inazuma.AratakiGang (aratakiGang)
+import Root.Teyvat.Inazuma.TriCommission (triCommission)
+import Root.Teyvat.Inazuma.WatatsumiIsland (watatsumiIsland)
+import Root.Teyvat.Inazuma.Shuumatsuban (shuumatsuban)
 
 eiRaiden = ach "EiRaiden";
     beelzebul = eiRaiden
@@ -15,15 +20,8 @@ kunikuzushiRaiden = ach "KunikuzushiRaiden";
     wanderer = kunikuzushiRaiden;
     scaramouche = kunikuzushiRaiden
 
-ayakaKamisato = ach "AyakaKamisato"
-ayatoKamisato = ach "AyatoKamisato"
-sayu = ach "Sayu"
 mikoYae = ach "MikoYae"
-saraKujo = ach "SaraKujo"
-shinobuKuki = ach "ShinobuKuki"
-ittoArataki = ach "IttoArataki"
 yoimiyaNaganohara = ach "YoimiyaNaganohara"
-kokomiSangonomiya = ach "KokomiSangonomiya"
 
 inazuma = clusterNode "Inazuma" Country
     [
@@ -31,19 +29,15 @@ inazuma = clusterNode "Inazuma" Country
         raidenShogun,
         makotoRaiden,
         kunikuzushiRaiden,
-        ayakaKamisato,
-        ayatoKamisato,
-        sayu,
         mikoYae,
-        saraKujo,
-        shinobuKuki,
-        ittoArataki,
-        yoimiyaNaganohara,
-        kokomiSangonomiya
+        yoimiyaNaganohara
     ]
     [
 
     ]
     [
-
+        triCommission,
+        aratakiGang,
+        watatsumiIsland,
+        shuumatsuban
     ]

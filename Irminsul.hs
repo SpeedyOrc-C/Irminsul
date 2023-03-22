@@ -3,15 +3,6 @@ module Irminsul where
 import Milestone
 import Data.List (nub)
 
-data Language
-    = ZhCn
-    | EnUs
-    deriving (Eq, Show)
-
-class Unique object => Translatable object where
-    translate :: Language -> object -> Information
-
-
 class Unique a where
     uniqueId :: a -> String
 
@@ -96,12 +87,18 @@ data Information = Information {
 data AtomType
     = Character
     | Object
-    deriving (Eq, Show)
+    deriving (Eq)
+
+instance Show AtomType where
+    show :: AtomType -> String
+    show Character = "CHR"
+    show Object = "OBJ"
 
 data ClusterType
     = Root
     | World
     | Country
+    | Island
     | Organization
     | Property
     deriving (Eq, Show)

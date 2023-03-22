@@ -9,16 +9,13 @@ iIvanovnaN = ach "IIvanonaN"
 andersdotter = ach "Andersdotter"
 barbeloth = ach "Barbeloth"
 
-
-hexenzirkel = clusterNode "Hexenzirkel" Organization
+hexenzirkel = clusterLeaf "Hexenzirkel" Organization
     [
         alice,
         rhinedottir,
         iIvanovnaN,
         andersdotter,
         barbeloth
-    ]
-    [
     ]
     [
         

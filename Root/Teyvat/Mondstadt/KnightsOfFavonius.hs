@@ -2,7 +2,9 @@ module Root.Teyvat.Mondstadt.KnightsOfFavonius where
 
 import Irminsul
 import CommonRelations (daughter)
+
 import Root.AnotherWorld (travellerArchonSide)
+import Root.Teyvat.Khaenriah (kaeyaAlberich)
 
 noelle = ach "Noelle"
 jeanGunnhildr = ach "JeanGunnhildr"
@@ -15,6 +17,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         jeanGunnhildr,
         eulaLaurence,
         klee,
+        kaeyaAlberich,
         travellerArchonSide
     ]
     [

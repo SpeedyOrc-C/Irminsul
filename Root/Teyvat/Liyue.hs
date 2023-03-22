@@ -6,38 +6,28 @@ module Root.Teyvat.Liyue where
 
 import Irminsul
 import Root.Teyvat.Liyue.Adepti (adepti)
+import Root.Teyvat.Liyue.FeiyunCommerceGuild (feiyunCommerceGuild)
+import Root.Teyvat.Liyue.Qixing (qixing)
+import Root.Teyvat.Liyue.WangshengFuneralParlor (wangshengFuneralParlor)
+import Root.Teyvat.Liyue.CruxFleet (cruxFleet)
 
-zhongli = ach "Zhongli";
-    morax = zhongli
-
-xingqiu = ach "Xingqiu"
 chongyun = ach "Chongyun"
 yunJin = ach "YunJin"
 xinyan = ach "Xinyan"
-ningguang = ach "Ningguang"
-keqing = ach "Keqing"
 qiqi = ach "Qiqi"
-hutao = ach "Hutao"
 ganyu = ach "Ganyu"
 yelan = ach "Yelan"
-beidou = ach "Beidou"
 yaoyao = ach "Yaoyao"
 yanfei = ach "Yanfei"
 
 liyue = clusterNode "Liyue" Country
     [
-        morax,
-        xingqiu,
         chongyun,
         yunJin,
         xinyan,
-        ningguang,
-        keqing,
         qiqi,
-        hutao,
         ganyu,
         yelan,
-        beidou,
         yaoyao,
         yanfei
     ]
@@ -45,5 +35,9 @@ liyue = clusterNode "Liyue" Country
 
     ]
     [
-        adepti
+        adepti,
+        feiyunCommerceGuild,
+        qixing,
+        wangshengFuneralParlor,
+        cruxFleet
     ]

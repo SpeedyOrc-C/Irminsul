@@ -98,8 +98,9 @@ data ClusterType
     = Root
     | World
     | Country
-    | Island
+    | Area
     | Organization
+    | AnotherMe
     | Property
     deriving (Eq, Show)
 

@@ -5,7 +5,7 @@ import Irminsul
 kokomiSangonomiya = ach "KokomiSangonomiya"
 gorou = ach "Gorou"
 
-watatsumiIsland = clusterLeaf "WatatsumiIsland" Island
+watatsumiIsland = clusterLeaf "WatatsumiIsland" Area
     [
         kokomiSangonomiya,
         gorou

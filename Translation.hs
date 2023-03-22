@@ -11,5 +11,5 @@ class Unique object => Translatable object where
     translate :: Language -> object -> Maybe Information
 
 -- | Shortcut for (Entity, Information)
-ip entity name aliases existance inforamtion =
-    (entity, Information name aliases existance inforamtion)
+ip entity name aliases existence information =
+    (entity, Information name aliases existence information)

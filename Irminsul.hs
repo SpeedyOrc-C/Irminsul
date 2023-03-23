@@ -42,21 +42,21 @@ data Relation
     -- | Unidirectional relation
     = Relation Action Entity Entity
     -- | Bidirectional relation
-    | BiRelation Action Entity Entity
+    | Birelation Action Entity Entity
     deriving (Eq)
 
-expandBiRelation :: [Relation] -> [Relation]
-expandBiRelation relations = relations >>= p
+expandBirelation :: [Relation] -> [Relation]
+expandBirelation relations = relations >>= p
     where
         p r@(Relation {}) = [r]
-        p r@(BiRelation action a b) = [Relation action a b, Relation action b a]
+        p r@(Birelation action a b) = [Relation action a b, Relation action b a]
 
 instance Show Relation where
     show :: Relation -> String
     show (Relation action from to) =
-        uniqueId from ++ " --" ++ show action ++ "-> " ++ uniqueId to
-    show (BiRelation action a b) =
-        uniqueId a ++ " <-" ++ show action ++ "-> " ++ uniqueId b
+        uniqueId from ++ " -" ++ show action ++ "→ " ++ uniqueId to
+    show (Birelation action a b) =
+        uniqueId a ++ " ←" ++ show action ++ "→ " ++ uniqueId b
 
 
 data Time
@@ -135,9 +135,3 @@ instance Show Entity where
     uniqueId cluster ++ " "
     ++ show entities ++ " "
     ++ show relations
-
-
-newtype ClusterIndex = ClusterIndex [String] deriving Show
-
-generateIndex :: [Entity] -> ClusterIndex
-generateIndex = ClusterIndex . map entityIdentifier

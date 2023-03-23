@@ -11,10 +11,10 @@ data Language
     | EnUs
     deriving (Eq, Show)
 
-class Unique object => Translatable object where
-    translate :: Language -> object -> Maybe Information
-    translateName :: Language -> object -> String
-    notYetTranslated :: Language -> object -> String
+class Translatable a where
+    translate :: Language -> a -> Maybe Information
+    translateName :: Language -> a -> String
+    notYetTranslated :: Language -> a -> String
 
 instance Translatable Entity where
     notYetTranslated :: Language -> Entity -> String
@@ -34,11 +34,3 @@ instance Translatable Entity where
                     (ZhCn, translationEntityZhCn),
                     (EnUs, translationEntityEnUs)
                 ]
-
-instance Translatable Relation where
-    translate :: Language -> Relation -> Maybe Information
-    translate = undefined
-    translateName :: Language -> Relation -> String
-    translateName = undefined
-    notYetTranslated :: Language -> Relation -> String
-    notYetTranslated = undefined

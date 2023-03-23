@@ -12,7 +12,7 @@ ip entity name aliases existence information =
 ra :: String -> Entity -> Entity -> Relation
 ra = Relation . Action
 ba :: String -> Entity -> Entity -> Relation
-ba = BiRelation . Action
+ba = Birelation . Action
 
 -- | Shortcut of creating a Atom Character
 ach :: String -> Entity

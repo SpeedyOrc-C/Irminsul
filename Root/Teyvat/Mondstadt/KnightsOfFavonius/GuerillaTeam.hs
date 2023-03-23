@@ -5,12 +5,12 @@ import Shortcut
 import CommonRelations
 
 eulaLaurence = ach "EulaLaurence"
-mika = ach "Mika"
+mikaSchmidt = ach "MikaSchmidt"
 
 guerillaTeam = clusterLeaf "GuerillaTeam" Organization
     [
         eulaLaurence,
-        mika
+        mikaSchmidt
     ]
     [
         eulaLaurence `captain` guerillaTeam

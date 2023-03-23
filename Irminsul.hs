@@ -1,42 +1,14 @@
 module Irminsul where
 
-import Milestone
 import Data.List (nub)
 
-class Unique a where
-    uniqueId :: a -> String
+import Milestone
 
-instance Unique Entity where
-    uniqueId :: Entity -> String
-    uniqueId (Atom id t) = show t ++ "-" ++ id
-    uniqueId (Cluster id t _ _) = show t ++ "-" ++ id
-
-instance Eq Entity where
-    (==) :: Entity -> Entity -> Bool
-    (Atom id1 type1) == (Atom id2 type2) =
-        id1 == id2 && type1 == type2
-    (Cluster id1 type1 _ _) == (Cluster id2 type2 _ _) =
-        id1 == id2 && type1 == type2
-    _ == _ = False
-
-instance Unique Action where
-    uniqueId :: Action -> String
-    uniqueId (Action id) = id
-
-instance Unique Relation where
-    uniqueId :: Relation -> String
-    uniqueId (Relation action from to) =
-        show action ++ "_"
-        ++ show from ++ "."
-        ++ show to
-
-
-newtype Action = Action String deriving (Eq)
+newtype Action = Action {actionId :: String} deriving (Eq)
 
 instance Show Action where
     show :: Action -> String
     show (Action id) = id
-
 
 data Relation
     -- | Unidirectional relation
@@ -45,19 +17,18 @@ data Relation
     | Birelation Action Entity Entity
     deriving (Eq)
 
-expandBirelation :: [Relation] -> [Relation]
-expandBirelation relations = relations >>= p
-    where
-        p r@(Relation {}) = [r]
-        p r@(Birelation action a b) = [Relation action a b, Relation action b a]
-
 instance Show Relation where
     show :: Relation -> String
     show (Relation action from to) =
-        uniqueId from ++ " -" ++ show action ++ "→ " ++ uniqueId to
+        entityId from ++ " -" ++ show action ++ "→ " ++ entityId to
     show (Birelation action a b) =
-        uniqueId a ++ " ←" ++ show action ++ "→ " ++ uniqueId b
+        entityId a ++ " ←" ++ show action ++ "→ " ++ entityId b
 
+expandBirelation :: [Relation] -> [Relation]
+expandBirelation = concatMap p
+    where
+        p r@(Relation {}) = [r]
+        p (Birelation action a b) = [Relation action a b, Relation action b a]
 
 data Time
     = YearsAgo Integer
@@ -115,23 +86,36 @@ instance Show a => Show (IndexedSetFamily a) where
   show :: Show a => IndexedSetFamily a -> String
   show = show . indices
 
-
+{- |
+    An entity could be an Atom or a Cluster.
+    Atom cannot be split further.
+    Cluster consists of many Atoms and Clusters, which means Cluster can form
+    a tree-like structure. It also consists of all relations about its entities.
+-}
 data Entity
     = Atom {
-        entityIdentifier :: String,
+        entityId :: String,
         atomType :: AtomType
     }
     | Cluster {
-        entityIdentifier :: String,
+        entityId :: String,
         clusterType :: ClusterType,
         entities :: IndexedSetFamily Entity,
         relations :: IndexedSetFamily Relation
     }
 
+instance Eq Entity where
+    (==) :: Entity -> Entity -> Bool
+    (Atom id1 type1) == (Atom id2 type2) =
+        id1 == id2 && type1 == type2
+    (Cluster id1 type1 _ _) == (Cluster id2 type2 _ _) =
+        id1 == id2 && type1 == type2
+    _ == _ = False
+
 instance Show Entity where
   show :: Entity -> String
-  show atom@(Atom {}) = uniqueId atom
+  show atom@(Atom {}) = entityId atom
   show cluster@(Cluster _ _ entities relations) =
-    uniqueId cluster ++ " "
+    entityId cluster ++ " "
     ++ show entities ++ " "
     ++ show relations

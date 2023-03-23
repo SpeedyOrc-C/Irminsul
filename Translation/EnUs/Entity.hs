@@ -27,7 +27,7 @@ translationEntityEnUs = [
         
     ip guerillaTeam "Guerilla Team" [] UntilNow "",
         ip eulaLaurence "Eula Laurence" [] UntilNow "",
-        ip mika "Mika" [] UntilNow "",
+        ip mikaSchmidt "Mika Schmidt" [] UntilNow "",
     
     ip aether "Aether" [] UntilNow "",
     ip lumine "Lumine" [] UntilNow ""

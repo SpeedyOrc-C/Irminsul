@@ -8,6 +8,7 @@ import Root.AnotherWorld (travellerArchonSide)
 import Root.Teyvat.Khaenriah (kaeyaAlberich, albedo)
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
     ( eulaLaurence, guerillaTeam )
+import Root.Teyvat.Mondstadt.FavoniusChurch (barbaraGunnhildr)
 
 jeanGunnhildr = ach "JeanGunnhildr"
 lisa = ach "Lisa"

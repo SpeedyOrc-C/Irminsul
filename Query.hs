@@ -14,7 +14,7 @@ instance Show QueryResult where
   show (QueryResult paths) =
     intercalate "\n" [
         intercalate " > "
-            (entityIdentifier <$> path) | path <- paths]
+            (entityId <$> path) | path <- paths]
 
 data QueryConfiguration = QueryConfiguration {
     partialMatch :: Bool,

@@ -1,5 +1,7 @@
 module Main where
 
+import Web.Scotty
+
 import System.Directory
 
 import Root (root)

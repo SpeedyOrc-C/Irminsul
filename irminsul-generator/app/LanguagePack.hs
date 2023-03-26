@@ -3,7 +3,6 @@ module LanguagePack where
 import Data.Maybe ( fromMaybe )
 
 import Irminsul
-
 data Language
     = ZhCn
     | EnUs

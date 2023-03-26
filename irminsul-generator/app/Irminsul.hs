@@ -7,8 +7,7 @@ import Utility.Vector
 newtype Path = Path [Entity] deriving (Eq, Ord)
 
 instance Semigroup Path where
-  (<>) :: Path -> Path -> Path
-  (Path path1) <> (Path path2) = Path $ path1 <> path2
+    (Path path1) <> (Path path2) = Path $ path1 <> path2
 
 depth :: Path -> Int
 depth (Path path) = length path
@@ -19,7 +18,6 @@ instance Show Path where
 newtype Action = Action {actionId :: String} deriving (Eq)
 
 instance Show Action where
-    show :: Action -> String
     show (Action id) = id
 
 data Relation
@@ -31,7 +29,6 @@ action (Relation a _ _) = a
 action (BiRelation a _ _) = a
 
 instance Show Relation where
-    show :: Relation -> String
     show (Relation action from to) =
         entityId from ++ " -" ++ show action ++ "→ " ++ entityId to
     show (BiRelation action a b) =
@@ -99,7 +96,6 @@ data AtomType
     deriving (Eq)
 
 instance Show AtomType where
-    show :: AtomType -> String
     show Character = "CHR"
     show Object = "OBJ"
 
@@ -119,7 +115,6 @@ data IndexedSetFamily a = IndexedSetFamily {
 }
 
 instance Show a => Show (IndexedSetFamily a) where
-  show :: Show a => IndexedSetFamily a -> String
   show = show . indices
 
 newtype Layout = Layout [(Entity, ShowcaseElementProperty)]
@@ -160,7 +155,6 @@ isAtom (Atom {}) = True
 isAtom _ = False
 
 instance Eq Entity where
-    (==) :: Entity -> Entity -> Bool
     (Atom id1 type1) == (Atom id2 type2) =
         id1 == id2 && type1 == type2
     (Cluster id1 type1 _ _ _) == (Cluster id2 type2 _ _ _) =
@@ -171,7 +165,6 @@ instance Ord Entity where
     x <= y = entityId x <= entityId y
 
 instance Show Entity where
-  show :: Entity -> String
   show atom@(Atom {}) = entityId atom
   show cluster@(Cluster _ _ entities relations _) =
     entityId cluster ++ " "

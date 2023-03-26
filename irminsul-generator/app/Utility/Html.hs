@@ -4,12 +4,11 @@ import Prelude hiding (div, head, id, span)
 import LanguagePack
 
 data Xml
-  = Text String
-  | TagClosing String [(String, String)]
-  | Tag String [(String, String)] [Xml]
+    = Text String
+    | TagClosing String [(String, String)]
+    | Tag String [(String, String)] [Xml]
 
 instance Show Xml where
-    show :: Xml -> String
     show (Text s) = s
     show (TagClosing tag pairs) =
         "<" ++ tag
@@ -39,8 +38,8 @@ title t = Tag "title" [] [Text t]
 metaUtf8 = TagClosing "meta" [("charset", "UTF-8")]
 linkCss href = TagClosing "link" [("rel", "stylesheet"), ("href", href)]
 
-id_ = ("id",)
-class_ = ("class",)
-style_ = ("style",)
+id_ = (,) "id"
+class_ = (,) "class"
+style_ = (,) "style"
 
 (.=) = (,)

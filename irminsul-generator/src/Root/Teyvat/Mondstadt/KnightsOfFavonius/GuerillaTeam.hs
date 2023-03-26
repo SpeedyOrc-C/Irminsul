@@ -15,4 +15,7 @@ guerillaTeam = clusterLeaf "GuerillaTeam" Organization
     [
         eulaLawrence `teamCaptain` guerillaTeam
     ]
-    Nothing
+    (Just $ Layout [
+        al eulaLawrence (-10, 0),
+        al mikaSchmidt (10, 0)
+    ])

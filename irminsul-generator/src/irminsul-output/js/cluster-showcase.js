@@ -2,49 +2,114 @@
 
 let clusterShowcase = document.getElementById('cluster-showcase')
 
+// View Controller
+
 let viewX = 0
 let viewY = 0
-let viewScaleExponent = 0;
+let viewAngle = 0
+let viewScaleExponent = 0
+let viewScale = 1
+
+function updateViewScale() {
+    viewScale = Math.pow(2, 0.5 * viewScaleExponent)
+}
+
+function updateTransform() {
+    clusterShowcase.style.transform =
+        `rotate(${-viewAngle}deg)` +
+        `scale(${viewScale*100}%)` +
+        `translate(${viewX}rem, ${-viewY}rem)` +
+        ''
+}
+
+function moveUp() {
+    let deltaViewX = 0
+    let deltaViewY = 0
+    let viewAngleRad = viewAngle * Math.PI / 180
+
+    deltaViewX -= 10 / viewScale * Math.sin(viewAngleRad)
+    deltaViewY -= 10 / viewScale * Math.cos(viewAngleRad)
+
+    viewAngle %= 360
+    viewX += deltaViewX
+    viewY += deltaViewY
+    updateTransform()
+}
+
+function moveDown() {
+    let viewAngleRad = viewAngle * Math.PI / 180
+    viewX += 10 / viewScale * Math.sin(viewAngleRad)
+    viewY += 10 / viewScale * Math.cos(viewAngleRad)
+    updateTransform()
+}
+
+function moveLeft() {
+    let viewAngleRad = viewAngle * Math.PI / 180
+    viewX += 10 / viewScale * Math.cos(viewAngleRad)
+    viewY -= 10 / viewScale * Math.sin(viewAngleRad)
+    updateTransform()
+}
+
+function moveRight() {
+    let viewAngleRad = viewAngle * Math.PI / 180
+    viewX -= 10 / viewScale * Math.cos(viewAngleRad)
+    viewY += 10 / viewScale * Math.sin(viewAngleRad)
+    updateTransform()
+}
+
+function zoomIn() {
+    viewScaleExponent += 1
+    updateViewScale()
+    updateTransform()
+}
+
+function zoomOut() {
+    viewScaleExponent -= 1
+    updateViewScale()
+    updateTransform()
+}
+
+function rotateAnticlockwise() {
+    viewAngle += 22.5
+    updateTransform()
+}
+
+function rotateClockwise() {
+    viewAngle -= 22.5
+    updateTransform()
+}
+
+function resetView() {
+    viewX = 0
+    viewY = 0
+    viewScaleExponent = 0
+    viewScale = 1
+    viewAngle = 0
+    updateTransform()
+}
+
+// For keyboard users
 
 document.addEventListener('keydown', e => {
-    let previousScaleExponent = viewScaleExponent
-    let newTransform = ''
-
     switch (e.code) {
-        case 'KeyW':
-            viewY += 10
-            break
-        case 'KeyS':
-            viewY -= 10
-            break
-        case 'KeyA':
-            viewX += 10
-            break
-        case 'KeyD':
-            viewX -= 10
-            break
-        case 'Minus':
-            viewScaleExponent -= 1
-            break
-        case 'Equal':
-            viewScaleExponent += 1
-            break
-        case 'Digit0':
-            viewX = 0
-            viewY = 0
-            viewScaleExponent = 0
-            newTransform = 'translate(0rem, 0rem) scale(100%)'
-            break
+        case 'KeyW': moveUp(); break
+        case 'KeyS': moveDown(); break
+        case 'KeyA': moveLeft(); break
+        case 'KeyD': moveRight(); break
+        case 'Minus': zoomOut(); break
+        case 'Equal': zoomIn(); break
+        case 'BracketLeft': rotateAnticlockwise(); break
+        case 'BracketRight': rotateClockwise(); break
+        case 'Digit0': resetView(); break
     }
-
-    let ratioThisScaleAndPreviousScale =
-        Math.pow(2, 0.5 * (viewScaleExponent - previousScaleExponent))
-    viewX *= ratioThisScaleAndPreviousScale
-    viewY *= ratioThisScaleAndPreviousScale
-    let viewScale = Math.pow(2, 0.5 * viewScaleExponent)
-
-    newTransform = `translate(${viewX}rem, ${viewY}rem) scale(${viewScale*100}%)`
-    clusterShowcase.style.transform = newTransform
 })
+
+// For touchscreen users
+
+let touchscreenControls = document.createElement('div')
+document.body.append(touchscreenControls)
+touchscreenControls.id = 'touchscreen-control'
+
+
 
 

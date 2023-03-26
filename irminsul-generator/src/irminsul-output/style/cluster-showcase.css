@@ -49,6 +49,7 @@ body {
 
     background-color: #703b00;
     color: white;
+    text-decoration: none;
 }
 
 .atom > img {
@@ -64,12 +65,20 @@ body {
     border: 0.2rem solid #bda277;
     display: block;
     margin: 0 auto;
+
+    transition: transform;
+    transition-duration: 0.5s;
+}
+
+.atom > img:hover {
+    transform: translate(-50%, -50%) scale(200%);
+    transition-duration: 0.2s;
 }
 
 .atom > .entity-name {
     width: 10rem;
     position: absolute;
-    top: 4rem;
+    top: 7rem;
     left: 0;
     transform: translate(-50%, -50%);
 
@@ -77,12 +86,11 @@ body {
     padding: 0.2rem 0;
     color: #3b4255;
 
-    opacity: 0;
-    transition: opacity;
+    display: none;
 }
 
 .atom > img:hover + .entity-name {
-    opacity: 100%;
+    display: block;
 }
 
 .relation-between {

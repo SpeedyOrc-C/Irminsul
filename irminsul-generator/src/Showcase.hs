@@ -93,7 +93,7 @@ showcaseHtml
             entity <- filter isCluster renderedEntities
             let (Just clusterLayout) = lookup entity (filter (isCluster.fst) entityLayouts)
             return $ clusterHtml (translateEntity languagePack entity)
-                rootFolder clusterLayout entity
+                language (entityId cluster) rootFolder clusterLayout entity
 
         renderedRelations =
             filter (\r ->
@@ -159,16 +159,15 @@ atomHtml nameLocal rootFolder position (Atom id _) =
             "left: " ++ toRem x
             ++ "; top: " ++ toRem (-y)
 
-clusterHtml :: String -> String -> ShowcaseElementProperty -> Entity -> Xml
-clusterHtml nameLocal rootFolder property (Cluster id _ _ _ _) =
+clusterHtml :: String -> Language -> String -> String -> ShowcaseElementProperty -> Entity -> Xml
+clusterHtml nameLocal language thisFolder rootFolder property (Cluster id _ _ _ _) =
     Tag "div" [
         ("id", id),
         ("class", "cluster"),
         ("style", clusterStyleFromRectangle property)
     ] [
-        -- TagClosing "img"
-        --     [("src", rootFolder ++ "img/cluster/" ++ id ++ ".png")],
-        Tag "div" [("class", "entity-name")]
+        Tag "a" [("class", "entity-name"), ("href",
+            thisFolder ++ "/" ++ id ++ "-" ++ show language ++ ".html")]
             [Text nameLocal]
     ]
     where

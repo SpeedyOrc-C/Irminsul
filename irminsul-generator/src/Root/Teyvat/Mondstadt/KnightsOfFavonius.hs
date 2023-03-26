@@ -7,8 +7,9 @@ import CommonRelations
 import Root.AnotherWorld (travellerArchonSide)
 import Root.Teyvat.Khaenriah (kaeyaAlberich, albedo)
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-    ( eulaLaurence, guerillaTeam )
+    ( eulaLawrence, guerillaTeam, mikaSchmidt )
 import Root.Teyvat.Mondstadt.FavoniusChurch (barbaraGunnhildr)
+import Root.Teyvat.Kaeya (kaeya)
 
 jeanGunnhildr = ach "JeanGunnhildr"
 lisa = ach "Lisa"
@@ -30,9 +31,9 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         travellerArchonSide
     ]
     [
-        acting captain jeanGunnhildr knightsOfFavonius,
+        jeanGunnhildr `actingGrandMaster` knightsOfFavonius,
         lisa `friend` jeanGunnhildr,
-        amber `friend` eulaLaurence,
+        amber `friend` eulaLawrence,
         albedo `teacher` sucrose,
         sucrose `student` albedo,
         foster elderBrother albedo klee,
@@ -43,9 +44,18 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         guerillaTeam
     ]
     (Just $ Layout [
-        al jeanGunnhildr (-10) 0,
-        al lisa 10 5,
-        al eulaLaurence 0 10,
-        al amber 0 (-10),
-        cl guerillaTeam 30 (-20) 15 (-20) 5 5
+        al jeanGunnhildr (-15, 15),
+        al klee (-15, 0),
+        al albedo (-15, -15),
+        al sucrose (0, -15),
+        al lisa (0, 15),
+
+        al kaeyaAlberich (15, 0),
+        al noelle (15, -15),
+
+        al amber (15, 15),
+        al eulaLawrence (30, 15),
+        al mikaSchmidt (30, 0),
+
+        cl guerillaTeam (30, 7.5) (37.5, 15) 15 30
     ])

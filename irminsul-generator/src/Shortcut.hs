@@ -20,15 +20,15 @@ ach :: String -> Entity
 ach = (`Atom` Character)
 
 -- | Shortcut of an atom's layout
-al :: Entity -> Double -> Double -> (Entity, ShowcaseElementProperty)
-al entity x y = (entity, ShowcaseElementProperty (Vector2 x y) (Vector2 x y) 0 0)
+al :: Entity -> (Double, Double) -> (Entity, ShowcaseElementProperty)
+al entity (x, y) = (entity, ShowcaseElementProperty (Vector2 x y) (Vector2 x y) 0 0)
 
 -- | Shortcut of a cluster's layout
 cl :: Entity ->
-    Double -> Double -> Double -> Double -> Double -> Double ->
-        (Entity, ShowcaseElementProperty)
+    (Double, Double) -> (Double, Double) -> Double -> Double ->
+    (Entity, ShowcaseElementProperty)
 -- TODO: Anchor of cluster may not be at the centre
-cl entity x y anchorX anchorY width height =
+cl entity (x, y) (anchorX, anchorY) width height =
     (entity, ShowcaseElementProperty
         (Vector2 x y) (Vector2 anchorX anchorY) width height)
 

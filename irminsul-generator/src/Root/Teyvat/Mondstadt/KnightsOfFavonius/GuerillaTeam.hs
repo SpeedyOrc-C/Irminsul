@@ -4,15 +4,15 @@ import Irminsul
 import Shortcut
 import CommonRelations
 
-eulaLaurence = ach "EulaLaurence"
+eulaLawrence = ach "EulaLawrence"
 mikaSchmidt = ach "MikaSchmidt"
 
 guerillaTeam = clusterLeaf "GuerillaTeam" Organization
     [
-        eulaLaurence,
+        eulaLawrence,
         mikaSchmidt
     ]
     [
-        eulaLaurence `captain` guerillaTeam
+        eulaLawrence `teamCaptain` guerillaTeam
     ]
     Nothing

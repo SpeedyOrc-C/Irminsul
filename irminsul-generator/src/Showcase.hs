@@ -35,13 +35,13 @@ flattenShowcases = flattenShowcases' (Path []) where
                 indices . entities $ rootEntity
             flattenShowcases' (nowPath <> Path [rootEntity]) childEntity
 
-showcaseOutputDirectory :: ClusterShowcase -> String
-showcaseOutputDirectory (ClusterShowcase (Path path) _) =
-    "./irminsul-output" ++ concatMap ("/" ++) (entityId <$> path)
+showcaseOutputDirectory :: String -> ClusterShowcase -> String
+showcaseOutputDirectory directory (ClusterShowcase (Path path) _) =
+    directory ++ concatMap ("/" ++) (entityId <$> path)
 
-showcaseOutputPath :: Language -> ClusterShowcase -> String
-showcaseOutputPath language showcase =
-    showcaseOutputDirectory showcase
+showcaseOutputPath :: String -> Language -> ClusterShowcase -> String
+showcaseOutputPath directory language showcase =
+    showcaseOutputDirectory directory showcase
     ++ "/" ++ entityId (cluster showcase) ++ "-" ++ show language ++ ".html"
 
 toRootFolder :: ClusterShowcase -> String
@@ -115,12 +115,13 @@ showcaseHtml
                     | e1x > e2x = True
                     | e1y > e2y = False
                     | otherwise = True
-                rotation = atan ((e2y - e1y) / (e2x - e1x))
+                rotation = atan ((e2y - e1y) / (e2x - e1x)) +
+                    if e1x > e2x then pi else 0
                 length = sqrt (((e2x - e1x)**2) + ((e2y - e1y)**2))
 
-            return  $ if reversed
+            return $ if reversed
                 then relationHtml
-                    midPoint length rotation e1 e2
+                    midPoint length (rotation + pi) e1 e2
                     (translateAction languagePack . action <$>
                         filter isBiRelation sameEntityPairs)
                     (translateAction languagePack . action <$>
@@ -165,8 +166,8 @@ clusterHtml nameLocal rootFolder property (Cluster id _ _ _ _) =
         ("class", "cluster"),
         ("style", clusterStyleFromRectangle property)
     ] [
-        TagClosing "img"
-            [("src", rootFolder ++ "img/avatar/" ++ id ++ ".png")],
+        -- TagClosing "img"
+        --     [("src", rootFolder ++ "img/cluster/" ++ id ++ ".png")],
         Tag "div" [("class", "entity-name")]
             [Text nameLocal]
     ]
@@ -194,14 +195,14 @@ relationHtml
         ("style", relationStyleFromStuff position width rotation)
     ] ([
         Tag "div" [("class", "bi-relation")]
-            (putInSpan <$> biRelations) | not (null biRelations)] ++ [
+            (putInDiv <$> biRelations) | not (null biRelations)] ++ [
         Tag "div" [("class", "forward-relation")]
-            (putInSpan <$> forwardRelations) | not (null forwardRelations)] ++ [
+            (putInDiv <$> forwardRelations) | not (null forwardRelations)] ++ [
         Tag "div" [("class", "backward-relation")]
-            (putInSpan <$> backwardRelations) | not (null backwardRelations)
+            (putInDiv <$> backwardRelations) | not (null backwardRelations)
     ])
     where
-        putInSpan x = Tag "span" [] [Text x]
+        putInDiv x = Tag "div" [] [Text x]
 
         relationStyleFromStuff :: Vector2 -> Double -> Double -> String
         relationStyleFromStuff (Vector2 x y) width rotation =
@@ -210,11 +211,9 @@ relationHtml
             ++ "; width: " ++ toRem width
             ++ "; transform: translate(-50%, -50%) rotate(" ++ show (-rotation) ++ "rad)"
 
-createShowcaseDirectory :: ClusterShowcase -> IO ()
-createShowcaseDirectory s@(ClusterShowcase _ entity) = do
-    let outputDirectory = showcaseOutputDirectory s
-    putStrLn $
-        "[CREATE DIRECTORY] " ++ outputDirectory ++ " [FOR] " ++ entityId entity
+createShowcaseDirectory :: String -> ClusterShowcase -> IO ()
+createShowcaseDirectory directory s@(ClusterShowcase _ entity) = do
+    let outputDirectory = showcaseOutputDirectory directory s
     createDirectoryIfMissing True outputDirectory
 
 

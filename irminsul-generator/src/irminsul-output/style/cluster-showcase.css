@@ -32,6 +32,25 @@ body {
     z-index: 10000;
 }
 
+.cluster {
+    background-color: #0000000b;
+    border: 0.2rem solid #bda277;
+    border-radius: 0.5rem;
+
+    z-index: 100;
+}
+
+.cluster > .entity-name {
+    width: fit-content;
+    position: absolute;
+    transform: translate(-1rem, -50%);
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+
+    background-color: #703b00;
+    color: white;
+}
+
 .atom > img {
     width: 5rem;
     height: 5rem;
@@ -57,6 +76,13 @@ body {
     background: linear-gradient(to right, #fff0 0%, #fff 50%, #fff0 100%);
     padding: 0.2rem 0;
     color: #3b4255;
+
+    opacity: 0;
+    transition: opacity;
+}
+
+.atom > img:hover + .entity-name {
+    opacity: 100%;
 }
 
 .relation-between {
@@ -71,7 +97,7 @@ body {
 
 .relation-between > * {
     border: 0.1rem solid #bda277;
-    box-shadow: #3b425588 0 0 0.3rem 0.1rem;
+    /*box-shadow: #3b425588 0 0 0.3rem 0.1rem;*/
 } .relation-between:hover > *, .relation-between:active > * {
     box-shadow: none;
 }
@@ -93,8 +119,18 @@ body {
     top: calc(50% - 0.7rem);
 }
 
+.forward-relation > div {
+    position: absolute;
+    left: 3.5rem;
+}
+
 .backward-relation {
     top: calc(50% + 0.7rem);
+}
+
+.backward-relation > div {
+    position: absolute;
+    right: 3.5rem;
 }
 
 .bi-relation ~ .forward-relation {

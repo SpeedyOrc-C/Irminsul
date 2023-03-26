@@ -28,7 +28,7 @@ translationEntityZhCn = [
         ip noelle "诺艾尔" ["女仆", "高达", "岩王帝姬"] UntilNow "",
     
     ip guerillaTeam "游击小队" [] UntilNow "",
-        ip eulaLaurence ("优菈".="劳伦斯") ["浪花骑士", "喷嚏记仇真君"] UntilNow "",
+        ip eulaLawrence ("优菈".="劳伦斯") ["浪花骑士", "喷嚏记仇真君"] UntilNow "",
         ip mikaSchmidt ("米卡".="施密特") ["前进测绘员"] UntilNow "",
     
     ip aether "空" [] UntilNow "",

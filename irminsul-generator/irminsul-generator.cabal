@@ -29,6 +29,7 @@ executable irminsul-generator
         Irminsul,
         LanguagePack,
         Milestone,
+        Query,
         Root,
         Root.AnotherWorld,
         Root.Teyvat,
@@ -74,6 +75,11 @@ executable irminsul-generator
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
-    build-depends:    base ^>=4.16.4.0, directory, scotty
+    build-depends:
+        base ^>=4.16.4.0
+        ,directory
+        ,text
+        -- ,scotty
+        -- ,blaze-html
     hs-source-dirs:   app
     default-language: Haskell2010

@@ -1,14 +1,11 @@
 module Main where
 
-import Web.Scotty
-
-import System.Directory
+import System.Environment (getArgs)
+import Data.List (isSuffixOf)
 
 import Root (root)
 import Showcase
 import LanguagePack
-import System.Environment (getArgs)
-import Data.List (isSuffixOf)
 
 waitOk :: String -> IO () -> IO ()
 waitOk info action = do

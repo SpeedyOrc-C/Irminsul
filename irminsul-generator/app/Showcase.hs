@@ -55,8 +55,14 @@ clusterChildLocalPath language cluster =
 showcaseHtml :: Language -> ClusterShowcase -> Xml
 showcaseHtml
     language
-    showcase@(ClusterShowcase _
-        cluster@(Cluster _ _ _ _ (Just layout@(Layout entityLayouts)))) =
+    showcase@(
+        ClusterShowcase _
+            cluster@(Cluster
+                rootId _ _ _
+                (Just layout@(
+                    Layout
+                    rootLayout
+                    entityLayouts)))) =
 
     html language (translateEntity languagePack cluster) [
         rootFolder ++ "style/cluster-showcase.css"
@@ -67,7 +73,19 @@ showcaseHtml
         ] (
             clusterTags ++
             atomTags ++
-            relationTags
+            relationTags ++
+            return (
+                Tag "div" [
+                    ("id", rootId),
+                    ("class", "root-cluster"),
+                    ("style", atomStyleFromVector (position rootLayout))
+                ] [
+                    TagClosing "img" [("src", rootFolder ++
+                        "img/ui/background-cluster-root-title.png")],
+                    Tag "div" [("class", "entity-name")] [
+                        Text $ translateEntity languagePack cluster
+                    ]
+                ])
         ),
         Tag "script" [("src", rootFolder ++ "js/cluster-showcase.js")] []
     ]
@@ -98,16 +116,21 @@ showcaseHtml
         renderedRelations =
             filter (\r ->
                 let (a, b) = subjectAndObject r
-                in a `elem` renderedEntities && b `elem` renderedEntities)
+                in a `elem` renderedEntities && b `elem` renderedEntities
+                    -- Don't forget root cluster, the most special one!
+                    || a == cluster && b `elem` renderedEntities
+                    || b == cluster && a `elem` renderedEntities)
             . renderedStuffFilter $ relations cluster
 
         relationTags = do
             sameEntityPairs <- groupBy sameEntityPair renderedRelations
-            let (e1, e2) = subjectAndObject $ head sameEntityPairs
+            let -- Don't forget root cluster here too!
+                entityLayoutsWithRoot = entityLayouts ++ [(cluster, rootLayout)]
+                (e1, e2) = subjectAndObject $ head sameEntityPairs
                 (Just (ShowcaseElementProperty _ (Vector2 e1x e1y) _ _)) =
-                    lookup e1 entityLayouts
+                    lookup e1 entityLayoutsWithRoot
                 (Just (ShowcaseElementProperty _ (Vector2 e2x e2y) _ _)) =
-                    lookup e2 entityLayouts
+                    lookup e2 entityLayoutsWithRoot
 
                 midPoint = Vector2 ((e1x + e2x) / 2) ((e1y + e2y) / 2)
                 reversed
@@ -153,11 +176,11 @@ atomHtml nameLocal rootFolder position (Atom id _) =
         Tag "div" [("class", "entity-name")]
             [Text nameLocal]
     ]
-    where
-        atomStyleFromVector :: Vector2 -> String
-        atomStyleFromVector (Vector2 x y) =
-            "left: " ++ toRem x
-            ++ "; top: " ++ toRem (-y)
+
+atomStyleFromVector :: Vector2 -> String
+atomStyleFromVector (Vector2 x y) =
+    "left: " ++ toRem x
+    ++ "; top: " ++ toRem (-y)
 
 clusterHtml :: String -> Language -> String -> String -> ShowcaseElementProperty -> Entity -> Xml
 clusterHtml nameLocal language thisFolder rootFolder property (Cluster id _ _ _ _) =

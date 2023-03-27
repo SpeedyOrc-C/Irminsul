@@ -43,19 +43,23 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
     [
         guerillaTeam
     ]
-    (Just $ Layout [
-        al jeanGunnhildr (-15, 15),
-        al klee (-15, 0),
-        al albedo (-15, -15),
-        al sucrose (0, -15),
-        al lisa (0, 15),
+    (Just $ Layout {
+        rootProperty =
+            rl (-34, 15) (-34, 15),
+        elementProperties = [
+            al jeanGunnhildr (-15, 15),
+            al klee (-15, 0),
+            al albedo (-15, -15),
+            al sucrose (0, -15),
+            al lisa (0, 15),
 
-        al kaeyaAlberich (15, 0),
-        al noelle (15, -15),
+            al kaeyaAlberich (15, 0),
+            al noelle (15, -15),
 
-        al amber (15, 15),
-        al eulaLawrence (30, 15),
-        al mikaSchmidt (30, 0),
+            al amber (15, 15),
+            al eulaLawrence (30, 15),
+            al mikaSchmidt (30, 0),
 
-        cl guerillaTeam (30, 7.5) (37.5, 15) 15 30
-    ])
+            cl guerillaTeam (30, 7.5) (37.5, 15) 15 30
+        ]
+    })

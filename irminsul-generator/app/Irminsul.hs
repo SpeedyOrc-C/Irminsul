@@ -117,7 +117,10 @@ data IndexedSetFamily a = IndexedSetFamily {
 instance Show a => Show (IndexedSetFamily a) where
   show = show . indices
 
-newtype Layout = Layout [(Entity, ShowcaseElementProperty)]
+data Layout = Layout {
+    rootProperty :: ShowcaseElementProperty,
+    elementProperties :: [(Entity, ShowcaseElementProperty)]
+}
 
 data ShowcaseElementProperty = ShowcaseElementProperty {
     position :: Vector2,
@@ -127,7 +130,7 @@ data ShowcaseElementProperty = ShowcaseElementProperty {
 }
 
 elemLayout :: Entity -> Layout -> Bool
-entity `elemLayout` (Layout entities) = entity `elem` (fst <$> entities)
+entity `elemLayout` (Layout _ entities) = entity `elem` (fst <$> entities)
 
 {- |
     An entity could be an Atom or a Cluster.

@@ -3,6 +3,11 @@
     src: url("../font/HYWenHei-65W.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: HYWenHei-85W;
+    src: url("../font/HYWenHei-85W.ttf") format("truetype");
+}
+
 body {
     overflow: hidden;
     background-color: #eedecd;
@@ -17,11 +22,37 @@ body {
     transition-duration: 0.3s;
 }
 
-.atom, .topmost-cluster, .cluster,
+.atom, .topmost-cluster, .cluster, .root-cluster, .root-cluster > .entity-name,
 .relation-between, .bi-relation, .forward-relation, .backward-relation,
 .forward-arrow, .backward-arrow {
     position: absolute;
     transform: translate(-50%, -50%);
+}
+
+.root-cluster, .root-cluster > img {
+    width: 15rem; height: calc(15rem * 101 / 327);
+
+    z-index: 10000;
+}
+.root-cluster > .entity-name {
+    top: 50%; left: 50%;
+    width: 12rem;
+
+    font-family: HYWenHei-85W, sans-serif;
+    color: #703b00;
+    text-shadow:
+        #e6dfd2 1px 0 0,
+        #e6dfd2 -1px 0 0,
+        #e6dfd2 0 1px 0,
+        #e6dfd2 0 -1px 0,
+        #e6dfd2 1px 1px 0,
+        #e6dfd2 -1px 1px 0,
+        #e6dfd2 1px -1px 0,
+        #e6dfd2 -1px -1px 0;
+}
+
+html[lang|="zh-cn"] .root-cluster > .entity-name {
+    font-size: 1.2rem;
 }
 
 .atom {
@@ -191,7 +222,7 @@ body {
 
 .entity-name, .forward-relation, .backward-relation, .bi-relation {
     text-align: center;
-    font-family: HYWenHei-65W, serif;
+    font-family: HYWenHei-65W, sans-serif;
 }
 
 .forward-relation, .backward-relation, .bi-relation {

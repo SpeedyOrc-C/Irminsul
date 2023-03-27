@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 
 let clusterShowcase = document.getElementById('cluster-showcase')
 
@@ -98,8 +98,8 @@ document.addEventListener('keydown', e => {
         case 'KeyD': moveRight(); break
         case 'Minus': zoomOut(); break
         case 'Equal': zoomIn(); break
-        case 'BracketLeft': rotateAnticlockwise(); break
-        case 'BracketRight': rotateClockwise(); break
+        case 'BracketLeft': rotateClockwise(); break
+        case 'BracketRight': rotateAnticlockwise(); break
         case 'Digit0': resetView(); break
     }
 })

@@ -33,7 +33,7 @@ body {
 }
 
 .cluster {
-    background-color: #0000000b;
+    background-color: #ffff0003;
     border: 0.2rem solid #bda277;
     border-radius: 0.5rem;
 
@@ -60,7 +60,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    background-color: white;
+    background-color: #eee;
     border-radius: 100%;
     border: 0.2rem solid #bda277;
     display: block;
@@ -119,12 +119,28 @@ body {
 
 .forward-relation, .backward-relation {
     left: 50%;
-    background-color: #f5ece1;
+    /* background-color: #f5ece1; */
     color: #3b4255;
 }
 
 .forward-relation {
     top: calc(50% - 0.7rem);
+
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        #00000000 1.1rem,
+        #0000000c 1.1rem,
+        #0000000c 2.2rem
+    );
+    background-size: 40rem 2rem;
+    animation: 2s linear 0s infinite normal forwards running
+        forward-relation-background;
+}
+
+@keyframes forward-relation-background {
+    from { background-position-x: -3.1112rem; }
+    to {background-position-x: 0;}
 }
 
 .forward-relation > div {
@@ -134,6 +150,22 @@ body {
 
 .backward-relation {
     top: calc(50% + 0.7rem);
+
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        #00000000 1.1rem,
+        #0000000c 1.1rem,
+        #0000000c 2.2rem
+    );
+    background-size: 40rem 2rem;
+    animation: 2s linear 0s infinite normal forwards running
+        backward-relation-background;
+}
+
+@keyframes backward-relation-background {
+    from { background-position-x: 0; }
+    to {background-position-x: -3.1112rem;}
 }
 
 .backward-relation > div {

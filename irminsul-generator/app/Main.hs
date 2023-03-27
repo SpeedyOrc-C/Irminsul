@@ -1,11 +1,13 @@
 module Main where
 
-import System.Environment (getArgs)
-import Data.List (isSuffixOf)
+import System.IO
+import System.Environment
+import Data.List
 
-import Root (root)
+import Root
 import Showcase
 import LanguagePack
+
 
 waitOk :: String -> IO () -> IO ()
 waitOk info action = do
@@ -33,6 +35,9 @@ debugGenerate = do
 
 main :: IO ()
 main = do
+    stdin `hSetEncoding` utf8
+    stdout `hSetEncoding` utf8
+
     args <- getArgs
 
     let outputDirectory = getOutputDirectory args
@@ -54,4 +59,8 @@ main = do
             outputHtml = showcaseHtml language showcase
         return $ do
             putStrLn $ "[WRITING] " ++ outputPath
-            writeFile outputPath (show outputHtml)
+            withFile outputPath WriteMode $ \f -> do
+                -- Write files in UTF-8
+                -- Because Windows always use the local encoding.
+                f `hSetEncoding` utf8
+                f `hPutStr` show outputHtml

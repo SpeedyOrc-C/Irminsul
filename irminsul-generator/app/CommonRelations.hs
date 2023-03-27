@@ -19,7 +19,7 @@ student = ra "Student"
 teacher = ra "Teacher"
 guardian = ra "Guardian"
 teamCaptain = ra "TeamCaptain"
-actingGrandMaster = ra "actingGrandMaster"
+actingGrandMaster = ra "ActingGrandMaster"
 
 liveIn = ra "LiveIn"
 love = ra "Love"

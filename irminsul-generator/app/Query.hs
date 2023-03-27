@@ -9,7 +9,6 @@ import Data.Char (toLower)
 newtype QueryResult = QueryResult [Path]
 
 instance Show QueryResult where
-  show :: QueryResult -> String
   show (QueryResult paths) = show paths
 
 data QueryConfiguration = QueryConfiguration {
@@ -47,7 +46,7 @@ searchPath id cluster config =
         | match id atomId = paths ++ [nowPath]
         | otherwise = paths
 
-    q id cluster@(Cluster clusterId _ childClusters _) nowPath paths
+    q id cluster@(Cluster clusterId _ childClusters _ _) nowPath paths
         | match id clusterId = paths ++ [nowPath]
         | otherwise = concat $
             [q id childClusters (nowPath <> Path [childClusters]) paths

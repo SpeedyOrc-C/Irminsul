@@ -1,0 +1,87 @@
+cabal-version:      2.4
+name:               irminsul-generator
+version:            0.1.0.0
+
+synopsis:           Generate characters' relation graph for Genshin Impact.
+
+-- A longer description of the package.
+-- description:
+
+-- A URL where users can report bugs.
+bug-reports:        https://github.com/SpeedyOrc-C/Irminsul/issues
+
+-- The license under which the package is released.
+license:            MIT
+author:             陈湛明
+maintainer:         1670732206@qq.com
+
+-- A copyright notice.
+-- copyright:
+-- category:
+extra-source-files: CHANGELOG.md
+
+executable irminsul-generator
+    main-is:          Main.hs
+
+    -- Modules included in this executable, other than Main.
+    other-modules:
+        CommonRelations,
+        Irminsul,
+        LanguagePack,
+        Milestone,
+        Query,
+        Root,
+        Root.AnotherWorld,
+        Root.Teyvat,
+        Root.Teyvat.Fontaine,
+        Root.Teyvat.Hexenzirkel,
+        Root.Teyvat.Inazuma,
+        Root.Teyvat.Inazuma.AratakiGang,
+        Root.Teyvat.Inazuma.Shuumatsuban,
+        Root.Teyvat.Inazuma.TriCommission,
+        Root.Teyvat.Inazuma.TriCommission.TenryouCommission,
+        Root.Teyvat.Inazuma.TriCommission.YashiroCommission,
+        Root.Teyvat.Inazuma.WatatsumiIsland,
+        Root.Teyvat.Kaeya,
+        Root.Teyvat.Khaenriah,
+        Root.Teyvat.Liyue,
+        Root.Teyvat.Liyue.Adepti,
+        Root.Teyvat.Liyue.Adepti.Yaksha,
+        Root.Teyvat.Liyue.BubuPharmacy,
+        Root.Teyvat.Liyue.CruxFleet,
+        Root.Teyvat.Liyue.FeiyunCommerceGuild,
+        Root.Teyvat.Liyue.Qixing,
+        Root.Teyvat.Liyue.WangshengFuneralParlor,
+        Root.Teyvat.Liyue.WanminRestaurant,
+        Root.Teyvat.Mondstadt,
+        Root.Teyvat.Mondstadt.DawnWinery,
+        Root.Teyvat.Mondstadt.FavoniusChurch,
+        Root.Teyvat.Mondstadt.KnightsOfFavonius,
+        Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam,
+        Root.Teyvat.Snezhnaya,
+        Root.Teyvat.Snezhnaya.Fatui,
+        Root.Teyvat.Sumeru,
+        Shortcut,
+        Translation,
+        Translation.EnUs,
+        Translation.EnUs.Action,
+        Translation.EnUs.Entity,
+        Translation.ZhCn,
+        Translation.ZhCn.Action,
+        Translation.ZhCn.Entity,
+        Translation.ZhCn.Utility,
+        Data.Xml,
+        Data.Vector,
+        Data.JSON
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:
+    build-depends:
+        base
+        ,directory
+        ,text
+        ,scotty
+        ,aeson
+        -- ,blaze-html
+    hs-source-dirs:   app
+    default-language: Haskell2010

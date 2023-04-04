@@ -19,7 +19,7 @@ translationActionZhCn = first Action <$> [
     ("FosterYoungerBrother", "干弟弟"),
     ("FosterElderBrother", "干哥哥"),
 
-    ("Friend", "互为好友"),
+    ("Friend", "好友"),
     ("Student", "学生"),
     ("Teacher", "老师"),
     ("Guardian", "监护人"),

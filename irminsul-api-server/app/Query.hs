@@ -1,31 +1,53 @@
 module Query where
 
 import Irminsul
-import Root
+import LanguagePack
+import Translation
+import Root ( root )
+import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
 
+import Data.Maybe
+import Data.String
+import Debug.Trace
 import Data.List
 import Data.Vector
 import Data.JSON
-import LanguagePack
-import Translation
-import Data.Maybe
-import Debug.Trace (trace)
-import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
 
+import Web.Scotty
+
+traceThis :: Show a => a -> a
+traceThis x = trace (show x) x
+
+{-
+    Wrapper of APIs' responses
+-}
 data ApiStatusCode
     = OK
+    | MissingParameter
     | UnsupportedLanguage
     | NotImplementedCluster
+    | NotImplementedEntity
     deriving (Eq, Show)
 
 apiResponse :: ApiStatusCode -> JSON -> JSON
 apiResponse status body =
     JObject [("status", JString (show status)), ("body", body)]
 
-traceThis :: Show a => a -> a
-traceThis x = trace (show x) x
+stringResponse :: String -> ActionM ()
+stringResponse = text . fromString
 
-newtype QueryResult = QueryResult [Path]
+dataResponse :: Show a => a -> ActionM ()
+dataResponse = stringResponse . show
+
+missingParameter =
+    dataResponse (JObject [("status", JString (show MissingParameter))])
+
+{-
+    Implementation of APIs
+-}
+
+-- | Relations grouped in forward, backward and bidirectional ones.
+type GroupedRelations = ([Relation], [Relation], [Relation])
 
 clusterFromId :: String -> Maybe Entity
 clusterFromId "Root" = Just root
@@ -36,24 +58,34 @@ clusterFromId id =
     then Nothing
     else Just (head result)
 
+entityFromId :: String -> Maybe Entity
+entityFromId "Root" = Just root
+entityFromId id =
+    let result = filter (\e -> entityId e == id)
+            (elements . entities $ root) in
+    if null result
+    then Nothing
+    else Just (head result)
+
 splitAtomsClusters :: [Entity] -> ([Entity], [Entity])
 splitAtomsClusters xs = (filter isAtom xs, filter isCluster xs)
 
-splitRelations ::
-    Entity -> Entity -> [Relation] -> ([Relation], [Relation], [Relation])
-splitRelations s o rs = (
-    filter (\r -> matchSubject s r && matchObject o r) rs,
-    filter (\r -> matchSubject o r && matchObject s r) rs,
-    filter isBiRelation rs
+-- | Group all relations between 2 entities.
+splitRelationsBetween ::
+    Entity -> Entity -> [Relation] -> GroupedRelations
+splitRelationsBetween s o relations = (
+    filter (\r -> matchSubject s r && matchObject o r) relations,
+    filter (\r -> matchSubject o r && matchObject s r) relations,
+    swapBiRelationSubject s <$> filter isBiRelation relations
     )
 
 sortTuple :: Ord a => (a, a) -> (a, a)
 sortTuple (a, b) = if a <= b then (a, b) else (b, a)
 
-layoutJsonFromCluster :: Language -> Entity -> JSON
-layoutJsonFromCluster _ (Atom {}) = JNull
-layoutJsonFromCluster _ (Cluster _ _ _ _ Nothing) = JNull
-layoutJsonFromCluster lang
+clusterGraph :: Language -> Entity -> JSON
+clusterGraph _ (Atom {}) = JNull
+clusterGraph _ (Cluster rootId _ _ _ Nothing) = JNull
+clusterGraph lang
     cluster@(Cluster
         rootId _ _ _
         (Just layout@(Layout rootLayout entityLayouts))) =
@@ -82,6 +114,7 @@ layoutJsonFromCluster lang
         lp = getLanguagePack lang
     in
     JObject [
+        ("id", JString rootId),
         ("rootPosition", toJSON (position rootLayout)),
 
         ("rootTranslation", JString $ translateEntity lp cluster),
@@ -110,6 +143,7 @@ layoutJsonFromCluster lang
                         ("translation", JString $ translateEntity lp c),
 
                         ("position", toJSON $ position layout),
+                        ("anchor", toJSON $ anchor layout),
                         ("width", JString . show $ width layout),
                         ("height", JString . show $ height layout)
                     ]
@@ -124,39 +158,7 @@ layoutJsonFromCluster lang
                     sortTuple $ subjectAndObject $ head relationGroup
 
             let (forwardRelations, backwardRelations, biRelations) =
-                    splitRelations subject object relationGroup
-
-            let subjectAnchor =
-                    if subject == cluster
-                    then anchor rootLayout
-                    else anchor . fromJust $
-                        lookup subject entityLayouts
-
-                objectAnchor =
-                    if object == cluster
-                    then anchor rootLayout
-                    else anchor . fromJust $
-                        lookup object entityLayouts
-
-            let relationVector = objectAnchor - subjectAnchor
-
-            let relationWidth =
-                    magnitude relationVector
-
-                relationPosition =
-                    scale (1/2) (subjectAnchor + objectAnchor)
-
-                relationRotation =
-                    let angle = atan (y relationVector / x relationVector) in
-                    if x subjectAnchor <= x objectAnchor
-                    then angle
-                    else angle + pi
-
-                needReverse =
-                    x objectAnchor < x subjectAnchor
-                    ||
-                    x objectAnchor == x subjectAnchor &&
-                    y objectAnchor > y subjectAnchor
+                    splitRelationsBetween subject object relationGroup
 
             if  subject `elem` (fst <$> entityLayouts) &&
                 object `elem` (fst <$> entityLayouts)
@@ -176,22 +178,56 @@ layoutJsonFromCluster lang
                     ("backwardRelations", JArray $ JString .
                         translateAction lp . action <$> backwardRelations),
                     ("biRelations", JArray $ JString .
-                        translateAction lp . action <$> biRelations),
-
-                    ("width", JNumber relationWidth),
-                    ("position", toJSON relationPosition),
-                    ("rotation", JNumber relationRotation),
-
-                    ("needReverse", JBool needReverse)
+                        translateAction lp . action <$> biRelations)
                     ]
             else []
         )
     ]
 
-layoutJsonFromId :: String -> Language -> JSON
-layoutJsonFromId id lang = maybe JNull
-    (layoutJsonFromCluster lang) (clusterFromId id)
+-- | Group all relations related to the specified cluster.
+splitRelationsOf :: Entity -> [Relation] -> GroupedRelations
+splitRelationsOf s relations = (
+    filter (matchSubject s) relations,
+    filter (matchObject s) relations,
+    filter (\r -> isBiRelation r && (subject r == s || object r == s)) relations
+    )
 
+entityRelations :: Language -> Entity -> JSON
+entityRelations lang entity =
+    let
+        lp = getLanguagePack lang
+
+        (asSubject, asObject, asBoth) =
+            splitRelationsOf entity (elements . relations $ root)
+    in
+    JObject [
+        ("id", JString (entityId entity)),
+        ("translation", JString (translateEntity lp entity)),
+
+        ("asSubject", JArray $ (\(Relation action _ object) -> 
+            JObject [
+                ("id", JString (entityId object)),
+                ("translation", JString (translateEntity lp object)),
+                ("action", JString (translateAction lp action))
+            ]
+            ) <$> asSubject),
+        
+        ("asObject", JArray $ (\(Relation action subject _) -> 
+            JObject [
+                ("id", JString (entityId subject)),
+                ("translation", JString (translateEntity lp subject)),
+                ("action", JString (translateAction lp action))
+            ]
+            ) <$> asObject),
+        
+        ("asBoth", JArray $ (\(BiRelation action _ object) -> 
+            JObject [
+                ("id", JString (entityId object)),
+                ("translation", JString (translateEntity lp object)),
+                ("action", JString (translateAction lp action))
+            ]
+            ) . swapBiRelationSubject entity <$> asBoth)
+    ]
 
 {-
 APIs
@@ -201,14 +237,29 @@ APIs
     Given a cluster id and a specified language,
     returns the layout of the cluster.
 -}
-apiCluster :: String -> String -> JSON
-apiCluster id lang =
+apiClusterGraph :: String -> String -> JSON
+apiClusterGraph id lang =
     maybe (apiResponse UnsupportedLanguage JNull)
     (\language ->
         maybe (apiResponse NotImplementedCluster JNull)
-        (apiResponse OK . layoutJsonFromCluster language)
+        (apiResponse OK . clusterGraph language)
         (clusterFromId id)
     )
     (readLanguageCode lang)
 
-apiKofDemo = layoutJsonFromCluster ZhCn knightsOfFavonius
+{- |
+    Given an entity id and a specified language,
+    returns all the relations associated to this entity.
+-}
+apiEntityRelations :: String -> String -> JSON
+apiEntityRelations id lang =
+    maybe (apiResponse UnsupportedLanguage JNull)
+    (\language ->
+        maybe (apiResponse NotImplementedEntity JNull)
+        (apiResponse OK . entityRelations language)
+        (entityFromId id)
+    )
+    (readLanguageCode lang)
+
+
+apiKofDemo = clusterGraph ZhCn knightsOfFavonius

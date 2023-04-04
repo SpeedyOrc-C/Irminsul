@@ -1,30 +1,30 @@
 <script lang="ts">
     import type { Vector2 } from "./Vector2";
-    import {onMount} from "svelte";
 
+    export let id: string;
+    export let anchor: Vector2;
     export let translation: string;
     export let position: Vector2;
     export let width: number;
     export let height: number;
 
     let style: string;
-
-    onMount(() => {
-        style = [
-            `left: ${position.x}rem`,
-            `top: ${-position.y}rem`,
-            `width: ${width}rem`,
-            `height: ${height}rem`,
-        ].join("; ");
-    })
+    style = [
+        `left: ${position.x}rem`,
+        `top: ${-position.y}rem`,
+        `width: ${width}rem`,
+        `height: ${height}rem`,
+    ].join("; ");
 </script>
 
-<div id="cluster" {style}>
-    <div id="translation" class="font-hywh-65w">{translation}</div>
+<div {id} class="cluster" {style}>
+    <div class="translation font-hywh-65w">
+        {translation}
+    </div>
 </div>
 
 <style>
-    #cluster {
+    .cluster {
         position: absolute;
         transform: translate(-50%, -50%);
 
@@ -35,7 +35,7 @@
         z-index: 100;
     }
 
-    #translation {
+    .translation {
         width: fit-content;
         position: absolute;
         transform: translate(-1rem, -50%);
@@ -48,7 +48,7 @@
         text-decoration: none;
     }
 
-    #cluster:hover {
+    .cluster:hover {
         background-color: #ffff000f;
     }
 </style>

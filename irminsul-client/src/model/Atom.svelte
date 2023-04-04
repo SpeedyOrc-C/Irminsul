@@ -1,31 +1,61 @@
 <script lang="ts">
-    import type {Vector2} from "./Vector2";
-    import {onMount} from "svelte";
+    import { onMount } from "svelte";
+    import { getImgAvatar, img_avatar_UnknownAvatar } from "../asset/Asset";
+    import type { Vector2 } from "./Vector2";
 
     export let id: string;
     export let translation: string;
     export let position: Vector2;
 
-    let style: string
+    let locked = true;
 
-    onMount(() => {
-        style = `left: ${position.x}rem; top: ${-position.y}rem`
-    })
+    let style: string;
+    $: style = `left: ${position.x}rem; top: ${-position.y}rem`;
 
+    let avatarSrc: string = img_avatar_UnknownAvatar;
+
+    onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
+
+
+    function click() {
+        locked = locked ? false : true;
+    }
+
+    function move(e: KeyboardEvent) {
+        if (locked) return;
+
+        let delta = e.shiftKey ? 5 : 1;
+
+        switch (e.code) {
+            case "ArrowUp":
+                position.y += delta;
+                break;
+            case "ArrowDown":
+                position.y -= delta;
+                break;
+            case "ArrowLeft":
+                position.x -= delta;
+                break;
+            case "ArrowRight":
+                position.x += delta;
+                break;
+        }
+    }
 </script>
 
-<div id="atom" {style}>
+<svelte:window on:keydown|preventDefault={move} />
 
-    <img id="avatar" src="/asset/img/avatar/{id}.png" alt=""/>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div id="{id}" class="atom" {style} on:click={click}>
+    <img class="avatar" src={avatarSrc} alt="" />
 
-    <div id="translation" class="font-hywh-65w">
+    <div class="translation font-hywh-65w">
         {translation}
     </div>
-
 </div>
 
 <style>
-    #atom {
+    .atom {
         position: absolute;
         transform: translate(-50%, -50%);
         width: fit-content;
@@ -36,7 +66,7 @@
         z-index: 10000;
     }
 
-    #avatar {
+    .avatar {
         width: 5rem;
         height: 5rem;
         position: absolute;
@@ -54,7 +84,7 @@
         transition-duration: 0.5s;
     }
 
-    #avatar:hover {
+    .avatar:hover {
         border: 0.2rem solid #bcc6e1;
         box-shadow: 0 0 0.2rem 0.1rem #bcc6e188;
 
@@ -62,11 +92,11 @@
         transition-duration: 0.2s;
     }
 
-    #avatar:hover + #translation {
+    .avatar:hover + .translation {
         display: block;
     }
 
-    #translation {
+    .translation {
         position: absolute;
         transform: translate(-50%, -50%);
 

@@ -1,13 +1,22 @@
 <script lang="ts">
-    import Atom from "./Atom.svelte";
-    import Cluster from "./Cluster.svelte";
-    import type {Layout} from "./Layout";
-    import RelationBetween from "./RelationBetween.svelte";
-    import {onMount} from "svelte";
+    import { img_ui_background_root_cluster } from "../../asset/Asset";
+    import Atom from "../../model/Atom.svelte";
+    import Cluster from "../../model/Cluster.svelte";
+    import type { RelationGraph } from "../../model/RelationGraph";
+    import RelationBetween from "../../model/RelationBetween.svelte";
+    import type { Vector2 } from "../../model/Vector2";
 
-    export let layout: Layout;
+    export let relationGraph: RelationGraph;
 
-    // View Controller
+    let entityAnchor: Map<string, Vector2> = new Map();
+
+    entityAnchor.set(relationGraph.id, relationGraph.rootPosition);
+    relationGraph.atoms.forEach((atom) =>
+        entityAnchor.set(atom.id, atom.position)
+    );
+    relationGraph.clusters.forEach((cluster) =>
+        entityAnchor.set(cluster.id, cluster.anchor)
+    );
 
     let viewX = 0;
     let viewY = 0;
@@ -17,11 +26,10 @@
 
     let transform: string;
     let rootClusterTransform: string;
-    let cloudTransform: string;
 
-    onMount(() => {
-        rootClusterTransform = `left: ${layout.rootPosition.x}rem; top: ${-layout.rootPosition.y}rem`;
-    })
+    $: rootClusterTransform = `left: ${
+        relationGraph.rootPosition.x
+    }rem; top: ${-relationGraph.rootPosition.y}rem`;
 
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
     $: transform = [
@@ -30,7 +38,6 @@
         `scale(${viewScale * 100}%)`,
         `translate(${viewX}rem, ${-viewY}rem)`,
     ].join(" ");
-    $: cloudTransform = [`transform:`, ``, ``, ``].join("; ");
 
     function moveUp() {
         let deltaViewX = 0;
@@ -87,9 +94,7 @@
         viewAngle = 0;
     }
 
-    // For keyboard users
-
-    document.addEventListener("keydown", (e) => {
+    function keydownListener(e: KeyboardEvent) {
         switch (e.code) {
             case "KeyW":
                 moveUp();
@@ -119,34 +124,48 @@
                 resetView();
                 break;
         }
-    });
+    }
 </script>
 
-<div id="background-dark-blue"></div>
+<svelte:window on:keydown={keydownListener} />
 
-<div id="background-cloud"></div>
+<div id="background-dark-blue" />
+
+<div id="background-cloud" />
 
 <div id="showcase" style={transform}>
-    {#each layout.relationsBetween as relationBetween}
-        <RelationBetween {...relationBetween}/>
+    {#each relationGraph.relationsBetween as relationBetween}
+        <RelationBetween
+            forwardRelations={relationBetween.forwardRelations}
+            backwardRelations={relationBetween.backwardRelations}
+            biRelations={relationBetween.biRelations}
+            subjectAnchor={entityAnchor.get(relationBetween.subjectId) ?? {
+                x: 0,
+                y: 0,
+            }}
+            objectAnchor={entityAnchor.get(relationBetween.objectId) ?? {
+                x: 0,
+                y: 0,
+            }}
+        />
     {/each}
 
-    {#each layout.clusters as cluster}
-        <Cluster {...cluster}/>
+    {#each relationGraph.clusters as cluster}
+        <Cluster {...cluster} />
     {/each}
 
-    {#each layout.atoms as atom}
-        <Atom {...atom}/>
+    {#each relationGraph.atoms as atom}
+        <Atom {...atom} />
     {/each}
 
     <div id="root-cluster" style={rootClusterTransform}>
         <img
             id="root-cluster-background"
-            src="/asset/img/ui/background-root-cluster.png"
+            src={img_ui_background_root_cluster}
             alt=""
         />
         <div id="translation" class="font-hywh-85w">
-            {layout.rootTranslation}
+            {relationGraph.rootTranslation}
         </div>
     </div>
 </div>
@@ -216,8 +235,8 @@
         font-size: 1.3rem;
         color: #703b00;
         text-shadow: #e6dfd2 1px 0 0, #e6dfd2 -1px 0 0, #e6dfd2 0 1px 0,
-        #e6dfd2 0 -1px 0, #e6dfd2 1px 1px 0, #e6dfd2 -1px 1px 0,
-        #e6dfd2 1px -1px 0, #e6dfd2 -1px -1px 0;
+            #e6dfd2 0 -1px 0, #e6dfd2 1px 1px 0, #e6dfd2 -1px 1px 0,
+            #e6dfd2 1px -1px 0, #e6dfd2 -1px -1px 0;
     }
 
     #root-cluster-background {

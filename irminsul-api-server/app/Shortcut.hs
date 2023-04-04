@@ -15,9 +15,12 @@ ra = Relation . Action
 ba :: String -> Entity -> Entity -> Relation
 ba = BiRelation . Action
 
--- | Shortcut of creating a Atom Character
+-- | Shortcut of creating an Atom Character
 ach :: String -> Entity
 ach = (`Atom` Character)
+-- | Shortcut of creating an Atom Object
+ao :: String -> Entity
+ao = (`Atom` Object) 
 
 -- | Shortcut of a root's title's layout
 rl :: (Double, Double) -> (Double, Double) -> ShowcaseElementProperty

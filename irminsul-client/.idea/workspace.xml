@@ -5,54 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b95e76f7-3c9b-4340-bb38-060f2b484b81" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/irminsul-client.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Entity.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Layout.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/RelationBetween.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Vector2.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/+layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../irminsul-generator/app/Data/JSON.hs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../irminsul-generator/app/Data/Vector.hs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../irminsul-generator/app/Data/Xml.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/.ghci" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Irminsul.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Irminsul.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/LanguagePack.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/LanguagePack.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Main.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Main.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Query.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Query.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Liyue/BubuPharmacy.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Liyue/BubuPharmacy.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Mondstadt/KnightsOfFavonius.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Mondstadt/KnightsOfFavonius.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Snezhnaya/Fatui.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Snezhnaya/Fatui.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Sumeru.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Root/Teyvat/Sumeru.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Shortcut.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/app/Shortcut.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Showcase.hs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Utility/Html.hs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/app/Utility/Vector.hs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/compile.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-generator.cabal" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-generator/irminsul-generator.cabal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/font/HYWenHei-65W.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/font/HYWenHei-85W.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/Albedo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/Amber.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/EulaLawrence.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/JeanGunnhildr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/KaeyaAlberich.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/KaeyaRagvindr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/Klee.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/Lisa.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/MikaSchmidt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/Noelle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/avatar/Sucrose.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/img/ui/background-cluster-root-title.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/js/cluster-showcase.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/style/cluster-showcase.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-generator/irminsul-output/style/navigator-control.css" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/EntityRelations.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/entity-relations/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Irminsul.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Irminsul.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Main.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Main.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Query.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Query.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/Adepti.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/Adepti.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/YuehaiPavilion.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/YuehaiPavilion.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/YunHanOperaTroupe.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/YunHanOperaTroupe.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Mondstadt.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Mondstadt.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Mondstadt/CatsTail.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Mondstadt/CatsTail.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Shortcut.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Shortcut.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/irminsul-generator.cabal" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/irminsul-generator.cabal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Layout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ClusterGraph.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Showcase.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ClusterGraph.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/cluster-graph/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +34,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="+page" />
+        <option value="EntityRelations" />
       </list>
     </option>
   </component>
@@ -102,6 +75,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/routes/cluster-graph" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -114,7 +92,8 @@
       <workItem from="1680219416585" duration="1189000" />
       <workItem from="1680292271031" duration="8133000" />
       <workItem from="1680459676982" duration="11053000" />
-      <workItem from="1680508865694" duration="304000" />
+      <workItem from="1680508865694" duration="643000" />
+      <workItem from="1680523825469" duration="1111000" />
     </task>
     <servers />
   </component>

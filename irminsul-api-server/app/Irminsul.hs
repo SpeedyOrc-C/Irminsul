@@ -50,6 +50,11 @@ matchObject :: Entity -> Relation -> Bool
 matchObject entity (Relation _ _ object) = entity == object
 matchObject _ _ = False
 
+swapBiRelationSubject :: Entity -> Relation -> Relation
+swapBiRelationSubject subject r@(BiRelation action rSubject rObject) =
+    if subject == rSubject then r else
+    BiRelation action rObject rSubject
+
 expandBiRelation :: [Relation] -> [Relation]
 expandBiRelation = concatMap p
     where

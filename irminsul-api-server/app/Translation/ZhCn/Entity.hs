@@ -12,6 +12,8 @@ import Root.Teyvat.Kaeya
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.DawnWinery
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
+import Root.Teyvat.Mondstadt.FavoniusChurch
+import Root.Teyvat.Hexenzirkel
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -30,6 +32,9 @@ translationEntityZhCn = [
     ip guerillaTeam "游击小队" [] UntilNow "",
         ip eulaLawrence ("优菈".="劳伦斯") ["浪花骑士", "喷嚏记仇真君"] UntilNow "",
         ip mikaSchmidt ("米卡".="施密特") ["前进测绘员"] UntilNow "",
+
+    ip alice "爱丽丝" [] UntilNow "",
+    ip barbaraGunnhildr ("芭芭拉".="佩奇") [] UntilNow "",
     
     ip aether "空" [] UntilNow "",
     ip lumine "荧" [] UntilNow ""

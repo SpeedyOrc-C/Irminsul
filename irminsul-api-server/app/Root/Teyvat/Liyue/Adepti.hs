@@ -4,6 +4,9 @@ module Root.Teyvat.Liyue.Adepti where
 import Irminsul
 import Shortcut
 import Root.Teyvat.Liyue.Adepti.Yaksha (yaksha)
+import Root.Teyvat.Liyue.Adepti.SeaGazersAbode (seaGazersAbode)
+import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode (streetwardRamblersAbode)
+import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode (cloudRetainersAbode)
 
 adepti = clusterNode "Adepti" Organization
     [
@@ -13,6 +16,9 @@ adepti = clusterNode "Adepti" Organization
 
     ]
     [
-        yaksha
+        yaksha,
+        cloudRetainersAbode,
+        streetwardRamblersAbode,
+        seaGazersAbode
     ]
     Nothing

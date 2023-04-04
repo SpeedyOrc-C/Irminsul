@@ -6,31 +6,29 @@ module Root.Teyvat.Liyue where
 
 import Irminsul
 import Shortcut
+import Root.AnotherWorld (aether)
 import Root.Teyvat.Liyue.Adepti (adepti)
+import Root.Teyvat.Liyue.BubuPharmacy (bubuPharmary)
+import Root.Teyvat.Liyue.CruxFleet (cruxFleet)
 import Root.Teyvat.Liyue.FeiyunCommerceGuild (feiyunCommerceGuild)
 import Root.Teyvat.Liyue.Qixing (qixing)
 import Root.Teyvat.Liyue.WangshengFuneralParlor (wangshengFuneralParlor)
-import Root.Teyvat.Liyue.CruxFleet (cruxFleet)
-import Root.AnotherWorld (aether)
 import Root.Teyvat.Liyue.WanminRestaurant (wanminRestaurant)
-import Root.Teyvat.Liyue.BubuPharmacy (bubuPharmary)
+import Root.Teyvat.Liyue.YuehaiPavilion (yuehaiPavilion)
+import Root.Teyvat.Liyue.YunHanOperaTroupe (yunHanOperaTroupe)
 
 chongyun = ach "Chongyun"
-yunJin = ach "YunJin"
+
 xinyan = ach "Xinyan"
-ganyu = ach "Ganyu"
+
 yelan = ach "Yelan"
-yaoyao = ach "Yaoyao"
 yanfei = ach "Yanfei"
 
 liyue = clusterNode "Liyue" Country
     [
         chongyun,
-        yunJin,
         xinyan,
-        ganyu,
         yelan,
-        yaoyao,
         yanfei
     ]
     [
@@ -43,6 +41,8 @@ liyue = clusterNode "Liyue" Country
         wangshengFuneralParlor,
         cruxFleet,
         wanminRestaurant,
-        bubuPharmary
+        bubuPharmary,
+        yuehaiPavilion,
+        yunHanOperaTroupe
     ]
     Nothing

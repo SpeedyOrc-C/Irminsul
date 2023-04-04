@@ -7,23 +7,26 @@ import LanguagePack
 import Web.Scotty
 import Data.String
 
-main = server
+main = scotty 50000 $ do
 
-stringResponse :: String -> ActionM ()
-stringResponse = text . fromString
-
-dataResponse :: Show a => a -> ActionM ()
-dataResponse = stringResponse . show
-
-server = scotty 50000 $ do
+    get "/api/hello" $
+        stringResponse "Hello, World!"
     
-    get "/api/test" $
-        stringResponse "Hello, World! 你好世界！"
-
     get "/api/kof-demo" $
         dataResponse apiKofDemo
-    
-    get "/api/cluster" $ do
-        id <- param "id"
-        lang <- param "lang"
-        dataResponse $ apiCluster id lang
+
+    get "/api/entity-relations" $
+        (do
+            id <- param "id"
+            lang <- param "lang"
+            dataResponse $ apiEntityRelations id lang
+        )
+        `rescue` const missingParameter
+
+    get "/api/relation-graph" $
+        (do
+            id <- param "id"
+            lang <- param "lang"
+            dataResponse $ apiClusterGraph id lang
+        )
+        `rescue` const missingParameter

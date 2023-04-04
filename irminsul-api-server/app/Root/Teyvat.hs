@@ -4,20 +4,30 @@ import Irminsul
 import Shortcut
 import CommonRelations
 
-import Root.Teyvat.Mondstadt (mondstadt)
-import Root.Teyvat.Liyue (liyue)
-import Root.Teyvat.Inazuma (inazuma)
-import Root.Teyvat.Snezhnaya (snezhnaya)
-import Root.Teyvat.Hexenzirkel (alice, hexenzirkel)
-import Root.Teyvat.Mondstadt.KnightsOfFavonius (klee)
-import Root.Teyvat.Khaenriah (khaenriah)
+import Root.Teyvat.Mondstadt
+import Root.Teyvat.Liyue 
+import Root.Teyvat.Inazuma 
+import Root.Teyvat.Snezhnaya 
+import Root.Teyvat.Hexenzirkel
+import Root.Teyvat.Mondstadt.KnightsOfFavonius 
+import Root.Teyvat.Khaenriah 
+import Root.Teyvat.Liyue.WangshengFuneralParlor (zhongli)
+import Root.Teyvat.Sumeru
+
+heavenlyPrinciple = ao "HeavenlyPrinciple"
+sustainerOfHeavenlyPrinciple = ach "SustainerOfHeavenlyPrinciple"
 
 teyvat = clusterNode "Teyvat" World
     [
+        heavenlyPrinciple,
+        sustainerOfHeavenlyPrinciple
     ]
     [
         alice `mother` klee,
-        klee `daughter` alice
+        klee `daughter` alice,
+
+        venti `friend` zhongli,
+        venti `friend` buer
     ]
     [
         mondstadt,

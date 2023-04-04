@@ -1,5 +1,5 @@
 cabal-version:      2.4
-name:               irminsul-generator
+name:               irminsul-api-server
 version:            0.1.0.0
 
 synopsis:           Generate characters' relation graph for Genshin Impact.
@@ -18,7 +18,6 @@ maintainer:         1670732206@qq.com
 -- A copyright notice.
 -- copyright:
 -- category:
-extra-source-files: CHANGELOG.md
 
 executable irminsul-generator
     main-is:          Main.hs
@@ -46,6 +45,9 @@ executable irminsul-generator
         Root.Teyvat.Khaenriah,
         Root.Teyvat.Liyue,
         Root.Teyvat.Liyue.Adepti,
+        Root.Teyvat.Liyue.Adepti.CloudRetainersAbode,
+        Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode,
+        Root.Teyvat.Liyue.Adepti.SeaGazersAbode,
         Root.Teyvat.Liyue.Adepti.Yaksha,
         Root.Teyvat.Liyue.BubuPharmacy,
         Root.Teyvat.Liyue.CruxFleet,
@@ -53,7 +55,10 @@ executable irminsul-generator
         Root.Teyvat.Liyue.Qixing,
         Root.Teyvat.Liyue.WangshengFuneralParlor,
         Root.Teyvat.Liyue.WanminRestaurant,
+        Root.Teyvat.Liyue.YuehaiPavilion,
+        Root.Teyvat.Liyue.YunHanOperaTroupe,
         Root.Teyvat.Mondstadt,
+        Root.Teyvat.Mondstadt.CatsTail,
         Root.Teyvat.Mondstadt.DawnWinery,
         Root.Teyvat.Mondstadt.FavoniusChurch,
         Root.Teyvat.Mondstadt.KnightsOfFavonius,
@@ -81,7 +86,5 @@ executable irminsul-generator
         ,directory
         ,text
         ,scotty
-        ,aeson
-        -- ,blaze-html
     hs-source-dirs:   app
     default-language: Haskell2010

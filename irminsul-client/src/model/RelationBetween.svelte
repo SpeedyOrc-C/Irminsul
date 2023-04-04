@@ -1,45 +1,70 @@
 <script lang="ts">
-    import type { Vector2 } from "./Vector2";
-    import {onMount} from "svelte";
-
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
     export let biRelations: Array<string>;
-    export let width: number;
-    export let position: Vector2;
-    export let rotation: number;
-    export let needReverse: boolean;
+    export let subjectAnchor: Vector2;
+    export let objectAnchor: Vector2;
 
-    let style = ''
-    let realForwardRelations: Array<string> = []
-    let realBackwardRelations: Array<string> = []
+    import type { Vector2 } from "./Vector2";
 
-    onMount(() => {
-        style = [
-            `width: ${width}rem`,
-            `left: ${position.x}rem`,
-            `top: ${-position.y}rem`,
-            "transform: " +
-                [
-                    `translate(-50%, -50%)`,
-                    `rotate(${-rotation + (needReverse ? 3.141592653589 : 0)}rad)`,
-                ].join(" "),
-        ].join("; ");
+    let realForwardRelations: Array<string> = [];
+    let realBackwardRelations: Array<string> = [];
 
-        realForwardRelations = needReverse
-            ? backwardRelations
-            : forwardRelations;
+    let needReverse: boolean;
+    let position: Vector2 = { x: 0, y: 0 };
+    let width: number;
+    let rotation: number;
 
-        realBackwardRelations = needReverse
-            ? forwardRelations
-            : backwardRelations;
-    })
+    $: needReverse =
+        objectAnchor.x < subjectAnchor.x ||
+        (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
+    $: realForwardRelations = needReverse
+        ? backwardRelations
+        : forwardRelations;
+
+    $: realBackwardRelations = needReverse
+        ? forwardRelations
+        : backwardRelations;
+
+    $: width = Math.sqrt(
+        (subjectAnchor.x - objectAnchor.x) ** 2 +
+            (subjectAnchor.y - objectAnchor.y) ** 2
+    );
+
+    $: position.x = (subjectAnchor.x + objectAnchor.x) / 2;
+    $: position.y = (subjectAnchor.y + objectAnchor.y) / 2;
+
+    $: rotation =
+        Math.atan(
+            (subjectAnchor.y - objectAnchor.y) /
+                (subjectAnchor.x - objectAnchor.x)
+        ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0);
+
+    let style: string;
+    $: style = [
+        `width: ${width}rem`,
+        `left: ${position.x}rem`,
+        `top: ${-position.y}rem`,
+        "transform: " +
+            [
+                `translate(-50%, -50%)`,
+                `rotate(${-rotation + (needReverse ? 3.141592653589 : 0)}rad)`,
+            ].join(" "),
+    ].join("; ");
+
+    export function updateTransform() {
+        subjectAnchor = subjectAnchor
+        objectAnchor = objectAnchor
+    }
+    updateTransform();
 </script>
 
-<div id="relation-between" {style}>
+<svelte:window on:keyup={updateTransform} />
+
+<div class="relation-between" {style}>
     {#if biRelations.length > 0}
-        <div id="bi-relation" class="font-hywh-65w">
+        <div class="bi-relation font-hywh-65w">
             {#each biRelations as r}
                 <div>{r}</div>
             {/each}
@@ -47,7 +72,7 @@
     {/if}
 
     {#if realForwardRelations.length > 0}
-        <div id="forward-relation" class="font-hywh-65w">
+        <div class="forward-relation font-hywh-65w">
             {#each realForwardRelations as r}
                 <div>{r}</div>
             {/each}
@@ -55,7 +80,7 @@
     {/if}
 
     {#if realBackwardRelations.length > 0}
-        <div id="backward-relation" class="font-hywh-65w">
+        <div class="backward-relation font-hywh-65w">
             {#each realBackwardRelations as r}
                 <div>{r}</div>
             {/each}
@@ -64,7 +89,7 @@
 </div>
 
 <style>
-    #relation-between {
+    .relation-between {
         position: absolute;
         transform: translate(-50%, -50%);
 
@@ -72,13 +97,13 @@
         z-index: 1000;
     }
 
-    #relation-between:hover,
-    #relation-between:active {
+    .relation-between:hover,
+    .relation-between:active {
         z-index: 2000;
         background-color: #bda27744;
     }
 
-    #relation-between > div {
+    .relation-between > div {
         border: 0.1rem solid #bda277;
         /*box-shadow: #3b425588 0 0 0.3rem 0.1rem;*/
 
@@ -89,35 +114,35 @@
         text-align: center;
     }
 
-    #bi-relation {
+    .bi-relation {
         left: 50%;
         top: 50%;
         background-color: #3b4255;
         color: white;
     }
 
-    #forward-relation,
-    #backward-relation {
+    .forward-relation,
+    .backward-relation {
         left: 50%;
         /* background-color: #f5ece1; */
         color: #3b4255;
     }
 
-    #bi-relation {
+    .bi-relation {
         left: 50%;
         top: 50%;
         background-color: #3b4255;
         color: white;
     }
 
-    #forward-relation,
-    #backward-relation {
+    .forward-relation,
+    .backward-relation {
         left: 50%;
         background-color: #f5ece1;
         color: #3b4255;
     }
 
-    #forward-relation {
+    .forward-relation {
         top: calc(50% - 0.7rem);
 
         background-image: repeating-linear-gradient(
@@ -141,12 +166,12 @@
         }
     }
 
-    #forward-relation > div {
+    .forward-relation > div {
         position: absolute;
         left: 3.5rem;
     }
 
-    #backward-relation {
+    .backward-relation {
         top: calc(50% + 0.7rem);
 
         background-image: repeating-linear-gradient(
@@ -170,22 +195,22 @@
         }
     }
 
-    #backward-relation > div {
+    .backward-relation > div {
         position: absolute;
         right: 3.5rem;
     }
 
-    #bi-relation ~ #forward-relation {
+    .bi-relation ~ .forward-relation {
         top: calc(50% - 1.4rem);
     }
 
-    #bi-relation ~ #backward-relation {
+    .bi-relation ~ .backward-relation {
         top: calc(50% + 1.4rem);
     }
 
-    #bi-relation,
-    #forward-relation,
-    #backward-relation {
+    .bi-relation,
+    .forward-relation,
+    .backward-relation {
         width: 100%;
         height: 1.1rem;
         line-height: 1.1rem;

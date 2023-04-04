@@ -11,6 +11,8 @@ import Root.Teyvat.Kaeya
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.DawnWinery
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
+import Root.Teyvat.Mondstadt.FavoniusChurch
+import Root.Teyvat.Hexenzirkel
 
 translationEntityEnUs = [
     ip knightsOfFavonius "Knights of Favonius" [] UntilNow "",
@@ -28,6 +30,9 @@ translationEntityEnUs = [
     ip guerillaTeam "Guerilla Team" [] UntilNow "",
         ip eulaLawrence "Eula Lawrence" [] UntilNow "",
         ip mikaSchmidt "Mika Schmidt" [] UntilNow "",
+
+    ip alice "Alice" [] UntilNow "",
+    ip barbaraGunnhildr "Barbara Pegg" [] UntilNow "",
     
     ip aether "Aether" [] UntilNow "",
     ip lumine "Lumine" [] UntilNow ""

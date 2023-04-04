@@ -4,14 +4,15 @@ import Irminsul
 import Shortcut
 import CommonRelations
 
-import Root.AnotherWorld (travellerArchonSide)
-import Root.Teyvat.Khaenriah (kaeyaAlberich, albedo)
+import Root.AnotherWorld
+import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-    ( eulaLawrence, guerillaTeam, mikaSchmidt )
-import Root.Teyvat.Mondstadt.FavoniusChurch (barbaraGunnhildr)
-import Root.Teyvat.Kaeya (kaeya)
+import Root.Teyvat.Mondstadt.FavoniusChurch
+import Root.Teyvat.Kaeya
 
+varka = ach "Varka"
 jeanGunnhildr = ach "JeanGunnhildr"
+
 lisa = ach "Lisa"
 amber = ach "Amber"
 klee = ach "Klee"

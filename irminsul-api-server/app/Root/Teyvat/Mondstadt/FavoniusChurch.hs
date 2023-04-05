@@ -4,16 +4,22 @@ import Irminsul
 import Shortcut
 import CommonRelations
 
-barbaraGunnhildr = ach "BarbaraGunnhildr"
+barbaraPegg = ach "BarbaraPegg"
 rosaria = ach "Rosaria"
 
 favoniusChurch = clusterLeaf "FavoniusChurch"
     Organization
     [
-        barbaraGunnhildr,
+        barbaraPegg,
         rosaria
     ]
     [
         
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty=rl (0, 10),
+        elementProperties=[
+            al barbaraPegg (-10, 0),
+            al rosaria (10, 0)
+        ]
+    })

@@ -11,8 +11,10 @@ import Root.Teyvat.Snezhnaya
 import Root.Teyvat.Hexenzirkel
 import Root.Teyvat.Mondstadt.KnightsOfFavonius 
 import Root.Teyvat.Khaenriah 
-import Root.Teyvat.Liyue.WangshengFuneralParlor (zhongli)
+import Root.Teyvat.Liyue.WangshengFuneralParlor
 import Root.Teyvat.Sumeru
+import Root.Teyvat.Mondstadt.CatsTail
+import Root.Teyvat.Liyue.WanminRestaurant
 
 heavenlyPrinciple = ao "HeavenlyPrinciple"
 sustainerOfHeavenlyPrinciple = ach "SustainerOfHeavenlyPrinciple"
@@ -27,7 +29,9 @@ teyvat = clusterNode "Teyvat" World
         klee `daughter` alice,
 
         venti `friend` zhongli,
-        venti `friend` buer
+        venti `friend` buer,
+
+        dionaKatzlein `friend` xiangling
     ]
     [
         mondstadt,
@@ -37,11 +41,4 @@ teyvat = clusterNode "Teyvat" World
         khaenriah,
         hexenzirkel
     ]
-    (Just $ RelationGraphLayout {
-        rootProperty= rl (0, 0),
-        elementProperties=[
-            cl mondstadt (80, 80) (80, 80) (60, 60),
-            cl liyue (0, 0) (0, 0) (60, 60),
-            cl inazuma (80, -80) (80, -80) (60, 60)
-        ]
-    })
+    Nothing

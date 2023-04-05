@@ -101,7 +101,7 @@
     .relation-between:hover,
     .relation-between:active {
         z-index: 2000;
-        background-color: #bda27744;
+        background-color: #bda27733;
     }
 
     .relation-between > div {
@@ -146,16 +146,14 @@
     .forward-relation {
         top: calc(50% - 0.7rem);
 
-        background-image: repeating-linear-gradient(
-            45deg,
-            transparent,
-            #00000000 1.1rem,
-            #0000000c 1.1rem,
-            #0000000c 2.2rem
+        background-image: linear-gradient(
+            90deg,
+            #ffbd22aa 0%,
+            transparent 10rem,
+            transparent 100%
         );
-        background-size: 40rem 2rem;
-        animation: 2s linear 0s infinite normal forwards running
-            forward-relation-background;
+        /* animation: 2s linear 0s infinite normal forwards running
+            forward-relation-background; */
     }
 
     @keyframes forward-relation-background {
@@ -175,16 +173,14 @@
     .backward-relation {
         top: calc(50% + 0.7rem);
 
-        background-image: repeating-linear-gradient(
-            45deg,
-            transparent,
-            #00000000 1.1rem,
-            #0000000c 1.1rem,
-            #0000000c 2.2rem
+        background-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent calc(100% - 10rem),
+            #ffbd22aa 100%
         );
-        background-size: 40rem 2rem;
-        animation: 2s linear 0s infinite normal forwards running
-            backward-relation-background;
+        /* animation: 2s linear 0s infinite normal forwards running
+            backward-relation-background; */
     }
 
     @keyframes backward-relation-background {

@@ -21,6 +21,7 @@ noelle = ach "Noelle"
 
 knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
     [
+        varka,
         jeanGunnhildr,
         lisa,
         kaeyaAlberich,
@@ -32,6 +33,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         travellerArchonSide
     ]
     [
+        varka `grandMaster` knightsOfFavonius,
         jeanGunnhildr `actingGrandMaster` knightsOfFavonius,
         lisa `friend` jeanGunnhildr,
         amber `friend` eulaLawrence,
@@ -46,19 +48,17 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         guerillaTeam
     ]
     (Just $ RelationGraphLayout {
-        rootProperty =
-            rl (-37, 15),
+        rootProperty = rl (-37, 15),
         elementProperties = [
+            al varka (-22.5, 7.5),
             al jeanGunnhildr (-15, 15),
+            al lisa (0, 15),
+            al kaeyaAlberich (0, 0),
+            al amber (15, 15),
             al klee (-15, 0),
             al albedo (-15, -15),
             al sucrose (0, -15),
-            al lisa (0, 15),
-
-            al kaeyaAlberich (15, 0),
-            al noelle (15, -15),
-
-            al amber (15, 15),
+            al noelle (15, 0),
             al eulaLawrence (30, 15),
             al mikaSchmidt (30, 0),
 

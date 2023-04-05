@@ -9,6 +9,10 @@ ip :: a -> String -> [String] -> Existence -> String -> (a, Information)
 ip entity name aliases existence information =
     (entity, Information name aliases existence information)
 
+-- | Shortcut for (Entity, Information) but only name is provided
+ipn :: a -> String -> (a, Information)
+ipn entity name = (entity, Information name [] UntilNow "")
+
 -- Shortcuts for relation
 ra :: String -> Entity -> Entity -> Relation
 ra = Relation . Action

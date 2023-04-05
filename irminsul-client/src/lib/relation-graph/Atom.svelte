@@ -75,7 +75,6 @@
         width: fit-content;
         height: fit-content;
 
-        
         z-index: 10000;
         
         cursor: pointer;
@@ -127,7 +126,7 @@
         border-radius: 0.2rem;
 
         background: #404756;
-        padding: 0.2rem 0;
+        padding: 0.2rem 0.2rem;
         color: #ebe4d7;
 
         text-align: center;

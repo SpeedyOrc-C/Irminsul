@@ -273,7 +273,7 @@
     </div>
 </div>
 
-<Panel on:panel-clicked={panelClicked} />
+<Panel on:panel-clicked={panelClicked} pathElements={relationGraph.path}/>
 
 <style>
     #background-dark-blue {

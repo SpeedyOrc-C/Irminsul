@@ -6,6 +6,8 @@ import Shortcut
 
 -- Unidirectional relations
 
+rule = ra "Rule"
+
 mother = ra "Mother"
 father = ra "Father"
 son = ra "Son"
@@ -21,14 +23,20 @@ olderGeneration = ra "OlderGeneration"
 
 student = ra "Student"
 teacher = ra "Teacher"
+mentor = ra "Mentor"
 guardian = ra "Guardian"
 teamCaptain = ra "TeamCaptain"
+grandMaster = ra "GrandMaster"
 actingGrandMaster = ra "ActingGrandMaster"
+attendant = ra "Attendant"
 
 liveIn = ra "LiveIn"
 love = ra "Love"
 admire = ra "Admire"
+like = ra "Like"
 create = ra "Create"
+hate = ra "Hate"
+dislike = ra "Dislike"
 kill = ra "Kill"
 
 foster relation x y = Relation (Action ("Foster" ++ id)) x y where
@@ -43,5 +51,5 @@ samsara = ra "Samsara"
 
 friend = ba "Friend"
 partner = ba "Partner"
-enemy = ba "enemy"
+enemy = ba "Enemy"
 colleague = ba "Colleague"

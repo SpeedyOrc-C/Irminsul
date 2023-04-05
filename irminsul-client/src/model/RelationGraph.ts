@@ -32,8 +32,14 @@ interface RelationBetween {
     needReverse: boolean
 }
 
+export interface PathElement {
+    id: string
+    translation: string
+}
+
 export interface RelationGraph {
     id: string
+    path: Array<PathElement>
     rootPosition: Vector2
     rootTranslation: string
 
@@ -46,7 +52,7 @@ export function dumpRelationGraphRelation2Haskell(rg: RelationGraph): string {
     return [
         '(Just $ RelationGraphLayout {',
 
-        `    rootProperty = rl (${rg.rootPosition.x}, ${rg.rootPosition.y})`,
+        `    rootProperty = rl (${rg.rootPosition.x}, ${rg.rootPosition.y}),`,
 
         '    elementProperties = [',
         [

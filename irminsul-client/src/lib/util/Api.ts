@@ -3,6 +3,7 @@ export type ApiStatusCode
     | "UnsupportedLanguage"
     | "NotImplementedCluster"
     | "NotImplementedEntity"
+    | "LayoutMissing"
 
 export interface ApiResponse<T> {
     status: ApiStatusCode

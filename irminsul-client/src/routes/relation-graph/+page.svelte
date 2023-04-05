@@ -15,7 +15,7 @@
     lang = $page.url.searchParams.get("lang");
     if (!(id == null || lang == null)) {
         setContext("lang", lang);
-        console.log("Language set to", lang);
+        console.info("Language set to", lang);
 
         onMount(() => {
             fetch(`/api/relation-graph?id=${id}&lang=${lang}`, {
@@ -53,6 +53,12 @@
     <Prompt
         title="Not Implemented Cluster"
         content={`Cluster <u>${id}</u> is not yet implemented.`}
+    />
+{:else if clusterGraphResponse.status === "LayoutMissing"}
+    <title>Layout Missing</title>
+    <Prompt
+        title="Layout Missing"
+        content={`Cluster <u>${id}</u> has no layout.`}
     />
 {:else if clusterGraphResponse.status === "OK" && relationGraph !== undefined}
     <title>Irminsul - {relationGraph.rootTranslation}</title>

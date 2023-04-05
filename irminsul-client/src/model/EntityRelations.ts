@@ -1,4 +1,3 @@
-
 interface PartialRelation {
     id: string
     translation: string

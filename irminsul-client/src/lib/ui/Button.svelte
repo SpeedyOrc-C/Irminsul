@@ -7,6 +7,7 @@
     const dispatch = createEventDispatcher();
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     class="button"
     on:click={() => {
@@ -18,6 +19,8 @@
 
 <style>
     .button {
+        display: inline-block;
+
         height: 1.2rem;
         padding: 0.5rem 2rem;
 

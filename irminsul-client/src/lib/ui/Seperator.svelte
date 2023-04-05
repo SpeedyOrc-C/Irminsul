@@ -2,4 +2,4 @@
     export let width: string = "1rem";
 </script>
 
-<div class="separator" style="width: {width}" />
+<div class="separator" style="width: {width}; display: inline-block" />

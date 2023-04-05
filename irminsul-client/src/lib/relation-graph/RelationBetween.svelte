@@ -5,36 +5,34 @@
     export let subjectAnchor: Vector2;
     export let objectAnchor: Vector2;
 
-    import type { Vector2 } from "./Vector2";
-
-    let realForwardRelations: Array<string> = [];
-    let realBackwardRelations: Array<string> = [];
+    import type { Vector2 } from "../../model/Vector2";
 
     let needReverse: boolean;
-    let position: Vector2 = { x: 0, y: 0 };
-    let width: number;
-    let rotation: number;
-
     $: needReverse =
         objectAnchor.x < subjectAnchor.x ||
         (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
+    let realForwardRelations: Array<string> = [];
     $: realForwardRelations = needReverse
         ? backwardRelations
         : forwardRelations;
 
+    let realBackwardRelations: Array<string> = [];
     $: realBackwardRelations = needReverse
         ? forwardRelations
         : backwardRelations;
 
+    let width: number;
     $: width = Math.sqrt(
         (subjectAnchor.x - objectAnchor.x) ** 2 +
             (subjectAnchor.y - objectAnchor.y) ** 2
     );
 
+    let position: Vector2 = { x: 0, y: 0 };
     $: position.x = (subjectAnchor.x + objectAnchor.x) / 2;
     $: position.y = (subjectAnchor.y + objectAnchor.y) / 2;
 
+    let rotation: number;
     $: rotation =
         Math.atan(
             (subjectAnchor.y - objectAnchor.y) /
@@ -54,8 +52,8 @@
     ].join("; ");
 
     export function updateTransform() {
-        subjectAnchor = subjectAnchor
-        objectAnchor = objectAnchor
+        subjectAnchor = subjectAnchor;
+        objectAnchor = objectAnchor;
     }
     updateTransform();
 </script>
@@ -95,6 +93,9 @@
 
         height: 5.4rem;
         z-index: 1000;
+
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     .relation-between:hover,

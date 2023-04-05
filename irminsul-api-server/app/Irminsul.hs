@@ -126,7 +126,7 @@ data IndexedSetFamily a = IndexedSetFamily {
 instance Show a => Show (IndexedSetFamily a) where
   show = show . indices
 
-data Layout = Layout {
+data RelationGraphLayout = RelationGraphLayout {
     rootProperty :: ShowcaseElementProperty,
     elementProperties :: [(Entity, ShowcaseElementProperty)]
 }
@@ -134,12 +134,12 @@ data Layout = Layout {
 data ShowcaseElementProperty = ShowcaseElementProperty {
     position :: Vector2,
     anchor :: Vector2,
-    width :: Double,
-    height :: Double
+    size :: Vector2
 } deriving Show
 
-elemLayout :: Entity -> Layout -> Bool
-entity `elemLayout` (Layout _ entities) = entity `elem` (fst <$> entities)
+elemLayout :: Entity -> RelationGraphLayout -> Bool
+entity `elemLayout` (RelationGraphLayout _ entities) =
+    entity `elem` (fst <$> entities)
 
 {- |
     An entity could be an Atom or a Cluster.
@@ -157,7 +157,7 @@ data Entity
         clusterType :: ClusterType,
         entities :: IndexedSetFamily Entity,
         relations :: IndexedSetFamily Relation,
-        layout :: Maybe Layout
+        layout :: Maybe RelationGraphLayout
     }
 
 isCluster (Cluster {}) = True

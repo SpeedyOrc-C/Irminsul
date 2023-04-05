@@ -29,5 +29,7 @@ translationActionZhCn = first Action <$> [
     ("LiveIn", "居住"),
     ("Love", "爱"),
     ("Create", "创造"),
-    ("Kill", "杀")
+    ("Kill", "杀"),
+
+    ("SupportInSilence", "暗中照顾")
     ]

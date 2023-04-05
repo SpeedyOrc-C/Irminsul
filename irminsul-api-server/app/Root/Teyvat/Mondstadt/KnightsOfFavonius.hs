@@ -39,14 +39,15 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         sucrose `student` albedo,
         foster elderBrother albedo klee,
         foster youngerSister klee albedo,
-        acting guardian jeanGunnhildr klee
+        acting guardian jeanGunnhildr klee,
+        ra "SupportInSilence" kaeyaAlberich noelle
     ]
     [
         guerillaTeam
     ]
-    (Just $ Layout {
+    (Just $ RelationGraphLayout {
         rootProperty =
-            rl (-37, 15) (-37, 15),
+            rl (-37, 15),
         elementProperties = [
             al jeanGunnhildr (-15, 15),
             al klee (-15, 0),
@@ -61,6 +62,6 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
             al eulaLawrence (30, 15),
             al mikaSchmidt (30, 0),
 
-            cl guerillaTeam (30, 7.5) (37.5, 15) 15 30
+            cl guerillaTeam (30, 7.5) (37.5, 15) (15, 30)
         ]
     })

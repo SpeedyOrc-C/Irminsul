@@ -29,5 +29,7 @@ translationActionEnUs = first Action <$> [
     ("LiveIn", "live in"),
     ("Love", "love"),
     ("Create", "create"),
-    ("Kill", "kill")
+    ("Kill", "kill"),
+
+    ("SupportInSilence", "support in silence")
     ]

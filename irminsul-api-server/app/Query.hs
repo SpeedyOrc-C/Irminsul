@@ -42,6 +42,19 @@ dataResponse = stringResponse . show
 missingParameter =
     dataResponse (JObject [("status", JString (show MissingParameter))])
 
+getAllPathsOfRoot :: [(Entity, Path)]
+getAllPathsOfRoot = getAllPaths root (Path [])
+
+getAllPaths :: Entity -> Path -> [(Entity, Path)]
+getAllPaths entity (Path nowPath) = (entity, Path nowPath) : do
+    let clusters = filter isCluster (indices . entities $ entity)
+    cluster <- clusters
+    getAllPaths cluster (Path (nowPath ++ [entity]))
+
+showPaths :: [(Entity, Path)] -> IO ()
+showPaths paths = putStrLn $ intercalate "\n" $
+    (\(entity, path) -> show path ++ " - " ++ entityId entity) <$> paths
+
 {-
     Implementation of APIs
 -}
@@ -88,7 +101,7 @@ clusterGraph _ (Cluster rootId _ _ _ Nothing) = JNull
 clusterGraph lang
     cluster@(Cluster
         rootId _ _ _
-        (Just layout@(Layout rootLayout entityLayouts))) =
+        (Just layout@(RelationGraphLayout rootLayout entityLayouts))) =
     let
         renderedEntities = filter
             -- Keep entities which has their layouts defined
@@ -144,8 +157,7 @@ clusterGraph lang
 
                         ("position", toJSON $ position layout),
                         ("anchor", toJSON $ anchor layout),
-                        ("width", JString . show $ width layout),
-                        ("height", JString . show $ height layout)
+                        ("size", toJSON $ size layout)
                     ]
             else []
         ),

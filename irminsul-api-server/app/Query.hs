@@ -107,7 +107,7 @@ clusterGraph lang
         renderedEntities = filter
             -- Keep entities which has their layouts defined
             (`elem` (fst <$> entityLayouts))
-            (traceThis $ elements . entities $ cluster)
+            (elements . entities $ cluster)
 
         renderedRelations =
             filter

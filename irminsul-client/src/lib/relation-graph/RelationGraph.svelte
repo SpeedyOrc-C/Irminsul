@@ -12,23 +12,25 @@
     import Grid from "./Grid.svelte";
     import { saveStringAsFile } from "$lib/util/String";
     import Panel from "./Panel.svelte";
-    import { onMount, setContext } from "svelte";
-    import type { ApiResponse } from "$lib/util/Api";
+    import { onMount } from "svelte";
+    import type { ApiResponse, ApiStatusCode } from "$lib/util/Api";
+    import Prompt from "$lib/ui/Prompt.svelte";
 
     export let id: string | null = null;
     export let lang: string | null = null;
 
     let relationGraph: RelationGraph | null = null;
+    let responseStatus: ApiStatusCode | null = null;
 
     let jsonFileInput: HTMLInputElement;
     let jsonFileReader: FileReader;
 
     let entityAnchor: Map<string, Vector2> = new Map();
-    
+
     let showAxis: boolean = false;
     let showGrid: boolean = false;
     let showCoordinate: boolean = false;
-    
+
     let viewX = 0;
     let viewY = 0;
     let viewAngle = 0;
@@ -148,11 +150,12 @@
                         "Failed to load relation graph, error: ",
                         json.status
                     );
-                    return;
                 }
 
                 relationGraph = json.body;
+                responseStatus = json.status;
                 updateEntityAnchor();
+                resetView();
 
                 console.info("Relation graph loaded: ", relationGraph);
             });
@@ -259,36 +262,61 @@
 
 <div class="relation-graph">
     <div class="background-dark-blue" />
-
     <div class="background-cloud" />
-    {#key relationGraph}
-        {#if relationGraph != null}
-            <div
-                class="content"
-                style:transform="rotate({-viewAngle}deg) scale({viewScale *
-                    100}%) translate({viewX}rem, {-viewY}rem)"
-            >
-                {#if showGrid} <Grid /> {/if}
-                {#if showAxis} <Axis /> {/if}
 
-                {#each relationGraph.relationsBetween as relationBetween}
-                    {#key relationGraph}
-                        <RelationBetween
-                            forwardRelations={relationBetween.forwardRelations}
-                            backwardRelations={relationBetween.backwardRelations}
-                            biRelations={relationBetween.biRelations}
-                            subjectAnchor={entityAnchor.get(
-                                relationBetween.subjectId
-                            ) ?? Vector2Zero}
-                            objectAnchor={entityAnchor.get(
-                                relationBetween.objectId
-                            ) ?? Vector2Zero}
+    <div
+        class="content"
+        style:transform="rotate({-viewAngle}deg) scale({viewScale * 100}%)
+        translate({viewX}rem, {-viewY}rem)"
+    >
+        {#if showGrid} <Grid /> {/if}
+        {#if showAxis} <Axis /> {/if}
+
+        {#if relationGraph == null}
+            {#key responseStatus}
+                {#if responseStatus != null && responseStatus !== "OK"}
+                    {#if responseStatus === "UnsupportedLanguage"}
+                        <Prompt
+                            title="Unsupported Language"
+                            content="Language [{lang}] is not supported."
                         />
-                    {/key}
+                    {/if}
+                    {#if responseStatus === "NotImplementedCluster"}
+                        <Prompt
+                            title="Not Implemented Cluster"
+                            content="Entity [{id}] is not implemented."
+                        />
+                    {/if}
+                    {#if responseStatus === "LayoutMissing"}
+                        <Prompt
+                            title="Layout Missing"
+                            content="Layout for [{id}] is missing."
+                        />
+                    {/if}
+                {/if}
+            {/key}
+        {:else}
+            {#key relationGraph}
+                {#each relationGraph.relationsBetween as relationBetween}
+                    <RelationBetween
+                        forwardRelations={relationBetween.forwardRelations}
+                        backwardRelations={relationBetween.backwardRelations}
+                        biRelations={relationBetween.biRelations}
+                        subjectAnchor={entityAnchor.get(
+                            relationBetween.subjectId
+                        ) ?? Vector2Zero}
+                        objectAnchor={entityAnchor.get(
+                            relationBetween.objectId
+                        ) ?? Vector2Zero}
+                    />
                 {/each}
 
                 {#each relationGraph.clusters as cluster}
-                    <Cluster {...cluster} {showCoordinate} on:rg-action={handleRgAction} />
+                    <Cluster
+                        {...cluster}
+                        {showCoordinate}
+                        on:rg-action={handleRgAction}
+                    />
                 {/each}
 
                 {#each relationGraph.atoms as atom}
@@ -297,8 +325,8 @@
 
                 <div
                     class="root-cluster"
-                    style="left: {relationGraph.rootPosition
-                        .x}rem; top: {-relationGraph.rootPosition.y}rem"
+                    style:left="{relationGraph.rootPosition.x}rem"
+                    style:top="{-relationGraph.rootPosition.y}rem"
                 >
                     <img
                         class="root-cluster-background"
@@ -309,14 +337,17 @@
                         {relationGraph.rootTranslation}
                     </div>
                 </div>
-            </div>
-            {#if lang != null}
-                <Panel
-                    on:rg-action={handleRgAction}
-                    pathElements={relationGraph.path}
-                    lang={lang}
-                />
-            {/if}
+            {/key}
+        {/if}
+    </div>
+
+    {#key lang}
+        {#if relationGraph != null && lang != null}
+            <Panel
+                on:rg-action={handleRgAction}
+                pathElements={relationGraph.path}
+                {lang}
+            />
         {/if}
     {/key}
 </div>

@@ -27,6 +27,6 @@ main = scotty 50000 $ do
         (do
             id <- param "id"
             lang <- param "lang"
-            dataResponse $ apiClusterGraph id lang
+            dataResponse $ apiRelationGraph id lang
         )
         `rescue` const missingParameter

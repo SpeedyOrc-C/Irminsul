@@ -1,12 +1,15 @@
 <script lang="ts">
     import { page } from "$app/stores";
+    import { onMount } from "svelte";
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
     
     let id: string | null;
     let lang: string | null;
 
-    id = $page.url.searchParams.get("id") ?? 'Mondstadt';
-    lang = $page.url.searchParams.get("lang") ?? 'zh-cn';
+    onMount(() => {
+        id = $page.url.searchParams.get("id") ?? 'Mondstadt';
+        lang = $page.url.searchParams.get("lang") ?? 'zh-cn';
+    })
 </script>
 
 <RelationGraph {id} {lang} />

@@ -73,21 +73,20 @@ mondstadt = clusterNode "Mondstadt" Country
         elementProperties = [
             al dvalin (-30, 0),
             al venti (-15, 0),
-            al bennett (15, 15),
-            al fischlVonLuftschlossNarfidort (30, 30),
+            al bennett (0, 0),
+            al fischlVonLuftschlossNarfidort (15, 15),
             al ozvaldoHrafnavins (15, 30),
             al monaAstrologistMegistus (30, 15),
-            al barbaraPegg (30, -15),
-            al varka (0, 15),
-            al jeanGunnhildr (15, -15),
+            al barbaraPegg (0, -30),
+            al varka (15, -15),
+            al jeanGunnhildr (0, -15),
             al klee (15, 0),
             al albedo (30, 0),
-            al dilucRagvindr (0, -15),
-            al kaeyaRagvindr (0, -30),
-            al dionaKatzlein (-15, -15),
-            al razor (0, 0),
+            al dilucRagvindr (-15, -15),
+            al kaeyaRagvindr (-15, -30),
+            al dionaKatzlein (-30, -15),
+            al razor (0, 15),
 
-            cl knightsOfFavonius (46, -1) (40, -2) (15, 5)
+            cl knightsOfFavonius (21, -30) (15, -31) (15, 5)
         ]
     })
-    

@@ -15,10 +15,10 @@ jobs:
       matrix:
         include:
           - dockerfile: ./irminsul-api-server/Dockerfile
-            image: ghcr.io/diauweb/irminsul-api-server
+            image: ghcr.io/SpeedyOrc-C/irminsul-api-server
             context: irminsul-api-server
           - dockerfile: ./irminsul-client/Dockerfile
-            image: ghcr.io/diauweb/irminsul-client
+            image: ghcr.io/SpeedyOrc-C/irminsul-client
             context: irminsul-client
     permissions:
       contents: read

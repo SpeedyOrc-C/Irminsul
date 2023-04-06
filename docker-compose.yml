@@ -1,9 +1,9 @@
 services:
   api-server:
-    image: ghcr.dockerproxy.com/diauweb/irminsul-api-server:main
+    image: ghcr.dockerproxy.com/SpeedyOrc-C/irminsul-api-server:main
     ports:
       - 50000:50000
   web:
-    image: ghcr.dockerproxy.com/diauweb/irminsul-client:main
+    image: ghcr.dockerproxy.com/SpeedyOrc-C/irminsul-client:main
     ports:
       - 50001:80

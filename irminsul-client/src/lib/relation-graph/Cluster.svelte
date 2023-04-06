@@ -2,31 +2,22 @@
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
     import type { Vector2 } from "../../model/Vector2";
-    import { getContext, onMount } from "svelte";
     import { page } from "$app/stores";
-
+    import { createEventDispatcher } from "svelte";
+    
     export let id: string;
     export let anchor: Vector2;
     export let translation: string;
     export let position: Vector2;
     export let size: Vector2;
     export let showCoordinate: boolean = false;
+    export let selected = false;
 
-    let selected = false;
+    const dispatch = createEventDispatcher();
 
-    let style: string;
-    $: style = [
-        `left: ${position.x}rem`,
-        `top: ${-position.y}rem`,
-        `width: ${size.x}rem`,
-        `height: ${size.y}rem`,
-    ].join("; ");
-
-    let coordinateStyle: string;
-    $: coordinateStyle = [
-        `left: ${anchor.x - position.x + size.x / 2}rem`,
-        `top: ${-(anchor.y - position.y - size.y / 2)}rem`,
-    ].join("; ");
+    function toggleSelect() {
+        selected = selected ? false : true;
+    }
 
     function keydown(e: KeyboardEvent) {
         if (e.ctrlKey || e.metaKey) {
@@ -47,18 +38,22 @@
             let delta = deadKeyMultiplier(e);
 
             switch (e.code) {
-                // Moving
+                // Moving (Anchor also moves)
                 case "KeyI":
                     position.y += delta;
+                    anchor.y += delta;
                     break;
                 case "KeyK":
                     position.y -= delta;
+                    anchor.y -= delta;
                     break;
                 case "KeyJ":
                     position.x -= delta;
+                    anchor.x -= delta;
                     break;
                 case "KeyL":
                     position.x += delta;
+                    anchor.x += delta;
                     break;
                 // Resizing
                 case "KeyY":
@@ -89,30 +84,31 @@
             }
         }
     }
-
-    function jumpToThisCluster(_: Event) {
-        window.location.href = `/relation-graph?id=${id}&lang=${$page.url.searchParams.get(
-            "lang"
-        )}`;
-    }
 </script>
 
 <svelte:window on:keydown={keydown} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-    {id}
-    class={["cluster", ...(selected ? ["selected"] : [])].join(" ")}
-    {style}
-    on:click={() => (selected = selected ? false : true)}
+    class="cluster"
+    class:selected
+    style:left="{position.x}rem"
+    style:top="{-position.y}rem"
+    style:width="{size.x}rem"
+    style:height="{size.y}rem"
+    on:click={toggleSelect}
 >
-    <div class="translation font-hywh-65w" on:click={jumpToThisCluster}>
+    <div class="translation font-hywh-65w" on:click={() => dispatch('rg-action', {action: 'jump-to', id: id})}>
         {translation}
     </div>
 
     {#if showCoordinate}
-        <Coordinate {position} {size} />
-        <div class="anchor-emphasis" style={coordinateStyle} />
+        <Coordinate coordinate={position} {size} />
+        <div
+            class="anchor-emphasis"
+            style:left="{anchor.x - position.x + size.x / 2}rem"
+            style:top="{-(anchor.y - position.y - size.y / 2)}rem"
+        />
     {/if}
 </div>
 

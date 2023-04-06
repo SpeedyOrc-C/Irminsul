@@ -1,38 +1,18 @@
 <script lang="ts">
-    export let width: string;
-    export let color: string;
+    import Line from "./Line.svelte";
 </script>
 
-{#each Array.from({ length: 34 }, (_, i) => 15 * i) as i}
-    <div
-        class="horizontal"
-        style="height: {width}; background-color: {color}; top: {i}rem"
+{#each Array.from({ length: 33 }, (_, i) => 15 * (i - 16)) as i}
+    <Line
+        offset={i}
+        thickness="2px"
+        color="gray"
+        type="horizontal"
     />
-    <div
-        class="vertical"
-        style="width: {width}; background-color: {color}; left: {i}rem"
-    />
-    <div
-        class="horizontal"
-        style="height: {width}; background-color: {color}; top: {-i}rem"
-    />
-    <div
-        class="vertical"
-        style="width: {width}; background-color: {color}; left: {-i}rem"
+    <Line
+        offset={i}
+        thickness="2px"
+        color="gray"
+        type="vertical"
     />
 {/each}
-
-<style>
-    div {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        background-color: white;
-    }
-
-    .horizontal {
-        width: 1000rem;
-    }
-    .vertical {
-        height: 1000rem;
-    }
-</style>

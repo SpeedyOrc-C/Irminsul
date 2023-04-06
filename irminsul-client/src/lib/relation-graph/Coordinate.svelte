@@ -1,16 +1,17 @@
 <script lang="ts">
     import type { Vector2 } from "../../model/Vector2";
 
-    export let position: Vector2;
+    export let coordinate: Vector2;
     export let size: Vector2 | null = null;
 </script>
 
 <div class="coordinate">
-    <div class="x">x= {position.x}</div>
-    <div class="y">y= {position.y}</div>
+    <div>x= {coordinate.x}</div>
+    <div>y= {coordinate.y}</div>
+    <!-- Only cluster has size, atom does not have a size. -->
     {#if size != null}
-        <div class="w">w= {size.x}</div>
-        <div class="h">h= {size.y}</div>
+        <div>w= {size.x}</div>
+        <div>h= {size.y}</div>
     {/if}
 </div>
 

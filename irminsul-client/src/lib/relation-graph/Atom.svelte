@@ -9,14 +9,14 @@
     export let translation: string;
     export let position: Vector2;
     export let showCoordinate: boolean = false;
-
-    let selected = false;
-
-    let style: string;
-    $: style = `left: ${position.x}rem; top: ${-position.y}rem`;
+    export let selected: boolean = false;
 
     let avatarSrc: string = img_avatar_UnknownAvatar;
     onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
+
+    function toggleSelect() {
+        selected = selected ? false : true;
+    }
 
     function keydown(e: KeyboardEvent) {
         if (e.ctrlKey || e.metaKey) {
@@ -59,13 +59,17 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     {id}
-    class={["atom", ...(selected ? ["selected"] : [])].join(" ")}
-    {style}
-    on:click={() => selected = selected ? false : true}
+    class="atom"
+    class:selected
+    style:left="{position.x}rem"
+    style:top="{-position.y}rem"
+    on:click={toggleSelect}
 >
     <img class="avatar" src={avatarSrc} alt="" />
     <div class="translation font-hywh-65w">{translation}</div>
-    {#if showCoordinate} <Coordinate {position} /> {/if}
+    {#if showCoordinate}
+        <Coordinate coordinate={position} />
+    {/if}
 </div>
 
 <style>
@@ -76,7 +80,7 @@
         height: fit-content;
 
         z-index: 10000;
-        
+
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;

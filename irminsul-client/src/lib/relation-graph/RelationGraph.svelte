@@ -12,46 +12,29 @@
     import Grid from "./Grid.svelte";
     import { saveStringAsFile } from "$lib/util/String";
     import Panel from "./Panel.svelte";
+    import { onMount, setContext } from "svelte";
+    import type { ApiResponse } from "$lib/util/Api";
 
-    export let relationGraph: RelationGraph;
+    export let id: string | null = null;
+    export let lang: string | null = null;
 
-    console.info("Relation graph loaded: ", relationGraph);
+    let relationGraph: RelationGraph | null = null;
+
+    let jsonFileInput: HTMLInputElement;
+    let jsonFileReader: FileReader;
 
     let entityAnchor: Map<string, Vector2> = new Map();
-    function updateEntityAnchor() {
-        entityAnchor.set(relationGraph.id, relationGraph.rootPosition);
-        relationGraph.atoms.forEach((atom) =>
-            entityAnchor.set(atom.id, atom.position)
-        );
-        relationGraph.clusters.forEach((cluster) =>
-            entityAnchor.set(cluster.id, cluster.anchor)
-        );
-    }
-    updateEntityAnchor();
-
+    
     let showAxis: boolean = false;
     let showGrid: boolean = false;
     let showCoordinate: boolean = false;
-
+    
     let viewX = 0;
     let viewY = 0;
     let viewAngle = 0;
     let viewScaleExponent = 0;
     let viewScale: number = Math.pow(2, 0.5 * viewScaleExponent);
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
-
-    let transform: string;
-    $: transform = [
-        `transform:`,
-        `rotate(${-viewAngle}deg)`,
-        `scale(${viewScale * 100}%)`,
-        `translate(${viewX}rem, ${-viewY}rem)`,
-    ].join(" ");
-
-    let rootClusterTransform: string;
-    $: rootClusterTransform = `left: ${
-        relationGraph.rootPosition.x
-    }rem; top: ${-relationGraph.rootPosition.y}rem`;
 
     function moveUp() {
         let deltaViewX = 0;
@@ -152,7 +135,44 @@
         }
     }
 
-    function saveAsHaskell() {
+    function loadRelationGraph() {
+        if (id == null || lang == null) return;
+
+        console.info("Loading relation graph: ", id);
+
+        fetch(`/api/relation-graph?id=${id}&lang=${lang}`)
+            .then((response) => response.json())
+            .then((json: ApiResponse<RelationGraph>) => {
+                if (json.status != "OK") {
+                    console.error(
+                        "Failed to load relation graph, error: ",
+                        json.status
+                    );
+                    return;
+                }
+
+                relationGraph = json.body;
+                updateEntityAnchor();
+
+                console.info("Relation graph loaded: ", relationGraph);
+            });
+    }
+
+    function updateEntityAnchor() {
+        if (relationGraph == null) return;
+
+        entityAnchor.set(relationGraph.id, relationGraph.rootPosition);
+        relationGraph.atoms.forEach((atom) =>
+            entityAnchor.set(atom.id, atom.position)
+        );
+        relationGraph.clusters.forEach((cluster) =>
+            entityAnchor.set(cluster.id, cluster.anchor)
+        );
+    }
+
+    function exportHaskell() {
+        if (relationGraph == null) return;
+
         let fileName = `${relationGraph.id}-Haskell.txt`;
         console.log("Saving as Haskell...", fileName);
         saveStringAsFile(
@@ -161,122 +181,148 @@
         );
     }
 
-    function saveAsJson() {
+    function exportJson() {
+        if (relationGraph == null) return;
+
         let fileName = `${relationGraph.id}-JSON.json`;
         console.log("Saving as JSON...", fileName);
         saveStringAsFile(JSON.stringify(relationGraph, null, 4), fileName);
     }
 
-    let jsonFileInput = document.createElement("input");
-    jsonFileInput.style.display = "none";
-    jsonFileInput.type = "file";
-    const jsonFileReader = new FileReader();
-
-    jsonFileInput.addEventListener("change", (_: Event) => {
-        if (jsonFileInput.files == null || jsonFileInput.files?.length == 0) {
-            console.error("No import file selected.");
-            return;
-        }
-
-        const file = jsonFileInput.files[0];
-        jsonFileReader.readAsText(file);
-    });
-
-    jsonFileReader.addEventListener(
-        "load",
-        (event: ProgressEvent<FileReader>) => {
-            const text = event.target?.result as string;
-            try {
-                const layout = JSON.parse(text);
-                relationGraph = layout;
-                console.info("Relation graph updated with", layout);
-                updateEntityAnchor();
-            } catch (e) {
-                console.error(
-                    "Failed to parse JSON file.",
-                    event.target?.result
-                );
-            }
-        }
-    );
-
-    function importFromJson() {
+    function importJson() {
         console.info("Trying to import from JSON...");
         jsonFileInput.click();
     }
 
-    function panelClicked(e: CustomEvent) {
+    function handleRgAction(e: CustomEvent) {
         switch (e.detail.action) {
-            case "save-as-JSON":
-                saveAsJson();
+            case "import-json":
+                importJson();
+                break;
+            case "export-json":
+                exportJson();
                 break;
             case "export-haskell":
-                saveAsHaskell();
+                exportHaskell();
                 break;
-            case "import-json":
-                importFromJson();
-                break;
-            case "go-to-parent":
-                history.back();
+            case "jump-to":
+                console.info("Jump to: " + e.detail.id);
+                id = e.detail.id;
+                loadRelationGraph();
                 break;
         }
     }
+
+    onMount(() => {
+        loadRelationGraph();
+
+        jsonFileReader = new FileReader();
+        jsonFileInput = document.createElement("input");
+        jsonFileInput.style.display = "none";
+        jsonFileInput.type = "file";
+
+        jsonFileInput.addEventListener("change", (_: Event) => {
+            if (
+                jsonFileInput.files == null ||
+                jsonFileInput.files?.length == 0
+            ) {
+                console.error("No import file selected.");
+                return;
+            }
+
+            const file = jsonFileInput.files[0];
+            jsonFileReader.readAsText(file);
+        });
+
+        jsonFileReader.addEventListener(
+            "load",
+            (event: ProgressEvent<FileReader>) => {
+                const text = event.target?.result as string;
+                try {
+                    const layout = JSON.parse(text);
+                    relationGraph = layout;
+                    console.info("Relation graph updated with", layout);
+                    updateEntityAnchor();
+                } catch (e) {
+                    console.error(
+                        "Failed to parse JSON file.",
+                        event.target?.result
+                    );
+                }
+            }
+        );
+    });
 </script>
 
 <!-- svelte-ignore missing-declaration -->
 <svelte:window on:keydown={keydownListener} />
 
-<div id="background-dark-blue" />
+<div class="relation-graph">
+    <div class="background-dark-blue" />
 
-<div id="background-cloud" />
+    <div class="background-cloud" />
+    {#key relationGraph}
+        {#if relationGraph != null}
+            <div
+                class="content"
+                style:transform="rotate({-viewAngle}deg) scale({viewScale *
+                    100}%) translate({viewX}rem, {-viewY}rem)"
+            >
+                {#if showGrid} <Grid /> {/if}
+                {#if showAxis} <Axis /> {/if}
 
-<div id="relation-graph" style={transform}>
-    {#if showGrid}
-        <Grid width="2px" color="gray" />
-    {/if}
+                {#each relationGraph.relationsBetween as relationBetween}
+                    {#key relationGraph}
+                        <RelationBetween
+                            forwardRelations={relationBetween.forwardRelations}
+                            backwardRelations={relationBetween.backwardRelations}
+                            biRelations={relationBetween.biRelations}
+                            subjectAnchor={entityAnchor.get(
+                                relationBetween.subjectId
+                            ) ?? Vector2Zero}
+                            objectAnchor={entityAnchor.get(
+                                relationBetween.objectId
+                            ) ?? Vector2Zero}
+                        />
+                    {/key}
+                {/each}
 
-    {#if showAxis}
-        <Axis width="4px" color="white" />
-    {/if}
+                {#each relationGraph.clusters as cluster}
+                    <Cluster {...cluster} {showCoordinate} on:rg-action={handleRgAction} />
+                {/each}
 
-    {#each relationGraph.relationsBetween as relationBetween}
-        {#key relationGraph}
-            <RelationBetween
-                forwardRelations={relationBetween.forwardRelations}
-                backwardRelations={relationBetween.backwardRelations}
-                biRelations={relationBetween.biRelations}
-                subjectAnchor={entityAnchor.get(relationBetween.subjectId) ??
-                    Vector2Zero}
-                objectAnchor={entityAnchor.get(relationBetween.objectId) ??
-                    Vector2Zero}
-            />
-        {/key}
-    {/each}
+                {#each relationGraph.atoms as atom}
+                    <Atom {...atom} {showCoordinate} />
+                {/each}
 
-    {#each relationGraph.clusters as cluster}
-        <Cluster {...cluster} {showCoordinate} />
-    {/each}
-
-    {#each relationGraph.atoms as atom}
-        <Atom {...atom} {showCoordinate} />
-    {/each}
-
-    <div id="root-cluster" style={rootClusterTransform}>
-        <img
-            id="root-cluster-background"
-            src={img_ui_background_root_cluster}
-            alt=""
-        />
-        <div id="translation" class="font-hywh-85w">
-            {relationGraph.rootTranslation}
-        </div>
-    </div>
+                <div
+                    class="root-cluster"
+                    style="left: {relationGraph.rootPosition
+                        .x}rem; top: {-relationGraph.rootPosition.y}rem"
+                >
+                    <img
+                        class="root-cluster-background"
+                        src={img_ui_background_root_cluster}
+                        alt=""
+                    />
+                    <div class="translation font-hywh-85w">
+                        {relationGraph.rootTranslation}
+                    </div>
+                </div>
+            </div>
+            {#if lang != null}
+                <Panel
+                    on:rg-action={handleRgAction}
+                    pathElements={relationGraph.path}
+                    lang={lang}
+                />
+            {/if}
+        {/if}
+    {/key}
 </div>
 
-<Panel on:panel-clicked={panelClicked} pathElements={relationGraph.path}/>
-
 <style>
-    #background-dark-blue {
+    .background-dark-blue {
         overflow: hidden;
         position: absolute;
         width: 100vw;
@@ -285,7 +331,7 @@
         background: #171f2b;
     }
 
-    #background-cloud {
+    .background-cloud {
         overflow: hidden;
         position: absolute;
         transform: translate(-50%, -50%);
@@ -315,7 +361,7 @@
         }
     } */
 
-    #relation-graph {
+    .content {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -324,7 +370,7 @@
         transition-duration: 0.3s;
     }
 
-    #root-cluster {
+    .root-cluster {
         position: absolute;
         transform: translate(-50%, -50%);
 
@@ -334,7 +380,7 @@
         -webkit-user-select: none;
     }
 
-    #translation {
+    .translation {
         position: absolute;
         transform: translate(-50%, -50%);
 
@@ -347,7 +393,7 @@
             #e6dfd2 1px -1px 0, #e6dfd2 -1px -1px 0;
     }
 
-    #root-cluster-background {
+    .root-cluster-background {
         position: absolute;
         transform: translate(-50%, -50%);
 

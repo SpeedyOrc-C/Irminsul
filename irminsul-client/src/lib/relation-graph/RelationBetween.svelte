@@ -34,22 +34,12 @@
 
     let rotation: number;
     $: rotation =
-        Math.atan(
-            (subjectAnchor.y - objectAnchor.y) /
-                (subjectAnchor.x - objectAnchor.x)
-        ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0);
-
-    let style: string;
-    $: style = [
-        `width: ${width}rem`,
-        `left: ${position.x}rem`,
-        `top: ${-position.y}rem`,
-        "transform: " +
-            [
-                `translate(-50%, -50%)`,
-                `rotate(${-rotation + (needReverse ? 3.141592653589 : 0)}rad)`,
-            ].join(" "),
-    ].join("; ");
+        -(
+            Math.atan(
+                (subjectAnchor.y - objectAnchor.y) /
+                    (subjectAnchor.x - objectAnchor.x)
+            ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
+        ) + (needReverse ? Math.PI : 0);
 
     export function updateTransform() {
         subjectAnchor = subjectAnchor;
@@ -60,7 +50,13 @@
 
 <svelte:window on:keyup={updateTransform} />
 
-<div class="relation-between" {style}>
+<div
+    class="relation-between"
+    style:width="{width}rem"
+    style:left="{position.x}rem"
+    style:top="{-position.y}rem"
+    style:transform="translate(-50%, -50%) rotate({rotation}rad)"
+>
     {#if biRelations.length > 0}
         <div class="bi-relation font-hywh-65w">
             {#each biRelations as r}

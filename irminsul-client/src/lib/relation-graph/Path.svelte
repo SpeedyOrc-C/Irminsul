@@ -1,14 +1,10 @@
 <script lang="ts">
-    import { page } from "$app/stores";
+    import { createEventDispatcher } from "svelte";
     import type { PathElement } from "../../model/RelationGraph";
 
     export let pathElements: Array<PathElement>;
 
-    function jumpToThisCluster(id: string) {
-        window.location.href = `/relation-graph?id=${id}&lang=${$page.url.searchParams.get(
-            "lang"
-        )}`;
-    }
+    const dispatch = createEventDispatcher();
 </script>
 
 <div class="path">
@@ -16,7 +12,11 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
             class="path-element"
-            on:click={() => jumpToThisCluster(pathElement.id)}
+            on:click={() =>
+                dispatch("rg-action", {
+                    action: "jump-to",
+                    id: pathElement.id,
+                })}
         >
             {pathElement.translation}
         </div>

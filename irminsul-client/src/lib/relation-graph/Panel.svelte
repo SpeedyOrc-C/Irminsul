@@ -1,23 +1,22 @@
 <script lang="ts">
     import Button from "$lib/ui/Button.svelte";
     import Separator from "$lib/ui/Seperator.svelte";
-    import { createEventDispatcher, getContext } from "svelte";
+    import { createEventDispatcher } from "svelte";
 
     import { dictionary, locale, _ } from "svelte-i18n";
     import type { PathElement } from "../../model/RelationGraph";
     import Path from "./Path.svelte";
 
+    export let lang: string;
     export let pathElements: Array<PathElement>;
 
-    locale.set(getContext("lang"));
-
+    locale.set(lang);
     dictionary.set({
         "zh-cn": {
             panel: {
                 "import-json": "导入 JSON",
                 "export-json": "导出 JSON",
                 "export-haskell": "导出 Haskell",
-                "go-to-parent": "返回上一层",
             },
         },
         "en-us": {
@@ -25,15 +24,14 @@
                 "import-json": "Import from JSON",
                 "export-json": "Export as JSON",
                 "export-haskell": "Export as Haskell",
-                "go-to-parent": "Go to parent",
             },
         },
     });
 
     const dispatch = createEventDispatcher();
 
-    function buttonClicked(e: CustomEvent) {
-        dispatch("panel-clicked", e.detail);
+    function dispatchRgAction(e: CustomEvent) {
+        dispatch("rg-action", e.detail);
     }
 </script>
 
@@ -41,22 +39,22 @@
     <Button
         label={$_("panel.import-json")}
         action="import-json"
-        on:button-clicked={buttonClicked}
+        on:button-clicked={dispatchRgAction}
     />
     <Separator />
     <Button
         label={$_("panel.export-json")}
-        action="save-as-JSON"
-        on:button-clicked={buttonClicked}
+        action="export-json"
+        on:button-clicked={dispatchRgAction}
     />
     <Separator />
     <Button
         label={$_("panel.export-haskell")}
         action="export-haskell"
-        on:button-clicked={buttonClicked}
+        on:button-clicked={dispatchRgAction}
     />
     <Separator width="4rem"/>
-    <Path {pathElements} />
+    <Path on:rg-action {pathElements} />
 </div>
 
 <style>

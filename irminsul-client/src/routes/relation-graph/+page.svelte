@@ -1,69 +1,15 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import { onMount, setContext } from "svelte";
-    import type { RelationGraph as TRelationGraph } from "../../model/RelationGraph";
-    import type { ApiResponse } from "../../lib/util/Api";
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
-    import Prompt from "$lib/ui/Prompt.svelte";
-
-    let clusterGraphResponse: ApiResponse<TRelationGraph> | null;
-    let relationGraph: TRelationGraph | undefined;
+    
     let id: string | null;
     let lang: string | null;
 
-    id = $page.url.searchParams.get("id");
-    lang = $page.url.searchParams.get("lang");
-    if (!(id == null || lang == null)) {
-        setContext("lang", lang);
-        console.info("Language set to", lang);
-
-        onMount(() => {
-            fetch(`/api/relation-graph?id=${id}&lang=${lang}`, {
-                method: "GET",
-            }).then((r) =>
-                r.json().then((json) => {
-                    clusterGraphResponse = json;
-                    relationGraph = clusterGraphResponse?.body;
-                })
-            );
-        });
-    }
+    id = $page.url.searchParams.get("id") ?? 'Mondstadt';
+    lang = $page.url.searchParams.get("lang") ?? 'zh-cn';
 </script>
 
-{#if id == null || lang == null}
-    <title>Missing Parameter</title>
-    <Prompt
-        title="Missing Parameter"
-        content={"Missing parameters <u>id</u> or <u>lang</u>."}
-    />
-{:else if clusterGraphResponse === undefined}
-    <title>Loading...</title>
-    <div class="loading font-hywh-85w">Loading...</div>
-{:else if clusterGraphResponse == null}
-    <title>Network Error</title>
-    <Prompt title="Network Error" content="Failed to fetch data from server." />
-{:else if clusterGraphResponse.status === "UnsupportedLanguage"}
-    <title>Unsupported Language</title>
-    <Prompt
-        title="Unsupported Language"
-        content={`Language <u>${lang}</u> is not supported.`}
-    />
-{:else if clusterGraphResponse.status === "NotImplementedCluster"}
-    <title>Not Implemented Cluster</title>
-    <Prompt
-        title="Not Implemented Cluster"
-        content={`Cluster <u>${id}</u> is not yet implemented.`}
-    />
-{:else if clusterGraphResponse.status === "LayoutMissing"}
-    <title>Layout Missing</title>
-    <Prompt
-        title="Layout Missing"
-        content={`Cluster <u>${id}</u> has no layout.`}
-    />
-{:else if clusterGraphResponse.status === "OK" && relationGraph !== undefined}
-    <title>Irminsul - {relationGraph.rootTranslation}</title>
-    <RelationGraph {relationGraph} />
-{/if}
+<RelationGraph {id} {lang} />
 
 <style>
     :global(body) {

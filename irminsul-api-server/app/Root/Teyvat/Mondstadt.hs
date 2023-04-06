@@ -5,37 +5,44 @@ import Shortcut
 import CommonRelations
 import Root.Teyvat.Mondstadt.KnightsOfFavonius
 import Root.Teyvat.Mondstadt.FavoniusChurch
-import Root.Teyvat.Fontaine
 import Root.Teyvat.Mondstadt.DawnWinery
+import Root.Teyvat.Mondstadt.Lupical
+import Root.Teyvat.Mondstadt.CatsTail
+import Root.Teyvat.Fontaine
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Inazuma (scaramouche)
 
-venti = ach "venti";
+venti = ach "Venti";
     barbatos = venti
-
 dvalin = ach "Dvalin"
 
-razor = ach "Razor"
 bennett = ach "Bennett"
 thoma = ach "Thoma"
 fischlVonLuftschlossNarfidort = ach "FischlVonLuftschlossNarfidort"
+ozvaldoHrafnavins = ach "OzvaldoHrafnavins"
+
+draff = ach "Draff"
 
 mondstadt = clusterNode "Mondstadt" Country
     [
+        dvalin,
         barbatos,
-        razor,
         bennett,
         thoma,
         fischlVonLuftschlossNarfidort,
+        ozvaldoHrafnavins,
         monaAstrologistMegistus
     ]
     [
+        venti `rule` mondstadt,
+        venti `dislike` dionaKatzlein,
         dvalin `familiar` venti,
 
         fischlVonLuftschlossNarfidort `friend` monaAstrologistMegistus,
+        ozvaldoHrafnavins `attendant` fischlVonLuftschlossNarfidort,
         albedo `friend` monaAstrologistMegistus,
         klee `friend` monaAstrologistMegistus,
-        scaramouche `enemy` monaAstrologistMegistus,
+        -- scaramouche `enemy` monaAstrologistMegistus,
 
         dilucRagvindr `youngerGeneration` jeanGunnhildr,
 
@@ -44,12 +51,43 @@ mondstadt = clusterNode "Mondstadt" Country
         bennett `admire` varka,
         bennett `friend` razor,
 
-        barbaraGunnhildr `youngerSister` jeanGunnhildr,
-        jeanGunnhildr `elderSister` barbaraGunnhildr
+        dionaKatzlein `hate` dilucRagvindr,
+        dionaKatzlein `daughter` draff,
+        draff `father` dionaKatzlein,
+
+        razor `friend` klee,
+        razor `like` venti,
+
+        barbaraPegg `youngerSister` jeanGunnhildr,
+        jeanGunnhildr `elderSister` barbaraPegg
     ]
     [
         favoniusChurch,
         knightsOfFavonius,
-        dawnWinery
+        dawnWinery,
+        catsTail,
+        lupical
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty = rl (-15, 15),
+        elementProperties = [
+            al dvalin (-30, 0),
+            al venti (-15, 0),
+            al bennett (15, 15),
+            al fischlVonLuftschlossNarfidort (30, 30),
+            al ozvaldoHrafnavins (15, 30),
+            al monaAstrologistMegistus (30, 15),
+            al barbaraPegg (30, -15),
+            al varka (0, 15),
+            al jeanGunnhildr (15, -15),
+            al klee (15, 0),
+            al albedo (30, 0),
+            al dilucRagvindr (0, -15),
+            al kaeyaRagvindr (0, -30),
+            al dionaKatzlein (-15, -15),
+            al razor (0, 0),
+
+            cl knightsOfFavonius (46, -1) (40, -2) (15, 5)
+        ]
+    })
+    

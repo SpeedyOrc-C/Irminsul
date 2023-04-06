@@ -19,7 +19,6 @@
         <span
             id="translation"
             on:click={jumpToThisEntity}
-            on:keypress={jumpToThisEntity}
         >
             {translation}
         </span>
@@ -29,7 +28,6 @@
         <span
             id="translation"
             on:click={jumpToThisEntity}
-            on:keypress={jumpToThisEntity}
         >
             {translation}
         </span>

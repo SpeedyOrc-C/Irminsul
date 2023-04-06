@@ -1,48 +1,25 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import { onMount } from "svelte";
-    import type { RelationGraph as TClusterGraph } from "../../model/RelationGraph";
-    import type { ApiResponse } from "../../model/Api";
-    import ClusterGraph from "./RelationGraph.svelte";
-
-    let clusterGraphResponse: ApiResponse<TClusterGraph> | null;
-    let clusterGraph: TClusterGraph | undefined;
+    import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
+    
     let id: string | null;
     let lang: string | null;
 
     onMount(() => {
-        id = $page.url.searchParams.get("id");
-        lang = $page.url.searchParams.get("lang");
-        if (id == null || lang == null) return;
-
-        fetch(`/api/relation-graph?id=${id}&lang=${lang}`, {
-            method: "GET",
-        }).then((r) =>
-            r.json().then((json) => {
-                clusterGraphResponse = json;
-                clusterGraph = clusterGraphResponse?.body;
-            })
-        );
-    });
+        id = $page.url.searchParams.get("id") ?? 'Mondstadt';
+        lang = $page.url.searchParams.get("lang") ?? 'zh-cn';
+    })
 </script>
 
-{#if id == null || lang == null}
-    <p>Missing parameters "id" or "lang"</p>
-{:else if clusterGraphResponse === undefined}
-    <p>Loading...</p>
-{:else if clusterGraphResponse == null}
-    <p>Cannot parse fetched result</p>
-{:else if clusterGraphResponse.status === "UnsupportedLanguage"}
-    <p>Language "{lang}" is not supported</p>
-{:else if clusterGraphResponse.status === "NotImplementedCluster"}
-    <p>Cluster "{id}" is not yet implemented</p>
-{:else if clusterGraphResponse.status === "OK" && clusterGraph !== undefined}
-    <ClusterGraph relationGraph={clusterGraph} />
-{:else}
-    <p>UNKNOWN ERROR</p>
-{/if}
+<RelationGraph {id} {lang} />
 
 <style>
+    :global(body) {
+        overflow: hidden;
+
+        background-color: #171f2b;
+    }
     @font-face {
         font-family: HYWenHei-65W;
         src: url("/font/HYWenHei-65W.ttf");
@@ -53,11 +30,41 @@
         src: url("/font/HYWenHei-85W.ttf");
     }
 
+    @font-face {
+        font-family: fira-code-regular;
+        src: url("/font/FiraCode-Regular.ttf");
+    }
+
     :global(.font-hywh-65w) {
         font-family: HYWenHei-65W, sans-serif;
     }
 
     :global(.font-hywh-85w) {
         font-family: HYWenHei-85W, sans-serif;
+    }
+
+    .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        font-size: 5rem;
+        color: #eee;
+
+        opacity: 0%;
+
+        animation: loading-animation 1s 1 ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 1s;
+    }
+
+    @keyframes loading-animation {
+        0% {
+            opacity: 0%;
+        }
+        100% {
+            opacity: 100%;
+        }
     }
 </style>

@@ -1,3 +1,4 @@
+import { lowercaseFirstLetter } from "$lib/util/String";
 import type { Vector2 } from "./Vector2";
 
 interface Atom {
@@ -13,8 +14,7 @@ interface Cluster {
 
     position: Vector2
     anchor: Vector2
-    width: number
-    height: number
+    size: Vector2
 }
 
 interface RelationBetween {
@@ -32,12 +32,48 @@ interface RelationBetween {
     needReverse: boolean
 }
 
+export interface PathElement {
+    id: string
+    translation: string
+}
+
 export interface RelationGraph {
     id: string
+    path: Array<PathElement>
     rootPosition: Vector2
     rootTranslation: string
 
     atoms: Array<Atom>
     clusters: Array<Cluster>
     relationsBetween: Array<RelationBetween>
+}
+
+export function dumpRelationGraphRelation2Haskell(rg: RelationGraph): string {
+    return [
+        '(Just $ RelationGraphLayout {',
+
+        `    rootProperty = rl (${rg.rootPosition.x}, ${rg.rootPosition.y}),`,
+
+        '    elementProperties = [',
+        [
+            ...(rg.atoms.length > 0 ?
+                [rg.atoms.map(atom =>
+                    `        al ` +
+                    `${lowercaseFirstLetter(atom.id)} ` +
+                    `(${atom.position.x}, ${atom.position.y})`
+                ).join(',\n')] : []),
+
+            ...(rg.clusters.length > 0 ?
+                [rg.clusters.map(cluster =>
+                    `        cl ` +
+                    `${lowercaseFirstLetter(cluster.id)} ` +
+                    `(${cluster.position.x}, ${cluster.position.y}) ` +
+                    `(${cluster.anchor.x}, ${cluster.anchor.y}) ` +
+                    `(${cluster.size.x}, ${cluster.size.y})`
+                ).join(',\n')] : []),
+        ].join(',\n\n'),
+
+        '    ]',
+        '})',
+    ].join('\n')
 }

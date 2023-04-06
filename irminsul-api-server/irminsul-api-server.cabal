@@ -63,6 +63,7 @@ executable irminsul-generator
         Root.Teyvat.Mondstadt.FavoniusChurch,
         Root.Teyvat.Mondstadt.KnightsOfFavonius,
         Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam,
+        Root.Teyvat.Mondstadt.Lupical,
         Root.Teyvat.Snezhnaya,
         Root.Teyvat.Snezhnaya.Fatui,
         Root.Teyvat.Sumeru,

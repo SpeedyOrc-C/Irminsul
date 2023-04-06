@@ -4,7 +4,14 @@ import img_avatar_UnknownAvatar from './img/avatar/_UnknownAvatar.png'
 export const asset: Record<string, () => Promise<any>> = import.meta.glob('./**/*')
 
 export function getImgAvatar(id: string, assign: (result: string) => void) {
-    asset[`./img/avatar/${id}.png`]().then(result => assign(result.default))
+    let path = `./img/avatar/${id}.png`
+    if (asset.hasOwnProperty(path)) {
+        asset[path]()
+            .then(result => assign(result.default))
+            .catch(() => assign(img_avatar_UnknownAvatar))
+    } else {
+        assign(img_avatar_UnknownAvatar)
+    }
 }
 
 export {

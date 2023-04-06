@@ -5,64 +5,58 @@
     export let subjectAnchor: Vector2;
     export let objectAnchor: Vector2;
 
-    import type { Vector2 } from "./Vector2";
-
-    let realForwardRelations: Array<string> = [];
-    let realBackwardRelations: Array<string> = [];
+    import type { Vector2 } from "../../model/Vector2";
 
     let needReverse: boolean;
-    let position: Vector2 = { x: 0, y: 0 };
-    let width: number;
-    let rotation: number;
-
     $: needReverse =
         objectAnchor.x < subjectAnchor.x ||
         (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
+    let realForwardRelations: Array<string> = [];
     $: realForwardRelations = needReverse
         ? backwardRelations
         : forwardRelations;
 
+    let realBackwardRelations: Array<string> = [];
     $: realBackwardRelations = needReverse
         ? forwardRelations
         : backwardRelations;
 
+    let width: number;
     $: width = Math.sqrt(
         (subjectAnchor.x - objectAnchor.x) ** 2 +
             (subjectAnchor.y - objectAnchor.y) ** 2
     );
 
+    let position: Vector2 = { x: 0, y: 0 };
     $: position.x = (subjectAnchor.x + objectAnchor.x) / 2;
     $: position.y = (subjectAnchor.y + objectAnchor.y) / 2;
 
+    let rotation: number;
     $: rotation =
-        Math.atan(
-            (subjectAnchor.y - objectAnchor.y) /
-                (subjectAnchor.x - objectAnchor.x)
-        ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0);
-
-    let style: string;
-    $: style = [
-        `width: ${width}rem`,
-        `left: ${position.x}rem`,
-        `top: ${-position.y}rem`,
-        "transform: " +
-            [
-                `translate(-50%, -50%)`,
-                `rotate(${-rotation + (needReverse ? 3.141592653589 : 0)}rad)`,
-            ].join(" "),
-    ].join("; ");
+        -(
+            Math.atan(
+                (subjectAnchor.y - objectAnchor.y) /
+                    (subjectAnchor.x - objectAnchor.x)
+            ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
+        ) + (needReverse ? Math.PI : 0);
 
     export function updateTransform() {
-        subjectAnchor = subjectAnchor
-        objectAnchor = objectAnchor
+        subjectAnchor = subjectAnchor;
+        objectAnchor = objectAnchor;
     }
     updateTransform();
 </script>
 
 <svelte:window on:keyup={updateTransform} />
 
-<div class="relation-between" {style}>
+<div
+    class="relation-between"
+    style:width="{width}rem"
+    style:left="{position.x}rem"
+    style:top="{-position.y}rem"
+    style:transform="translate(-50%, -50%) rotate({rotation}rad)"
+>
     {#if biRelations.length > 0}
         <div class="bi-relation font-hywh-65w">
             {#each biRelations as r}
@@ -95,12 +89,15 @@
 
         height: 5.4rem;
         z-index: 1000;
+
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     .relation-between:hover,
     .relation-between:active {
         z-index: 2000;
-        background-color: #bda27744;
+        background-color: #bda27733;
     }
 
     .relation-between > div {
@@ -145,16 +142,14 @@
     .forward-relation {
         top: calc(50% - 0.7rem);
 
-        background-image: repeating-linear-gradient(
-            45deg,
-            transparent,
-            #00000000 1.1rem,
-            #0000000c 1.1rem,
-            #0000000c 2.2rem
+        background-image: linear-gradient(
+            90deg,
+            #ffbd22aa 0%,
+            transparent 10rem,
+            transparent 100%
         );
-        background-size: 40rem 2rem;
-        animation: 2s linear 0s infinite normal forwards running
-            forward-relation-background;
+        /* animation: 2s linear 0s infinite normal forwards running
+            forward-relation-background; */
     }
 
     @keyframes forward-relation-background {
@@ -174,16 +169,14 @@
     .backward-relation {
         top: calc(50% + 0.7rem);
 
-        background-image: repeating-linear-gradient(
-            45deg,
-            transparent,
-            #00000000 1.1rem,
-            #0000000c 1.1rem,
-            #0000000c 2.2rem
+        background-image: linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent calc(100% - 10rem),
+            #ffbd22aa 100%
         );
-        background-size: 40rem 2rem;
-        animation: 2s linear 0s infinite normal forwards running
-            backward-relation-background;
+        /* animation: 2s linear 0s infinite normal forwards running
+            backward-relation-background; */
     }
 
     @keyframes backward-relation-background {

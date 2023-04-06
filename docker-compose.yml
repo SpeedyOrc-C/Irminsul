@@ -1,0 +1,9 @@
+services:
+  api-server:
+    image: ghcr.dockerproxy.com/speedyorc-c/irminsul-api-server:main
+    ports:
+      - 50000:50000
+  web:
+    image: ghcr.dockerproxy.com/speedyorc-c/irminsul-client:main
+    ports:
+      - 50001:80

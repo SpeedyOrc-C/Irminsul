@@ -1,19 +1,19 @@
 module Query where
 
-import Irminsul
-import LanguagePack
-import Translation
-import Root ( root )
-import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
+import           Irminsul
+import           LanguagePack
+import           Root                                    (root)
+import           Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
+import           Translation
 
-import Data.Maybe
-import Data.String
-import Debug.Trace
-import Data.List
-import Data.Vector
-import Data.JSON
+import           Data.JSON
+import           Data.List
+import           Data.Maybe
+import           Data.String
+import           Data.Vector
+import           Debug.Trace
 
-import Web.Scotty
+import           Web.Scotty
 
 traceThis :: Show a => a -> a
 traceThis x = trace (show x) x
@@ -27,6 +27,7 @@ data ApiStatusCode
     | UnsupportedLanguage
     | NotImplementedCluster
     | NotImplementedEntity
+    | LayoutMissing
     deriving (Eq, Show)
 
 apiResponse :: ApiStatusCode -> JSON -> JSON
@@ -41,6 +42,19 @@ dataResponse = stringResponse . show
 
 missingParameter =
     dataResponse (JObject [("status", JString (show MissingParameter))])
+
+getAllPathsOfRoot :: [(Entity, Path)]
+getAllPathsOfRoot = getAllPaths root (Path [])
+
+getAllPaths :: Entity -> Path -> [(Entity, Path)]
+getAllPaths entity (Path nowPath) = (entity, Path nowPath) : do
+    let clusters = filter isCluster (indices . entities $ entity)
+    cluster <- clusters
+    getAllPaths cluster (Path (nowPath ++ [entity]))
+
+showPaths :: [(Entity, Path)] -> IO ()
+showPaths paths = putStrLn $ intercalate "\n" $
+    (\(entity, path) -> show path ++ " - " ++ entityId entity) <$> paths
 
 {-
     Implementation of APIs
@@ -88,7 +102,7 @@ clusterGraph _ (Cluster rootId _ _ _ Nothing) = JNull
 clusterGraph lang
     cluster@(Cluster
         rootId _ _ _
-        (Just layout@(Layout rootLayout entityLayouts))) =
+        (Just layout@(RelationGraphLayout rootLayout entityLayouts))) =
     let
         renderedEntities = filter
             -- Keep entities which has their layouts defined
@@ -115,8 +129,13 @@ clusterGraph lang
     in
     JObject [
         ("id", JString rootId),
+        ("path", let (Path path) = fromJust $ lookup cluster getAllPathsOfRoot
+                in JArray $ (\entity -> JObject [
+                    ("id", JString (entityId entity)),
+                    ("translation", JString $ translateEntity lp entity)
+                ]) <$> path
+        ),
         ("rootPosition", toJSON (position rootLayout)),
-
         ("rootTranslation", JString $ translateEntity lp cluster),
 
         ("atoms", JArray $ do
@@ -144,8 +163,7 @@ clusterGraph lang
 
                         ("position", toJSON $ position layout),
                         ("anchor", toJSON $ anchor layout),
-                        ("width", JString . show $ width layout),
-                        ("height", JString . show $ height layout)
+                        ("size", toJSON $ size layout)
                     ]
             else []
         ),
@@ -204,23 +222,23 @@ entityRelations lang entity =
         ("id", JString (entityId entity)),
         ("translation", JString (translateEntity lp entity)),
 
-        ("asSubject", JArray $ (\(Relation action _ object) -> 
+        ("asSubject", JArray $ (\(Relation action _ object) ->
             JObject [
                 ("id", JString (entityId object)),
                 ("translation", JString (translateEntity lp object)),
                 ("action", JString (translateAction lp action))
             ]
             ) <$> asSubject),
-        
-        ("asObject", JArray $ (\(Relation action subject _) -> 
+
+        ("asObject", JArray $ (\(Relation action subject _) ->
             JObject [
                 ("id", JString (entityId subject)),
                 ("translation", JString (translateEntity lp subject)),
                 ("action", JString (translateAction lp action))
             ]
             ) <$> asObject),
-        
-        ("asBoth", JArray $ (\(BiRelation action _ object) -> 
+
+        ("asBoth", JArray $ (\(BiRelation action _ object) ->
             JObject [
                 ("id", JString (entityId object)),
                 ("translation", JString (translateEntity lp object)),
@@ -241,11 +259,16 @@ apiClusterGraph :: String -> String -> JSON
 apiClusterGraph id lang =
     maybe (apiResponse UnsupportedLanguage JNull)
     (\language ->
-        maybe (apiResponse NotImplementedCluster JNull)
-        (apiResponse OK . clusterGraph language)
-        (clusterFromId id)
+        maybe (apiResponse NotImplementedEntity JNull)
+        (\entity ->
+            if isNothing (layout entity)
+            then apiResponse LayoutMissing JNull
+            else apiResponse OK . clusterGraph language $ entity
+        )
+        (entityFromId id)
     )
     (readLanguageCode lang)
+
 
 {- |
     Given an entity id and a specified language,
@@ -255,11 +278,10 @@ apiEntityRelations :: String -> String -> JSON
 apiEntityRelations id lang =
     maybe (apiResponse UnsupportedLanguage JNull)
     (\language ->
-        maybe (apiResponse NotImplementedEntity JNull)
+        maybe (apiResponse NotImplementedCluster JNull)
         (apiResponse OK . entityRelations language)
-        (entityFromId id)
+        (clusterFromId id)
     )
     (readLanguageCode lang)
-
 
 apiKofDemo = clusterGraph ZhCn knightsOfFavonius

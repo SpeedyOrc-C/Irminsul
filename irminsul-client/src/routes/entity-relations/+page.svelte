@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import { onMount } from "svelte";
-    import type { ApiResponse } from "../../model/Api";
+    import type { ApiResponse } from "../../lib/util/Api";
     import type { EntityRelations as TEntityRelations } from "../../model/EntityRelations";
     import EntityRelations from "./EntityRelations.svelte";
 
@@ -41,10 +41,6 @@
 {/if}
 
 <style>
-    :global(body) {
-        background-color: #171f2b;
-    }
-    
     @font-face {
         font-family: HYWenHei-65W;
         src: url("/asset/font/HYWenHei-65W.ttf");

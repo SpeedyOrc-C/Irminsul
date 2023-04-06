@@ -9,6 +9,10 @@ ip :: a -> String -> [String] -> Existence -> String -> (a, Information)
 ip entity name aliases existence information =
     (entity, Information name aliases existence information)
 
+-- | Shortcut for (Entity, Information) but only name is provided
+ipn :: a -> String -> (a, Information)
+ipn entity name = (entity, Information name [] UntilNow "")
+
 -- Shortcuts for relation
 ra :: String -> Entity -> Entity -> Relation
 ra = Relation . Action
@@ -23,22 +27,21 @@ ao :: String -> Entity
 ao = (`Atom` Object) 
 
 -- | Shortcut of a root's title's layout
-rl :: (Double, Double) -> (Double, Double) -> ShowcaseElementProperty
-rl (x, y) (anchorX, anchorY) =
-    ShowcaseElementProperty (Vector2 x y) (Vector2 anchorX anchorY) 0 0
+rl :: (Double, Double) -> ShowcaseElementProperty
+rl (x, y) = ShowcaseElementProperty (Vector2 x y) (Vector2 x y) (Vector2 0 0)
 
 -- | Shortcut of an atom's layout
 al :: Entity -> (Double, Double) -> (Entity, ShowcaseElementProperty)
 al entity (x, y) =
-    (entity, ShowcaseElementProperty (Vector2 x y) (Vector2 x y) 0 0)
+    (entity, ShowcaseElementProperty (Vector2 x y) (Vector2 x y) (Vector2 0 0))
 
 -- | Shortcut of a cluster's layout
 cl :: Entity ->
-    (Double, Double) -> (Double, Double) -> Double -> Double ->
+    (Double, Double) -> (Double, Double) -> (Double, Double) ->
     (Entity, ShowcaseElementProperty)
-cl entity (x, y) (anchorX, anchorY) width height =
+cl entity (x, y) (anchorX, anchorY) (width, height) =
     (entity, ShowcaseElementProperty
-        (Vector2 x y) (Vector2 anchorX anchorY) width height)
+        (Vector2 x y) (Vector2 anchorX anchorY) (Vector2 width height))
 
 {- |
     Create a new cluster node, where all entities and relations from children
@@ -50,7 +53,7 @@ clusterNode ::
     ->  [Entity]    -- entities
     ->  [Relation]  -- relations
     ->  [Entity]    -- child clusters
-    -> Maybe Layout
+    -> Maybe RelationGraphLayout
     ->  Entity
 clusterNode name clusterType pEntities pRelations children =
     Cluster name clusterType
@@ -69,7 +72,7 @@ clusterLeaf ::
     ->  ClusterType -- leaf type
     ->  [Entity]    -- entities
     ->  [Relation]  -- relations
-    -> Maybe Layout
+    -> Maybe RelationGraphLayout
     ->  Entity
 clusterLeaf name clusterType entities relations =
     Cluster name clusterType

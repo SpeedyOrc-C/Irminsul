@@ -1,0 +1,25 @@
+name: Deploy to production
+on:
+ registry_package:
+ workflow_dispatch:
+
+jobs:
+  deploy_to_machine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup remote context
+        uses: amirmarmul/docker-context-ssh-action@v2.1.3
+        with:
+          ssh-host: ${{ secrets.SSH_TARGET }}
+          ssh-username: root
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          context-name: remote
+          context-use: true
+      - name: Check new images
+        run: docker compose pull
+      - name: Deploy
+        run: docker compose up -d
+        
+          

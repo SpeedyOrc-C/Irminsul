@@ -13,5 +13,5 @@ RUN cabal install
 
 EXPOSE 50000
 
-CMD ["irminsul-generator"]
+CMD ["irminsul-api-server"]
  

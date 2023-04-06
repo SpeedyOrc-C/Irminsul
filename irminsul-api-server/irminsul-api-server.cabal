@@ -19,7 +19,7 @@ maintainer:         1670732206@qq.com
 -- copyright:
 -- category:
 
-executable irminsul-generator
+executable irminsul-api-server
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.

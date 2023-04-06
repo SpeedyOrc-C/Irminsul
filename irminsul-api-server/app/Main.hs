@@ -12,9 +12,6 @@ main = scotty 50000 $ do
     get "/api/hello" $
         stringResponse "Hello, World!"
     
-    get "/api/kof-demo" $
-        dataResponse apiKofDemo
-
     get "/api/entity-relations" $
         (do
             id <- param "id"

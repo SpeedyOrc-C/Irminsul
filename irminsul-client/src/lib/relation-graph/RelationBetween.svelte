@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
     export let biRelations: Array<string>;
@@ -41,11 +43,35 @@
             ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
         ) + (needReverse ? Math.PI : 0);
 
-    export function updateTransform() {
+    let hasBiRelation: boolean;
+    let hasForwardRelation: boolean;
+    let hasBackwardRelation: boolean;
+
+    $: hasBiRelation = biRelations.length > 0;
+    $: hasForwardRelation = realForwardRelations.length > 0;
+    $: hasBackwardRelation = realBackwardRelations.length > 0;
+    
+    let forwardRelationY: number;
+    let backwardRelationY: number;
+    
+    function updateTransform() {
         subjectAnchor = subjectAnchor;
         objectAnchor = objectAnchor;
     }
-    updateTransform();
+
+    onMount(() => {
+        if (hasBiRelation) {
+            forwardRelationY = 1.4;
+            backwardRelationY = -1.4;
+        } else if (hasForwardRelation !== hasBackwardRelation) {
+            forwardRelationY = 0;
+            backwardRelationY = 0;
+        } else {
+            forwardRelationY = 0.7;
+            backwardRelationY = -0.7;
+        }
+        updateTransform();
+    })
 </script>
 
 <svelte:window on:keyup={updateTransform} />
@@ -66,7 +92,10 @@
     {/if}
 
     {#if realForwardRelations.length > 0}
-        <div class="forward-relation font-hywh-65w">
+        <div
+            class="forward-relation font-hywh-65w"
+            style:top="calc(50% + {-forwardRelationY}rem)"
+        >
             {#each realForwardRelations as r}
                 <div>{r}</div>
             {/each}
@@ -74,7 +103,10 @@
     {/if}
 
     {#if realBackwardRelations.length > 0}
-        <div class="backward-relation font-hywh-65w">
+        <div
+            class="backward-relation font-hywh-65w"
+            style:top="calc(50% + {-backwardRelationY}rem)"
+        >
             {#each realBackwardRelations as r}
                 <div>{r}</div>
             {/each}
@@ -82,7 +114,7 @@
     {/if}
 </div>
 
-<style>
+<style lang="scss">
     .relation-between {
         position: absolute;
         transform: translate(-50%, -50%);
@@ -92,55 +124,46 @@
 
         user-select: none;
         -webkit-user-select: none;
+
+        &:hover,
+        &:active {
+            z-index: 2000;
+            background-color: #bda27733;
+        }
     }
 
-    .relation-between:hover,
-    .relation-between:active {
-        z-index: 2000;
-        background-color: #bda27733;
-    }
-
-    .relation-between > div {
-        border: 0.1rem solid #bda277;
-        /*box-shadow: #3b425588 0 0 0.3rem 0.1rem;*/
-
+    %relation-shared {
         position: absolute;
         transform: translate(-50%, -50%);
+        left: 50%;
+
+        width: 100%;
+        height: 1.1rem;
+        line-height: 1.1rem;
+        padding: 0.1rem 0;
+
+        border: 0.1rem solid #bda277;
 
         font-size: 0.8rem;
         text-align: center;
     }
 
     .bi-relation {
-        left: 50%;
+        @extend %relation-shared;
         top: 50%;
         background-color: #3b4255;
         color: white;
     }
 
-    .forward-relation,
-    .backward-relation {
-        left: 50%;
-        /* background-color: #f5ece1; */
-        color: #3b4255;
-    }
-
-    .bi-relation {
-        left: 50%;
-        top: 50%;
-        background-color: #3b4255;
-        color: white;
-    }
-
-    .forward-relation,
-    .backward-relation {
-        left: 50%;
+    %uni-relation-shared {
+        @extend %relation-shared;
         background-color: #f5ece1;
         color: #3b4255;
     }
 
     .forward-relation {
-        top: calc(50% - 0.7rem);
+        @extend %uni-relation-shared;
+        // top: calc(50% - 0.7rem);
 
         background-image: linear-gradient(
             90deg,
@@ -148,26 +171,16 @@
             transparent 10rem,
             transparent 100%
         );
-        /* animation: 2s linear 0s infinite normal forwards running
-            forward-relation-background; */
-    }
 
-    @keyframes forward-relation-background {
-        from {
-            background-position-x: -3.1112rem;
+        & > div {
+            position: absolute;
+            left: 3.5rem;
         }
-        to {
-            background-position-x: 0;
-        }
-    }
-
-    .forward-relation > div {
-        position: absolute;
-        left: 3.5rem;
     }
 
     .backward-relation {
-        top: calc(50% + 0.7rem);
+        @extend %uni-relation-shared;
+        // top: calc(50% + 0.7rem);
 
         background-image: linear-gradient(
             90deg,
@@ -175,39 +188,18 @@
             transparent calc(100% - 10rem),
             #ffbd22aa 100%
         );
-        /* animation: 2s linear 0s infinite normal forwards running
-            backward-relation-background; */
-    }
 
-    @keyframes backward-relation-background {
-        from {
-            background-position-x: 0;
+        & > div {
+            position: absolute;
+            right: 3.5rem;
         }
-        to {
-            background-position-x: -3.1112rem;
-        }
-    }
-
-    .backward-relation > div {
-        position: absolute;
-        right: 3.5rem;
     }
 
     .bi-relation ~ .forward-relation {
-        top: calc(50% - 1.4rem);
+        // top: calc(50% - 1.4rem);
     }
 
     .bi-relation ~ .backward-relation {
-        top: calc(50% + 1.4rem);
-    }
-
-    .bi-relation,
-    .forward-relation,
-    .backward-relation {
-        width: 100%;
-        height: 1.1rem;
-        line-height: 1.1rem;
-        padding: 0.1rem 0;
-        /*color: #724302;*/
+        // top: calc(50% + 1.4rem);
     }
 </style>

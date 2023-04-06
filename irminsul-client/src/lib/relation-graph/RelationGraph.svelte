@@ -140,14 +140,14 @@
     function loadRelationGraph() {
         if (id == null || lang == null) return;
 
-        console.info("Loading relation graph: ", id);
+        console.info("Loading relation graph:", id);
 
         fetch(`/api/relation-graph?id=${id}&lang=${lang}`)
             .then((response) => response.json())
             .then((json: ApiResponse<RelationGraph>) => {
                 if (json.status != "OK") {
                     console.error(
-                        "Failed to load relation graph, error: ",
+                        "Failed to load relation graph, error:",
                         json.status
                     );
                 }
@@ -157,7 +157,9 @@
                 updateEntityAnchor();
                 resetView();
 
-                console.info("Relation graph loaded: ", relationGraph);
+                if (json.body != null) {
+                    console.info("Relation graph loaded: ", relationGraph);
+                }
             });
     }
 

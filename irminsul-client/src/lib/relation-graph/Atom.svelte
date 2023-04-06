@@ -1,5 +1,9 @@
+<script lang="ts" context="module">
+    export let selectedAtoms: Set<string> = new Set();
+</script>
+
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     import { getImgAvatar, img_avatar_UnknownAvatar } from "../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
@@ -10,25 +14,46 @@
     export let position: Vector2;
     export let showCoordinate: boolean = false;
     export let selected: boolean = false;
+    export let dim: boolean = false;
 
     let avatarSrc: string = img_avatar_UnknownAvatar;
     onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
 
+    const dispatch = createEventDispatcher();
+
+    function dispatchUpdateSelectedAtoms() {
+        dispatch("rg-action", {
+            action: "update-selected-atoms",
+            atoms: selectedAtoms,
+        });
+    }
+
     function toggleSelect() {
         selected = selected ? false : true;
+        if (selected) select();
+        else deselect();
+    }
+
+    function select() {
+        selected = true;
+        selectedAtoms.add(id);
+        dispatchUpdateSelectedAtoms();
+    }
+
+    function deselect() {
+        selected = false;
+        selectedAtoms.delete(id);
+        dispatchUpdateSelectedAtoms();
     }
 
     function keydown(e: KeyboardEvent) {
-        if (e.ctrlKey || e.metaKey) {
+        if (e.ctrlKey !== e.metaKey) {
             switch (e.code) {
                 case "KeyA":
-                    if (e.altKey) {
-                        selected = false;
-                    } else if (e.shiftKey) {
-                        selected = selected ? false : true;
-                    } else {
-                        selected = true;
-                    }
+                    e.preventDefault();
+                    if (e.altKey) deselect();
+                    else if (e.shiftKey) toggleSelect();
+                    else select();
                     break;
             }
         } else {
@@ -54,13 +79,14 @@
     }
 </script>
 
-<svelte:window on:keydown|preventDefault={keydown} />
+<svelte:window on:keydown={keydown} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     {id}
     class="atom"
     class:selected
+    class:dim
     style:left="{position.x}rem"
     style:top="{-position.y}rem"
     on:click={toggleSelect}
@@ -72,7 +98,7 @@
     {/if}
 </div>
 
-<style>
+<style lang="scss">
     .atom {
         position: absolute;
         transform: translate(-50%, -50%);
@@ -84,6 +110,16 @@
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
+
+        transition: filter;
+        transition-duration: 0.2s;
+
+        &.dim {
+            filter: brightness(50%) blur(0.1rem);
+        }
+        &.dim:hover {
+            filter: unset;
+        }
     }
 
     .avatar {
@@ -102,22 +138,19 @@
 
         transition: transform, border-color, border-width, box-shadow;
         transition-duration: 0.2s;
-    }
-    .atom.selected > .avatar {
-        border-color: orange;
-        border-width: 0.5rem;
-    }
 
-    .avatar:hover {
-        border-color: #bcc6e1;
-        box-shadow: 0 0 0.2rem 0.1rem #bcc6e188;
+        &:hover {
+            border-color: #bcc6e1;
+            box-shadow: 0 0 0.2rem 0.1rem #bcc6e188;
 
-        transform: translate(-50%, -50%) scale(200%);
-        transition-duration: 0.2s;
-    }
+            transform: translate(-50%, -50%) scale(200%);
+            transition-duration: 0.2s;
+        }
 
-    .avatar:hover + .translation {
-        display: block;
+        .atom.selected > & {
+            border-color: orange;
+            border-width: 0.5rem;
+        }
     }
 
     .translation {
@@ -136,5 +169,9 @@
         text-align: center;
 
         display: none;
+
+        .avatar:hover + & {
+            display: block;
+        }
     }
 </style>

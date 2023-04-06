@@ -15,7 +15,7 @@
     {/if}
 </div>
 
-<style>
+<style lang="scss">
     .coordinate {
         position: absolute;
         transform: translate(-50%, 0);
@@ -31,9 +31,10 @@
         color: #222;
 
         z-index: 100000;
+
+        & > div {
+            font-family: fira-code-regular, monospace;
+        }
     }
 
-    .coordinate > div {
-        font-family: fira-code-regular, monospace;
-    }
 </style>

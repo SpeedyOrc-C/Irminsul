@@ -4,8 +4,17 @@
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
     export let biRelations: Array<string>;
+    export let highlight: boolean = false;
+    export let dim: boolean = false;
     export let subjectAnchor: Vector2;
     export let objectAnchor: Vector2;
+
+    /*
+    Chinese characters (in Chinese and Japanese) and Hangul (in Korean)
+    rotate themselves 90 degrees anti-clockwise when they are written vertically.
+    As some relations are vertical, we need to rotate these characters.
+    */
+    export let writingSystemIsCJK: boolean = false;
 
     import type { Vector2 } from "../../model/Vector2";
 
@@ -50,41 +59,56 @@
     $: hasBiRelation = biRelations.length > 0;
     $: hasForwardRelation = realForwardRelations.length > 0;
     $: hasBackwardRelation = realBackwardRelations.length > 0;
-    
+
     let forwardRelationY: number;
     let backwardRelationY: number;
-    
+
     function updateTransform() {
         subjectAnchor = subjectAnchor;
         objectAnchor = objectAnchor;
     }
 
     onMount(() => {
+        // Bi-relations are always centered.
+        // But uni-directional relations' offset can change for better readability.
         if (hasBiRelation) {
+            // Uni-directional relations are placed
+            // above or below the bi-relations.
             forwardRelationY = 1.4;
             backwardRelationY = -1.4;
-        } else if (hasForwardRelation !== hasBackwardRelation) {
-            forwardRelationY = 0;
-            backwardRelationY = 0;
         } else {
-            forwardRelationY = 0.7;
-            backwardRelationY = -0.7;
+            // If there is only one uni-directional relation
+            if (hasForwardRelation !== hasBackwardRelation) {
+                // It is placed in the middle.
+                forwardRelationY = 0;
+                backwardRelationY = 0;
+            } else {
+                // If there are two uni-directional relations,
+                // they are placed above and below the middle.
+                forwardRelationY = 0.7;
+                backwardRelationY = -0.7;
+            }
         }
         updateTransform();
-    })
+    });
 </script>
 
 <svelte:window on:keyup={updateTransform} />
 
 <div
     class="relation-between"
+    class:highlight
+    class:dim
     style:width="{width}rem"
     style:left="{position.x}rem"
     style:top="{-position.y}rem"
     style:transform="translate(-50%, -50%) rotate({rotation}rad)"
 >
     {#if biRelations.length > 0}
-        <div class="bi-relation font-hywh-65w">
+        <div
+            class="bi-relation font-hywh-65w"
+            class:write-vertically={writingSystemIsCJK}
+        >
             {#each biRelations as r}
                 <div>{r}</div>
             {/each}
@@ -93,7 +117,7 @@
 
     {#if realForwardRelations.length > 0}
         <div
-            class="forward-relation font-hywh-65w"
+            class="forward-relation font-hywh-65w rotate-cjk-clockwise"
             style:top="calc(50% + {-forwardRelationY}rem)"
         >
             {#each realForwardRelations as r}
@@ -105,6 +129,7 @@
     {#if realBackwardRelations.length > 0}
         <div
             class="backward-relation font-hywh-65w"
+            class:write-vertically={writingSystemIsCJK}
             style:top="calc(50% + {-backwardRelationY}rem)"
         >
             {#each realBackwardRelations as r}
@@ -124,11 +149,20 @@
 
         user-select: none;
         -webkit-user-select: none;
+        
+        transition: filter;
+        transition-duration: 0.2s;
 
         &:hover,
         &:active {
             z-index: 2000;
             background-color: #bda27733;
+        }
+        &.dim {
+            filter: brightness(50%) blur(0.1rem);
+        }
+        &.highlight {
+            z-index: 2000;
         }
     }
 
@@ -145,7 +179,6 @@
         border: 0.1rem solid #bda277;
 
         font-size: 0.8rem;
-        text-align: center;
     }
 
     .bi-relation {
@@ -153,6 +186,7 @@
         top: 50%;
         background-color: #3b4255;
         color: white;
+        text-align: center;
     }
 
     %uni-relation-shared {
@@ -163,7 +197,6 @@
 
     .forward-relation {
         @extend %uni-relation-shared;
-        // top: calc(50% - 0.7rem);
 
         background-image: linear-gradient(
             90deg,
@@ -175,12 +208,12 @@
         & > div {
             position: absolute;
             left: 3.5rem;
+            font-feature-settings: "vert";
         }
     }
 
     .backward-relation {
         @extend %uni-relation-shared;
-        // top: calc(50% + 0.7rem);
 
         background-image: linear-gradient(
             90deg,
@@ -193,13 +226,5 @@
             position: absolute;
             right: 3.5rem;
         }
-    }
-
-    .bi-relation ~ .forward-relation {
-        // top: calc(50% - 1.4rem);
-    }
-
-    .bi-relation ~ .backward-relation {
-        // top: calc(50% + 1.4rem);
     }
 </style>

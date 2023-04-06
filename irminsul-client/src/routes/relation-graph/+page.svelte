@@ -52,22 +52,6 @@
         font-family: HYWenHei-85W, sans-serif;
     }
 
-    .loading {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        font-size: 5rem;
-        color: #eee;
-
-        opacity: 0%;
-
-        animation: loading-animation 1s 1 ease-out;
-        animation-fill-mode: forwards;
-        animation-delay: 1s;
-    }
-
     @keyframes loading-animation {
         0% {
             opacity: 0%;

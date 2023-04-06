@@ -1,10 +1,13 @@
+<script lang="ts" context="module">
+    export let selectedClusters: Set<string> = new Set();
+</script>
+
 <script lang="ts">
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
     import type { Vector2 } from "../../model/Vector2";
-    import { page } from "$app/stores";
     import { createEventDispatcher } from "svelte";
-    
+
     export let id: string;
     export let anchor: Vector2;
     export let translation: string;
@@ -15,21 +18,39 @@
 
     const dispatch = createEventDispatcher();
 
+    function dispatchUpdateSelectedClusters() {
+        dispatch("rg-action", {
+            action: "update-selected-clusters",
+            clusters: selectedClusters,
+        });
+    }
+
     function toggleSelect() {
         selected = selected ? false : true;
+        if (selected) select();
+        else deselect();
+    }
+
+    function select() {
+        selected = true;
+        selectedClusters.add(id);
+        dispatchUpdateSelectedClusters();
+    }
+
+    function deselect() {
+        selected = false;
+        selectedClusters.delete(id);
+        dispatchUpdateSelectedClusters();
     }
 
     function keydown(e: KeyboardEvent) {
-        if (e.ctrlKey || e.metaKey) {
+        if (e.ctrlKey !== e.metaKey) {
             switch (e.code) {
                 case "KeyA":
-                    if (e.altKey) {
-                        selected = false;
-                    } else if (e.shiftKey) {
-                        selected = selected ? false : true;
-                    } else {
-                        selected = true;
-                    }
+                    e.preventDefault();
+                    if (e.altKey) deselect();
+                    else if (e.shiftKey) toggleSelect();
+                    else select();
                     break;
             }
         } else {
@@ -98,7 +119,10 @@
     style:height="{size.y}rem"
     on:click={toggleSelect}
 >
-    <div class="translation font-hywh-65w" on:click={() => dispatch('rg-action', {action: 'jump-to', id: id})}>
+    <div
+        class="translation font-hywh-65w"
+        on:click={() => dispatch("rg-action", { action: "jump-to", id: id })}
+    >
         {translation}
     </div>
 
@@ -112,7 +136,7 @@
     {/if}
 </div>
 
-<style>
+<style lang="scss">
     .cluster {
         position: absolute;
         transform: translate(-50%, -50%);
@@ -126,11 +150,14 @@
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
-    }
 
-    .cluster.selected {
-        border-color: orange;
-        border-width: 0.5rem;
+        &.selected {
+            border-color: orange;
+            border-width: 0.5rem;
+        }
+        &:hover {
+            background-color: #ffff000f;
+        }
     }
 
     .translation {
@@ -144,10 +171,6 @@
         font-size: 1.2rem;
         color: white;
         text-decoration: none;
-    }
-
-    .cluster:hover {
-        background-color: #ffff000f;
     }
 
     .anchor-emphasis {

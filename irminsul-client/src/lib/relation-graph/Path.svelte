@@ -23,7 +23,7 @@
     {/each}
 </div>
 
-<style>
+<style lang="scss">
     .path {
         width: fit-content;
         display: inline-block;
@@ -47,13 +47,14 @@
 
         transition: transform, box-shadow;
         transition-duration: 0.1s;
-    }
-    .path-element:hover {
-        transform: scale(150%);
-        box-shadow: 0 0 0.5rem 0.5rem #0004;
-    }
-    .path-element:active {
-        transform: scale(140%);
-        box-shadow: 0 0 0.4rem 0.4rem #0004;
+
+        &:hover {
+            transform: scale(150%);
+            box-shadow: 0 0 0.5rem 0.5rem #0004;
+        }
+        &:active {
+            transform: scale(140%);
+            box-shadow: 0 0 0.4rem 0.4rem #0004;
+        }
     }
 </style>

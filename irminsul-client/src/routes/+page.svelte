@@ -1,6 +1,14 @@
+<script>
+    import { onMount } from "svelte";
+
+
+    onMount(() => {
+        window.location.href="/relation-graph"
+    })
+</script>
+
 <div id="home">
-    <p><a href="/relation-graph">关系图</a></p>
-    <p><a href="/entity-relations">单一实体关系列表</a></p>
+    
 </div>
 
 <style>

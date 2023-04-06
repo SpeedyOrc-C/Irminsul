@@ -4,7 +4,7 @@
 </script>
 
 <div class="prompt">
-    <div class="title font-hywh-85w">{title}</div>
+    <div class="title font-hywh-85w">{@html title}</div>
     <div class="content font-hywh-65w">{@html content}</div>
 </div>
 

@@ -255,11 +255,11 @@ APIs
     Given a cluster id and a specified language,
     returns the layout of the cluster.
 -}
-apiClusterGraph :: String -> String -> JSON
-apiClusterGraph id lang =
+apiRelationGraph :: String -> String -> JSON
+apiRelationGraph id lang =
     maybe (apiResponse UnsupportedLanguage JNull)
     (\language ->
-        maybe (apiResponse NotImplementedEntity JNull)
+        maybe (apiResponse NotImplementedCluster JNull)
         (\entity ->
             if isNothing (layout entity)
             then apiResponse LayoutMissing JNull

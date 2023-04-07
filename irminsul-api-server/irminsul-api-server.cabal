@@ -84,8 +84,6 @@ executable irminsul-api-server
     -- other-extensions:
     build-depends:
         base
-        ,directory
-        ,text
         ,scotty
     hs-source-dirs:   app
     default-language: Haskell2010

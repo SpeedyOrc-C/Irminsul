@@ -38,6 +38,26 @@
     let viewScale: number = Math.pow(2, 0.5 * viewScaleExponent);
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
 
+    let writingSystemIsCJK: boolean;
+    $: writingSystemIsCJK =
+        (lang?.startsWith("zh") ?? false) ||
+        (lang?.startsWith("ja") ?? false) ||
+        (lang?.startsWith("ko") ?? false);
+
+    let selectedAtoms: Set<string> = new Set();
+    let selectedClusters: Set<string> = new Set();
+    let selectedEntities: Set<string> = new Set();
+
+    function updateSelectedAtoms(e: CustomEvent) {
+        selectedAtoms = e.detail.atoms;
+        selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
+    }
+
+    function updateSelectedClusters(e: CustomEvent) {
+        selectedClusters = e.detail.clusters;
+        selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
+    }
+
     function moveUp() {
         let deltaViewX = 0;
         let deltaViewY = 0;
@@ -94,7 +114,7 @@
     }
 
     function keydownListener(e: KeyboardEvent) {
-        if (e.ctrlKey || e.metaKey) {
+        if (e.ctrlKey !== e.metaKey) {
         } else {
             switch (e.code) {
                 case "KeyW":
@@ -140,28 +160,35 @@
     function loadRelationGraph() {
         if (id == null || lang == null) return;
 
-        console.info("Loading relation graph: ", id);
+        console.info("Loading relation graph:", id);
 
         fetch(`/api/relation-graph?id=${id}&lang=${lang}`)
             .then((response) => response.json())
             .then((json: ApiResponse<RelationGraph>) => {
                 if (json.status != "OK") {
                     console.error(
-                        "Failed to load relation graph, error: ",
+                        "Failed to load relation graph, error:",
                         json.status
                     );
                 }
 
                 relationGraph = json.body;
                 responseStatus = json.status;
+                selectedEntities.clear();
+                selectedAtoms.clear();
+                selectedClusters.clear();
                 updateEntityAnchor();
                 resetView();
 
-                console.info("Relation graph loaded: ", relationGraph);
+                if (json.body != null) {
+                    console.info("Relation graph loaded: ", relationGraph);
+                }
             });
     }
 
     function updateEntityAnchor() {
+        // Entities' anchors are updated. It makes relations update their positions,
+        // so that they are always connected to the entities.
         if (relationGraph == null) return;
 
         entityAnchor.set(relationGraph.id, relationGraph.rootPosition);
@@ -209,9 +236,15 @@
                 exportHaskell();
                 break;
             case "jump-to":
-                console.info("Jump to: " + e.detail.id);
+                console.info("Jump to:" + e.detail.id);
                 id = e.detail.id;
                 loadRelationGraph();
+                break;
+            case "update-selected-atoms":
+                updateSelectedAtoms(e);
+                break;
+            case "update-selected-clusters":
+                updateSelectedClusters(e);
                 break;
         }
     }
@@ -298,6 +331,10 @@
         {:else}
             {#key relationGraph}
                 {#each relationGraph.relationsBetween as relationBetween}
+                    {@const highlight =
+                        selectedEntities.has(relationBetween.subjectId) ||
+                        selectedEntities.has(relationBetween.objectId)}
+                    {@const dim = !highlight && selectedEntities.size > 0}
                     <RelationBetween
                         forwardRelations={relationBetween.forwardRelations}
                         backwardRelations={relationBetween.backwardRelations}
@@ -308,6 +345,9 @@
                         objectAnchor={entityAnchor.get(
                             relationBetween.objectId
                         ) ?? Vector2Zero}
+                        {writingSystemIsCJK}
+                        {highlight}
+                        {dim}
                     />
                 {/each}
 
@@ -320,7 +360,15 @@
                 {/each}
 
                 {#each relationGraph.atoms as atom}
-                    <Atom {...atom} {showCoordinate} />
+                    {@const dim =
+                        (!selectedAtoms.has(atom.id)) &&
+                        selectedEntities.size > 0}
+                    <Atom
+                        {...atom}
+                        {showCoordinate}
+                        on:rg-action={handleRgAction}
+                        {dim}
+                    />
                 {/each}
 
                 <div

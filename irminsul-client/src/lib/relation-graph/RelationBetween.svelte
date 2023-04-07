@@ -1,9 +1,20 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
     export let biRelations: Array<string>;
+    export let highlight: boolean = false;
+    export let dim: boolean = false;
     export let subjectAnchor: Vector2;
     export let objectAnchor: Vector2;
+
+    /*
+    Chinese characters (in Chinese and Japanese) and Hangul (in Korean)
+    rotate themselves 90 degrees anti-clockwise when they are written vertically.
+    As some relations are vertical, we need to rotate these characters.
+    */
+    export let writingSystemIsCJK: boolean = false;
 
     import type { Vector2 } from "../../model/Vector2";
 
@@ -41,24 +52,63 @@
             ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
         ) + (needReverse ? Math.PI : 0);
 
-    export function updateTransform() {
+    let hasBiRelation: boolean;
+    let hasForwardRelation: boolean;
+    let hasBackwardRelation: boolean;
+
+    $: hasBiRelation = biRelations.length > 0;
+    $: hasForwardRelation = realForwardRelations.length > 0;
+    $: hasBackwardRelation = realBackwardRelations.length > 0;
+
+    let forwardRelationY: number;
+    let backwardRelationY: number;
+
+    function updateTransform() {
         subjectAnchor = subjectAnchor;
         objectAnchor = objectAnchor;
     }
-    updateTransform();
+
+    onMount(() => {
+        // Bi-relations are always centered.
+        // But uni-directional relations' offset can change for better readability.
+        if (hasBiRelation) {
+            // Uni-directional relations are placed
+            // above or below the bi-relations.
+            forwardRelationY = 1.4;
+            backwardRelationY = -1.4;
+        } else {
+            // If there is only one uni-directional relation
+            if (hasForwardRelation !== hasBackwardRelation) {
+                // It is placed in the middle.
+                forwardRelationY = 0;
+                backwardRelationY = 0;
+            } else {
+                // If there are two uni-directional relations,
+                // they are placed above and below the middle.
+                forwardRelationY = 0.7;
+                backwardRelationY = -0.7;
+            }
+        }
+        updateTransform();
+    });
 </script>
 
 <svelte:window on:keyup={updateTransform} />
 
 <div
     class="relation-between"
+    class:highlight
+    class:dim
     style:width="{width}rem"
     style:left="{position.x}rem"
     style:top="{-position.y}rem"
     style:transform="translate(-50%, -50%) rotate({rotation}rad)"
 >
     {#if biRelations.length > 0}
-        <div class="bi-relation font-hywh-65w">
+        <div
+            class="bi-relation font-hywh-65w"
+            class:write-vertically={writingSystemIsCJK}
+        >
             {#each biRelations as r}
                 <div>{r}</div>
             {/each}
@@ -66,7 +116,10 @@
     {/if}
 
     {#if realForwardRelations.length > 0}
-        <div class="forward-relation font-hywh-65w">
+        <div
+            class="forward-relation font-hywh-65w rotate-cjk-clockwise"
+            style:top="calc(50% + {-forwardRelationY}rem)"
+        >
             {#each realForwardRelations as r}
                 <div>{r}</div>
             {/each}
@@ -74,7 +127,11 @@
     {/if}
 
     {#if realBackwardRelations.length > 0}
-        <div class="backward-relation font-hywh-65w">
+        <div
+            class="backward-relation font-hywh-65w"
+            class:write-vertically={writingSystemIsCJK}
+            style:top="calc(50% + {-backwardRelationY}rem)"
+        >
             {#each realBackwardRelations as r}
                 <div>{r}</div>
             {/each}
@@ -82,7 +139,7 @@
     {/if}
 </div>
 
-<style>
+<style lang="scss">
     .relation-between {
         position: absolute;
         transform: translate(-50%, -50%);
@@ -92,55 +149,54 @@
 
         user-select: none;
         -webkit-user-select: none;
+        
+        transition: filter;
+        transition-duration: 0.2s;
+
+        &:hover,
+        &:active {
+            z-index: 2000;
+            background-color: #bda27733;
+        }
+        &.dim {
+            filter: brightness(50%) blur(0.1rem);
+        }
+        &.highlight {
+            z-index: 2000;
+        }
     }
 
-    .relation-between:hover,
-    .relation-between:active {
-        z-index: 2000;
-        background-color: #bda27733;
-    }
-
-    .relation-between > div {
-        border: 0.1rem solid #bda277;
-        /*box-shadow: #3b425588 0 0 0.3rem 0.1rem;*/
-
+    %relation-shared {
         position: absolute;
         transform: translate(-50%, -50%);
+        left: 50%;
+
+        width: 100%;
+        height: 1.1rem;
+        line-height: 1.1rem;
+        padding: 0.1rem 0;
+
+        border: 0.1rem solid #bda277;
 
         font-size: 0.8rem;
+    }
+
+    .bi-relation {
+        @extend %relation-shared;
+        top: 50%;
+        background-color: #3b4255;
+        color: white;
         text-align: center;
     }
 
-    .bi-relation {
-        left: 50%;
-        top: 50%;
-        background-color: #3b4255;
-        color: white;
-    }
-
-    .forward-relation,
-    .backward-relation {
-        left: 50%;
-        /* background-color: #f5ece1; */
-        color: #3b4255;
-    }
-
-    .bi-relation {
-        left: 50%;
-        top: 50%;
-        background-color: #3b4255;
-        color: white;
-    }
-
-    .forward-relation,
-    .backward-relation {
-        left: 50%;
+    %uni-relation-shared {
+        @extend %relation-shared;
         background-color: #f5ece1;
         color: #3b4255;
     }
 
     .forward-relation {
-        top: calc(50% - 0.7rem);
+        @extend %uni-relation-shared;
 
         background-image: linear-gradient(
             90deg,
@@ -148,26 +204,16 @@
             transparent 10rem,
             transparent 100%
         );
-        /* animation: 2s linear 0s infinite normal forwards running
-            forward-relation-background; */
-    }
 
-    @keyframes forward-relation-background {
-        from {
-            background-position-x: -3.1112rem;
+        & > div {
+            position: absolute;
+            left: 3.5rem;
+            font-feature-settings: "vert";
         }
-        to {
-            background-position-x: 0;
-        }
-    }
-
-    .forward-relation > div {
-        position: absolute;
-        left: 3.5rem;
     }
 
     .backward-relation {
-        top: calc(50% + 0.7rem);
+        @extend %uni-relation-shared;
 
         background-image: linear-gradient(
             90deg,
@@ -175,39 +221,10 @@
             transparent calc(100% - 10rem),
             #ffbd22aa 100%
         );
-        /* animation: 2s linear 0s infinite normal forwards running
-            backward-relation-background; */
-    }
 
-    @keyframes backward-relation-background {
-        from {
-            background-position-x: 0;
+        & > div {
+            position: absolute;
+            right: 3.5rem;
         }
-        to {
-            background-position-x: -3.1112rem;
-        }
-    }
-
-    .backward-relation > div {
-        position: absolute;
-        right: 3.5rem;
-    }
-
-    .bi-relation ~ .forward-relation {
-        top: calc(50% - 1.4rem);
-    }
-
-    .bi-relation ~ .backward-relation {
-        top: calc(50% + 1.4rem);
-    }
-
-    .bi-relation,
-    .forward-relation,
-    .backward-relation {
-        width: 100%;
-        height: 1.1rem;
-        line-height: 1.1rem;
-        padding: 0.1rem 0;
-        /*color: #724302;*/
     }
 </style>

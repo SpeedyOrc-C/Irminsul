@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<style>
+<style lang="scss">
     #avatar {
         height: fit-content; width: fit-content;
         margin: 2rem auto;
@@ -42,13 +42,13 @@
         border-radius: 100%;
 
         overflow: hidden;
+
+        & > img {
+            height: 20rem;
+            display: block;
+        }
     }
     
-    #avatar > img {
-        height: 20rem;
-        display: block;
-    }
-
     #translation {
         color: #eee;
         font-size: 3rem;

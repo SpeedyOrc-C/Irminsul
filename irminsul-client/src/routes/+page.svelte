@@ -16,10 +16,6 @@
         background-color: #171f2b;
     }
 
-    a {
-        color: #eee;
-    }
-
     #home {
         margin: 2rem;
     }

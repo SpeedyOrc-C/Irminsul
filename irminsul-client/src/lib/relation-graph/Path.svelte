@@ -43,6 +43,7 @@
 
         user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
         cursor: pointer;
 
         transition: transform, box-shadow;

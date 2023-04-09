@@ -8,6 +8,7 @@ COPY irminsul-api-server.cabal /opt/irminsul/irminsul-api-server.cabal
 
 RUN cabal build --only-dependencies
 
+COPY dist-newstyle /opt/irminsul/dist-newstyle
 COPY . /opt/irminsul
 RUN cabal install
 

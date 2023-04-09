@@ -187,7 +187,7 @@
 
         console.info("Loading relation graph:", id);
 
-        fetch(`/api/relation-graph?id=${id}&lang=${lang}`)
+        fetch(`/api/relation-graph/${id}/${lang}`)
             .then((response) => response.json())
             .then((json: ApiResponse<RelationGraph>) => {
                 if (json.status != "OK") {

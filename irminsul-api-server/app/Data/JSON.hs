@@ -23,8 +23,9 @@ escapeChar char
     | char == '\f' = "\\\f"
     | char == '\n' = "\\\n"
     | char == '\r' = "\\\r"
-    | 0 <= code && code <= 255 = return char
-    | otherwise = "\\u" ++ replicate (4 - length hexCode) '0' ++ hexCode
+    | otherwise = return char
+    -- | 0 <= code && code <= 255 = return char
+    -- | otherwise = "\\u" ++ replicate (4 - length hexCode) '0' ++ hexCode
     where
         code = ord char
         hexCode = showHex code ""

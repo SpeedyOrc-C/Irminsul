@@ -1,19 +1,26 @@
 module Query where
 
-import           Irminsul
-import           LanguagePack
-import           Root                                    (root)
-import           Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
-import           Translation
+import Irminsul
+import LanguagePack
+import Root                                    (root)
+import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
+import Translation
 
-import           Data.JSON
-import           Data.List
-import           Data.Maybe
-import           Data.String
-import           Data.Vector
-import           Debug.Trace
+import Data.JSON
+import Data.List
+import Data.Maybe
+import Debug.Trace
 
-import           Web.Scotty
+import qualified Data.ByteString.Lazy as BSL
+import qualified Data.ByteString as BS
+import qualified Data.Text.Encoding as E
+import qualified Data.Text as T
+
+stringToUtf8LazyByteString :: String -> BSL.ByteString
+stringToUtf8LazyByteString = BSL.pack . BS.unpack . E.encodeUtf8 . T.pack
+
+showToUtf8LazyByteString :: (Show a) => a -> BSL.LazyByteString
+showToUtf8LazyByteString = stringToUtf8LazyByteString . show
 
 traceThis :: Show a => a -> a
 traceThis x = trace (show x) x
@@ -34,14 +41,8 @@ apiResponse :: ApiStatusCode -> JSON -> JSON
 apiResponse status body =
     JObject [("status", JString (show status)), ("body", body)]
 
-stringResponse :: String -> ActionM ()
-stringResponse = text . fromString
-
-dataResponse :: Show a => a -> ActionM ()
-dataResponse = stringResponse . show
-
 missingParameter =
-    dataResponse (JObject [("status", JString (show MissingParameter))])
+    showToUtf8LazyByteString (JObject [("status", JString (show MissingParameter))])
 
 getAllPathsOfRoot :: [(Entity, Path)]
 getAllPathsOfRoot = getAllPaths root (Path [])

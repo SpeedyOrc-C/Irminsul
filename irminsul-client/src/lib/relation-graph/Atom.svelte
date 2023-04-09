@@ -29,7 +29,7 @@
     }
 
     function toggleSelect() {
-        selected = selected ? false : true;
+        selected = !selected;
         if (selected) select();
         else deselect();
     }
@@ -110,6 +110,7 @@
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
 
         transition: filter;
         transition-duration: 0.2s;

@@ -15,9 +15,14 @@
     import { onMount } from "svelte";
     import type { ApiResponse, ApiStatusCode } from "$lib/util/Api";
     import Prompt from "$lib/ui/Prompt.svelte";
+    import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
+    import Settings from "./Settings.svelte";
+    import { writable, type Writable } from "svelte/store";
 
     export let id: string | null = null;
-    export let lang: string | null = null;
+    export let langW: Writable<string>;
+
+    let lang: string | null = null;
 
     let relationGraph: RelationGraph | null = null;
     let responseStatus: ApiStatusCode | null = null;
@@ -30,6 +35,7 @@
     let showAxis: boolean = false;
     let showGrid: boolean = false;
     let showCoordinate: boolean = false;
+    let showSettings: Writable<boolean> = writable(false);
 
     let viewX = 0;
     let viewY = 0;
@@ -38,15 +44,13 @@
     let viewScale: number = Math.pow(2, 0.5 * viewScaleExponent);
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
 
-    let writingSystemIsCJK: boolean;
-    $: writingSystemIsCJK =
-        (lang?.startsWith("zh") ?? false) ||
-        (lang?.startsWith("ja") ?? false) ||
-        (lang?.startsWith("ko") ?? false);
-
     let selectedAtoms: Set<string> = new Set();
     let selectedClusters: Set<string> = new Set();
     let selectedEntities: Set<string> = new Set();
+
+    let rootClusterSelected: boolean = false;
+    let rootPosition: Vector2;
+    $: rootPosition = relationGraph?.rootPosition ?? Vector2Zero;
 
     function updateSelectedAtoms(e: CustomEvent) {
         selectedAtoms = e.detail.atoms;
@@ -113,6 +117,10 @@
         viewAngle = 0;
     }
 
+    function toggleRootClusterSelect() {
+        rootClusterSelected = !rootClusterSelected;
+    }
+
     function keydownListener(e: KeyboardEvent) {
         if (e.ctrlKey !== e.metaKey) {
         } else {
@@ -145,13 +153,30 @@
                     resetView();
                     break;
                 case "KeyX":
-                    showAxis = showAxis ? false : true;
+                    showAxis = !showAxis;
                     break;
                 case "KeyG":
-                    showGrid = showGrid ? false : true;
+                    showGrid = !showGrid;
                     break;
                 case "KeyC":
-                    showCoordinate = showCoordinate ? false : true;
+                    showCoordinate = !showCoordinate;
+                    break;
+                default:
+                    if (relationGraph == null || !rootClusterSelected) return;
+                    switch (e.code) {
+                        case "KeyI":
+                            rootPosition.y += deadKeyMultiplier(e);
+                            break;
+                        case "KeyK":
+                            rootPosition.y -= deadKeyMultiplier(e);
+                            break;
+                        case "KeyJ":
+                            rootPosition.x -= deadKeyMultiplier(e);
+                            break;
+                        case "KeyL":
+                            rootPosition.x += deadKeyMultiplier(e);
+                            break;
+                    }
                     break;
             }
         }
@@ -180,6 +205,12 @@
                 updateEntityAnchor();
                 resetView();
 
+                window.history.replaceState(
+                    undefined,
+                    "",
+                    `/relation-graph/?id=${id}&lang=${lang}`
+                );
+
                 if (json.body != null) {
                     console.info("Relation graph loaded: ", relationGraph);
                 }
@@ -204,7 +235,7 @@
         if (relationGraph == null) return;
 
         let fileName = `${relationGraph.id}-Haskell.txt`;
-        console.log("Saving as Haskell...", fileName);
+        console.info("Saving as Haskell...", fileName);
         saveStringAsFile(
             dumpRelationGraphRelation2Haskell(relationGraph),
             fileName
@@ -215,13 +246,17 @@
         if (relationGraph == null) return;
 
         let fileName = `${relationGraph.id}-JSON.json`;
-        console.log("Saving as JSON...", fileName);
+        console.info("Saving as JSON...", fileName);
         saveStringAsFile(JSON.stringify(relationGraph, null, 4), fileName);
     }
 
     function importJson() {
         console.info("Trying to import from JSON...");
         jsonFileInput.click();
+    }
+
+    function openSettings() {
+        showSettings.set(true);
     }
 
     function handleRgAction(e: CustomEvent) {
@@ -246,12 +281,18 @@
             case "update-selected-clusters":
                 updateSelectedClusters(e);
                 break;
+            case "change-lang":
+                langW.set(e.detail.lang);
+                break;
+            case "open-settings":
+                openSettings();
+                break;
+            default:
+                console.error("Unknown action:", e.detail);
         }
     }
 
     onMount(() => {
-        loadRelationGraph();
-
         jsonFileReader = new FileReader();
         jsonFileInput = document.createElement("input");
         jsonFileInput.style.display = "none";
@@ -266,8 +307,11 @@
                 return;
             }
 
-            const file = jsonFileInput.files[0];
-            jsonFileReader.readAsText(file);
+            const files = jsonFileInput.files;
+            if (files?.length > 0) {
+                const file = files[0];
+                jsonFileReader.readAsText(file);
+            }
         });
 
         jsonFileReader.addEventListener(
@@ -287,6 +331,19 @@
                 }
             }
         );
+
+        langW.subscribe((newLang) => {
+            if (newLang == null) {
+                return;
+            }
+            if (newLang === lang) {
+                console.info("Language is already:", lang);
+                return;
+            }
+            console.info("Change language into:", newLang);
+            lang = newLang;
+            loadRelationGraph();
+        });
     });
 </script>
 
@@ -345,7 +402,6 @@
                         objectAnchor={entityAnchor.get(
                             relationBetween.objectId
                         ) ?? Vector2Zero}
-                        {writingSystemIsCJK}
                         {highlight}
                         {dim}
                     />
@@ -361,7 +417,7 @@
 
                 {#each relationGraph.atoms as atom}
                     {@const dim =
-                        (!selectedAtoms.has(atom.id)) &&
+                        !selectedAtoms.has(atom.id) &&
                         selectedEntities.size > 0}
                     <Atom
                         {...atom}
@@ -371,10 +427,13 @@
                     />
                 {/each}
 
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div
                     class="root-cluster"
-                    style:left="{relationGraph.rootPosition.x}rem"
-                    style:top="{-relationGraph.rootPosition.y}rem"
+                    class:selected={rootClusterSelected}
+                    style:left="{rootPosition.x}rem"
+                    style:top="{-rootPosition.y}rem"
+                    on:click={toggleRootClusterSelect}
                 >
                     <img
                         class="root-cluster-background"
@@ -398,9 +457,11 @@
             />
         {/if}
     {/key}
+
+    <Settings showW={showSettings} on:rg-action={handleRgAction} {langW} />
 </div>
 
-<style>
+<style lang="scss">
     .background-dark-blue {
         overflow: hidden;
         position: absolute;
@@ -409,36 +470,6 @@
 
         background: #171f2b;
     }
-
-    .background-cloud {
-        overflow: hidden;
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        width: 100vw;
-        height: 100vh;
-
-        /*background: url("/asset/img/ui/background-cloud-repeating.png") repeat;*/
-        background-position-x: 0;
-        opacity: 20%;
-
-        animation: cloud-ani;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        animation-duration: 1000s;
-    }
-
-    /* @keyframes cloud-ani {
-        0% {
-            background-position-x: 0;
-            background-position-y: 0;
-        }
-        100% {
-            background-position-x: -8192px;
-            background-position-y: 4096px;
-        }
-    } */
 
     .content {
         position: absolute;
@@ -457,6 +488,11 @@
 
         user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
+
+        &.selected {
+            filter: drop-shadow(0 0 1rem orange);
+        }
     }
 
     .translation {

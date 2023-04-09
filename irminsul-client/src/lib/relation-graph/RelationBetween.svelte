@@ -149,6 +149,7 @@
 
         user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
         
         transition: filter;
         transition-duration: 0.2s;

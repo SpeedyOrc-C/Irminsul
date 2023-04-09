@@ -1,0 +1,35 @@
+{
+    "language": {
+        "zh-cn": "Simplified Chinese",
+        "en-us": "English (US)"
+    },
+    "settings": {
+        "category": {
+            "file": "File",
+            "view": "View",
+            "language": "Language",
+            "key-bindings": "Key Bindings",
+            "about": "About"
+        },
+        "file": {
+            "import": "Import",
+            "import-json": "Import relation graph layout",
+            "export": "Export",
+            "export-json": "Export relation graph layout as JSON used in web",
+            "export-haskell": "Export relation graph layout as Haskell used in Irminsul project"
+        },
+        "language": {
+            "interface-language": "Interface Language"
+        },
+        "msg": {
+            "click-to-export": "Click to Export",
+            "click-to-import": "Click to Import"
+        }
+    },
+    "panel": {
+        "settings": "Settings",
+        "import-json": "Import from JSON",
+        "export-json": "Export as JSON",
+        "export-haskell": "Export as Haskell"
+    }
+}

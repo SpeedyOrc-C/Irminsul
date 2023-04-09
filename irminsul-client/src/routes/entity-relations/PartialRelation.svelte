@@ -1,6 +1,5 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import { redirect } from "@sveltejs/kit";
 
     export let id: string;
     export let translation: string;

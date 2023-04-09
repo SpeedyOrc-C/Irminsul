@@ -53,6 +53,10 @@
         position: absolute;
         top: 7rem;
         left: 5.5rem;
+
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
     }
 
     .cloudy-background {
@@ -67,6 +71,8 @@
         width: 20rem;
         margin-bottom: 0.7rem;
         border-radius: 3.2rem;
+
+        cursor: pointer;
 
         & > .option-background {
             position: absolute;
@@ -127,14 +133,8 @@
             font-size: 1.7rem;
             color: #ece4d8cc;
 
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-
             transition-property: transform;
             transition-duration: 0.1s;
-
-            cursor: default;
         }
 
         &:hover {

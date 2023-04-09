@@ -39,22 +39,10 @@
         display: flex;
         align-items: center;
         width: 100vw;
-        padding: 2rem;
+        height: 4rem;
 
         background-color: #3e4457cc;
         backdrop-filter: blur(0.2rem);
         -webkit-backdrop-filter: blur(0.2rem);
-
-        transform: translate(0, calc(-100% + 2rem));
-        transition-property: transform, background-color;
-        transition-duration: 1s;
-        transition-delay: 1s;
-
-        &:hover,
-        &:active {
-            transform: translate(0, 0);
-            transition-duration: 0.2s;
-            transition-delay: 0s;
-        }
     }
 </style>

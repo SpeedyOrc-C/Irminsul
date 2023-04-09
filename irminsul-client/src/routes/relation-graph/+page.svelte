@@ -19,8 +19,8 @@
             ? $page.url.searchParams.get("lang")!
             : "zh-cn";
 
-        langW.subscribe((newLang) => locale.set(newLang));
         langW.set(lang);
+        langW.subscribe((newLang) => locale.set(newLang));
     });
 </script>
 

@@ -31,7 +31,8 @@
 
         background-color: #ece5d8;
 
-        box-shadow: 0 0 1rem 0.2rem #0004;
+        box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0 transparent,
+            inset 0 0 0 0 transparent;
 
         user-select: none;
         -webkit-user-select: none;
@@ -54,7 +55,8 @@
         }
 
         &.has-border {
-            box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0.4rem #ece5daaa;
+            box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0.4rem #ece5daaa,
+                inset 0 0 0 0 transparent;
 
             &:hover {
                 box-shadow: 0 0 1rem 0.2rem #fff4, 0 0 0 0.2rem white,

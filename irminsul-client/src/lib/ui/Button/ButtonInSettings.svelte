@@ -22,7 +22,7 @@
 
         text-align: center;
         font-size: 1.3rem;
-        color: #3b4255;
+        color: #485265;
     }
 
     .right-arrow {

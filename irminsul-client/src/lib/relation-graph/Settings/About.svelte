@@ -1,20 +1,6 @@
 <h1>Irminsul ——《原神》人物关系图谱</h1>
 
-<h2>这里到底发生了什么？</h2>
-
-<p>为了还原神作，你懂的……</p>
-
-<h2>探寻秘密</h2>
-
-<p>
-    <a href="https://github.com/SpeedyOrc-C/Irminsul" target="_blank"
-        >GitHub 仓库</a
-    >
-</p>
-
-<p>
-    客户端版本：2023.0408.0
-</p>
+<p>客户端版本：2023.0409.0</p>
 
 <style lang="scss">
     %common {

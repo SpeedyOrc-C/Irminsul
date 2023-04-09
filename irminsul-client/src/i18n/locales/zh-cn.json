@@ -4,12 +4,14 @@
         "en-us": "英文（美国）"
     },
     "settings": {
+        "self": "设置",
         "category": {
             "file": "文件",
             "view": "视图",
             "language": "语言",
             "key-bindings": "按键",
-            "about": "关于"
+            "about": "关于",
+            "other": "其他"
         },
         "file": {
             "import": "导入",
@@ -21,9 +23,21 @@
         "language": {
             "interface-language": "界面语言"
         },
+        "other": {
+            "tracing-back": "溯源",
+            "github-repository": "Irminsul 的 GitHub 仓库",
+            "yuanshen-official-website": "《原神》官方网站",
+            "genshin-impact-official-website": "Genshin Impact 官方网站",
+            "wiki": "百科",
+            "miyoushe-obs": "米游社观测枢",
+            "hoyolab-hoyowiki": "HoYoLab HoYoWiki",
+            "fandom": "Fandom",
+            "bwiki": "B站百科"
+        },
         "msg": {
             "click-to-export": "点击导出",
-            "click-to-import": "点击导入"
+            "click-to-import": "点击导入",
+            "click-to-proceed": "点击跳转"
         }
     },
     "panel": {

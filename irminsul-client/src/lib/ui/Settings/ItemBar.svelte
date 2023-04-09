@@ -1,21 +1,24 @@
 <script lang="ts">
+    import LeftArrow from '../../../asset/img/ui/UI-Settings-Item-LeftFigure-Colored.png'
+    import ThreeStars from "../../../asset/img/ui/UI-Settings-Item-ThreeStars-Recolored.png";
     export let caption: string;
 </script>
 
 <div class="item-bar">
-    <div class="background"></div>
+    <img class="left-arrow" src={LeftArrow} alt="">
     <div class="left-figure"></div>
-    <div class="right-stars"></div>
     <div class="caption">{caption}</div>
     <div class="widget">
         <slot />
     </div>
+    <img src={ThreeStars} alt="" class="three-stars">
 </div>
 
 <style lang="scss">
     .item-bar {
+        position: relative;
+        
         margin: 0.6rem 0.2rem;
-
         width: calc(100% - 0.4rem);
         height: 3.2rem;
         border-radius: 1.6rem;
@@ -31,14 +34,31 @@
         transition-duration: 0.1s;
         
         &:hover {
-            box-shadow: 0 0 0 0.18rem white;
+            box-shadow: 0 0 0 0.15rem white;
             opacity: 100%;
         }
         
         &:active {
-            box-shadow: 0 0 0 0.18rem #ddd;
+            box-shadow: 0 0 0 0.15rem #ddd;
             opacity: 100%;
         }
+    }
+
+    .left-arrow {
+        position: absolute;
+        display: block;
+
+        height: 3.2rem;
+        opacity: 40%;
+    }
+
+    .three-stars {
+        position: absolute;
+        display: block;
+        right: 17.7rem;
+        
+        height: 3.2rem;
+        opacity: 100%;
     }
 
     .caption {
@@ -49,7 +69,7 @@
         line-height: 3.2rem;
 
         font-size: 1.3rem;
-        color: #3b4255;
+        color: #485265;
     }
 
     .widget {

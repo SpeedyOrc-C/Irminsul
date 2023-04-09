@@ -3,11 +3,12 @@
     import ItemBar from "$lib/ui/Settings/ItemBar.svelte";
     import { createEventDispatcher } from "svelte";
     import { _ } from "svelte-i18n";
+    import SubCategory from "../../ui/Settings/SubCategory.svelte";
 
     const dispatch = createEventDispatcher();
 </script>
 
-<div class="sub-category">{$_("settings.file.import")}</div>
+<SubCategory>{$_("settings.file.import")}</SubCategory>
 
 <ItemBar caption={$_("settings.file.import-json")} on:rg-action>
     <ButtonInSettings
@@ -19,7 +20,7 @@
     </ButtonInSettings>
 </ItemBar>
 
-<div class="sub-category">{$_("settings.file.export")}</div>
+<SubCategory>{$_("settings.file.export")}</SubCategory>
 
 <ItemBar caption={$_("settings.file.export-json")}>
     <ButtonInSettings

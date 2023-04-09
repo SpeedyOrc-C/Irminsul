@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { img_ui_background_root_cluster } from "../../asset/Asset";
+    import RootCluster_Background from "../../asset/img/ui/RootCluster-Background.png"
     import Atom from "./Atom.svelte";
     import Cluster from "./Cluster.svelte";
     import {
@@ -350,6 +350,14 @@
 <!-- svelte-ignore missing-declaration -->
 <svelte:window on:keydown={keydownListener} />
 
+<title>
+    {#if relationGraph != null}
+        Irminsul - {relationGraph?.rootTranslation}
+    {:else}
+        Irminsul
+    {/if}
+</title>
+
 <div class="relation-graph">
     <div class="background-dark-blue" />
     <div class="background-cloud" />
@@ -437,7 +445,7 @@
                 >
                     <img
                         class="root-cluster-background"
-                        src={img_ui_background_root_cluster}
+                        src={RootCluster_Background}
                         alt=""
                     />
                     <div class="translation font-hywh-85w">

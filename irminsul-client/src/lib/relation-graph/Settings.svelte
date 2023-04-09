@@ -1,10 +1,14 @@
 <script lang="ts">
+    import Background from "../../asset/img/ui/UI-Settings-Background.png";
+    import Icon from "../../asset/img/ui/UI-Settings-Icon.png";
     import ButtonClose from "$lib/ui/Button/ButtonClose.svelte";
     import Language from "$lib/relation-graph/Settings/Language.svelte";
     import SettingsCategories from "$lib/ui/Settings/SettingsCategories.svelte";
     import type { Writable } from "svelte/store";
     import About from "./Settings/About.svelte";
     import File from "./Settings/File.svelte";
+    import { _ } from "svelte-i18n";
+    import Other from "./Settings/Other.svelte";
 
     export let showW: Writable<boolean>;
     export let langW: Writable<string>;
@@ -43,15 +47,26 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-    class="settings font-hywh-65w"
+    class="settings font-hywh-85w"
     class:show
     style:display={displayed ? "block" : "none"}
 >
     <div class="top-bar">
+        <img class="icon" src={Icon} alt="" />
+
         <div class="button-close" on:click={close}>
             <ButtonClose />
         </div>
+
+        <div class="title">
+            {$_("settings.self")}&nbsp;&nbsp;/&nbsp;&nbsp;{$_(
+                `settings.category.${selectedCategory}`
+            )}
+        </div>
     </div>
+
+    <!-- This is slightly different to the background in game -->
+    <img class="background" src={Background} alt="" />
 
     <div class="settings-categories">
         <SettingsCategories
@@ -60,7 +75,8 @@
                 // "view",
                 "language",
                 // "key-bindings",
-                "about"
+                "other",
+                "about",
             ]}
             on:settings-categories-change={(e) =>
                 (selectedCategory = e.detail.category)}
@@ -71,11 +87,14 @@
         {#if selectedCategory === "file"}
             <File on:rg-action />
         {/if}
+        {#if selectedCategory === "language"}
+            <Language {langW} on:rg-action />
+        {/if}
         {#if selectedCategory === "about"}
             <About />
         {/if}
-        {#if selectedCategory === "language"}
-            <Language {langW} on:rg-action/>
+        {#if selectedCategory === "other"}
+            <Other />
         {/if}
     </div>
 </div>
@@ -89,11 +108,38 @@
         transition-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035);
     }
 
+    .background {
+        position: absolute;
+        transform: translate(-37%, -38%);
+
+        filter: blur(0.1rem);
+        opacity: 5%;
+    }
+
+    .icon {
+        position: absolute;
+        display: block;
+
+        top: 1.2rem;
+        left: 2.4rem;
+        height: 3rem;
+    }
+
+    .title {
+        position: absolute;
+
+        top: 50%;
+        transform: translate(8rem, -50%);
+
+        font-size: 1.3rem;
+        color: #d3bc8e;
+    }
+
     .top-bar {
         position: absolute;
         display: flex;
         width: 100%;
-        height: 5.5rem;
+        height: 5.35rem;
 
         background-color: #0004;
 
@@ -213,12 +259,5 @@
                 }
             }
         }
-    }
-
-    :global(.sub-category) {
-        margin: 1rem 0rem;
-
-        font-size: 1.5rem;
-        color: white;
     }
 </style>

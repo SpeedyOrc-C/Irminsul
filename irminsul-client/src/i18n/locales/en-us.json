@@ -4,12 +4,14 @@
         "en-us": "English (US)"
     },
     "settings": {
+        "self": "Settings",
         "category": {
             "file": "File",
             "view": "View",
             "language": "Language",
             "key-bindings": "Key Bindings",
-            "about": "About"
+            "about": "About",
+            "other": "Other"
         },
         "file": {
             "import": "Import",
@@ -21,9 +23,21 @@
         "language": {
             "interface-language": "Interface Language"
         },
+        "other": {
+            "tracing-back": "Tracing Back",
+            "github-repository": "Irminsul's GitHub Repository",
+            "yuanshen-official-website": "Yuanshen's Official Website",
+            "genshin-impact-official-website": "Genshin Impact's Official Website",
+            "wiki": "Wiki",
+            "miyoushe-obs": "Guanceshu in Miyoushe",
+            "hoyolab-hoyowiki": "HoYoWiki in HoYoLab",
+            "fandom": "Fandom",
+            "bwiki": "Bilibili Wiki"
+        },
         "msg": {
             "click-to-export": "Click to Export",
-            "click-to-import": "Click to Import"
+            "click-to-import": "Click to Import",
+            "click-to-proceed": "Click to Proceed"
         }
     },
     "panel": {

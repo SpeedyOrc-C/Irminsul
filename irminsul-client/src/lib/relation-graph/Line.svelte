@@ -14,8 +14,7 @@
         style:height={thickness}
         style:background-color={color}
         style:top="{-offset}rem"
-        style:transform="translate(-50%, -50%)"
-    />
+        style:transform="translate(-50%, -50%)"></div>
 {:else if type === "vertical"}
     <div
         class="line"
@@ -24,6 +23,5 @@
         style:width={thickness}
         style:background-color={color}
         style:left="{offset}rem"
-        style:transform="translate(-50%, -50%)"
-    />
+        style:transform="translate(-50%, -50%)"></div>
 {/if}

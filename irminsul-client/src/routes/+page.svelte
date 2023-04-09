@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from "svelte";
+import { onMount } from "svelte";
 
 
     onMount(() => {
@@ -8,14 +8,9 @@
 </script>
 
 <div id="home">
-    
 </div>
 
 <style>
-    :global(body) {
-        background-color: #171f2b;
-    }
-
     #home {
         margin: 2rem;
     }

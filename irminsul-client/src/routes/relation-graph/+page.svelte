@@ -1,25 +1,32 @@
 <script lang="ts">
     import { page } from "$app/stores";
     import { onMount } from "svelte";
+    import { locale } from "svelte-i18n";
+    import { writable, type Writable } from "svelte/store";
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
 
     let id: string | null;
     let lang: string | null;
 
+    let langW: Writable<string> = writable();
+
     onMount(() => {
         id = $page.url.searchParams.has("id")
-            ? $page.url.searchParams.get("id")
+            ? $page.url.searchParams.get("id")!
             : "Mondstadt";
-        
+
         lang = $page.url.searchParams.has("lang")
-            ? $page.url.searchParams.get("lang")
+            ? $page.url.searchParams.get("lang")!
             : "zh-cn";
+
+        langW.subscribe((newLang) => locale.set(newLang));
+        langW.set(lang);
     });
 </script>
 
 {#key id}
     {#key lang}
-        <RelationGraph {id} {lang} />
+        <RelationGraph {id} {langW} />
     {/key}
 {/key}
 
@@ -29,6 +36,7 @@
 
         background-color: #171f2b;
     }
+
     @font-face {
         font-family: HYWenHei-65W;
         src: url("/font/HYWenHei-65W.ttf");

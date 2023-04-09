@@ -1,8 +1,12 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
 
-    export let label: string;
-    export let action: string = '';
+    export let action: string = "";
+    export let width: string = "";
+    export let height: string = "";
+    export let style: string = "";
+    export let hasBorder: boolean = false;
+    export let inSettings: boolean = false;
 
     const dispatch = createEventDispatcher();
 </script>
@@ -10,50 +14,89 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     class="button"
-    on:click={() => {
-        dispatch("button-clicked", { action: action });
-    }}
+    style:height
+    style:width
+    {style}
+    class:has-border={hasBorder}
+    class:in-settings={inSettings}
+    on:click={() => dispatch("button-clicked", { action: action })}
 >
-    {label}
+    <slot />
 </div>
 
 <style lang="scss">
     .button {
         display: inline-block;
-
-        height: 1.2rem;
-        padding: 0.5rem 2rem;
+        border-radius: 99rem;
 
         background-color: #ece5d8;
-        color: #3b4255;
 
-        border-radius: 1.1rem;
-
-        min-width: 3rem;
-        text-align: center;
+        box-shadow: 0 0 1rem 0.2rem #0004;
 
         user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
         cursor: pointer;
 
-        transition: background-color, color, box-shadow;
+        transition: background-color, box-shadow;
         transition-duration: 0.2s;
 
         &:hover {
-            padding: 0.3rem 1.8rem;
-            border: 0.2rem solid white;
+            box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0.2rem white,
+                inset 0 0 0 0.1rem #0000001c;
         }
-        
         &:active {
-            padding: 0.4rem 1.9rem;
-            margin: 0.1rem;
-            border: 0 solid white;
-    
-            background-color: #b4a38e;
-            color: white;
-    
-            box-shadow: 0 0 0.2rem 0.1rem #b4a38edd;
+            box-shadow: 0 0 0.5rem 0.2rem #fff4, 0 0 0 0.2rem transparent,
+                inset 0 0 0 0.15rem #0004;
+
+            animation: click-blink-ani 0.2s;
+            animation-fill-mode: forwards;
+        }
+
+        &.has-border {
+            box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0.4rem #ece5daaa;
+
+            &:hover {
+                box-shadow: 0 0 1rem 0.2rem #fff4, 0 0 0 0.2rem white,
+                    inset 0 0 0 0.1rem #0000001c;
+            }
+            &:active {
+                box-shadow: 0 0 0.5rem 0.2rem #fff4, 0 0 0 0.2rem #0004,
+                    inset 0 0 0 0.1rem transparent;
+
+                animation: click-blink-ani 0.2s;
+                animation-fill-mode: forwards;
+            }
+        }
+
+        &.in-settings {
+            width: 19rem;
+            height: 3.2rem;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+
+            box-shadow: none;
+            background-color: #d8cdb9;
+
+            &:active {
+                background-image: radial-gradient(
+                    rgba(255, 242, 205, 0.9),
+                    rgba(255, 223, 164, 0.5),
+                    #d8cdb9,
+                    #d8cdb9
+                ) !important;
+            }
         }
     }
 
+    @keyframes click-blink-ani {
+        from {
+            background-color: #fff7cf;
+            color: #d1b669;
+        }
+        to {
+            background-color: #ece5d8dd;
+            color: white;
+        }
+    }
 </style>

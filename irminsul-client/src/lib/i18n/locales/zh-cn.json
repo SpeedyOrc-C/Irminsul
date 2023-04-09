@@ -1,0 +1,35 @@
+{
+    "language": {
+        "zh-cn": "简体中文",
+        "en-us": "英文（美国）"
+    },
+    "settings": {
+        "category": {
+            "file": "文件",
+            "view": "视图",
+            "language": "语言",
+            "key-bindings": "按键",
+            "about": "关于"
+        },
+        "file": {
+            "import": "导入",
+            "import-json": "导入关系图布局",
+            "export": "导出",
+            "export-json": "将关系图布局导出为网页端中使用的 JSON",
+            "export-haskell": "将关系图布局导出为 Irminsul 项目中使用的 Haskell"
+        },
+        "language": {
+            "interface-language": "界面语言"
+        },
+        "msg": {
+            "click-to-export": "点击导出",
+            "click-to-import": "点击导入"
+        }
+    },
+    "panel": {
+        "settings": "设置",
+        "import-json": "导入 JSON",
+        "export-json": "导出 JSON",
+        "export-haskell": "导出 Haskell"
+    }
+}

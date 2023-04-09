@@ -26,7 +26,7 @@
     }
 
     function toggleSelect() {
-        selected = selected ? false : true;
+        selected = !selected;
         if (selected) select();
         else deselect();
     }
@@ -131,8 +131,7 @@
         <div
             class="anchor-emphasis"
             style:left="{anchor.x - position.x + size.x / 2}rem"
-            style:top="{-(anchor.y - position.y - size.y / 2)}rem"
-        />
+            style:top="{-(anchor.y - position.y - size.y / 2)}rem"></div>
     {/if}
 </div>
 
@@ -150,6 +149,7 @@
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
 
         &.selected {
             border-color: orange;

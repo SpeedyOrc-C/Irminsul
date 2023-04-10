@@ -9,9 +9,11 @@
     import File from "./Settings/File.svelte";
     import { _ } from "svelte-i18n";
     import Other from "./Settings/Other.svelte";
+    import Graphics from "./Settings/Graphics.svelte";
 
     export let showW: Writable<boolean>;
     export let langW: Writable<string>;
+    export let reduceVisualEffectW: Writable<string>;
 
     let show: boolean = false;
     let displayed: boolean = false;
@@ -45,59 +47,65 @@
 
 <svelte:window on:keyup={handleKeyup} />
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-    class="settings font-hywh-85w"
-    class:show
-    style:display={displayed ? "block" : "none"}
->
-    <div class="top-bar">
-        <img class="icon" src={Icon} alt="" />
+{#if displayed}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div
+        class="settings font-hywh-85w"
+        class:show
+        style:display={displayed ? "block" : "none"}
+    >
+        <!-- This is slightly different to the background in game -->
+        <img class="background" src={Background} alt="" />
 
-        <div class="button-close" on:click={close}>
-            <ButtonClose />
+        <div class="top-bar">
+            <img class="icon" src={Icon} alt="" />
+
+            <div class="button-close" on:click={close}>
+                <ButtonClose />
+            </div>
+
+            <div class="title">
+                {$_("settings.self")}&nbsp;&nbsp;/&nbsp;&nbsp;{$_(
+                    `settings.category.${selectedCategory}`
+                )}
+            </div>
         </div>
 
-        <div class="title">
-            {$_("settings.self")}&nbsp;&nbsp;/&nbsp;&nbsp;{$_(
-                `settings.category.${selectedCategory}`
-            )}
+        <div class="settings-categories">
+            <SettingsCategories
+                options={[
+                    "file",
+                    "graphics",
+                    "language",
+                    // "key-bindings",
+                    "other",
+                    "about",
+                ]}
+                on:settings-categories-change={(e) =>
+                    (selectedCategory = e.detail.category)}
+                {reduceVisualEffectW}
+            />
+        </div>
+
+        <div class="selected-category">
+            {#if selectedCategory === "file"}
+                <File on:rg-action />
+            {/if}
+            {#if selectedCategory === "graphics"}
+                <Graphics {reduceVisualEffectW} />
+            {/if}
+            {#if selectedCategory === "language"}
+                <Language {langW} on:rg-action />
+            {/if}
+            {#if selectedCategory === "about"}
+                <About />
+            {/if}
+            {#if selectedCategory === "other"}
+                <Other />
+            {/if}
         </div>
     </div>
-
-    <!-- This is slightly different to the background in game -->
-    <img class="background" src={Background} alt="" />
-
-    <div class="settings-categories">
-        <SettingsCategories
-            options={[
-                "file",
-                // "view",
-                "language",
-                // "key-bindings",
-                "other",
-                "about",
-            ]}
-            on:settings-categories-change={(e) =>
-                (selectedCategory = e.detail.category)}
-        />
-    </div>
-
-    <div class="selected-category">
-        {#if selectedCategory === "file"}
-            <File on:rg-action />
-        {/if}
-        {#if selectedCategory === "language"}
-            <Language {langW} on:rg-action />
-        {/if}
-        {#if selectedCategory === "about"}
-            <About />
-        {/if}
-        {#if selectedCategory === "other"}
-            <Other />
-        {/if}
-    </div>
-</div>
+{/if}
 
 <style lang="scss">
     %ease-out-expo {
@@ -133,6 +141,10 @@
 
         font-size: 1.3rem;
         color: #d3bc8e;
+
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
     }
 
     .top-bar {

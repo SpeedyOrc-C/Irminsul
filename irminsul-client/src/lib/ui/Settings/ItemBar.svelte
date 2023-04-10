@@ -6,12 +6,11 @@
 
 <div class="item-bar">
     <img class="left-arrow" src={LeftArrow} alt="">
-    <div class="left-figure"></div>
-    <div class="caption">{caption}</div>
     <div class="widget">
         <slot />
     </div>
     <img src={ThreeStars} alt="" class="three-stars">
+    <div class="caption">{caption}</div>
 </div>
 
 <style lang="scss">
@@ -55,7 +54,7 @@
     .three-stars {
         position: absolute;
         display: block;
-        right: 17.7rem;
+        right: 17.55rem;
         
         height: 3.2rem;
         opacity: 100%;
@@ -74,6 +73,6 @@
 
     .widget {
         position: absolute;
-        right: 0.18rem;
+        right: 0rem;
     }
 </style>

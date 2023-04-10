@@ -1,5 +1,5 @@
 import { lowercaseFirstLetter } from "$lib/util/String";
-import type { Vector2 } from "./Vector2";
+import type { Vector2 } from "../lib/util/Vector2";
 
 interface Atom {
     id: string

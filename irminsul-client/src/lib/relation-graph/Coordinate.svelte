@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Vector2 } from "../../model/Vector2";
+    import type { Vector2 } from "../util/Vector2";
 
     export let coordinate: Vector2;
     export let size: Vector2 | null = null;

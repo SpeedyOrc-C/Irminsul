@@ -16,7 +16,7 @@
     */
     export let writingSystemIsCJK: boolean = false;
 
-    import type { Vector2 } from "../../model/Vector2";
+    import type { Vector2 } from "../util/Vector2";
 
     let needReverse: boolean;
     $: needReverse =

@@ -7,7 +7,7 @@
         "self": "Settings",
         "category": {
             "file": "File",
-            "view": "View",
+            "graphics": "Graphics",
             "language": "Language",
             "key-bindings": "Key Bindings",
             "about": "About",
@@ -19,6 +19,9 @@
             "export": "Export",
             "export-json": "Export relation graph layout as JSON used in web",
             "export-haskell": "Export relation graph layout as Haskell used in Irminsul project"
+        },
+        "graphics": {
+            "reduce-visual-effect": "Reduce visual effect"
         },
         "language": {
             "interface-language": "Interface Language"
@@ -38,6 +41,10 @@
             "click-to-export": "Click to Export",
             "click-to-import": "Click to Import",
             "click-to-proceed": "Click to Proceed"
+        },
+        "common": {
+            "on": "On",
+            "off": "Off"
         }
     },
     "panel": {

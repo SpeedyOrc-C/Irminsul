@@ -7,7 +7,7 @@
     import { getImgAvatar, img_avatar_UnknownAvatar } from "../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
-    import type { Vector2 } from "../../model/Vector2";
+    import type { Vector2 } from "../util/Vector2";
 
     export let id: string;
     export let translation: string;

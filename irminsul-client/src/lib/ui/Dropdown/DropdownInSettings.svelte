@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Option } from "../../util/Option";
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     import { writable, type Writable } from "svelte/store";
     import Button from "../Button.svelte";
     import DropdownList from "../DropdownList.svelte";
@@ -16,7 +16,9 @@
     const dispatch = createEventDispatcher();
 
     valueW.subscribe((newValue) => {
-        label = options.find((op) => op.value === newValue)?.label ?? null;
+        
+        label = options?.find((op) => op.value === newValue)?.label ?? null;
+        console.log(newValue, label, options);
     });
 
     showW.subscribe((newValue) => (show = newValue));
@@ -25,7 +27,9 @@
 <Button inSettings={true}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="label" on:click={() => showW.set(!show)}>
-        {label}
+        {#key label}
+            {label}
+        {/key}
     </div>
     <div class="down-arrow" />
     <div class="dropdown-list" class:below>
@@ -34,6 +38,7 @@
             {showW}
             {valueW}
             on:dropdown-list-change={(e) => {
+                valueW.set(e.detail.value);
                 dispatch("dropdown-change", e.detail);
             }}
         />

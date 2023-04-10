@@ -1,9 +1,18 @@
 <script lang="ts">
+    import SettingsItemCloudyBackground from "$lib/Canvas/SettingsItemCloudyBackground.svelte";
     import { createEventDispatcher } from "svelte";
     import { _ } from "svelte-i18n";
+    import type { Writable } from "svelte/store";
 
     export let options: Array<string>;
+    export let reduceVisualEffectW: Writable<string>;
+    
     let selectedCategory: string | null = options[0];
+    let reduceVisualEffect = true;
+
+    reduceVisualEffectW.subscribe((newValue) => {
+        reduceVisualEffect = newValue === "on";
+    })
 
     const dispatch = createEventDispatcher();
 
@@ -21,22 +30,26 @@
             class="option"
             class:selected
             on:click={() => {
-                selectedCategory = option
-                dispatchSettingsCategoriesChange()
+                selectedCategory = option;
+                dispatchSettingsCategoriesChange();
             }}
         >
-            <div class="cloudy-background"></div>
+            {#if selected && !reduceVisualEffect}
+                <div class="cloudy-background">
+                    <SettingsItemCloudyBackground />
+                </div>
+            {/if}
 
-            <div class="option-background"></div>
+            <div class="option-background" />
             <div class="option-bullet">
-                <div class="bullet-outer"></div>
+                <div class="bullet-outer" />
                 {#if !selected}
-                    <div class="bullet-inner"></div>
+                    <div class="bullet-inner" />
                 {/if}
                 {#if selected}
                     <div class="bullet-arrow-with-background">
-                        <div class="bullet-background"></div>
-                        <div class="bullet-arrow"></div>
+                        <div class="bullet-background" />
+                        <div class="bullet-arrow" />
                     </div>
                 {/if}
             </div>

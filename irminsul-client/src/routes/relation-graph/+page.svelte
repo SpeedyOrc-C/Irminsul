@@ -6,27 +6,35 @@
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
 
     let id: string | null;
-    let lang: string | null;
+    let lang: string;
+    let reduceVisualEffect: string;
 
     let langW: Writable<string> = writable();
+    let reduceVisualEffectW: Writable<string> = writable();
 
     onMount(() => {
-        id = $page.url.searchParams.has("id")
-            ? $page.url.searchParams.get("id")!
-            : "Mondstadt";
+        id = $page.url.searchParams.get("id") ?? "Mondstadt";
 
-        lang = $page.url.searchParams.has("lang")
-            ? $page.url.searchParams.get("lang")!
-            : "zh-cn";
-
+        lang =
+            $page.url.searchParams.get("lang") ??
+            localStorage.getItem("lang") ??
+            "zh-cn";
         langW.set(lang);
         langW.subscribe((newLang) => locale.set(newLang));
+        localStorage.setItem("lang", lang);
+
+        reduceVisualEffect =
+            localStorage.getItem("reduce-visual-effect") ?? "on";
+        reduceVisualEffectW.set(reduceVisualEffect);
+        reduceVisualEffectW.subscribe((newValue) => {
+            localStorage.setItem("reduce-visual-effect", newValue);
+        });
     });
 </script>
 
 {#key id}
     {#key lang}
-        <RelationGraph {id} {langW} />
+        <RelationGraph {id} {langW} {reduceVisualEffectW} />
     {/key}
 {/key}
 

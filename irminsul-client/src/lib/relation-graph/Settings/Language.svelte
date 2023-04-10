@@ -2,15 +2,15 @@
     import ItemBar from "../../ui/Settings/ItemBar.svelte";
     import { _ } from "svelte-i18n";
     import DropdownInSettings from "../../ui/Dropdown/DropdownInSettings.svelte";
-    import { afterUpdate, createEventDispatcher } from "svelte";
+    import { beforeUpdate, createEventDispatcher } from "svelte";
     import type { Writable } from "svelte/store";
     import type { Option } from "$lib/util/Option";
     const dispatch = createEventDispatcher();
 
     export let langW: Writable<string>;
 
-    let options: Array<Option> = [];
-    afterUpdate(() => {
+    let options: Array<Option>;
+    beforeUpdate(() => {
         options = [
             { label: $_("language.zh-cn"), value: "zh-cn" },
             { label: $_("language.en-us"), value: "en-us" },

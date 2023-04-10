@@ -5,21 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b95e76f7-3c9b-4340-bb38-060f2b484b81" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/Canvas.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/Particle.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/Particle/Snowflake.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/Particle/Star.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/ParticleSystem.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderable.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/Canvas/SettingsItemCloudyBackground.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/util/Color.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/util/LinearMap.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/App.svelte" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Atom.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Atom.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Cluster.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Cluster.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Line.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Line.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Panel.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Panel.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Path.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Path.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Coordinate.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Coordinate.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/RelationBetween.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/RelationBetween.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/RelationGraph.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/RelationGraph.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/ui/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Button.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/ui/Seperator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Seperator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/util/String.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/util/String.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/entity-relations/PartialRelation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/entity-relations/PartialRelation.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/relation-graph/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/relation-graph/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Settings/ItemBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Settings/ItemBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RelationGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RelationGraph.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Vector2.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/util/Vector2.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,25 +58,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/chenzhanming/Documents/GitHub/Irminsul/irminsul-client/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/chenzhanming/Documents/GitHub/Irminsul/irminsul-client/node_modules/typescript/lib",
+    "ts.rename.search.for.js.occurrences": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/util" />
       <recent name="$PROJECT_DIR$/src/routes/cluster-graph" />
     </key>
   </component>
@@ -92,6 +98,7 @@
       <workItem from="1680523825469" duration="1111000" />
       <workItem from="1680986060588" duration="299000" />
       <workItem from="1680986366512" duration="785000" />
+      <workItem from="1681073279818" duration="10440000" />
     </task>
     <servers />
   </component>

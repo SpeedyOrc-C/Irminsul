@@ -7,7 +7,7 @@
         "self": "设置",
         "category": {
             "file": "文件",
-            "view": "视图",
+            "graphics": "画面",
             "language": "语言",
             "key-bindings": "按键",
             "about": "关于",
@@ -19,6 +19,9 @@
             "export": "导出",
             "export-json": "将关系图布局导出为网页端中使用的 JSON",
             "export-haskell": "将关系图布局导出为 Irminsul 项目中使用的 Haskell"
+        },
+        "graphics": {
+            "reduce-visual-effect": "减少视觉效果"
         },
         "language": {
             "interface-language": "界面语言"
@@ -38,6 +41,10 @@
             "click-to-export": "点击导出",
             "click-to-import": "点击导入",
             "click-to-proceed": "点击跳转"
+        },
+        "common": {
+            "on": "打开",
+            "off": "关闭"
         }
     },
     "panel": {

@@ -5,7 +5,7 @@
 <script lang="ts">
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
-    import type { Vector2 } from "../../model/Vector2";
+    import type { Vector2 } from "../util/Vector2";
     import { createEventDispatcher } from "svelte";
 
     export let id: string;

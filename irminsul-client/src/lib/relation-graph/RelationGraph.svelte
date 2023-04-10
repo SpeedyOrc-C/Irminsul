@@ -1,5 +1,5 @@
 <script lang="ts">
-    import RootCluster_Background from "../../asset/img/ui/RootCluster-Background.png"
+    import RootCluster_Background from "../../asset/img/ui/RootCluster-Background.png";
     import Atom from "./Atom.svelte";
     import Cluster from "./Cluster.svelte";
     import {
@@ -7,7 +7,7 @@
         type RelationGraph,
     } from "../../model/RelationGraph";
     import RelationBetween from "./RelationBetween.svelte";
-    import { Vector2Zero, type Vector2 } from "../../model/Vector2";
+    import { Vector2Zero, type Vector2 } from "../util/Vector2";
     import Axis from "./Axis.svelte";
     import Grid from "./Grid.svelte";
     import { saveStringAsFile } from "$lib/util/String";
@@ -21,6 +21,7 @@
 
     export let id: string | null = null;
     export let langW: Writable<string>;
+    export let reduceVisualEffectW: Writable<string>;
 
     let lang: string | null = null;
 
@@ -342,6 +343,7 @@
             }
             console.info("Change language into:", newLang);
             lang = newLang;
+            localStorage.setItem("lang", newLang);
             loadRelationGraph();
         });
     });
@@ -466,7 +468,12 @@
         {/if}
     {/key}
 
-    <Settings showW={showSettings} on:rg-action={handleRgAction} {langW} />
+    <Settings
+        showW={showSettings}
+        on:rg-action={handleRgAction}
+        {langW}
+        {reduceVisualEffectW}
+    />
 </div>
 
 <style lang="scss">

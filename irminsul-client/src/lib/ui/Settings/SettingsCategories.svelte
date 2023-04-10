@@ -6,19 +6,15 @@
 
     export let options: Array<string>;
     export let reduceVisualEffectW: Writable<string>;
-    
-    let selectedCategory: string | null = options[0];
+
+    export let selectedCategory: string;
     let reduceVisualEffect = true;
 
     reduceVisualEffectW.subscribe((newValue) => {
         reduceVisualEffect = newValue === "on";
-    })
+    });
 
     const dispatch = createEventDispatcher();
-
-    function dispatchSettingsCategoriesChange() {
-        dispatch("settings-categories-change", { category: selectedCategory });
-    }
 </script>
 
 <div class="settings-categories">
@@ -31,7 +27,9 @@
             class:selected
             on:click={() => {
                 selectedCategory = option;
-                dispatchSettingsCategoriesChange();
+                dispatch("settings-categories-change", {
+                    category: selectedCategory,
+                });
             }}
         >
             {#if selected && !reduceVisualEffect}

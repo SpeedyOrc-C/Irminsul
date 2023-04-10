@@ -15,33 +15,21 @@
     const fps = 60;
 
     onMount(() => {
-        effect = new Canvas(
-            canvasEffect,
-            height,
-            width,
-            0,
-            1,
-            -1,
-            1,
-            fps,
-            [
-                new CloudyWave(),
-                new ParticleSystem((self) => {
-                    if (Math.random() < 0.3) {
-                        self.particles.push(new Snowflake());
-                    }
-                    if (Math.random() < 0.1) {
-                        self.particles.push(new Star());
-                    }
-                }),
-            ]
-        );
+        effect = new Canvas(canvasEffect, height, width, 0, 1, -1, 1, fps, [
+            new CloudyWave(),
+            new ParticleSystem((self) => {
+                if (Math.random() < 0.3) {
+                    self.particles.push(new Snowflake());
+                }
+                if (Math.random() < 0.1) {
+                    self.particles.push(new Star());
+                }
+            }),
+        ]);
         effect.startRendering();
     });
 
-    onDestroy(() => {
-        effect.stopRendering();
-    });
+    onDestroy(() => effect.stopRendering());
 </script>
 
 <canvas bind:this={canvasEffect} />

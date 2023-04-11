@@ -52,16 +52,16 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         elementProperties = [
             al varka (-22.5, 7.5),
             al jeanGunnhildr (-15, 15),
-            al lisa (0, 15),
+            al lisa (-15, 0),
             al kaeyaAlberich (0, 0),
-            al amber (15, 15),
-            al klee (-15, 0),
-            al albedo (-15, -15),
-            al sucrose (0, -15),
+            al amber (-15, -15),
+            al klee (0, 15),
+            al albedo (15, 15),
+            al sucrose (30, 15),
             al noelle (15, 0),
-            al eulaLawrence (30, 15),
-            al mikaSchmidt (30, 0),
+            al eulaLawrence (0, -15),
+            al mikaSchmidt (30, -15),
 
-            cl guerillaTeam (30, 7.5) (37.5, 15) (15, 30)
+            cl guerillaTeam (18.5, -15) (18, -15) (15, 5)
         ]
     })

@@ -5,7 +5,7 @@ import Control.Arrow (Arrow(first))
 import Irminsul
 
 translationActionEnUs = first Action <$> [
-    ("ActingGrandMaster", "Acting grandMaster"),
+    ("ActingGrandMaster", "Acting grand master"),
     ("ActingGuardian", "Acting guardian"),
     ("Admire", "Admire"),
     ("Attendant", "Attendant"),
@@ -30,12 +30,15 @@ translationActionEnUs = first Action <$> [
     ("Love", "Love"),
     ("Mother", "Mother"),
     ("Partner", "Partner"),
+    ("Pet", "Pet"),
     ("Rule", "Rule"),
     ("Son", "Son"),
     ("Student", "Student"),
+    ("TavernOwner", "Tavern owner"),
     ("SupportInSilence", "Support in silence"),
     ("Teacher", "Teacher"),
     ("TeamCaptain", "Team captain"),
+    ("Translator", "Translator"),
     ("YoungerBrother", "Younger brother"),
     ("YoungerGeneration", "Younger generation"),
     ("YoungerSister", "Younger sister")

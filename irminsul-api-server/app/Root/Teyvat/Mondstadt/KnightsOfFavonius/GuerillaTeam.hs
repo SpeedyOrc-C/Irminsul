@@ -16,9 +16,9 @@ guerillaTeam = clusterLeaf "GuerillaTeam" Organization
         eulaLawrence `teamCaptain` guerillaTeam
     ]
     (Just $ RelationGraphLayout {
-        rootProperty = rl (0, 10),
+        rootProperty = rl (0, 15),
         elementProperties = [
-            al eulaLawrence (-10, 0),
-            al mikaSchmidt (10, 0)
+            al eulaLawrence (-15, 0),
+            al mikaSchmidt (15, 0)
         ]
     })

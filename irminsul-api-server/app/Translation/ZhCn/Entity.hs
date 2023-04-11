@@ -6,20 +6,21 @@ import Irminsul
 import Shortcut
 import Translation.ZhCn.Utility
 
-import Root.AnotherWorld
-import Root.Teyvat.Mondstadt.KnightsOfFavonius
-import Root.Teyvat.Kaeya
-import Root.Teyvat.Khaenriah
-import Root.Teyvat.Mondstadt.DawnWinery
-import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-import Root.Teyvat.Mondstadt.FavoniusChurch
-import Root.Teyvat.Hexenzirkel
 import Root
+import Root.AnotherWorld
 import Root.Teyvat
 import Root.Teyvat.Mondstadt
 import Root.Teyvat.Mondstadt.CatsTail
+import Root.Teyvat.Mondstadt.DawnWinery
+import Root.Teyvat.Mondstadt.FavoniusChurch
 import Root.Teyvat.Mondstadt.Lupical
+import Root.Teyvat.Mondstadt.KnightsOfFavonius
+import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
+import Root.Teyvat.Kaeya
+import Root.Teyvat.Khaenriah
+import Root.Teyvat.Hexenzirkel
 import Root.Teyvat.Fontaine
+
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -29,6 +30,8 @@ translationEntityZhCn = [
     ip amber "安柏" ["打火姬", "蒙德飞行冠军"] UntilNow "",
     ipn bennett "班尼特",
     ipn barbaraPegg ("芭芭拉".="佩奇"),
+    ipn catsTail "猫尾酒馆",
+    ipn diane "黛安",
     ipn dilucRagvindr ("迪卢克".="莱艮芬德"),
     ipn dionaKatzlein "迪奥娜",
     ipn dvalin "特瓦林",
@@ -44,14 +47,17 @@ translationEntityZhCn = [
     ipn knightsOfFavonius "西风骑士团",
     ip lisa "丽莎" ["丽莎阿姨", "蒙德雷神"] UntilNow "",
     ipn lumine "荧",
+    ipn margaret "玛格丽特",
     ip mikaSchmidt ("米卡".="施密特") ["前进测绘员"] UntilNow "",
     ipn monaAstrologistMegistus ("阿斯托洛吉斯".="莫娜".="梅姬斯图斯"),
     ipn mondstadt "蒙德",
     ip noelle "诺艾尔" ["女仆", "高达", "岩王帝姬"] UntilNow "",
     ipn ozvaldoHrafnavins ("奥兹华尔多".="赫芙那梵茵斯"),
+    ipn princeCat "小王子",
     ipn razor "雷泽",
     ipn rosaria "罗莎莉亚",
     ipn root "树根",
+    ipn shuyun "恕筠",
     ip sucrose "砂糖" ["雷萤术士"] UntilNow "",
     ipn teyvat "提瓦特",
     ipn varka "法尔伽",

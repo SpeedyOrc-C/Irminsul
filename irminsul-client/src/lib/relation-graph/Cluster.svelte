@@ -139,7 +139,7 @@
         position: absolute;
         transform: translate(-50%, -50%);
 
-        background-color: #ffff0003;
+        background-color: #e7dfd2;
         border: 0.2rem solid #bda277;
         border-radius: 0.5rem;
 
@@ -155,21 +155,21 @@
             border-width: 0.5rem;
         }
         &:hover {
-            background-color: #ffff000f;
         }
     }
 
     .translation {
         position: absolute;
-        right: 0;
-        bottom: 0;
-        padding: 0.5rem 1rem;
-        border-radius: 0.3rem;
+        top: 50%;
 
-        background-color: #703b00;
+        width: 100%;
+        height: fit-content;
+        transform: translate(0, -50%);
+        border-radius: 0.3rem;
+        
+        text-align: center;
         font-size: 1.2rem;
-        color: white;
-        text-decoration: none;
+        color: #3b4255;
     }
 
     .anchor-emphasis {

@@ -118,11 +118,9 @@
     style:width="{size.x}rem"
     style:height="{size.y}rem"
     on:click={toggleSelect}
+    on:dblclick={() => dispatch("rg-action", { action: "jump-to", id: id })}
 >
-    <div
-        class="translation font-hywh-65w"
-        on:click={() => dispatch("rg-action", { action: "jump-to", id: id })}
-    >
+    <div class="translation font-hywh-65w">
         {translation}
     </div>
 
@@ -131,7 +129,8 @@
         <div
             class="anchor-emphasis"
             style:left="{anchor.x - position.x + size.x / 2}rem"
-            style:top="{-(anchor.y - position.y - size.y / 2)}rem"></div>
+            style:top="{-(anchor.y - position.y - size.y / 2)}rem"
+        />
     {/if}
 </div>
 
@@ -144,7 +143,7 @@
         border: 0.2rem solid #bda277;
         border-radius: 0.5rem;
 
-        z-index: 100;
+        z-index: 10000;
 
         cursor: pointer;
         user-select: none;
@@ -161,9 +160,9 @@
     }
 
     .translation {
-        width: fit-content;
         position: absolute;
-        transform: translate(-1rem, -50%);
+        right: 0;
+        bottom: 0;
         padding: 0.5rem 1rem;
         border-radius: 0.3rem;
 

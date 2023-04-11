@@ -3,7 +3,6 @@ module Query where
 import Irminsul
 import LanguagePack
 import Root                                    (root)
-import Root.Teyvat.Mondstadt.KnightsOfFavonius (knightsOfFavonius)
 import Translation
 
 import Data.JSON
@@ -35,6 +34,7 @@ data ApiStatusCode
     | NotImplementedCluster
     | NotImplementedEntity
     | LayoutMissing
+    | UnknownApi
     deriving (Eq, Show)
 
 apiResponse :: ApiStatusCode -> JSON -> JSON
@@ -97,10 +97,10 @@ splitRelationsBetween s o relations = (
 sortTuple :: Ord a => (a, a) -> (a, a)
 sortTuple (a, b) = if a <= b then (a, b) else (b, a)
 
-clusterGraph :: Language -> Entity -> JSON
-clusterGraph _ (Atom {}) = JNull
-clusterGraph _ (Cluster rootId _ _ _ Nothing) = JNull
-clusterGraph lang
+relationGraph :: Language -> Entity -> JSON
+relationGraph _ (Atom {}) = JNull
+relationGraph _ (Cluster rootId _ _ _ Nothing) = JNull
+relationGraph lang
     cluster@(Cluster
         rootId _ _ _
         (Just layout@(RelationGraphLayout rootLayout entityLayouts))) =
@@ -158,9 +158,11 @@ clusterGraph lang
             let maybeLayout = lookup c entityLayouts
             if isJust maybeLayout then do
                 let layout = fromJust maybeLayout
-                return $ JObject [
+                return $ traceThis $ JObject [
                         ("id", JString $ entityId c),
                         ("translation", JString $ translateEntity lp c),
+                        ("elements", JArray $ JString .
+                            entityId <$> indices (entities c)),
 
                         ("position", toJSON $ position layout),
                         ("anchor", toJSON $ anchor layout),
@@ -264,7 +266,7 @@ apiRelationGraph id lang =
         (\entity ->
             if isNothing (layout entity)
             then apiResponse LayoutMissing JNull
-            else apiResponse OK . clusterGraph language $ entity
+            else apiResponse OK . relationGraph language $ entity
         )
         (entityFromId id)
     )
@@ -284,5 +286,3 @@ apiEntityRelations id lang =
         (clusterFromId id)
     )
     (readLanguageCode lang)
-
-apiKofDemo = clusterGraph ZhCn knightsOfFavonius

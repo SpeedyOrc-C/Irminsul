@@ -498,7 +498,7 @@
         top: 50%;
         left: 50%;
 
-        transition: transform;
+        transition-property: transform;
         transition-duration: 0.3s;
     }
 

@@ -46,7 +46,7 @@
         -moz-user-select: none;
         cursor: pointer;
 
-        transition: transform, box-shadow;
+        transition-property: transform, box-shadow;
         transition-duration: 0.1s;
 
         &:hover {

@@ -39,7 +39,7 @@
         -moz-user-select: none;
         cursor: pointer;
 
-        transition: background-color, box-shadow;
+        transition-property: background-color, box-shadow;
         transition-duration: 0.2s;
 
         &:hover {

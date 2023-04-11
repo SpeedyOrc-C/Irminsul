@@ -112,7 +112,7 @@
         -webkit-user-select: none;
         -moz-user-select: none;
 
-        transition: filter;
+        transition-property: filter;
         transition-duration: 0.2s;
 
         &.dim {
@@ -137,7 +137,7 @@
         display: block;
         margin: 0 auto;
 
-        transition: transform, border-color, border-width, box-shadow;
+        transition-property: transform, border-color, border-width, box-shadow;
         transition-duration: 0.2s;
 
         &:hover {

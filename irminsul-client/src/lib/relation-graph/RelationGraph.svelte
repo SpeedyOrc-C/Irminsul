@@ -466,10 +466,13 @@
     </div>
 
     {#key lang}
-        {#if relationGraph != null && lang != null}
+        {#if relationGraph != null && lang != null && id != null}
+        <!-- Path should contain the current cluster for better experience -->
             <Panel
                 on:rg-action={handleRgAction}
-                pathElements={relationGraph.path}
+                pathElements={relationGraph.path.concat([
+                    { id: id, translation: relationGraph.rootTranslation },
+                ])}
                 {lang}
             />
         {/if}

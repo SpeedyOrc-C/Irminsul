@@ -15,10 +15,8 @@
 
     const dispatch = createEventDispatcher();
 
-    valueW.subscribe((newValue) => {
-        
+    valueW.subscribe((newValue) => { 
         label = options?.find((op) => op.value === newValue)?.label ?? null;
-        console.log(newValue, label, options);
     });
 
     showW.subscribe((newValue) => (show = newValue));

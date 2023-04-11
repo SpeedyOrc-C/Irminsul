@@ -73,16 +73,10 @@
 
         <div class="settings-categories">
             <SettingsCategories
-                options={[
-                    "file",
-                    "graphics",
-                    "language",
-                    // "key-bindings",
-                    "other",
-                    "about",
-                ]}
+                options={["file", "graphics", "language", "other", "about"]}
                 on:settings-categories-change={(e) =>
                     (selectedCategory = e.detail.category)}
+                {selectedCategory}
                 {reduceVisualEffectW}
             />
         </div>

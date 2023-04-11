@@ -11,6 +11,7 @@ interface Atom {
 interface Cluster {
     id: string
     translation: string
+    elements: Array<string>
 
     position: Vector2
     anchor: Vector2

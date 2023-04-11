@@ -1,10 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Query
-import LanguagePack
-
-import Data.String
+import Query ( showToUtf8LazyByteString, apiRelationGraph, apiResponse, ApiStatusCode(..) )
+import Data.JSON
 
 import Network.Wai
 import Network.Wai.Middleware.RequestLogger
@@ -17,23 +15,21 @@ unpackPath :: [Text] -> [String]
 unpackPath = (T.unpack <$>)
 
 main :: IO ()
-main = run 50000
+main = do
+    putStrLn "Irminsul API Server starts on port 50000..."
+
+    run 50000
     -- Uncomment this to show all requests
     -- $ logStdoutDev
-    app
+        app
 
 app :: Application
 app req respond = do
     case pathInfo req of
-
-        [] -> respond $ textResponse "1"
 
         path@["api", "relation-graph", _, _] -> do
             let [_, _, id, lang] = unpackPath path
             let json = apiRelationGraph id lang
             respond $ textResponse (showToUtf8LazyByteString json)
 
-        _ -> respond $ responseLBS
-            status404
-            [("Content-Type", "text/plain")]
-            "404 - Not Found"
+        _ -> respond $ textResponse (showToUtf8LazyByteString (apiResponse UnknownApi JNull))

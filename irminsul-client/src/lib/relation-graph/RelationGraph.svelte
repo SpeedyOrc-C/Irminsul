@@ -48,6 +48,7 @@
     let selectedAtoms: Set<string> = new Set();
     let selectedClusters: Set<string> = new Set();
     let selectedEntities: Set<string> = new Set();
+    let selectedEntitiesInSelectedClusters: Set<string> = new Set();
 
     let rootClusterSelected: boolean = false;
     let rootPosition: Vector2;
@@ -61,6 +62,11 @@
     function updateSelectedClusters(e: CustomEvent) {
         selectedClusters = e.detail.clusters;
         selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
+        selectedEntitiesInSelectedClusters = new Set(
+            relationGraph?.clusters
+                .filter((cluster) => selectedClusters.has(cluster.id))
+                .flatMap((cluster) => cluster.elements) ?? []
+        );
     }
 
     function moveUp() {
@@ -428,7 +434,8 @@
                 {#each relationGraph.atoms as atom}
                     {@const dim =
                         !selectedAtoms.has(atom.id) &&
-                        selectedEntities.size > 0}
+                        selectedEntities.size > 0 &&
+                        !selectedEntitiesInSelectedClusters.has(atom.id)}
                     <Atom
                         {...atom}
                         {showCoordinate}

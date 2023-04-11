@@ -13,7 +13,6 @@ export class Star extends TimedParticle {
     }
 
     renderOn(canvas: Canvas): void {
-        const canvasDrawPosition: Vector2 = canvas.mapViewport(this.position);
         const t = this.t;
         const t2 = t * t
         const t3 = t2 * t

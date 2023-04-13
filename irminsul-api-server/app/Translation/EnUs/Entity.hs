@@ -5,27 +5,34 @@ import Data.Maybe
 import Irminsul
 import Shortcut
 
+import Root
 import Root.AnotherWorld
-import Root.Teyvat.Mondstadt.KnightsOfFavonius
-import Root.Teyvat.Kaeya
-import Root.Teyvat.Khaenriah
-import Root.Teyvat.Mondstadt.DawnWinery
-import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-import Root.Teyvat.Mondstadt.FavoniusChurch
-import Root.Teyvat.Hexenzirkel
-import Root (root)
 import Root.Teyvat
 import Root.Teyvat.Mondstadt
-import Root.Teyvat.Mondstadt.CatsTail (dionaKatzlein)
-import Root.Teyvat.Fontaine (monaAstrologistMegistus)
+import Root.Teyvat.Mondstadt.CatsTail
+import Root.Teyvat.Mondstadt.DawnWinery
+import Root.Teyvat.Mondstadt.FavoniusChurch
+import Root.Teyvat.Mondstadt.Lupical
+import Root.Teyvat.Mondstadt.KnightsOfFavonius
+import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
+import Root.Teyvat.Kaeya
+import Root.Teyvat.Khaenriah
+import Root.Teyvat.Hexenzirkel
+import Root.Teyvat.Fontaine
+import Root.Teyvat.Mondstadt.TheFourWinds
 
+translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
     ipn aether "Aether",
     ipn albedo "Albedo",
     ipn alice "Alice",
     ipn amber "Amber",
-    ipn bennett "Bennett",
     ipn barbaraPegg "Barbara Pegg",
+    ipn bennett "Bennett",
+    ipn boreas "Boreas",
+    ipn catsTail "Cat's Tail",
+    ipn dawnWinery "Dawn Winery",
+    ipn diane "Diane",
     ipn dilucRagvindr "Diluc Ragvindr",
     ipn dionaKatzlein "Diona Katzlein",
     ipn dvalin "Dvalin",
@@ -42,14 +49,19 @@ translationEntityEnUs = [
     ipn lisa "Lisa",
     ipn lumine "Lumine",
     ipn mikaSchmidt "Mika Schmidt",
+    ipn margaret "Margaret",
     ipn monaAstrologistMegistus "Mona Megistus, the Astrologist",
     ipn mondstadt "Mondstadt",
     ipn ozvaldoHrafnavins "Ozvaldo Hrafnavins",
+    ipn princeCat "Prince",
     ipn noelle "Noelle",
+    ipn razor "Razor",
     ipn rosaria "Rosaria",
     ipn root "Root",
+    ipn shuyun "Shuyun",
     ipn sucrose "Sucrose",
     ipn teyvat "Teyvat",
+    ipn theFourWinds "The Four Winds",
     ipn varka "Varka",
     ipn venti "Venti"
     ]

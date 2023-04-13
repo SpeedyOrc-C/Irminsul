@@ -18,7 +18,8 @@ export class CloudyWave implements Renderable<CloudyWave> {
     renderOn(canvas: Canvas) {
         const t = canvas.getTime();
         const ctx = canvas.getContext();
-        let x: number, y: number, yDownward: number, yUpward: number, brightness: number;
+        let x: number, y: number;
+        let yDownward: number, yUpward: number, brightness: number;
 
         for (let w = 0; w < canvas.width; w++) {
             x = canvas.mapCanvasW(w);

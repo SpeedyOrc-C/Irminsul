@@ -151,7 +151,7 @@
         -webkit-user-select: none;
         -moz-user-select: none;
         
-        transition: filter;
+        transition-property: filter;
         transition-duration: 0.2s;
 
         &:hover,

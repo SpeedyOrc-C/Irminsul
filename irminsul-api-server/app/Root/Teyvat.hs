@@ -15,6 +15,7 @@ import Root.Teyvat.Liyue.WangshengFuneralParlor
 import Root.Teyvat.Sumeru
 import Root.Teyvat.Mondstadt.CatsTail
 import Root.Teyvat.Liyue.WanminRestaurant
+import Root.Teyvat.Mondstadt.TheFourWinds
 
 heavenlyPrinciple = ao "HeavenlyPrinciple"
 sustainerOfHeavenlyPrinciple = ach "SustainerOfHeavenlyPrinciple"

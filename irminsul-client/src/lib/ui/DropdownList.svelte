@@ -4,24 +4,15 @@
     import type { Option } from "../util/Option";
 
     export let options: Array<Option>;
-    export let valueW: Writable<string>;
-    export let showW: Writable<boolean>;
+    export let value: Writable<string>;
+    export let show: Writable<boolean>;
 
-    let value: string | null = null;
-    let show = false;
     let optionDisplayed = false;
 
     const dispatch = createEventDispatcher();
 
-    valueW.subscribe((newValue) => {
-        if (options.find((option) => option.value === newValue)) {
-            value = newValue;
-        }
-    });
-
-    showW.subscribe((newShow) => {
-        show = newShow;
-        if (show) {
+    show.subscribe(() => {
+        if ($show) {
             optionDisplayed = true;
         } else {
             setTimeout(() => {
@@ -33,18 +24,18 @@
 
 <div
     class="options"
-    class:show
+    class:show={$show}
     style:display={optionDisplayed ? "block" : "none"}
 >
     {#each options as option}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
             class="option"
-            class:triggered={option.value === value}
+            class:triggered={option.value === $value}
             on:click={() => {
                 dispatch("dropdown-list-change", { value: option.value });
-                value = option.value;
-                showW.set(false);
+                value.set(option.value);
+                show.set(false);
             }}
         >
             <div class="option-background" />

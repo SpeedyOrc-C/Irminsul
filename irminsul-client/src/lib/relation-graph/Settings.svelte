@@ -11,37 +11,33 @@
     import Other from "./Settings/Other.svelte";
     import Graphics from "./Settings/Graphics.svelte";
 
-    export let showW: Writable<boolean>;
-    export let langW: Writable<string>;
-    export let reduceVisualEffectW: Writable<string>;
+    export let show: Writable<boolean>;
+    export let lang: Writable<string>;
+    export let reduceVisualEffect: Writable<string>;
 
-    let show: boolean = false;
     let displayed: boolean = false;
     let selectedCategory: string = "file";
 
-    showW.subscribe((newValue) => {
-        show = newValue;
-        if (show) {
+    show.subscribe((_) => {
+        if ($show) {
             displayed = true;
         } else {
-            setTimeout(() => {
-                displayed = false;
-            }, 500);
+            setTimeout(() => (displayed = false), 500);
         }
     });
 
     function handleKeyup(e: KeyboardEvent) {
-        if (!show) return;
+        if (!$show) return;
 
         switch (e.code) {
             case "Escape":
-                showW.set(false);
+                show.set(false);
                 break;
         }
     }
 
     function close() {
-        showW.set(false);
+        show.set(false);
     }
 </script>
 
@@ -51,7 +47,7 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
         class="settings font-hywh-85w"
-        class:show
+        class:show={$show}
         style:display={displayed ? "block" : "none"}
     >
         <!-- This is slightly different to the background in game -->
@@ -77,7 +73,7 @@
                 on:settings-categories-change={(e) =>
                     (selectedCategory = e.detail.category)}
                 {selectedCategory}
-                {reduceVisualEffectW}
+                {reduceVisualEffect}
             />
         </div>
 
@@ -86,10 +82,10 @@
                 <File on:rg-action />
             {/if}
             {#if selectedCategory === "graphics"}
-                <Graphics {reduceVisualEffectW} />
+                <Graphics {reduceVisualEffect} />
             {/if}
             {#if selectedCategory === "language"}
-                <Language {langW} on:rg-action />
+                <Language {lang} on:rg-action />
             {/if}
             {#if selectedCategory === "about"}
                 <About />

@@ -7,8 +7,7 @@ import CommonRelations
 import Root.AnotherWorld
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-import Root.Teyvat.Mondstadt.FavoniusChurch
-import Root.Teyvat.Kaeya
+import Root.Teyvat.Mondstadt.DawnWinery
 
 varka = ach "Varka"
 jeanGunnhildr = ach "JeanGunnhildr"
@@ -24,7 +23,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         varka,
         jeanGunnhildr,
         lisa,
-        kaeyaAlberich,
+        kaeyaRagvindr,
         amber,
         klee,
         albedo,
@@ -42,7 +41,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         foster elderBrother albedo klee,
         foster youngerSister klee albedo,
         acting guardian jeanGunnhildr klee,
-        ra "SupportInSilence" kaeyaAlberich noelle
+        ra "SupportInSilence" kaeyaRagvindr noelle
     ]
     [
         guerillaTeam
@@ -52,16 +51,16 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         elementProperties = [
             al varka (-22.5, 7.5),
             al jeanGunnhildr (-15, 15),
-            al lisa (0, 15),
-            al kaeyaAlberich (0, 0),
-            al amber (15, 15),
-            al klee (-15, 0),
-            al albedo (-15, -15),
-            al sucrose (0, -15),
+            al lisa (-15, 0),
+            al kaeyaRagvindr (0, 0),
+            al amber (-15, -15),
+            al klee (0, 15),
+            al albedo (15, 15),
+            al sucrose (30, 15),
             al noelle (15, 0),
-            al eulaLawrence (30, 15),
-            al mikaSchmidt (30, 0),
+            al eulaLawrence (0, -15),
+            al mikaSchmidt (30, -15),
 
-            cl guerillaTeam (30, 7.5) (37.5, 15) (15, 30)
+            cl guerillaTeam (18.5, -15) (18, -15) (15, 5)
         ]
     })

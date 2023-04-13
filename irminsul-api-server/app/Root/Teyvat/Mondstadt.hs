@@ -10,11 +10,8 @@ import Root.Teyvat.Mondstadt.Lupical
 import Root.Teyvat.Mondstadt.CatsTail
 import Root.Teyvat.Fontaine
 import Root.Teyvat.Khaenriah
-import Root.Teyvat.Inazuma (scaramouche)
-
-venti = ach "Venti";
-    barbatos = venti
-dvalin = ach "Dvalin"
+import Root.Teyvat.Inazuma
+import Root.Teyvat.Mondstadt.TheFourWinds
 
 bennett = ach "Bennett"
 thoma = ach "Thoma"
@@ -35,7 +32,7 @@ mondstadt = clusterNode "Mondstadt" Country
     ]
     [
         venti `rule` mondstadt,
-        venti `dislike` dionaKatzlein,
+        venti `allergicTo` dionaKatzlein,
         dvalin `familiar` venti,
 
         fischlVonLuftschlossNarfidort `friend` monaAstrologistMegistus,
@@ -66,16 +63,17 @@ mondstadt = clusterNode "Mondstadt" Country
         knightsOfFavonius,
         dawnWinery,
         catsTail,
-        lupical
+        lupical,
+        theFourWinds
     ]
     (Just $ RelationGraphLayout {
         rootProperty = rl (-15, 15),
         elementProperties = [
-            al dvalin (-30, 0),
+            al dvalin (-7.5, -7.5),
             al venti (-15, 0),
             al bennett (0, 0),
             al fischlVonLuftschlossNarfidort (15, 15),
-            al ozvaldoHrafnavins (15, 30),
+            al ozvaldoHrafnavins (7.5, 22.5),
             al monaAstrologistMegistus (30, 15),
             al barbaraPegg (0, -30),
             al varka (15, -15),
@@ -87,6 +85,10 @@ mondstadt = clusterNode "Mondstadt" Country
             al dionaKatzlein (-30, -15),
             al razor (0, 15),
 
-            cl knightsOfFavonius (21, -30) (15, -31) (15, 5)
+            cl knightsOfFavonius (17, -30) (15, -30) (15, 5),
+            cl catsTail (-45, -15) (-45, -15) (15, 5),
+            cl dawnWinery (-30, -30) (-30, -30) (15, 5),
+            cl favoniusChurch (0, -40) (0, -40) (15, 5),
+            cl theFourWinds (-30, 0) (-30, 0) (15, 5)
         ]
     })

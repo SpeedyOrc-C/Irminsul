@@ -5,15 +5,9 @@
     import type { Writable } from "svelte/store";
 
     export let options: Array<string>;
-    export let reduceVisualEffectW: Writable<string>;
+    export let reduceVisualEffect: Writable<string>;
 
     export let selectedCategory: string;
-    let reduceVisualEffect = true;
-
-    reduceVisualEffectW.subscribe((newValue) => {
-        reduceVisualEffect = newValue === "on";
-    });
-
     const dispatch = createEventDispatcher();
 </script>
 
@@ -32,29 +26,27 @@
                 });
             }}
         >
-            {#if selected && !reduceVisualEffect}
-                <div class="cloudy-background">
+            <div class="cloudy-background">
+                {#if selected && $reduceVisualEffect !== "off"}
                     <SettingsItemCloudyBackground />
-                </div>
-            {/if}
+                {/if}
+            </div>
 
             <div class="option-background" />
+
             <div class="option-bullet">
                 <div class="bullet-outer" />
-                {#if !selected}
-                    <div class="bullet-inner" />
-                {/if}
                 {#if selected}
                     <div class="bullet-arrow-with-background">
                         <div class="bullet-background" />
                         <div class="bullet-arrow" />
                     </div>
+                {:else}
+                    <div class="bullet-inner" />
                 {/if}
             </div>
 
-            <div class="option-label">
-                {$_(`settings.category.${option}`)}
-            </div>
+            <div class="option-label">{$_(`settings.category.${option}`)}</div>
         </div>
     {/each}
 </div>

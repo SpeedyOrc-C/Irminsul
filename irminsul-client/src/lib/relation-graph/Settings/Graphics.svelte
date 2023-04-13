@@ -8,7 +8,7 @@
 
     const dispatch = createEventDispatcher();
 
-    export let reduceVisualEffectW: Writable<string>;
+    export let reduceVisualEffect: Writable<string>;
 
     let options: Array<Option>
     beforeUpdate(() => {
@@ -23,7 +23,7 @@
     {#key options}
         <DropdownInSettings
             {options}
-            valueW={reduceVisualEffectW}
+            value={reduceVisualEffect}
             on:dropdown-change={(e) => {
                 dispatch("rg-action", {
                     action: "change-reduce-visual-effect",

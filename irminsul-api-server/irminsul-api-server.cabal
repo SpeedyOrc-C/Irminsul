@@ -64,6 +64,7 @@ executable irminsul-api-server
         Root.Teyvat.Mondstadt.KnightsOfFavonius,
         Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam,
         Root.Teyvat.Mondstadt.Lupical,
+        Root.Teyvat.Mondstadt.TheFourWinds,
         Root.Teyvat.Snezhnaya,
         Root.Teyvat.Snezhnaya.Fatui,
         Root.Teyvat.Sumeru,

@@ -12,11 +12,17 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
             class="path-element"
-            on:click={() =>
-                dispatch("rg-action", {
-                    action: "jump-to",
-                    id: pathElement.id,
-                })}
+            on:click={() => {
+                if (
+                    // Prevent jumping if the user clicks on the last cluster
+                    pathElement.id != pathElements[pathElements.length - 1].id
+                ) {
+                    dispatch("rg-action", {
+                        action: "jump-to",
+                        id: pathElement.id,
+                    });
+                }
+            }}
         >
             {pathElement.translation}
         </div>
@@ -46,7 +52,7 @@
         -moz-user-select: none;
         cursor: pointer;
 
-        transition: transform, box-shadow;
+        transition-property: transform, box-shadow;
         transition-duration: 0.1s;
 
         &:hover {

@@ -29,6 +29,8 @@ teamCaptain = ra "TeamCaptain"
 grandMaster = ra "GrandMaster"
 actingGrandMaster = ra "ActingGrandMaster"
 attendant = ra "Attendant"
+translator = ra "Translator"
+pet = ra "Pet"
 
 liveIn = ra "LiveIn"
 love = ra "Love"
@@ -46,6 +48,9 @@ acting relation x y = Relation (Action ("Acting" ++ id)) x y where
     (Relation (Action id) _ _) = relation x y
 
 samsara = ra "Samsara"
+tavernOwner = ra "TavernOwner"
+
+allergicTo = ra "AllergicTo"
 
 -- Bidirectional relations
 

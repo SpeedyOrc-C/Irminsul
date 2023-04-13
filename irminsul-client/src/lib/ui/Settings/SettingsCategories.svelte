@@ -27,7 +27,7 @@
             }}
         >
             <div class="cloudy-background">
-                {#if selected && $reduceVisualEffect !== "off"}
+                {#if selected && $reduceVisualEffect === "off"}
                     <SettingsItemCloudyBackground />
                 {/if}
             </div>

@@ -24,9 +24,7 @@
         if (show) {
             displayed = true;
         } else {
-            setTimeout(() => {
-                displayed = false;
-            }, 500);
+            setTimeout(() => (displayed = false), 500);
         }
     });
 

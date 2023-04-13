@@ -32,29 +32,27 @@
                 });
             }}
         >
-            {#if selected && !reduceVisualEffect}
-                <div class="cloudy-background">
+            <div class="cloudy-background">
+                {#if selected && !reduceVisualEffect}
                     <SettingsItemCloudyBackground />
-                </div>
-            {/if}
+                {/if}
+            </div>
 
             <div class="option-background" />
+
             <div class="option-bullet">
                 <div class="bullet-outer" />
-                {#if !selected}
-                    <div class="bullet-inner" />
-                {/if}
                 {#if selected}
                     <div class="bullet-arrow-with-background">
                         <div class="bullet-background" />
                         <div class="bullet-arrow" />
                     </div>
+                {:else}
+                    <div class="bullet-inner" />
                 {/if}
             </div>
 
-            <div class="option-label">
-                {$_(`settings.category.${option}`)}
-            </div>
+            <div class="option-label">{$_(`settings.category.${option}`)}</div>
         </div>
     {/each}
 </div>

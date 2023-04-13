@@ -6,7 +6,7 @@
     import type { Writable } from "svelte/store";
     import type { Option } from "$lib/util/Option";
 
-    export let langW: Writable<string>;
+    export let lang: Writable<string>;
 
     let options: Array<Option>;
     beforeUpdate(() => {
@@ -19,6 +19,6 @@
 
 <ItemBar caption={$_("settings.language.interface-language")}>
     {#key options}
-        <DropdownInSettings {options} valueW={langW} />
+        <DropdownInSettings {options} value={lang} />
     {/key}
 </ItemBar>

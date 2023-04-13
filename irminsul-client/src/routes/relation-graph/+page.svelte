@@ -5,38 +5,34 @@
     import { writable, type Writable } from "svelte/store";
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
 
-    let id: string | null;
-    let lang: string;
-    let reduceVisualEffect: string;
-
-    let langW: Writable<string> = writable();
-    let reduceVisualEffectW: Writable<string> = writable();
+    let id: string = "Mondstadt";
+    let lang: Writable<string> = writable("zh-cn");
+    let reduceVisualEffect: Writable<string> = writable("on");
 
     onMount(() => {
         id = $page.url.searchParams.get("id") ?? "Mondstadt";
 
-        lang =
+        lang.set(
             $page.url.searchParams.get("lang") ??
-            localStorage.getItem("lang") ??
-            "zh-cn";
-        langW.set(lang);
-        langW.subscribe((newLang) => locale.set(newLang));
-        localStorage.setItem("lang", lang);
+                localStorage.getItem("lang") ??
+                "zh-cn"
+        );
+        lang.subscribe((newLang) => {
+            console.info("Change language into:", newLang);
+            locale.set(newLang);
+            localStorage.setItem("lang", newLang);
+        });
 
-        reduceVisualEffect =
-            localStorage.getItem("reduce-visual-effect") ?? "on";
-        reduceVisualEffectW.set(reduceVisualEffect);
-        reduceVisualEffectW.subscribe((newValue) => {
+        reduceVisualEffect.set(
+            localStorage.getItem("reduce-visual-effect") ?? "on"
+        );
+        reduceVisualEffect.subscribe((newValue) => {
             localStorage.setItem("reduce-visual-effect", newValue);
         });
     });
 </script>
 
-{#key id}
-    {#key lang}
-        <RelationGraph {id} {langW} {reduceVisualEffectW} />
-    {/key}
-{/key}
+<RelationGraph {id} {lang} {reduceVisualEffect} />
 
 <style>
     :global(body) {

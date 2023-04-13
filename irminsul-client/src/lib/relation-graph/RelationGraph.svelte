@@ -19,11 +19,9 @@
     import Settings from "./Settings.svelte";
     import { writable, type Writable } from "svelte/store";
 
-    export let id: string | null = null;
-    export let langW: Writable<string>;
-    export let reduceVisualEffectW: Writable<string>;
-
-    let lang: string | null = null;
+    export let id: string;
+    export let lang: Writable<string>;
+    export let reduceVisualEffect: Writable<string>;
 
     let relationGraph: RelationGraph | null = null;
     let responseStatus: ApiStatusCode | null = null;
@@ -190,11 +188,8 @@
     }
 
     function loadRelationGraph() {
-        if (id == null || lang == null) return;
-
         console.info("Loading relation graph:", id);
-
-        fetch(`/api/relation-graph/${id}/${lang}`)
+        fetch(`/api/relation-graph/${id}/${$lang}`)
             .then((response) => response.json())
             .then((json: ApiResponse<RelationGraph>) => {
                 if (json.status != "OK") {
@@ -215,7 +210,7 @@
                 window.history.replaceState(
                     undefined,
                     "",
-                    `/relation-graph/?id=${id}&lang=${lang}`
+                    `/relation-graph/?id=${id}&lang=${$lang}`
                 );
 
                 if (json.body != null) {
@@ -289,7 +284,7 @@
                 updateSelectedClusters(e);
                 break;
             case "change-lang":
-                langW.set(e.detail.lang);
+                lang.set(e.detail.lang);
                 break;
             case "open-settings":
                 openSettings();
@@ -301,9 +296,6 @@
 
     onMount(() => {
         jsonFileReader = new FileReader();
-        jsonFileInput = document.createElement("input");
-        jsonFileInput.style.display = "none";
-        jsonFileInput.type = "file";
 
         jsonFileInput.addEventListener("change", (_: Event) => {
             if (
@@ -338,20 +330,7 @@
                 }
             }
         );
-
-        langW.subscribe((newLang) => {
-            if (newLang == null) {
-                return;
-            }
-            if (newLang === lang) {
-                console.info("Language is already:", lang);
-                return;
-            }
-            console.info("Change language into:", newLang);
-            lang = newLang;
-            localStorage.setItem("lang", newLang);
-            loadRelationGraph();
-        });
+        lang.subscribe(loadRelationGraph);
     });
 </script>
 
@@ -384,7 +363,7 @@
                     {#if responseStatus === "UnsupportedLanguage"}
                         <Prompt
                             title="Unsupported Language"
-                            content="Language [{lang}] is not supported."
+                            content="Language [{$lang}] is not supported."
                         />
                     {/if}
                     {#if responseStatus === "NotImplementedCluster"}
@@ -465,25 +444,24 @@
         {/if}
     </div>
 
-    {#key lang}
-        {#if relationGraph != null && lang != null && id != null}
+    {#if relationGraph != null && id != null}
         <!-- Path should contain the current cluster for better experience -->
-            <Panel
-                on:rg-action={handleRgAction}
-                pathElements={relationGraph.path.concat([
-                    { id: id, translation: relationGraph.rootTranslation },
-                ])}
-                {lang}
-            />
-        {/if}
-    {/key}
+        <Panel
+            on:rg-action={handleRgAction}
+            pathElements={relationGraph.path.concat([
+                { id: id, translation: relationGraph.rootTranslation },
+            ])}
+        />
+    {/if}
 
     <Settings
-        showW={showSettings}
+        show={showSettings}
         on:rg-action={handleRgAction}
-        {langW}
-        {reduceVisualEffectW}
+        {lang}
+        {reduceVisualEffect}
     />
+
+    <input type="file" bind:this={jsonFileInput} style:display="none" />
 </div>
 
 <style lang="scss">

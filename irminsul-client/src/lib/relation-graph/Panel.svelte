@@ -7,7 +7,6 @@
     import type { PathElement } from "../../model/RelationGraph";
     import Path from "./Path.svelte";
 
-    export let lang: string;
     export let pathElements: Array<PathElement>;
 
     const dispatch = createEventDispatcher();
@@ -17,18 +16,14 @@
     }
 </script>
 
-{#key lang}
-    <div class="panel font-hywh-65w">
-        <Separator />
-        <ButtonInferior
-            action="open-settings"
-            on:button-clicked={dispatchRgAction}
-            >{$_("panel.settings")}</ButtonInferior
-        >
-        <Separator width="4rem" />
-        <Path on:rg-action {pathElements} />
-    </div>
-{/key}
+<div class="panel font-hywh-65w">
+    <Separator />
+    <ButtonInferior action="open-settings" on:button-clicked={dispatchRgAction}
+        >{$_("panel.settings")}</ButtonInferior
+    >
+    <Separator width="4rem" />
+    <Path on:rg-action {pathElements} />
+</div>
 
 <style lang="scss">
     .panel {

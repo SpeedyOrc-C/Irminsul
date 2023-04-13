@@ -41,7 +41,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         foster elderBrother albedo klee,
         foster youngerSister klee albedo,
         acting guardian jeanGunnhildr klee,
-        ra "SupportInSilence" kaeyaAlberich noelle
+        ra "SupportInSilence" kaeyaRagvindr noelle
     ]
     [
         guerillaTeam
@@ -52,7 +52,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
             al varka (-22.5, 7.5),
             al jeanGunnhildr (-15, 15),
             al lisa (-15, 0),
-            al kaeyaAlberich (0, 0),
+            al kaeyaRagvindr (0, 0),
             al amber (-15, -15),
             al klee (0, 15),
             al albedo (15, 15),

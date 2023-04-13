@@ -50,6 +50,8 @@ acting relation x y = Relation (Action ("Acting" ++ id)) x y where
 samsara = ra "Samsara"
 tavernOwner = ra "TavernOwner"
 
+allergicTo = ra "AllergicTo"
+
 -- Bidirectional relations
 
 friend = ba "Friend"

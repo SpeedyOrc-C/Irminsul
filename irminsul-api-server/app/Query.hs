@@ -158,7 +158,7 @@ relationGraph lang
             let maybeLayout = lookup c entityLayouts
             if isJust maybeLayout then do
                 let layout = fromJust maybeLayout
-                return $ traceThis $ JObject [
+                return $ JObject [
                         ("id", JString $ entityId c),
                         ("translation", JString $ translateEntity lp c),
                         ("elements", JArray $ JString .

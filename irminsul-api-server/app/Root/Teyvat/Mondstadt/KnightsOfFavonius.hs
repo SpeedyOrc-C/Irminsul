@@ -7,8 +7,7 @@ import CommonRelations
 import Root.AnotherWorld
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-import Root.Teyvat.Mondstadt.FavoniusChurch
-import Root.Teyvat.Kaeya
+import Root.Teyvat.Mondstadt.DawnWinery
 
 varka = ach "Varka"
 jeanGunnhildr = ach "JeanGunnhildr"
@@ -24,7 +23,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         varka,
         jeanGunnhildr,
         lisa,
-        kaeyaAlberich,
+        kaeyaRagvindr,
         amber,
         klee,
         albedo,

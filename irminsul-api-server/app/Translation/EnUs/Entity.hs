@@ -19,15 +19,19 @@ import Root.Teyvat.Kaeya
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Hexenzirkel
 import Root.Teyvat.Fontaine
+import Root.Teyvat.Mondstadt.TheFourWinds
 
+translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
     ipn aether "Aether",
     ipn albedo "Albedo",
     ipn alice "Alice",
     ipn amber "Amber",
-    ipn bennett "Bennett",
     ipn barbaraPegg "Barbara Pegg",
+    ipn bennett "Bennett",
+    ipn boreas "Boreas",
     ipn catsTail "Cat's Tail",
+    ipn dawnWinery "Dawn Winery",
     ipn diane "Diane",
     ipn dilucRagvindr "Diluc Ragvindr",
     ipn dionaKatzlein "Diona Katzlein",
@@ -57,6 +61,7 @@ translationEntityEnUs = [
     ipn shuyun "Shuyun",
     ipn sucrose "Sucrose",
     ipn teyvat "Teyvat",
+    ipn theFourWinds "The Four Winds",
     ipn varka "Varka",
     ipn venti "Venti"
     ]

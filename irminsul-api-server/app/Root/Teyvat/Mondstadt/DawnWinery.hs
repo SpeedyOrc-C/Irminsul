@@ -16,4 +16,10 @@ dawnWinery = clusterLeaf "DawnWinery" Organization
         foster youngerBrother kaeyaRagvindr dilucRagvindr,
         foster elderBrother dilucRagvindr kaeyaRagvindr
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty = rl (0, 15),
+        elementProperties = [
+            al dilucRagvindr (-15, 0),
+            al kaeyaRagvindr (15, 0)
+        ]
+    })

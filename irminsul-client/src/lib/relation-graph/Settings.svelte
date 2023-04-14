@@ -13,6 +13,9 @@
 
     export let show: Writable<boolean>;
     export let lang: Writable<string>;
+    
+    export let showAxis: Writable<boolean>;
+    export let showGrid: Writable<boolean>;
     export let reduceVisualEffect: Writable<string>;
 
     let displayed: boolean = false;
@@ -82,7 +85,7 @@
                 <File on:rg-action />
             {/if}
             {#if selectedCategory === "graphics"}
-                <Graphics {reduceVisualEffect} />
+                <Graphics {showAxis} {showGrid} {reduceVisualEffect} />
             {/if}
             {#if selectedCategory === "language"}
                 <Language {lang} on:rg-action />

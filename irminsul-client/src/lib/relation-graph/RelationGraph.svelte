@@ -31,8 +31,8 @@
 
     let entityAnchor: Map<string, Vector2> = new Map();
 
-    let showAxis: boolean = false;
-    let showGrid: boolean = false;
+    let showAxis: Writable<boolean> = writable(false);
+    let showGrid: Writable<boolean> = writable(false);
     let showCoordinate: boolean = false;
     let showSettings: Writable<boolean> = writable(false);
 
@@ -158,10 +158,10 @@
                     resetView();
                     break;
                 case "KeyX":
-                    showAxis = !showAxis;
+                    showAxis.set(!$showAxis);
                     break;
                 case "KeyG":
-                    showGrid = !showGrid;
+                    showGrid.set(!$showGrid);
                     break;
                 case "KeyC":
                     showCoordinate = !showCoordinate;
@@ -354,8 +354,8 @@
         style:transform="rotate({-viewAngle}deg) scale({viewScale * 100}%)
         translate({viewX}rem, {-viewY}rem)"
     >
-        {#if showGrid} <Grid /> {/if}
-        {#if showAxis} <Axis /> {/if}
+        {#if $showGrid} <Grid /> {/if}
+        {#if $showAxis} <Axis /> {/if}
 
         {#if relationGraph == null}
             {#key responseStatus}
@@ -459,6 +459,8 @@
         on:rg-action={handleRgAction}
         {lang}
         {reduceVisualEffect}
+        {showAxis}
+        {showGrid}
     />
 
     <input type="file" bind:this={jsonFileInput} style:display="none" />

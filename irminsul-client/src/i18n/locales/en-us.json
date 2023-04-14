@@ -21,6 +21,10 @@
             "export-haskell": "Export relation graph layout as Haskell used in Irminsul project"
         },
         "graphics": {
+            "relation-graph": "Relation Graph",
+            "show-axis": "Show axis",
+            "show-grid": "Show grid",
+            "performance": "Performance",
             "reduce-visual-effect": "Reduce visual effect"
         },
         "language": {
@@ -29,6 +33,8 @@
         "other": {
             "tracing-back": "Tracing Back",
             "github-repository": "Irminsul's GitHub Repository",
+            "give-feedback-on-github": "Give feedback on GitHub",
+            "give-feedback-on-gitee": "Give feedback on Gitee",
             "yuanshen-official-website": "Yuanshen's Official Website",
             "genshin-impact-official-website": "Genshin Impact's Official Website",
             "wiki": "Wiki",

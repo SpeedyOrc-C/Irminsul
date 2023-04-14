@@ -20,6 +20,24 @@
     </ButtonInSettings>
 </ItemBar>
 
+<ItemBar caption={$_("settings.other.give-feedback-on-github")}>
+    <ButtonInSettings
+        on:button-clicked={() =>
+            openLink("https://github.com/SpeedyOrc-C/Irminsul/issues/new")}
+    >
+        {$_("settings.msg.click-to-proceed")}
+    </ButtonInSettings>
+</ItemBar>
+
+<ItemBar caption={$_("settings.other.give-feedback-on-gitee")}>
+    <ButtonInSettings
+        on:button-clicked={() =>
+            openLink("https://gitee.com/Chen_Zhanming/Irminsul/issues/new")}
+    >
+        {$_("settings.msg.click-to-proceed")}
+    </ButtonInSettings>
+</ItemBar>
+
 <ItemBar caption={$_("settings.other.yuanshen-official-website")}>
     <ButtonInSettings
         on:button-clicked={() => openLink("https://ys.mihoyo.com/main/")}

@@ -57,6 +57,8 @@
 
         top: unset;
         bottom: 3.5rem;
+        
+        z-index: 1;
 
         &.below {
             top: 3.2rem;

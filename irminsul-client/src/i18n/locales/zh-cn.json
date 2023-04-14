@@ -21,6 +21,10 @@
             "export-haskell": "将关系图布局导出为 Irminsul 项目中使用的 Haskell"
         },
         "graphics": {
+            "relation-graph": "关系图",
+            "show-axis": "显示坐标轴",
+            "show-grid": "显示网格",
+            "performance": "性能",
             "reduce-visual-effect": "减少视觉效果"
         },
         "language": {
@@ -29,6 +33,8 @@
         "other": {
             "tracing-back": "溯源",
             "github-repository": "Irminsul 的 GitHub 仓库",
+            "give-feedback-on-github": "在 GitHub 上提建议",
+            "give-feedback-on-gitee": "在 Gitee 上提建议",
             "yuanshen-official-website": "《原神》官方网站",
             "genshin-impact-official-website": "Genshin Impact 官方网站",
             "wiki": "百科",

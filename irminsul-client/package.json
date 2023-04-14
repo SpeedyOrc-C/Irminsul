@@ -1,6 +1,6 @@
 {
 	"name": "irminsul-client",
-	"version": "2023.0409.2",
+	"version": "2023.0409.3",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",

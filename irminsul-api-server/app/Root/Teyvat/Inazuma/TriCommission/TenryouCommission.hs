@@ -4,10 +4,12 @@ import Irminsul
 import Shortcut
 
 saraKujo = ach "SaraKujo"
+heizouShikanoin = ach "HeizouShikanoin"
 
 tenryouCommission = clusterLeaf "TenryouCommission" Organization
     [
-        saraKujo
+        saraKujo,
+        heizouShikanoin
     ]
     [
     ]

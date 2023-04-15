@@ -42,4 +42,11 @@ teyvat = clusterNode "Teyvat" World
         khaenriah,
         hexenzirkel
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty=rl (-15, 15),
+        elementProperties=[
+            cl mondstadt (15, 15) (15, 15) (15, 5),
+            cl liyue (0, 0) (0, 0) (15, 5),
+            cl inazuma (15, -15) (15, -15) (15, 5)
+        ]
+    })

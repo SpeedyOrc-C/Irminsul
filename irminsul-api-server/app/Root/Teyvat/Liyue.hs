@@ -6,16 +6,18 @@ module Root.Teyvat.Liyue where
 
 import Irminsul
 import Shortcut
-import Root.AnotherWorld (aether)
-import Root.Teyvat.Liyue.Adepti (adepti)
-import Root.Teyvat.Liyue.BubuPharmacy (bubuPharmary)
-import Root.Teyvat.Liyue.CruxFleet (cruxFleet)
-import Root.Teyvat.Liyue.FeiyunCommerceGuild (feiyunCommerceGuild)
-import Root.Teyvat.Liyue.Qixing (qixing)
-import Root.Teyvat.Liyue.WangshengFuneralParlor (wangshengFuneralParlor)
-import Root.Teyvat.Liyue.WanminRestaurant (wanminRestaurant)
-import Root.Teyvat.Liyue.YuehaiPavilion (yuehaiPavilion)
-import Root.Teyvat.Liyue.YunHanOperaTroupe (yunHanOperaTroupe)
+import CommonRelations
+
+import Root.AnotherWorld
+import Root.Teyvat.Liyue.Adepti
+import Root.Teyvat.Liyue.BubuPharmacy
+import Root.Teyvat.Liyue.CruxFleet
+import Root.Teyvat.Liyue.FeiyunCommerceGuild
+import Root.Teyvat.Liyue.Qixing
+import Root.Teyvat.Liyue.WangshengFuneralParlor
+import Root.Teyvat.Liyue.WanminRestaurant
+import Root.Teyvat.Liyue.YuehaiPavilion
+import Root.Teyvat.Liyue.YunHanOperaTroupe
 
 chongyun = ach "Chongyun"
 
@@ -32,7 +34,8 @@ liyue = clusterNode "Liyue" Country
         yanfei
     ]
     [
-
+        ningguang `friend` beidou,
+        ningguang `friend` yelan
     ]
     [
         adepti,

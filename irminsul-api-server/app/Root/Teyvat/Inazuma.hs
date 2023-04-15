@@ -18,7 +18,6 @@ raidenShogun = ach "RaidenShogun"
 makotoRaiden = ach "MakotoRaiden";
     baal = makotoRaiden
 kunikuzushiRaiden = ach "KunikuzushiRaiden";
-    wanderer = kunikuzushiRaiden;
     scaramouche = kunikuzushiRaiden
 
 mikoYae = ach "MikoYae"

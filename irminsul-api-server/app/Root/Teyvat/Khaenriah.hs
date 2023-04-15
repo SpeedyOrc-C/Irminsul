@@ -1,11 +1,9 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use camelCase" #-}
-
 module Root.Teyvat.Khaenriah where
 
 import Irminsul
 import Shortcut
 import CommonRelations
+import Root.Teyvat.Khaenriah.Schwaneritter
 
 albedo = ach "Albedo"
 rhinedottir = ach "Rhinedottir"
@@ -15,17 +13,22 @@ chlotharAlberich = ach "ChlotharAlberich"
 
 dainsleif = ach "Dainsleif"
 
+irmin = ach "Irmin"
+
+
 khaenriah = clusterNode "Khaenriah" Country
     [
         albedo,
         rhinedottir,
         kaeyaAlberich,
         chlotharAlberich,
-        dainsleif
+        dainsleif,
+        irmin
     ]
     [
         rhinedottir `create` albedo
     ]
     [
+        schwaneritter
     ]
     Nothing

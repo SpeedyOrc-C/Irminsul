@@ -1,9 +1,11 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Fontaine where
 
 import Irminsul
 import Shortcut
 
-monaAstrologistMegistus = ach "MonaAstrologistMegistus"
+monaAstrologistMegistus = "MonaAstrologistMegistus"
 
 fontaine = clusterNode "Fontaine" Country
     [

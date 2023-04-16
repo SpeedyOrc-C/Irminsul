@@ -1,10 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Sumeru.Akademiya.Rtawahist where
 
 import Irminsul
 import CommonRelations
 import Shortcut
 
-layla = ach "Layla"
+layla = "Layla"
 
 rtawahist = clusterLeaf "Rtawahist" Organization
     [

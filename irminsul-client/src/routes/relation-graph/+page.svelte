@@ -5,7 +5,7 @@
     import { writable, type Writable } from "svelte/store";
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
 
-    let id: string = "Mondstadt";
+    let id: string;
     let lang: Writable<string> = writable("zh-cn");
     let reduceVisualEffect: Writable<string> = writable("on");
 
@@ -32,7 +32,9 @@
     });
 </script>
 
-<RelationGraph {id} {lang} {reduceVisualEffect} />
+{#if id !== undefined}
+    <RelationGraph {id} {lang} {reduceVisualEffect} />
+{/if}
 
 <style>
     :global(body) {

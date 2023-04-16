@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Khaenriah where
 
 import Irminsul
@@ -5,15 +7,15 @@ import Shortcut
 import CommonRelations
 import Root.Teyvat.Khaenriah.Schwaneritter
 
-albedo = ach "Albedo"
-rhinedottir = ach "Rhinedottir"
+albedo = "Albedo"
+rhinedottir = "Rhinedottir"
 
-kaeyaAlberich = ach "KaeyaAlberich"
-chlotharAlberich = ach "ChlotharAlberich"
+kaeyaAlberich = "KaeyaAlberich"
+chlotharAlberich = "ChlotharAlberich"
 
-dainsleif = ach "Dainsleif"
+dainsleif = "Dainsleif"
 
-irmin = ach "Irmin"
+irmin = "Irmin"
 
 
 khaenriah = clusterNode "Khaenriah" Country

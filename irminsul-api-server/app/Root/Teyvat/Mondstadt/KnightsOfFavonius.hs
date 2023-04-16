@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.KnightsOfFavonius where
 
 import Irminsul
@@ -9,14 +11,14 @@ import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
 import Root.Teyvat.Mondstadt.DawnWinery
 
-varka = ach "Varka"
-jeanGunnhildr = ach "JeanGunnhildr"
+varka = "Varka"
+jeanGunnhildr = "JeanGunnhildr"
 
-lisa = ach "Lisa"
-amber = ach "Amber"
-klee = ach "Klee"
-sucrose = ach "Sucrose"
-noelle = ach "Noelle"
+lisa = "Lisa"
+amber = "Amber"
+klee = "Klee"
+sucrose = "Sucrose"
+noelle = "Noelle"
 
 knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
     [

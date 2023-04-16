@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Kaeya where
 
 import Irminsul

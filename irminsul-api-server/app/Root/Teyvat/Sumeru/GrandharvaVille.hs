@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Sumeru.GrandharvaVille where
 
 import Irminsul
@@ -5,8 +7,8 @@ import Shortcut
 import CommonRelations
 
 
-tighnari = ach "Tighnari"
-collei = ach "Collei"
+tighnari = "Tighnari"
+collei = "Collei"
 
 grandharvaVille = clusterLeaf "GrandharvaVille" Area
     [

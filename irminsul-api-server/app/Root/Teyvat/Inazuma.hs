@@ -1,5 +1,4 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use camelCase" #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Root.Teyvat.Inazuma where
 -- 稲妻
@@ -12,16 +11,16 @@ import Root.Teyvat.Inazuma.TriCommission (triCommission)
 import Root.Teyvat.Inazuma.WatatsumiIsland (watatsumiIsland)
 import Root.Teyvat.Inazuma.Shuumatsuban (shuumatsuban)
 
-eiRaiden = ach "EiRaiden";
+eiRaiden = "EiRaiden";
     beelzebul = eiRaiden
-raidenShogun = ach "RaidenShogun"
-makotoRaiden = ach "MakotoRaiden";
+raidenShogun = "RaidenShogun"
+makotoRaiden = "MakotoRaiden";
     baal = makotoRaiden
-kunikuzushiRaiden = ach "KunikuzushiRaiden";
+kunikuzushiRaiden = "KunikuzushiRaiden";
     scaramouche = kunikuzushiRaiden
 
-mikoYae = ach "MikoYae"
-yoimiyaNaganohara = ach "YoimiyaNaganohara"
+mikoYae = "MikoYae"
+yoimiyaNaganohara = "YoimiyaNaganohara"
 
 inazuma = clusterNode "Inazuma" Country
     [

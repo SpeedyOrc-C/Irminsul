@@ -1,10 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Liyue.Adepti.CloudRetainersAbode where
 
 import Shortcut
 import Irminsul
 
-cloudRetainer = ach "CloudRetainer"
-shenhe = ach "Shenhe"
+cloudRetainer = "CloudRetainer"
+shenhe = "Shenhe"
 
 cloudRetainersAbode = clusterLeaf "CloudRetainersAbode" Organization
     [

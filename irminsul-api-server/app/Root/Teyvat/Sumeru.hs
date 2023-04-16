@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Sumeru where
 
 import Irminsul
@@ -7,10 +9,10 @@ import CommonRelations
 import Root.Teyvat.Sumeru.Akademiya
 import Root.Teyvat.Sumeru.GrandharvaVille
 
-nahida = ach "Nahida";
+nahida = "Nahida";
     buer = nahida
 
-wanderer = ach "Wanderer"
+wanderer = "Wanderer"
 
 sumeru = clusterNode "Sumeru" Country
     [

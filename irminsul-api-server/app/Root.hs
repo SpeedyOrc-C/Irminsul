@@ -1,14 +1,11 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use camelCase" #-}
-
 module Root where
 
 import Irminsul
 import Shortcut
 import Root.Teyvat
 
-alloy = ach "Alloy"
-rost = ach "Rost"
+alloy = "Alloy"
+rost = "Rost"
 
 root = clusterNode "Root" Root
     [

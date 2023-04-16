@@ -1,10 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.Lupical where
 
 import Irminsul
 import Shortcut
 
-razor = ach "Razor"
-andrius = ach "Andrius"
+razor = "Razor"
+andrius = "Andrius"
 
 lupical = clusterLeaf "Lupical" Property
     [

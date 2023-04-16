@@ -1,16 +1,18 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Liyue.Adepti.Yaksha where
 -- 夜叉
 
 import Irminsul
 import Shortcut
 
-xiao = ach "Xiao";
+xiao = "Xiao";
     alatus = xiao
-bosacius = ach "Bosacius"
-indarias = ach "Indarias"
-bonanus = ach "Bonanus"
-menogias = ach "Menogias"
-pervases = ach "Pervases"
+bosacius = "Bosacius"
+indarias = "Indarias"
+bonanus = "Bonanus"
+menogias = "Menogias"
+pervases = "Pervases"
 
 yaksha = clusterLeaf "Yaksha" Organization
     [

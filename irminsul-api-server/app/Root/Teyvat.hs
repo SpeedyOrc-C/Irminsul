@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat where
 
 import Irminsul
@@ -16,9 +18,10 @@ import Root.Teyvat.Sumeru
 import Root.Teyvat.Mondstadt.CatsTail
 import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Mondstadt.TheFourWinds
+import Root.Teyvat.Liyue.Qixing
 
 heavenlyPrinciple = ao "HeavenlyPrinciple"
-sustainerOfHeavenlyPrinciple = ach "SustainerOfHeavenlyPrinciple"
+sustainerOfHeavenlyPrinciple = "SustainerOfHeavenlyPrinciple"
 
 teyvat = clusterNode "Teyvat" World
     [
@@ -32,7 +35,10 @@ teyvat = clusterNode "Teyvat" World
         venti `friend` zhongli,
         venti `friend` buer,
 
-        dionaKatzlein `friend` xiangling
+        dionaKatzlein `friend` xiangling,
+
+        ningguang `appreciate` jeanGunnhildr,
+        ningguang `partner` jeanGunnhildr
     ]
     [
         mondstadt,

@@ -1,5 +1,4 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use camelCase" #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Root.Teyvat.Liyue where
 -- 璃月
@@ -19,12 +18,12 @@ import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Liyue.YunHanOperaTroupe
 
-chongyun = ach "Chongyun"
+chongyun = "Chongyun"
 
-xinyan = ach "Xinyan"
+xinyan = "Xinyan"
 
-yelan = ach "Yelan"
-yanfei = ach "Yanfei"
+yelan = "Yelan"
+yanfei = "Yanfei"
 
 liyue = clusterNode "Liyue" Country
     [
@@ -35,7 +34,8 @@ liyue = clusterNode "Liyue" Country
     ]
     [
         ningguang `friend` beidou,
-        ningguang `friend` yelan
+        ningguang `friend` yelan,
+        ningguang `appreciate` yunJin
     ]
     [
         adepti,

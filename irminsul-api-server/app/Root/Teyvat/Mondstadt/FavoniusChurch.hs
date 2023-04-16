@@ -1,11 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.FavoniusChurch where
 
 import Irminsul
 import Shortcut
 import CommonRelations
 
-barbaraPegg = ach "BarbaraPegg"
-rosaria = ach "Rosaria"
+barbaraPegg = "BarbaraPegg"
+rosaria = "Rosaria"
 
 favoniusChurch = clusterLeaf "FavoniusChurch"
     Organization

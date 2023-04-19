@@ -4,7 +4,7 @@ module Root.Teyvat.Snezhnaya.Fatui where
 
 import Irminsul
 import Shortcut
-import Root.Teyvat.Inazuma (scaramouche)
+import Root.Teyvat.Inazuma
 
 tartaglia = "Tartaglia";
     childe = tartaglia

@@ -5,11 +5,11 @@ module Root.Teyvat.Inazuma where
 
 import Irminsul
 import Shortcut
-import Root.Teyvat.Inazuma.TriCommission.YashiroCommission (yashiroCommission)
-import Root.Teyvat.Inazuma.AratakiGang (aratakiGang)
-import Root.Teyvat.Inazuma.TriCommission (triCommission)
-import Root.Teyvat.Inazuma.WatatsumiIsland (watatsumiIsland)
-import Root.Teyvat.Inazuma.Shuumatsuban (shuumatsuban)
+import Root.Teyvat.Inazuma.TriCommission.YashiroCommission
+import Root.Teyvat.Inazuma.AratakiGang
+import Root.Teyvat.Inazuma.TriCommission
+import Root.Teyvat.Inazuma.WatatsumiIsland
+import Root.Teyvat.Inazuma.Shuumatsuban
 
 eiRaiden = "EiRaiden";
     beelzebul = eiRaiden

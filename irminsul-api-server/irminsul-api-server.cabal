@@ -49,6 +49,7 @@ executable irminsul-api-server
         Root,
         Root.AnotherWorld,
         Root.Teyvat,
+        Root.Teyvat.Byakuyakoku,
         Root.Teyvat.Deshret,
         Root.Teyvat.Deshret.AaruVillage,
         Root.Teyvat.Fontaine,

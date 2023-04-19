@@ -2,7 +2,7 @@ module Query where
 
 import Irminsul
 import LanguagePack
-import Root                                    (root)
+import Root
 import Translation
 
 import Data.JSON

@@ -111,7 +111,7 @@
 
             height: 1.6rem;
             line-height: 1.6rem;
-            width: calc(100% - 2 * 0.3rem);
+            width: 100%;
             padding: 0.5rem 0;
             margin: 0.2rem 0;
 

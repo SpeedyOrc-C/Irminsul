@@ -44,6 +44,8 @@
     let viewScale: number = Math.pow(2, 0.5 * viewScaleExponent);
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
 
+    let contentOpacity = 1;
+
     let selectedAtoms: Set<string> = new Set();
     let selectedClusters: Set<string> = new Set();
     let selectedEntities: Set<string> = new Set();
@@ -359,6 +361,7 @@
         class="content"
         style:transform="rotate({-viewAngle}deg) scale({viewScale * 100}%)
         translate({viewX}rem, {-viewY}rem)"
+        style:opacity={contentOpacity}
     >
         {#if $showGrid} <Grid /> {/if}
         {#if $showAxis} <Axis /> {/if}
@@ -488,7 +491,7 @@
         top: 50%;
         left: 50%;
 
-        transition-property: transform;
+        transition-property: transform, opacity;
         transition-duration: 0.3s;
     }
 

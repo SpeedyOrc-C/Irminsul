@@ -17,6 +17,7 @@
     export let showAxis: Writable<boolean>;
     export let showGrid: Writable<boolean>;
     export let reduceVisualEffect: Writable<string>;
+    export let whoAmI: Writable<"aether" | "lumine">;
 
     let displayed: boolean = false;
     let selectedCategory: string = "file";
@@ -88,7 +89,7 @@
                 <Graphics {showAxis} {showGrid} {reduceVisualEffect} />
             {/if}
             {#if selectedCategory === "language"}
-                <Language {lang} on:rg-action />
+                <Language {lang} {whoAmI} on:rg-action />
             {/if}
             {#if selectedCategory === "about"}
                 <About />

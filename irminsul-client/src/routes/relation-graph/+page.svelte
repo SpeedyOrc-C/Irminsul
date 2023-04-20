@@ -8,6 +8,7 @@
     let id: string;
     let lang: Writable<string> = writable("zh-cn");
     let reduceVisualEffect: Writable<string> = writable("on");
+    let whoAmI: Writable<"aether" | "lumine"> = writable("aether");
 
     onMount(() => {
         id = $page.url.searchParams.get("id") ?? "Mondstadt";
@@ -29,11 +30,26 @@
         reduceVisualEffect.subscribe((newValue) => {
             localStorage.setItem("reduce-visual-effect", newValue);
         });
+
+        switch (localStorage.getItem("who-am-i")) {
+            case "aether":
+                whoAmI.set("aether");
+                break;
+            case "lumine":
+                whoAmI.set("lumine");
+                break;
+            default:
+                whoAmI.set("aether");
+                break;
+        }
+        whoAmI.subscribe((newValue) => {
+            localStorage.setItem("who-am-i", newValue);
+        });
     });
 </script>
 
 {#if id !== undefined}
-    <RelationGraph {id} {lang} {reduceVisualEffect} />
+    <RelationGraph {id} {lang} {reduceVisualEffect} {whoAmI}/>
 {/if}
 
 <style>

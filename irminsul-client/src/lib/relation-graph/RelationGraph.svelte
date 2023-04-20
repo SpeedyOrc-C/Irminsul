@@ -22,6 +22,7 @@
     export let id: string;
     export let lang: Writable<string>;
     export let reduceVisualEffect: Writable<string>;
+    export let whoAmI: Writable<"aether" | "lumine">;
 
     let relationGraph: RelationGraph | null = null;
     let responseStatus: ApiStatusCode | null = null;
@@ -189,34 +190,39 @@
 
     function loadRelationGraph() {
         console.info("Loading relation graph:", id);
-        fetch(`/api/relation-graph/${id}/${$lang}`)
-            .then((response) => response.json())
-            .then((json: ApiResponse<RelationGraph>) => {
-                if (json.status != "OK") {
-                    console.error(
-                        "Failed to load relation graph, error:",
-                        json.status
+
+        contentOpacity = 0;
+        setTimeout(() => {
+            fetch(`/api/relation-graph/${id}/${$lang}`)
+                .then((response) => response.json())
+                .then((json: ApiResponse<RelationGraph>) => {
+                    if (json.status != "OK") {
+                        console.error(
+                            "Failed to load relation graph, error:",
+                            json.status
+                        );
+                    }
+    
+                    relationGraph = json.body;
+                    responseStatus = json.status;
+                    selectedEntities.clear();
+                    selectedAtoms.clear();
+                    selectedClusters.clear();
+                    updateEntityAnchor();
+                    resetView();
+                    contentOpacity = 1;
+    
+                    window.history.replaceState(
+                        undefined,
+                        "",
+                        `/relation-graph/?id=${id}&lang=${$lang}`
                     );
-                }
-
-                relationGraph = json.body;
-                responseStatus = json.status;
-                selectedEntities.clear();
-                selectedAtoms.clear();
-                selectedClusters.clear();
-                updateEntityAnchor();
-                resetView();
-
-                window.history.replaceState(
-                    undefined,
-                    "",
-                    `/relation-graph/?id=${id}&lang=${$lang}`
-                );
-
-                if (json.body != null) {
-                    console.info("Relation graph loaded: ", relationGraph);
-                }
-            });
+    
+                    if (json.body != null) {
+                        console.info("Relation graph loaded: ", relationGraph);
+                    }
+                });
+        }, 300);
     }
 
     function updateEntityAnchor() {
@@ -461,6 +467,7 @@
         {reduceVisualEffect}
         {showAxis}
         {showGrid}
+        {whoAmI}
     />
 
     <input type="file" bind:this={jsonFileInput} style:display="none" />

@@ -7,18 +7,30 @@
     import type { Option } from "$lib/util/Option";
 
     export let lang: Writable<string>;
+    export let whoAmI: Writable<"aether" | "lumine">;
 
-    let options: Array<Option>;
+    let interfaceLanguageOptions: Array<Option>;
+    let whoAmIOptions: Array<Option>;
     beforeUpdate(() => {
-        options = [
+        interfaceLanguageOptions = [
             { label: $_("language.zh-cn"), value: "zh-cn" },
             { label: $_("language.en-us"), value: "en-us" },
+        ];
+        whoAmIOptions = [
+            { label: $_("who-am-i.aether"), value: "aether" },
+            { label: $_("who-am-i.lumine"), value: "lumine" },
         ];
     });
 </script>
 
 <ItemBar caption={$_("settings.language.interface-language")}>
-    {#key options}
-        <DropdownInSettings {options} value={lang} />
+    {#key interfaceLanguageOptions}
+        <DropdownInSettings options={interfaceLanguageOptions} value={lang} />
+    {/key}
+</ItemBar>
+
+<ItemBar caption={$_("settings.language.who-am-i")}>
+    {#key whoAmIOptions}
+        <DropdownInSettings options={whoAmIOptions} value={whoAmI} />
     {/key}
 </ItemBar>

@@ -17,6 +17,8 @@ ema = "Ema"
 supadaNoHiko = "SupadaNoHiko"
 uda = "Uda"
 
+tsumi = "Tsumi"
+
 byakuyakoku = clusterLeaf "Byakuyakoku" Country
     [
         aberaku,
@@ -29,7 +31,8 @@ byakuyakoku = clusterLeaf "Byakuyakoku" Country
         eki,
         ema,
         supadaNoHiko,
-        uda
+        uda,
+        tsumi
     ]
     [
 

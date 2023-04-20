@@ -33,6 +33,8 @@ liyue = clusterNode "Liyue" Country
         yanfei
     ]
     [
+        zhongli `rule` liyue,
+
         ningguang `friend` beidou,
         ningguang `friend` yelan,
         ningguang `appreciate` yunJin
@@ -48,4 +50,9 @@ liyue = clusterNode "Liyue" Country
         yuehaiPavilion,
         yunHanOperaTroupe
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty=rl (-15, 15),
+        elementProperties=[
+            al zhongli (-15, 0)
+        ]    
+    })

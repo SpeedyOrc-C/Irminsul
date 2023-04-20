@@ -22,6 +22,9 @@ import Root.Teyvat.Khaenriah
 import Root.Teyvat.Hexenzirkel
 import Root.Teyvat.Fontaine
 import Root.Teyvat.Mondstadt.TheFourWinds
+import Root.Teyvat.Liyue
+import Root.Teyvat.Inazuma
+import Root.Teyvat.Liyue.WangshengFuneralParlor
 
 
 translationEntityZhCn :: [(Entity, Information)]
@@ -43,6 +46,7 @@ translationEntityZhCn = [
     ipn favoniusChurch "西风教会",
     ipn fischlVonLuftschlossNarfidort ("菲谢尔"."冯"."露弗施洛斯"."那菲多特"),
     ipn guerillaTeam "游击小队",
+    ipn inazuma "稻妻",
     ip jeanGunnhildr ("琴"."古恩希尔德") ["琴妈", "骑士团的魂"] UntilNow "",
     ip kaeya "凯亚" ["矿工头子"] UntilNow "",
     ipn kaeyaAlberich ("凯亚"."亚尔伯里奇"),
@@ -50,6 +54,7 @@ translationEntityZhCn = [
     ip klee "可莉" ["蒙德最强战力", "火花骑士"] UntilNow "",
     ipn knightsOfFavonius "西风骑士团",
     ip lisa "丽莎" ["丽莎阿姨", "蒙德雷神"] UntilNow "",
+    ipn liyue "璃月",
     ipn lumine "荧",
     ipn margaret "玛格丽特",
     ip mikaSchmidt ("米卡"."施密特") ["前进测绘员"] UntilNow "",
@@ -66,5 +71,6 @@ translationEntityZhCn = [
     ipn teyvat "提瓦特",
     ipn theFourWinds "四风守护",
     ipn varka "法尔伽",
-    ipn venti "温迪"
+    ipn venti "温迪",
+    ipn zhongli "钟离"
     ]

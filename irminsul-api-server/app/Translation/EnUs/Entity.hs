@@ -20,6 +20,9 @@ import Root.Teyvat.Khaenriah
 import Root.Teyvat.Hexenzirkel
 import Root.Teyvat.Fontaine
 import Root.Teyvat.Mondstadt.TheFourWinds
+import Root.Teyvat.Liyue
+import Root.Teyvat.Inazuma
+import Root.Teyvat.Liyue.WangshengFuneralParlor
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -40,6 +43,7 @@ translationEntityEnUs = [
     ipn favoniusChurch "Favonius Church",
     ipn fischlVonLuftschlossNarfidort "Fischl von Luftschloss Narfidort",
     ipn guerillaTeam "Guerilla Team",
+    ipn inazuma "Inazuma",
     ipn jeanGunnhildr "Jean Gunnhildr",
     ipn kaeya "Kaeya",
     ipn kaeyaAlberich "Kaeya Alberich",
@@ -47,6 +51,7 @@ translationEntityEnUs = [
     ipn klee "Klee",
     ipn knightsOfFavonius "Knights of Favonius",
     ipn lisa "Lisa",
+    ipn liyue "Líyuè",
     ipn lumine "Lumine",
     ipn mikaSchmidt "Mika Schmidt",
     ipn margaret "Margaret",
@@ -63,5 +68,6 @@ translationEntityEnUs = [
     ipn teyvat "Teyvat",
     ipn theFourWinds "The Four Winds",
     ipn varka "Varka",
-    ipn venti "Venti"
+    ipn venti "Venti",
+    ipn zhongli "Zhōnglí"
     ]

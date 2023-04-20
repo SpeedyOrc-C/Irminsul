@@ -5,12 +5,14 @@ module Root.Teyvat.Liyue.CruxFleet where
 
 import Irminsul
 import Shortcut
+import Root.Teyvat.Inazuma
 
 beidou = "Beidou"
 
 cruxFleet = clusterLeaf "CruxFleet" Organization
     [
-        beidou
+        beidou,
+        kaedeharaKazuha
     ]
     [
     ]

@@ -8,6 +8,7 @@ import CommonRelations
 
 import Root.Teyvat.Sumeru.Akademiya
 import Root.Teyvat.Sumeru.GrandharvaVille
+import Root.Teyvat.Inazuma
 
 nahida = "Nahida";
     buer = nahida
@@ -20,7 +21,7 @@ sumeru = clusterNode "Sumeru" Country
         wanderer
     ]
     [
-
+        scaramouche `samsara` wanderer
     ]
     [
         akademiya,

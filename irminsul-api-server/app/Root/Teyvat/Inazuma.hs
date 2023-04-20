@@ -22,6 +22,8 @@ kunikuzushiRaiden = "KunikuzushiRaiden";
 mikoYae = "MikoYae"
 yoimiyaNaganohara = "YoimiyaNaganohara"
 
+kaedeharaKazuha = "KaedeharaKazuha"
+
 inazuma = clusterNode "Inazuma" Country
     [
         eiRaiden,
@@ -29,7 +31,8 @@ inazuma = clusterNode "Inazuma" Country
         makotoRaiden,
         kunikuzushiRaiden,
         mikoYae,
-        yoimiyaNaganohara
+        yoimiyaNaganohara,
+        kaedeharaKazuha
     ]
     [
 

@@ -346,10 +346,9 @@
 <svelte:window on:keydown={keydownListener} />
 
 <title>
+    Irminsul
     {#if relationGraph != null}
-        Irminsul - {relationGraph?.rootTranslation}
-    {:else}
-        Irminsul
+        - {relationGraph.rootTranslation}
     {/if}
 </title>
 

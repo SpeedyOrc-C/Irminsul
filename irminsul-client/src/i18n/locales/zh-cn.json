@@ -7,6 +7,17 @@
         "aether": "空",
         "lumine": "荧"
     },
+    "error": {
+        "layout-missing": {
+            "self": "布局缺失",
+            "detail": "该集合目前还没有制作好。"
+        }
+    },
+    "prompt": {
+        "button": {
+            "confirm": "确定"
+        }
+    },
     "settings": {
         "self": "设置",
         "category": {

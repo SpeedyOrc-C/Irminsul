@@ -14,10 +14,11 @@
     import Panel from "./Panel.svelte";
     import { onMount } from "svelte";
     import type { ApiResponse, ApiStatusCode } from "$lib/util/Api";
-    import Prompt from "$lib/ui/Prompt.svelte";
     import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
     import Settings from "./Settings.svelte";
     import { writable, type Writable } from "svelte/store";
+    import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
+    import { _ } from "svelte-i18n";
 
     export let id: string;
     export let lang: Writable<string>;
@@ -54,6 +55,8 @@
     let rootClusterSelected: boolean = false;
     let rootPosition: Vector2;
     $: rootPosition = relationGraph?.rootPosition ?? Vector2Zero;
+
+    let showLayoutMissing: Writable<boolean> = writable(false);
 
     function updateSelectedAtoms(e: CustomEvent) {
         selectedAtoms = e.detail.atoms;
@@ -190,41 +193,52 @@
         }
     }
 
-    function loadRelationGraph() {
-        console.info("Loading relation graph:", id);
+    function loadRelationGraph(to: string) {
+        console.info("Loading relation graph:", to);
 
-        contentOpacity = 0;
-        setTimeout(() => {
-            fetch(`/api/relation-graph/${id}/${$lang}`)
-                .then((response) => response.json())
-                .then((json: ApiResponse<RelationGraph>) => {
-                    if (json.status != "OK") {
-                        console.error(
-                            "Failed to load relation graph, error:",
-                            json.status
-                        );
-                    }
-    
-                    relationGraph = json.body;
-                    responseStatus = json.status;
-                    selectedEntities.clear();
-                    selectedAtoms.clear();
-                    selectedClusters.clear();
-                    updateEntityAnchor();
-                    resetView();
-                    contentOpacity = 1;
-    
-                    window.history.replaceState(
-                        undefined,
-                        "",
-                        `/relation-graph/?id=${id}&lang=${$lang}`
+        fetch(`/api/relation-graph/${to}/${$lang}`)
+            .then((response) => response.json())
+            .then((json: ApiResponse<RelationGraph>) => {
+                responseStatus = json.status;
+
+                if (json.status != "OK") {
+                    console.warn(
+                        "Failed to load relation graph, error:",
+                        json.status
                     );
-    
-                    if (json.body != null) {
-                        console.info("Relation graph loaded: ", relationGraph);
+                    switch (json.status) {
+                        case "LayoutMissing":
+                            showLayoutMissing.set(true);
+                            break;
+                        default:
+                            break;
                     }
-                });
-        }, 300);
+                    return;
+                }
+
+                contentOpacity = 0;
+                relationGraph = json.body;
+                selectedEntities.clear();
+                selectedAtoms.clear();
+                selectedClusters.clear();
+                updateEntityAnchor();
+                resetView();
+                id = to;
+
+                window.history.replaceState(
+                    undefined,
+                    "",
+                    `/relation-graph/?id=${id}&lang=${$lang}`
+                );
+
+                if (json.body != null) {
+                    console.info("Relation graph loaded: ", relationGraph);
+                }
+
+                setTimeout(() => {
+                    contentOpacity = 1;
+                }, 300);
+            });
     }
 
     function updateEntityAnchor() {
@@ -281,9 +295,7 @@
                 exportHaskell();
                 break;
             case "jump-to":
-                console.info("Jump to:" + e.detail.id);
-                id = e.detail.id;
-                loadRelationGraph();
+                loadRelationGraph(e.detail.id);
                 break;
             case "update-selected-atoms":
                 updateSelectedAtoms(e);
@@ -338,7 +350,7 @@
                 }
             }
         );
-        lang.subscribe(loadRelationGraph);
+        lang.subscribe(() => loadRelationGraph(id));
     });
 </script>
 
@@ -365,30 +377,7 @@
         {#if $showGrid} <Grid /> {/if}
         {#if $showAxis} <Axis /> {/if}
 
-        {#if relationGraph == null}
-            {#key responseStatus}
-                {#if responseStatus != null && responseStatus !== "OK"}
-                    {#if responseStatus === "UnsupportedLanguage"}
-                        <Prompt
-                            title="Unsupported Language"
-                            content="Language [{$lang}] is not supported."
-                        />
-                    {/if}
-                    {#if responseStatus === "NotImplementedCluster"}
-                        <Prompt
-                            title="Not Implemented Cluster"
-                            content="Entity [{id}] is not implemented."
-                        />
-                    {/if}
-                    {#if responseStatus === "LayoutMissing"}
-                        <Prompt
-                            title="Layout Missing"
-                            content="Layout for [{id}] is missing."
-                        />
-                    {/if}
-                {/if}
-            {/key}
-        {:else}
+        {#if relationGraph != null}
             {#key relationGraph}
                 {#each relationGraph.relationsBetween as relationBetween}
                     {@const highlight =
@@ -461,6 +450,10 @@
             ])}
         />
     {/if}
+
+    <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
+        {$_("error.layout-missing.detail")}
+    </DialogOk>
 
     <Settings
         show={showSettings}

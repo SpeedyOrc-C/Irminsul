@@ -1,13 +1,15 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Snezhnaya.Fatui where
 
 import Irminsul
 import Shortcut
-import Root.Teyvat.Inazuma (scaramouche)
+import Root.Teyvat.Inazuma
 
-tartaglia = ach "Tartaglia";
+tartaglia = "Tartaglia";
     childe = tartaglia
 
-rosalyneKruzchkaLohefalter = ach "RosalyneKruzchkaLohefalter";
+rosalyneKruzchkaLohefalter = "RosalyneKruzchkaLohefalter";
     signora = rosalyneKruzchkaLohefalter
 
 fatui = clusterNode "Fatui" Organization

@@ -2,10 +2,12 @@ cabal-version:      2.4
 name:               irminsul-api-server
 version:            0.1.0.0
 
-synopsis:           Generate characters' relation graph for Genshin Impact.
+synopsis:           Holds all the data for Irminsul
 
 -- A longer description of the package.
--- description:
+description:
+    Contains the hierarchy structure of entities and relations.
+    Also provide APIs to query them.
 
 -- A URL where users can report bugs.
 bug-reports:        https://github.com/SpeedyOrc-C/Irminsul/issues
@@ -29,25 +31,45 @@ executable irminsul-api-server
         LanguagePack,
         Milestone,
         Query,
+        Shortcut,
+
+        Data.Xml,
+        Data.Vector,
+        Data.JSON,
+        
+        Translation,
+        Translation.EnUs,
+        Translation.EnUs.Action,
+        Translation.EnUs.Entity,
+        Translation.ZhCn,
+        Translation.ZhCn.Action,
+        Translation.ZhCn.Entity,
+        Translation.ZhCn.Utility,
+
         Root,
         Root.AnotherWorld,
         Root.Teyvat,
+        Root.Teyvat.Byakuyakoku,
+        Root.Teyvat.Deshret,
+        Root.Teyvat.Deshret.AaruVillage,
         Root.Teyvat.Fontaine,
         Root.Teyvat.Hexenzirkel,
         Root.Teyvat.Inazuma,
         Root.Teyvat.Inazuma.AratakiGang,
         Root.Teyvat.Inazuma.Shuumatsuban,
         Root.Teyvat.Inazuma.TriCommission,
+        Root.Teyvat.Inazuma.TriCommission.KanjouCommission,
         Root.Teyvat.Inazuma.TriCommission.TenryouCommission,
         Root.Teyvat.Inazuma.TriCommission.YashiroCommission,
         Root.Teyvat.Inazuma.WatatsumiIsland,
-        Root.Teyvat.Kaeya,
         Root.Teyvat.Khaenriah,
+        Root.Teyvat.Khaenriah.Schwaneritter,
+        Root.Teyvat.Kaeya,
         Root.Teyvat.Liyue,
         Root.Teyvat.Liyue.Adepti,
         Root.Teyvat.Liyue.Adepti.CloudRetainersAbode,
-        Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode,
         Root.Teyvat.Liyue.Adepti.SeaGazersAbode,
+        Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode,
         Root.Teyvat.Liyue.Adepti.Yaksha,
         Root.Teyvat.Liyue.BubuPharmacy,
         Root.Teyvat.Liyue.CruxFleet,
@@ -65,21 +87,16 @@ executable irminsul-api-server
         Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam,
         Root.Teyvat.Mondstadt.Lupical,
         Root.Teyvat.Mondstadt.TheFourWinds,
+        Root.Teyvat.Natlan,
         Root.Teyvat.Snezhnaya,
         Root.Teyvat.Snezhnaya.Fatui,
         Root.Teyvat.Sumeru,
-        Shortcut,
-        Translation,
-        Translation.EnUs,
-        Translation.EnUs.Action,
-        Translation.EnUs.Entity,
-        Translation.ZhCn,
-        Translation.ZhCn.Action,
-        Translation.ZhCn.Entity,
-        Translation.ZhCn.Utility,
-        Data.Xml,
-        Data.Vector,
-        Data.JSON
+        Root.Teyvat.Sumeru.Akademiya,
+        Root.Teyvat.Sumeru.Akademiya.Rtawahist,
+        Root.Teyvat.Sumeru.Akademiya.Haravatat,
+        Root.Teyvat.Sumeru.AlcazarzarayPalace,
+        Root.Teyvat.Sumeru.GrandharvaVille
+
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

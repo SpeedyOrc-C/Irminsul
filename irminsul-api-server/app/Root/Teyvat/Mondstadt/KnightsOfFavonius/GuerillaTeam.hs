@@ -1,11 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam where
 
 import Irminsul
 import Shortcut
 import CommonRelations
 
-eulaLawrence = ach "EulaLawrence"
-mikaSchmidt = ach "MikaSchmidt"
+eulaLawrence = "EulaLawrence"
+mikaSchmidt = "MikaSchmidt"
 
 guerillaTeam = clusterLeaf "GuerillaTeam" Organization
     [

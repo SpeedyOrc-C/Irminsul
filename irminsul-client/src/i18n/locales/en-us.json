@@ -3,6 +3,21 @@
         "zh-cn": "Simplified Chinese",
         "en-us": "English (US)"
     },
+    "who-am-i": {
+        "aether": "Aether",
+        "lumine": "Lumine"
+    },
+    "error": {
+        "layout-missing": {
+            "self": "Layout Missing",
+            "detail": "This cluster does not have a layout yet."
+        }
+    },
+    "prompt": {
+        "button": {
+            "confirm": "Confirm"
+        }
+    },
     "settings": {
         "self": "Settings",
         "category": {
@@ -28,7 +43,8 @@
             "reduce-visual-effect": "Reduce visual effect"
         },
         "language": {
-            "interface-language": "Interface Language"
+            "interface-language": "Interface Language",
+            "who-am-i": "Who Am I?"
         },
         "other": {
             "tracing-back": "Tracing Back",

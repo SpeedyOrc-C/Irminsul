@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt where
 
 import Irminsul
@@ -13,12 +15,12 @@ import Root.Teyvat.Khaenriah
 import Root.Teyvat.Inazuma
 import Root.Teyvat.Mondstadt.TheFourWinds
 
-bennett = ach "Bennett"
-thoma = ach "Thoma"
-fischlVonLuftschlossNarfidort = ach "FischlVonLuftschlossNarfidort"
-ozvaldoHrafnavins = ach "OzvaldoHrafnavins"
+bennett = "Bennett"
+thoma = "Thoma"
+fischlVonLuftschlossNarfidort = "FischlVonLuftschlossNarfidort"
+ozvaldoHrafnavins = "OzvaldoHrafnavins"
 
-draff = ach "Draff"
+draff = "Draff"
 
 mondstadt = clusterNode "Mondstadt" Country
     [
@@ -39,7 +41,6 @@ mondstadt = clusterNode "Mondstadt" Country
         ozvaldoHrafnavins `attendant` fischlVonLuftschlossNarfidort,
         albedo `friend` monaAstrologistMegistus,
         klee `friend` monaAstrologistMegistus,
-        -- scaramouche `enemy` monaAstrologistMegistus,
 
         dilucRagvindr `youngerGeneration` jeanGunnhildr,
 

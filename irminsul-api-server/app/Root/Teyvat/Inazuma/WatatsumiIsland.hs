@@ -1,10 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Inazuma.WatatsumiIsland where
 
 import Irminsul
 import Shortcut
 
-kokomiSangonomiya = ach "KokomiSangonomiya"
-gorou = ach "Gorou"
+kokomiSangonomiya = "KokomiSangonomiya"
+gorou = "Gorou"
 
 watatsumiIsland = clusterLeaf "WatatsumiIsland" Area
     [

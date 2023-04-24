@@ -1,14 +1,16 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.CatsTail where
 
 import Irminsul
 import Shortcut
 import CommonRelations
 
-dionaKatzlein = ach "DionaKatzlein"
-margaret = ach "Margaret"
-shuyun = ach "Shuyun"
-princeCat = ach "PrinceCat"
-diane = ach "Diane"
+dionaKatzlein = "DionaKatzlein"
+margaret = "Margaret"
+shuyun = "Shuyun"
+princeCat = "PrinceCat"
+diane = "Diane"
 
 catsTail = clusterLeaf "CatsTail" Organization
     [

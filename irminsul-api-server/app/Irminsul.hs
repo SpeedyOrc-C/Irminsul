@@ -5,6 +5,7 @@ module Irminsul where
 import Milestone
 import Data.List (intercalate)
 import Data.Vector
+import Data.String
 
 
 newtype Path = Path [Entity] deriving (Eq, Ord)
@@ -147,6 +148,10 @@ entity `elemLayout` (RelationGraphLayout _ entities) =
     Cluster consists of many Atoms and Clusters, which means Cluster can form
     a tree-like structure. It also consists of all relations about its entities.
 -}
+
+instance IsString Entity where
+    fromString id = Atom id Character
+
 data Entity
     = Atom {
         entityId :: String,

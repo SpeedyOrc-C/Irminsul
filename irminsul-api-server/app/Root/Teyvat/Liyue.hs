@@ -1,28 +1,29 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use camelCase" #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Root.Teyvat.Liyue where
 -- 璃月
 
 import Irminsul
 import Shortcut
-import Root.AnotherWorld (aether)
-import Root.Teyvat.Liyue.Adepti (adepti)
-import Root.Teyvat.Liyue.BubuPharmacy (bubuPharmary)
-import Root.Teyvat.Liyue.CruxFleet (cruxFleet)
-import Root.Teyvat.Liyue.FeiyunCommerceGuild (feiyunCommerceGuild)
-import Root.Teyvat.Liyue.Qixing (qixing)
-import Root.Teyvat.Liyue.WangshengFuneralParlor (wangshengFuneralParlor)
-import Root.Teyvat.Liyue.WanminRestaurant (wanminRestaurant)
-import Root.Teyvat.Liyue.YuehaiPavilion (yuehaiPavilion)
-import Root.Teyvat.Liyue.YunHanOperaTroupe (yunHanOperaTroupe)
+import CommonRelations
 
-chongyun = ach "Chongyun"
+import Root.AnotherWorld
+import Root.Teyvat.Liyue.Adepti
+import Root.Teyvat.Liyue.BubuPharmacy
+import Root.Teyvat.Liyue.CruxFleet
+import Root.Teyvat.Liyue.FeiyunCommerceGuild
+import Root.Teyvat.Liyue.Qixing
+import Root.Teyvat.Liyue.WangshengFuneralParlor
+import Root.Teyvat.Liyue.WanminRestaurant
+import Root.Teyvat.Liyue.YuehaiPavilion
+import Root.Teyvat.Liyue.YunHanOperaTroupe
 
-xinyan = ach "Xinyan"
+chongyun = "Chongyun"
 
-yelan = ach "Yelan"
-yanfei = ach "Yanfei"
+xinyan = "Xinyan"
+
+yelan = "Yelan"
+yanfei = "Yanfei"
 
 liyue = clusterNode "Liyue" Country
     [
@@ -32,7 +33,11 @@ liyue = clusterNode "Liyue" Country
         yanfei
     ]
     [
+        zhongli `rule` liyue,
 
+        ningguang `friend` beidou,
+        ningguang `friend` yelan,
+        ningguang `appreciate` yunJin
     ]
     [
         adepti,
@@ -45,4 +50,9 @@ liyue = clusterNode "Liyue" Country
         yuehaiPavilion,
         yunHanOperaTroupe
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty=rl (-15, 15),
+        elementProperties=[
+            al zhongli (-15, 0)
+        ]    
+    })

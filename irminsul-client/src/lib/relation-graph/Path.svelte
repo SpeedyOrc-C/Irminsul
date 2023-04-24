@@ -56,12 +56,12 @@
         transition-duration: 0.1s;
 
         &:hover {
-            transform: scale(150%);
-            box-shadow: 0 0 0.5rem 0.5rem #0004;
+            transform: scale(130%);
+            box-shadow: 0 0 0.5rem 0.5rem #0003;
         }
         &:active {
-            transform: scale(140%);
-            box-shadow: 0 0 0.4rem 0.4rem #0004;
+            transform: scale(120%);
+            box-shadow: 0 0 0.4rem 0.4rem #0003;
         }
     }
 </style>

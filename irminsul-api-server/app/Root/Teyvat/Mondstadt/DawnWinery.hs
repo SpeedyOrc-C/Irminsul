@@ -1,11 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.DawnWinery where
 
 import Irminsul
 import Shortcut
 import CommonRelations
 
-dilucRagvindr = ach "DilucRagvindr"
-kaeyaRagvindr = ach "KaeyaRagvindr"
+dilucRagvindr = "DilucRagvindr"
+kaeyaRagvindr = "KaeyaRagvindr"
 
 dawnWinery = clusterLeaf "DawnWinery" Organization
     [

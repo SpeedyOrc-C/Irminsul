@@ -1,12 +1,14 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Liyue.WangshengFuneralParlor where
 -- 往生堂
 
 import Irminsul
 import Shortcut
 
-zhongli = ach "Zhongli";
+zhongli = "Zhongli";
     morax = zhongli
-hutao = ach "Hutao"
+hutao = "Hutao"
 
 wangshengFuneralParlor = clusterLeaf "WangshengFuneralParlor" Organization
     [

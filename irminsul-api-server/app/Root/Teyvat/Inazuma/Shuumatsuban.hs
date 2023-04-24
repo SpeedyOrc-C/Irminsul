@@ -1,9 +1,11 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Inazuma.Shuumatsuban where
 
 import Irminsul
 import Shortcut
 
-sayu = ach "Sayu"
+sayu = "Sayu"
 
 shuumatsuban = clusterLeaf "Shuumatsuban" Organization
     [

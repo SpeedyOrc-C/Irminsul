@@ -1,28 +1,28 @@
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-{-# HLINT ignore "Use camelCase" #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Root.Teyvat.Inazuma where
 -- 稲妻
 
 import Irminsul
 import Shortcut
-import Root.Teyvat.Inazuma.TriCommission.YashiroCommission (yashiroCommission)
-import Root.Teyvat.Inazuma.AratakiGang (aratakiGang)
-import Root.Teyvat.Inazuma.TriCommission (triCommission)
-import Root.Teyvat.Inazuma.WatatsumiIsland (watatsumiIsland)
-import Root.Teyvat.Inazuma.Shuumatsuban (shuumatsuban)
+import Root.Teyvat.Inazuma.TriCommission.YashiroCommission
+import Root.Teyvat.Inazuma.AratakiGang
+import Root.Teyvat.Inazuma.TriCommission
+import Root.Teyvat.Inazuma.WatatsumiIsland
+import Root.Teyvat.Inazuma.Shuumatsuban
 
-eiRaiden = ach "EiRaiden";
+eiRaiden = "EiRaiden";
     beelzebul = eiRaiden
-raidenShogun = ach "RaidenShogun"
-makotoRaiden = ach "MakotoRaiden";
+raidenShogun = "RaidenShogun"
+makotoRaiden = "MakotoRaiden";
     baal = makotoRaiden
-kunikuzushiRaiden = ach "KunikuzushiRaiden";
-    wanderer = kunikuzushiRaiden;
+kunikuzushiRaiden = "KunikuzushiRaiden";
     scaramouche = kunikuzushiRaiden
 
-mikoYae = ach "MikoYae"
-yoimiyaNaganohara = ach "YoimiyaNaganohara"
+mikoYae = "MikoYae"
+yoimiyaNaganohara = "YoimiyaNaganohara"
+
+kaedeharaKazuha = "KaedeharaKazuha"
 
 inazuma = clusterNode "Inazuma" Country
     [
@@ -31,7 +31,8 @@ inazuma = clusterNode "Inazuma" Country
         makotoRaiden,
         kunikuzushiRaiden,
         mikoYae,
-        yoimiyaNaganohara
+        yoimiyaNaganohara,
+        kaedeharaKazuha
     ]
     [
 

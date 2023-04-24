@@ -1,13 +1,15 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Mondstadt.TheFourWinds where
 
 import Irminsul
 import CommonRelations
 import Shortcut
 
-venti = ach "Venti";
+venti = "Venti";
     barbatos = venti
-dvalin = ach "Dvalin"
-boreas = ach "Boreas"
+dvalin = "Dvalin"
+boreas = "Boreas"
 
 theFourWinds = clusterLeaf "TheFourWinds" Organization
     [

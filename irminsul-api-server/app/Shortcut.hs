@@ -20,8 +20,8 @@ ba :: String -> Entity -> Entity -> Relation
 ba = BiRelation . Action
 
 -- | Shortcut of creating an Atom Character
-ach :: String -> Entity
-ach = (`Atom` Character)
+-- ach :: String -> Entity
+-- ach = (`Atom` Character)
 -- | Shortcut of creating an Atom Object
 ao :: String -> Entity
 ao = (`Atom` Object) 

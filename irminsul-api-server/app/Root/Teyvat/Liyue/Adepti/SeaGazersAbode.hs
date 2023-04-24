@@ -1,9 +1,11 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Liyue.Adepti.SeaGazersAbode where
 
 import Irminsul
 import Shortcut
 
-seaGazer = ach "SeaGazer"
+seaGazer = "SeaGazer"
 
 seaGazersAbode = clusterLeaf "SeaGazersAbode" Organization
     [

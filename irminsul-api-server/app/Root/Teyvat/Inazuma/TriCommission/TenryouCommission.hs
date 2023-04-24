@@ -1,13 +1,17 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Inazuma.TriCommission.TenryouCommission where
 
 import Irminsul
 import Shortcut
 
-saraKujo = ach "SaraKujo"
+saraKujo = "SaraKujo"
+heizouShikanoin = "HeizouShikanoin"
 
 tenryouCommission = clusterLeaf "TenryouCommission" Organization
     [
-        saraKujo
+        saraKujo,
+        heizouShikanoin
     ]
     [
     ]

@@ -1,10 +1,12 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode where
 
 import Irminsul
 import Shortcut
 
-streetwardRambler = ach "StreetwardRambler"
-yaoyao = ach "Yaoyao"
+streetwardRambler = "StreetwardRambler"
+yaoyao = "Yaoyao"
 
 streetwardRamblersAbode = clusterLeaf "StreetwardRamblersAbode" Organization
     [

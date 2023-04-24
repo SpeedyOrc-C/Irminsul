@@ -3,6 +3,21 @@
         "zh-cn": "简体中文",
         "en-us": "英文（美国）"
     },
+    "who-am-i": {
+        "aether": "空",
+        "lumine": "荧"
+    },
+    "error": {
+        "layout-missing": {
+            "self": "布局缺失",
+            "detail": "该集合目前还没有制作好。"
+        }
+    },
+    "prompt": {
+        "button": {
+            "confirm": "确定"
+        }
+    },
     "settings": {
         "self": "设置",
         "category": {
@@ -28,7 +43,8 @@
             "reduce-visual-effect": "减少视觉效果"
         },
         "language": {
-            "interface-language": "界面语言"
+            "interface-language": "界面语言",
+            "who-am-i": "我是谁？"
         },
         "other": {
             "tracing-back": "溯源",

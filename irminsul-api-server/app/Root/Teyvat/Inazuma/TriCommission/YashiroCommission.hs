@@ -1,11 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Inazuma.TriCommission.YashiroCommission where
 
 import Irminsul
 import Shortcut
 import CommonRelations
 
-ayakaKamisato = ach "AyakaKamisato"
-ayatoKamisato = ach "AyatoKamisato"
+ayakaKamisato = "AyakaKamisato"
+ayatoKamisato = "AyatoKamisato"
 
 yashiroCommission = clusterLeaf "YashiroCommission" Organization
     [

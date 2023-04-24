@@ -14,14 +14,16 @@
     import Panel from "./Panel.svelte";
     import { onMount } from "svelte";
     import type { ApiResponse, ApiStatusCode } from "$lib/util/Api";
-    import Prompt from "$lib/ui/Prompt.svelte";
     import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
     import Settings from "./Settings.svelte";
     import { writable, type Writable } from "svelte/store";
+    import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
+    import { _ } from "svelte-i18n";
 
     export let id: string;
     export let lang: Writable<string>;
     export let reduceVisualEffect: Writable<string>;
+    export let whoAmI: Writable<"aether" | "lumine">;
 
     let relationGraph: RelationGraph | null = null;
     let responseStatus: ApiStatusCode | null = null;
@@ -43,6 +45,8 @@
     let viewScale: number = Math.pow(2, 0.5 * viewScaleExponent);
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
 
+    let contentOpacity = 1;
+
     let selectedAtoms: Set<string> = new Set();
     let selectedClusters: Set<string> = new Set();
     let selectedEntities: Set<string> = new Set();
@@ -51,6 +55,8 @@
     let rootClusterSelected: boolean = false;
     let rootPosition: Vector2;
     $: rootPosition = relationGraph?.rootPosition ?? Vector2Zero;
+
+    let showLayoutMissing: Writable<boolean> = writable(false);
 
     function updateSelectedAtoms(e: CustomEvent) {
         selectedAtoms = e.detail.atoms;
@@ -187,25 +193,37 @@
         }
     }
 
-    function loadRelationGraph() {
-        console.info("Loading relation graph:", id);
-        fetch(`/api/relation-graph/${id}/${$lang}`)
+    function loadRelationGraph(to: string) {
+        console.info("Loading relation graph:", to);
+
+        fetch(`/api/relation-graph/${to}/${$lang}`)
             .then((response) => response.json())
             .then((json: ApiResponse<RelationGraph>) => {
+                responseStatus = json.status;
+
                 if (json.status != "OK") {
-                    console.error(
+                    console.warn(
                         "Failed to load relation graph, error:",
                         json.status
                     );
+                    switch (json.status) {
+                        case "LayoutMissing":
+                            showLayoutMissing.set(true);
+                            break;
+                        default:
+                            break;
+                    }
+                    return;
                 }
 
+                contentOpacity = 0;
                 relationGraph = json.body;
-                responseStatus = json.status;
                 selectedEntities.clear();
                 selectedAtoms.clear();
                 selectedClusters.clear();
                 updateEntityAnchor();
                 resetView();
+                id = to;
 
                 window.history.replaceState(
                     undefined,
@@ -216,6 +234,10 @@
                 if (json.body != null) {
                     console.info("Relation graph loaded: ", relationGraph);
                 }
+
+                setTimeout(() => {
+                    contentOpacity = 1;
+                }, 300);
             });
     }
 
@@ -273,9 +295,7 @@
                 exportHaskell();
                 break;
             case "jump-to":
-                console.info("Jump to:" + e.detail.id);
-                id = e.detail.id;
-                loadRelationGraph();
+                loadRelationGraph(e.detail.id);
                 break;
             case "update-selected-atoms":
                 updateSelectedAtoms(e);
@@ -330,7 +350,7 @@
                 }
             }
         );
-        lang.subscribe(loadRelationGraph);
+        lang.subscribe(() => loadRelationGraph(id));
     });
 </script>
 
@@ -338,10 +358,9 @@
 <svelte:window on:keydown={keydownListener} />
 
 <title>
+    Irminsul
     {#if relationGraph != null}
-        Irminsul - {relationGraph?.rootTranslation}
-    {:else}
-        Irminsul
+        - {relationGraph.rootTranslation}
     {/if}
 </title>
 
@@ -353,34 +372,12 @@
         class="content"
         style:transform="rotate({-viewAngle}deg) scale({viewScale * 100}%)
         translate({viewX}rem, {-viewY}rem)"
+        style:opacity={contentOpacity}
     >
         {#if $showGrid} <Grid /> {/if}
         {#if $showAxis} <Axis /> {/if}
 
-        {#if relationGraph == null}
-            {#key responseStatus}
-                {#if responseStatus != null && responseStatus !== "OK"}
-                    {#if responseStatus === "UnsupportedLanguage"}
-                        <Prompt
-                            title="Unsupported Language"
-                            content="Language [{$lang}] is not supported."
-                        />
-                    {/if}
-                    {#if responseStatus === "NotImplementedCluster"}
-                        <Prompt
-                            title="Not Implemented Cluster"
-                            content="Entity [{id}] is not implemented."
-                        />
-                    {/if}
-                    {#if responseStatus === "LayoutMissing"}
-                        <Prompt
-                            title="Layout Missing"
-                            content="Layout for [{id}] is missing."
-                        />
-                    {/if}
-                {/if}
-            {/key}
-        {:else}
+        {#if relationGraph != null}
             {#key relationGraph}
                 {#each relationGraph.relationsBetween as relationBetween}
                     {@const highlight =
@@ -454,6 +451,10 @@
         />
     {/if}
 
+    <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
+        {$_("error.layout-missing.detail")}
+    </DialogOk>
+
     <Settings
         show={showSettings}
         on:rg-action={handleRgAction}
@@ -461,6 +462,7 @@
         {reduceVisualEffect}
         {showAxis}
         {showGrid}
+        {whoAmI}
     />
 
     <input type="file" bind:this={jsonFileInput} style:display="none" />
@@ -481,7 +483,7 @@
         top: 50%;
         left: 50%;
 
-        transition-property: transform;
+        transition-property: transform, opacity;
         transition-duration: 0.3s;
     }
 

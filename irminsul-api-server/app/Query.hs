@@ -110,20 +110,6 @@ relationGraph lang
             (`elem` (fst <$> entityLayouts))
             (elements . entities $ cluster)
 
-        renderedRelations =
-            filter
-            (\r ->
-                let (e1, e2) = subjectAndObject r in
-                -- Keep relations which has subject and object in rendered
-                -- entities, so that we can calculate relation's layout
-                e1 `elem` renderedEntities && e2 `elem` renderedEntities ||
-                -- Don't forget the root cluster is an exception,
-                -- it can also be in a relation
-                e1 == cluster && e2 `elem` renderedEntities ||
-                e2 == cluster && e1 `elem` renderedEntities
-            )
-            (elements . relations $ cluster)
-
         (renderedAtoms, renderedClusters) = splitAtomsClusters renderedEntities
 
         lp = getLanguagePack lang

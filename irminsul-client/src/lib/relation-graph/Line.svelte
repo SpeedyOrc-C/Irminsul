@@ -9,19 +9,24 @@
 {#if type === "horizontal"}
     <div
         class="line"
-        style:position="absolute"
         style:width="{length}rem"
         style:height={thickness}
         style:background-color={color}
         style:top="{-offset}rem"
-        style:transform="translate(-50%, -50%)"></div>
+    />
 {:else if type === "vertical"}
     <div
         class="line"
-        style:position="absolute"
         style:height="{length}rem"
         style:width={thickness}
         style:background-color={color}
         style:left="{offset}rem"
-        style:transform="translate(-50%, -50%)"></div>
+    />
 {/if}
+
+<style lang="scss">
+    .line {
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+</style>

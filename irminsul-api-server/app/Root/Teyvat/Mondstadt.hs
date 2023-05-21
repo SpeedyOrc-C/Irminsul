@@ -14,13 +14,14 @@ import Root.Teyvat.Fontaine
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Inazuma
 import Root.Teyvat.Mondstadt.TheFourWinds
+import Root.Teyvat.Mondstadt.Springvale
 
 bennett = "Bennett"
 thoma = "Thoma"
 fischlVonLuftschlossNarfidort = "FischlVonLuftschlossNarfidort"
 ozvaldoHrafnavins = "OzvaldoHrafnavins"
 
-draff = "Draff"
+timaeus = "Timaeus"
 
 mondstadt = clusterNode "Mondstadt" Country
     [
@@ -30,7 +31,8 @@ mondstadt = clusterNode "Mondstadt" Country
         thoma,
         fischlVonLuftschlossNarfidort,
         ozvaldoHrafnavins,
-        monaAstrologistMegistus
+        monaAstrologistMegistus,
+        timaeus
     ]
     [
         venti `rule` mondstadt,
@@ -65,7 +67,8 @@ mondstadt = clusterNode "Mondstadt" Country
         dawnWinery,
         catsTail,
         lupical,
-        theFourWinds
+        theFourWinds,
+        springvale
     ]
     (Just $ RelationGraphLayout {
         rootProperty = rl (-15, 15),

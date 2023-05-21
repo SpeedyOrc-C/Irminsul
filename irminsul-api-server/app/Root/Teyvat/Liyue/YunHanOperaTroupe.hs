@@ -6,11 +6,11 @@ module Root.Teyvat.Liyue.YunHanOperaTroupe where
 import Irminsul
 import Shortcut
 
-yunJin = "YunJin"
+jinYun = "JinYun"
 
 yunHanOperaTroupe = clusterLeaf "YunHanOperaTroupe" Organization
     [
-        yunJin
+        jinYun
     ]
     [
 

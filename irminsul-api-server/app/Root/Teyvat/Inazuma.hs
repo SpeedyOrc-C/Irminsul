@@ -23,6 +23,7 @@ mikoYae = "MikoYae"
 yoimiyaNaganohara = "YoimiyaNaganohara"
 
 kaedeharaKazuha = "KaedeharaKazuha"
+kirara = "Kirara"
 
 inazuma = clusterNode "Inazuma" Country
     [
@@ -32,7 +33,8 @@ inazuma = clusterNode "Inazuma" Country
         kunikuzushiRaiden,
         mikoYae,
         yoimiyaNaganohara,
-        kaedeharaKazuha
+        kaedeharaKazuha,
+        kirara
     ]
     [
 

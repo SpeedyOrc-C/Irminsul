@@ -10,10 +10,12 @@ import Root.Teyvat.Sumeru.Akademiya.Haravatat
 import Root.Teyvat.Sumeru.Akademiya.Rtawahist
 
 alhaitham = "Alhaitham"
+cyno = "Cyno"
 
 akademiya = clusterNode "Akademiya" Organization
     [
-        alhaitham
+        alhaitham,
+        cyno
     ]
     [
 

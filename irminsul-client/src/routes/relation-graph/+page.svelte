@@ -27,29 +27,25 @@
         reduceVisualEffect.set(
             localStorage.getItem("reduce-visual-effect") ?? "on"
         );
-        reduceVisualEffect.subscribe((newValue) => {
-            localStorage.setItem("reduce-visual-effect", newValue);
-        });
+        reduceVisualEffect.subscribe((v) =>
+            localStorage.setItem("reduce-visual-effect", v)
+        );
 
         switch (localStorage.getItem("who-am-i")) {
-            case "aether":
-                whoAmI.set("aether");
-                break;
             case "lumine":
                 whoAmI.set("lumine");
                 break;
+            case "aether":
             default:
                 whoAmI.set("aether");
                 break;
         }
-        whoAmI.subscribe((newValue) => {
-            localStorage.setItem("who-am-i", newValue);
-        });
+        whoAmI.subscribe((v) => localStorage.setItem("who-am-i", v));
     });
 </script>
 
 {#if id !== undefined}
-    <RelationGraph {id} {lang} {reduceVisualEffect} {whoAmI}/>
+    <RelationGraph {id} {lang} {reduceVisualEffect} {whoAmI} />
 {/if}
 
 <style>

@@ -23,6 +23,12 @@ import Root.Teyvat.Mondstadt.TheFourWinds
 import Root.Teyvat.Liyue
 import Root.Teyvat.Inazuma
 import Root.Teyvat.Liyue.WangshengFuneralParlor
+import Root.Teyvat.Fontaine.TheSteambird
+import Root.Teyvat.Liyue.QingceVillage
+import Root.Teyvat.Liyue.WanminRestaurant
+import Root.Teyvat.Liyue.FeiyunCommerceGuild
+import Root.Teyvat.Liyue.Qixing
+import Root.Teyvat.Liyue.YuehaiPavilion
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -34,6 +40,8 @@ translationEntityEnUs = [
     ipn bennett "Bennett",
     ipn boreas "Boreas",
     ipn catsTail "Cat's Tail",
+    ipn charlotte "Charlotte",
+    ipn chongyun "Chongyun",
     ipn dawnWinery "Dawn Winery",
     ipn diane "Diane",
     ipn dilucRagvindr "Diluc Ragvindr",
@@ -42,16 +50,19 @@ translationEntityEnUs = [
     ipn eulaLawrence "Eula Lawrence",
     ipn favoniusChurch "Favonius Church",
     ipn fischlVonLuftschlossNarfidort "Fischl von Luftschloss Narfidort",
+    ipn ganyu "Ganyu",
     ipn guerillaTeam "Guerilla Team",
     ipn inazuma "Inazuma",
     ipn jeanGunnhildr "Jean Gunnhildr",
     ipn kaeya "Kaeya",
     ipn kaeyaAlberich "Kaeya Alberich",
     ipn kaeyaRagvindr "Kaeya Ragvindr",
+    ipn keqing "Keqing",
+    ipn kirara "Kirara",
     ipn klee "Klee",
     ipn knightsOfFavonius "Knights of Favonius",
     ipn lisa "Lisa",
-    ipn liyue "Líyuè",
+    ipn liyue "Liyue",
     ipn lumine "Lumine",
     ipn mikaSchmidt "Mika Schmidt",
     ipn margaret "Margaret",
@@ -60,6 +71,7 @@ translationEntityEnUs = [
     ipn ozvaldoHrafnavins "Ozvaldo Hrafnavins",
     ipn princeCat "Prince",
     ipn noelle "Noelle",
+    ipn qingceVillage "Qingce Village",
     ipn razor "Razor",
     ipn rosaria "Rosaria",
     ipn root "Root",
@@ -69,5 +81,7 @@ translationEntityEnUs = [
     ipn theFourWinds "The Four Winds",
     ipn varka "Varka",
     ipn venti "Venti",
-    ipn zhongli "Zhōnglí"
+    ipn xiangling "Xiangling",
+    ipn xingqiu "Xingqiu",
+    ipn zhongli "Zhongli"
     ]

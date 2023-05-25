@@ -30,7 +30,8 @@ executable irminsul-api-server
         Irminsul,
         LanguagePack,
         Milestone,
-        Query,
+        API,
+        API.RelationGraph,
         Shortcut,
 
         Data.Xml,

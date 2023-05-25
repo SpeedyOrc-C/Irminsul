@@ -27,7 +27,12 @@ instance Show Action where
 data Relation
     = Relation {action::Action, subject::Entity, object:: Entity}
     | BiRelation {action::Action, subject::Entity, object:: Entity}
-    deriving (Eq)
+
+instance Eq Relation where
+    (Relation a1 s1 o1) == (Relation a2 s2 o2) =
+        a1 == a2 && s1 == s2 && o1 == o2
+    (BiRelation a1 s1 o1) == (BiRelation a2 s2 o2) =
+        a1 == a2 && (s1 == s2 && o1 == o2 || s1 == o2 && s2 == o1)
 
 instance Show Relation where
     show (Relation action from to) =

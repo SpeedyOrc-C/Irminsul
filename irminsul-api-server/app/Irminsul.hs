@@ -33,6 +33,7 @@ instance Eq Relation where
         a1 == a2 && s1 == s2 && o1 == o2
     (BiRelation a1 s1 o1) == (BiRelation a2 s2 o2) =
         a1 == a2 && (s1 == s2 && o1 == o2 || s1 == o2 && s2 == o1)
+    _ == _ = False
 
 instance Show Relation where
     show (Relation action from to) =

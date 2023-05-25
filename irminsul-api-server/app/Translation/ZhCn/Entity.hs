@@ -31,24 +31,31 @@ import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.FeiyunCommerceGuild
 import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Liyue.YuehaiPavilion
+import Root.Teyvat.Byakuyakoku
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
+    ipn aberaku "阿倍良久",
+    ipn adonis "阿多尼斯",
     ipn aether "空",
     ip albedo "阿贝多" ["阿贝多先生", "白垩之子"] UntilNow "",
     ipn alice "爱丽丝",
     ip amber "安柏" ["打火姬", "蒙德飞行冠军"] UntilNow "",
+    ipn aru "亚琉",
     ipn barbaraPegg ("芭芭拉"."佩奇"),
     ipn bennett "班尼特",
     ipn boreas "玻瑞亚斯",
     ipn catsTail "猫尾酒馆",
-    ipn chongyun "重云",
     ipn charlotte "夏洛蒂",
+    ipn chongyun "重云",
+    ipn daimon "大门",
     ipn dawnWinery "晨曦酒庄",
     ipn diane "黛安",
     ipn dilucRagvindr ("迪卢克"."莱艮芬德"),
     ipn dionaKatzlein "迪奥娜",
     ipn dvalin "特瓦林",
+    ipn eboshi "乌帽子",
+    ipn ema "绘真",
     ip eulaLawrence ("优菈"."劳伦斯") ["浪花骑士", "喷嚏记仇真君"] UntilNow "",
     ipn favoniusChurch "西风教会",
     ipn fischlVonLuftschlossNarfidort ("菲谢尔"."冯"."露弗施洛斯"."那菲多特"),
@@ -79,8 +86,10 @@ translationEntityZhCn = [
     ipn root "树根",
     ipn shuyun "恕筠",
     ip sucrose "砂糖" ["雷萤术士"] UntilNow "",
+    ipn supadaNoHiko "须婆达之彦",
     ipn teyvat "提瓦特",
     ipn theFourWinds "四风守护",
+    ipn uda "宇陀",
     ipn varka "法尔伽",
     ipn venti "温迪",
     ipn xiangling "香菱",

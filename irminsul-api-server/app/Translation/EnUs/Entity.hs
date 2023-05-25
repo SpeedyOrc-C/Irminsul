@@ -29,24 +29,31 @@ import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.FeiyunCommerceGuild
 import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Liyue.YuehaiPavilion
+import Root.Teyvat.Byakuyakoku
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
+    ipn aberaku "Aberaku",
+    ipn adonis "Adonis",
     ipn aether "Aether",
     ipn albedo "Albedo",
     ipn alice "Alice",
     ipn amber "Amber",
+    ipn aru "Aru",
     ipn barbaraPegg "Barbara Pegg",
     ipn bennett "Bennett",
     ipn boreas "Boreas",
     ipn catsTail "Cat's Tail",
     ipn charlotte "Charlotte",
     ipn chongyun "Chongyun",
+    ipn daimon "Daimon",
     ipn dawnWinery "Dawn Winery",
     ipn diane "Diane",
     ipn dilucRagvindr "Diluc Ragvindr",
     ipn dionaKatzlein "Diona Katzlein",
     ipn dvalin "Dvalin",
+    ipn eboshi "Eboshi",
+    ipn ema "Ema",
     ipn eulaLawrence "Eula Lawrence",
     ipn favoniusChurch "Favonius Church",
     ipn fischlVonLuftschlossNarfidort "Fischl von Luftschloss Narfidort",
@@ -77,8 +84,10 @@ translationEntityEnUs = [
     ipn root "Root",
     ipn shuyun "Shuyun",
     ipn sucrose "Sucrose",
+    ipn supadaNoHiko "Supada no Hiko",
     ipn teyvat "Teyvat",
     ipn theFourWinds "The Four Winds",
+    ipn uda "Uda",
     ipn varka "Varka",
     ipn venti "Venti",
     ipn xiangling "Xiangling",

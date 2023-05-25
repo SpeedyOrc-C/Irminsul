@@ -47,6 +47,7 @@ executable irminsul-api-server
         Translation.ZhCn.Utility,
 
         Root,
+        Root.Gender
         Root.AnotherWorld,
         Root.Teyvat,
         Root.Teyvat.Byakuyakoku,

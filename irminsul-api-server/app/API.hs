@@ -38,8 +38,8 @@ Try to find a entity that matches the input ID.
 -}
 entityFromId :: String -> Maybe Entity
 entityFromId "Root" = Just root
-entityFromId id =
-    let result = filter (\e -> entityId e == id)
+entityFromId inputId =
+    let result = filter (\e -> entityId e == inputId)
             (elements . entities $ root) in
     if null result
     then Nothing
@@ -48,7 +48,7 @@ entityFromId id =
 {- APIs -}
 
 apiRelationGraph :: String -> String -> JSON
-apiRelationGraph id lang =
+apiRelationGraph inputId inputLang =
     maybe (apiResponse UnsupportedLanguage JNull)
     (\language ->
         maybe (apiResponse NotImplementedCluster JNull)
@@ -57,9 +57,10 @@ apiRelationGraph id lang =
             then apiResponse LayoutMissing JNull
             else apiResponse OK $ relationGraph language entity
         )
-        (entityFromId id)
+        (entityFromId inputId)
     )
-    (readLanguageCode lang)
+    (readLanguageCode inputLang)
 
 -- | Response with this if the input is illegal.
+apiUnknown :: JSON
 apiUnknown = apiResponse UnknownApi JNull

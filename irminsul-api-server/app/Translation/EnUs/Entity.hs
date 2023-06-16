@@ -1,7 +1,5 @@
 module Translation.EnUs.Entity where
 
-import Data.Maybe
-
 import Irminsul
 import Shortcut
 

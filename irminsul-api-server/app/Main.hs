@@ -7,12 +7,11 @@ It will listen to port 50000 to handle API requests.
 module Main where
 
 import API
-import Data.JSON
 
-import Network.Wai
-import Network.Wai.Middleware.RequestLogger
-import Network.Wai.Handler.Warp
-import Network.HTTP.Types
+import Network.Wai ( responseLBS, Request(pathInfo), Response, Application )
+import Network.Wai.Middleware.RequestLogger ()
+import Network.Wai.Handler.Warp ( run )
+import Network.HTTP.Types ( status200 )
 
 import qualified Data.ByteString.Lazy as BSL
 import qualified Data.ByteString as BS
@@ -52,9 +51,10 @@ app req respond = do
         Relation Graph
         Path: api/relation-graph/<cluster-id>/<language-code>
         -}
-        path@["api", "relation-graph", _, _] ->
-            let [_, _, id, lang]    = unpackPath path in
-            respond . showResponse $ apiRelationGraph id lang
+        ["api", "relation-graph", cluster_id, lang] ->
+            respond . showResponse $ apiRelationGraph 
+                (T.unpack cluster_id)
+                (T.unpack lang)
 
         {-
         It goes here if the request doesn't match any of the paths above.

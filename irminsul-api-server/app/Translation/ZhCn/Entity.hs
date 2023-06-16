@@ -1,7 +1,5 @@
 module Translation.ZhCn.Entity where
 
-import Data.Maybe
-
 import Irminsul
 import Shortcut
 import Prelude hiding ((.))

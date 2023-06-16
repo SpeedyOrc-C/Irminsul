@@ -20,13 +20,13 @@ These two inputs are illegal and should never happen.
 But considering these cases for the sake of robustness.
 -}
 relationGraph _ (Atom {}) = JNull
-relationGraph _ (Cluster rootId _ _ _ Nothing) = JNull
+relationGraph _ (Cluster _ _ _ _ Nothing) = JNull
 
 {- Legal input goes here -}
 relationGraph lang
     cluster@(Cluster
         rootId _ _ _
-        (Just layout@(RelationGraphLayout rootLayout entityLayouts))) =
+        (Just (RelationGraphLayout rootLayout entityLayouts))) =
     let
         renderedEntities = filter
             -- Keep entities which has their layouts defined

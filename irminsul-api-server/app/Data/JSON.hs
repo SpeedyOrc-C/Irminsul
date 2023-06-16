@@ -1,7 +1,7 @@
 module Data.JSON where
 
 import Data.List (intercalate)
-import Data.Char
+import Data.Char (ord)
 import Numeric (showHex)
 
 data JSON
@@ -17,27 +17,31 @@ class ToJSON a where
 
 escapeChar :: Char -> String
 escapeChar char
-    | char == '"' = "\\\""
+    | char == '"'  = "\\\""
     | char == '\\' = "\\\\"
     | char == '\b' = "\\\b"
     | char == '\f' = "\\\f"
     | char == '\n' = "\\\n"
     | char == '\r' = "\\\r"
     | otherwise = return char
-    -- | 0 <= code && code <= 255 = return char
-    -- | otherwise = "\\u" ++ replicate (4 - length hexCode) '0' ++ hexCode
+
+escapeCharUnicode :: Char -> String
+escapeCharUnicode char
+    | 0 <= code && code <= 255 = return char
+    | otherwise = "\\u" ++ replicate (4 - length hexCode) '0' ++ hexCode
     where
         code = ord char
         hexCode = showHex code ""
 
 instance Show JSON where
-    show JNull = "null"
-    show (JBool bool) = if bool then "true" else "false"
-    show (JNumber number) = show number
-    show (JString string) = "\"" ++ finalInner ++ "\"" where
-        finalInner = do
-            char <- string
-            escapeChar char
-    show (JArray array) = "[" ++ intercalate "," (map show array) ++ "]"
-    show (JObject object) = "{" ++ intercalate ","
-        (map (\(key, value) -> show key ++ ":" ++ show value) object) ++ "}"
+    show JNull              = "null"
+    show (JBool True)       = "true"
+    show (JBool False)      = "false"
+    show (JNumber number)   = show number
+    show (JString string)   = "\"" ++ inner ++ "\"" where
+        inner = string >>= escapeCharUnicode
+    show (JArray array)     = "[" ++ inner ++ "]" where
+        inner = intercalate "," (map show array)
+    show (JObject object)   = "{" ++ inner ++ "}" where
+        inner = intercalate "," pairs where
+            pairs = map (\(key, value) -> show key ++ ":" ++ show value) object

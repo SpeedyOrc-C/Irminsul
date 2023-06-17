@@ -2,7 +2,6 @@
 
 module Irminsul where
 
-import Milestone
 import Data.List (intercalate)
 import Data.Vector
 import Data.String
@@ -82,7 +81,6 @@ subjectAndObject (BiRelation _ a b) = (a, b)
 
 data Time
     = YearsAgo Integer
-    | Timestamp Milestone
     deriving Show
 
 data Existence

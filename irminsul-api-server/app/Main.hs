@@ -38,23 +38,18 @@ showResponse =
     -- String conversions
     BSL.pack . BS.unpack . E.encodeUtf8 . T.pack . show
 
-unpackPath :: [T.Text] -> [String]
-unpackPath = (T.unpack <$>)
-
 {-
 Here defines all the possible paths of API requests.
 -}
 app :: Application
-app req respond = do
-    case pathInfo req of
+app req respond =
+    case (T.unpack <$> pathInfo req) of
         {-
         Relation Graph
         Path: api/relation-graph/<cluster-id>/<language-code>
         -}
         ["api", "relation-graph", cluster_id, lang] ->
-            respond . showResponse $ apiRelationGraph 
-                (T.unpack cluster_id)
-                (T.unpack lang)
+            respond . showResponse $ apiRelationGraph cluster_id lang
 
         {-
         It goes here if the request doesn't match any of the paths above.

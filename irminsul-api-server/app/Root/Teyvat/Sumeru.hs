@@ -14,11 +14,13 @@ nahida = "Nahida";
     buer = nahida
 
 wanderer = "Wanderer"
+dehya = "Dehya"
 
 sumeru = clusterNode "Sumeru" Country
     [
         nahida,
-        wanderer
+        wanderer,
+        dehya
     ]
     [
         scaramouche `samsara` wanderer

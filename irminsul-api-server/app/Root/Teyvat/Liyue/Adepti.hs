@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Root.Teyvat.Liyue.Adepti where
 -- 仙人
 
@@ -9,9 +11,14 @@ import Root.Teyvat.Liyue.Adepti.SeaGazersAbode
 import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
 import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
 
+moonCarver = "MoonCarver"
+mountainShaper = "MountainShaper"
+
+
 adepti = clusterNode "Adepti" Organization
     [
-
+        moonCarver,
+        mountainShaper
     ]
     [
 

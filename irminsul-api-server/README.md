@@ -20,8 +20,8 @@ cabal repl
 
 所有的 API 将可以在端口 50000 上访问。
 
-试一试通过[这个链接](http://localhost:50000/api/relation-graph?id=KnightsOfFavonius&lang=zh-cn)获取简体中文的西风骑士团的数据吧：
+试一试通过[这个链接](http://localhost:50000/api/relation-graph/KnightsOfFavonius/zh-cn)获取简体中文的西风骑士团的数据吧：
 
 ```
-http://localhost:50000/api/relation-graph?id=KnightsOfFavonius&lang=zh-cn
+http://localhost:50000/api/relation-graph/KnightsOfFavonius/zh-cn
 ```

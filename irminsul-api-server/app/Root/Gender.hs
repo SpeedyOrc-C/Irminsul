@@ -3,8 +3,8 @@ module Root.Gender where
 import Irminsul
 import Shortcut
 
-male = clusterLeaf "Cluster_Male" Property [
+male = clusterLeaf "Male" Property [
     ] []
 
-female = clusterLeaf "Cluster_Female" Property [
+female = clusterLeaf "Female" Property [
     ] []

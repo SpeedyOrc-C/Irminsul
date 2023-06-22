@@ -17,6 +17,7 @@ import Root.Teyvat.Liyue.WangshengFuneralParlor
 import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Liyue.YunHanOperaTroupe
+import Root.Teyvat.Liyue.QingceVillage
 
 chongyun = "Chongyun"
 
@@ -37,7 +38,7 @@ liyue = clusterNode "Liyue" Country
 
         ningguang `friend` beidou,
         ningguang `friend` yelan,
-        ningguang `appreciate` yunJin
+        ningguang `appreciate` jinYun
     ]
     [
         adepti,
@@ -48,7 +49,8 @@ liyue = clusterNode "Liyue" Country
         wanminRestaurant,
         bubuPharmary,
         yuehaiPavilion,
-        yunHanOperaTroupe
+        yunHanOperaTroupe,
+        qingceVillage
     ]
     (Just $ RelationGraphLayout {
         rootProperty=rl (-15, 15),

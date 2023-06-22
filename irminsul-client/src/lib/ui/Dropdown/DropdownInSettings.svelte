@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Option } from "../../util/Option";
-    import { createEventDispatcher, onMount } from "svelte";
+    import { createEventDispatcher } from "svelte";
     import { writable, type Writable } from "svelte/store";
     import Button from "../Button.svelte";
     import DropdownList from "../DropdownList.svelte";

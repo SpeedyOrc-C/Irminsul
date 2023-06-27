@@ -5,6 +5,7 @@ module Root.Teyvat.Liyue.WangshengFuneralParlor where
 
 import Irminsul
 import Shortcut
+import CommonRelations
 
 zhongli = "Zhongli";
     morax = zhongli
@@ -16,6 +17,6 @@ wangshengFuneralParlor = clusterLeaf "WangshengFuneralParlor" Organization
         hutao
     ]
     [
-        
+        hutao `superior` zhongli
     ]
     Nothing

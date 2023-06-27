@@ -5,6 +5,8 @@ module Root.Teyvat.Inazuma where
 
 import Irminsul
 import Shortcut
+import CommonRelations
+
 import Root.Teyvat.Inazuma.TriCommission.YashiroCommission
 import Root.Teyvat.Inazuma.AratakiGang
 import Root.Teyvat.Inazuma.TriCommission
@@ -37,7 +39,7 @@ inazuma = clusterNode "Inazuma" Country
         kirara
     ]
     [
-
+        eiRaiden `rule` inazuma
     ]
     [
         triCommission,

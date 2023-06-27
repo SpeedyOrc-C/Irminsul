@@ -23,6 +23,7 @@ sumeru = clusterNode "Sumeru" Country
         dehya
     ]
     [
+        nahida `rule` sumeru,
         scaramouche `samsara` wanderer
     ]
     [

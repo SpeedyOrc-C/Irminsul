@@ -42,6 +42,8 @@ hate = ra "Hate"
 dislike = ra "Dislike"
 kill = ra "Kill"
 
+superior = ra "Superior"
+
 foster relation x y = Relation (Action ("Foster" ++ id)) x y where
     (Relation (Action id) _ _) = relation x y
 

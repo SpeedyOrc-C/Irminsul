@@ -8,7 +8,7 @@ import Shortcut
 
 dori = "Dori"
 
-alcazarzaraypalace = clusterLeaf "AlcazarzarayPalace" Area
+alcazarzarayPalace = clusterLeaf "AlcazarzarayPalace" Area
     [
         dori
     ]

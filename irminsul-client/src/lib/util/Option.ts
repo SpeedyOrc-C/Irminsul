@@ -1,10 +1,9 @@
-type Option = {
+export class Option {
     label: string;
     value: string;
-};
 
-export function op(value: string, label: string): Option {
-    return { label, value };
+    constructor(value: string, label: string) {
+        this.value = value;
+        this.label = label;
+    }
 }
-
-export { type Option };

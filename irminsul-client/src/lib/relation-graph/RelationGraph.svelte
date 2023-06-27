@@ -35,7 +35,7 @@
 
     let showAxis: Writable<boolean> = writable(false);
     let showGrid: Writable<boolean> = writable(false);
-    let showCoordinate: boolean = false;
+    let showCoordinate = false;
     let showSettings: Writable<boolean> = writable(false);
 
     let viewX = 0;
@@ -52,9 +52,7 @@
     let selectedEntities: Set<string> = new Set();
     let selectedEntitiesInSelectedClusters: Set<string> = new Set();
 
-    let rootClusterSelected: boolean = false;
-    let rootPosition: Vector2;
-    $: rootPosition = relationGraph?.rootPosition ?? Vector2Zero;
+    let rootClusterSelected = false;
 
     let showLayoutMissing: Writable<boolean> = writable(false);
 
@@ -64,6 +62,8 @@
     }
 
     function updateSelectedClusters(e: CustomEvent) {
+        if (relationGraph == null) return;
+
         selectedClusters = e.detail.clusters;
         selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
         selectedEntitiesInSelectedClusters = new Set(
@@ -133,8 +133,7 @@
     }
 
     function keydownListener(e: KeyboardEvent) {
-        if (e.ctrlKey !== e.metaKey) {
-        } else {
+        if (e.ctrlKey === e.metaKey) {
             switch (e.code) {
                 case "KeyW":
                     moveUp();
@@ -176,16 +175,16 @@
                     if (relationGraph == null || !rootClusterSelected) return;
                     switch (e.code) {
                         case "KeyI":
-                            rootPosition.y += deadKeyMultiplier(e);
+                            relationGraph.rootPosition.y += deadKeyMultiplier(e);
                             break;
                         case "KeyK":
-                            rootPosition.y -= deadKeyMultiplier(e);
+                            relationGraph.rootPosition.y -= deadKeyMultiplier(e);
                             break;
                         case "KeyJ":
-                            rootPosition.x -= deadKeyMultiplier(e);
+                            relationGraph.rootPosition.x -= deadKeyMultiplier(e);
                             break;
                         case "KeyL":
-                            rootPosition.x += deadKeyMultiplier(e);
+                            relationGraph.rootPosition.x += deadKeyMultiplier(e);
                             break;
                     }
                     break;
@@ -231,9 +230,7 @@
                     `/relation-graph/?id=${id}&lang=${$lang}`
                 );
 
-                if (json.body != null) {
-                    console.info("Relation graph loaded: ", relationGraph);
-                }
+                console.info("Relation graph loaded: ", relationGraph);
 
                 setTimeout(() => {
                     contentOpacity = 1;
@@ -317,11 +314,8 @@
     onMount(() => {
         jsonFileReader = new FileReader();
 
-        jsonFileInput.addEventListener("change", (_: Event) => {
-            if (
-                jsonFileInput.files == null ||
-                jsonFileInput.files?.length == 0
-            ) {
+        jsonFileInput.addEventListener("change", () => {
+            if (jsonFileInput.files?.length == 0) {
                 console.error("No import file selected.");
                 return;
             }
@@ -365,8 +359,8 @@
 </title>
 
 <div class="relation-graph">
-    <div class="background-dark-blue" />
-    <div class="background-cloud" />
+    <div class="background-dark-blue"></div>
+    <div class="background-cloud"></div>
 
     <div
         class="content"
@@ -424,8 +418,8 @@
                 <div
                     class="root-cluster"
                     class:selected={rootClusterSelected}
-                    style:left="{rootPosition.x}rem"
-                    style:top="{-rootPosition.y}rem"
+                    style:left="{relationGraph.rootPosition.x}rem"
+                    style:top="{-relationGraph.rootPosition.y}rem"
                     on:click={toggleRootClusterSelect}
                 >
                     <img

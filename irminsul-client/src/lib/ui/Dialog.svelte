@@ -1,26 +1,28 @@
 <script lang="ts">
     import type { Writable } from "svelte/store";
     import PromptCorner from "./Dialog/DialogCorner.svelte";
+    import {onMount} from "svelte";
 
     export let title: string;
     export let show: Writable<boolean>;
 
-    let displayed: boolean = false;
+    let displayed = false;
 
-    show.subscribe((_) => {
-        if ($show) {
-            displayed = true;
-        } else {
-            setTimeout(() => (displayed = false), 200);
-        }
-    });
+    onMount(() => {
+        show.subscribe(() => {
+            if ($show) {
+                displayed = true;
+            } else {
+                setTimeout(() => (displayed = false), 200);
+            }
+        });
+    })
 </script>
 
 <div
     class="background"
     class:show={$show}
-    style:display={displayed ? "block" : "none"}
-/>
+    style:display={displayed ? "block" : "none"}></div>
 
 <div
     class="prompt"
@@ -29,10 +31,10 @@
 >
     <div style="position: relative">
         <div class="decoration">
-            <div class="inner-line-top" />
-            <div class="inner-line-bottom" />
-            <div class="inner-line-left" />
-            <div class="inner-line-right" />
+            <div class="inner-line-top"></div>
+            <div class="inner-line-bottom"></div>
+            <div class="inner-line-left"></div>
+            <div class="inner-line-right"></div>
 
             <div class="corner-upper-left"><PromptCorner /></div>
             <div class="corner-upper-right"><PromptCorner /></div>
@@ -80,7 +82,7 @@
                 transform: translate(-50%, -50%) scale(100%);
             }
         }
-    
+
         @keyframes prompt-disappear {
             0% {
                 opacity: 1;
@@ -95,8 +97,6 @@
 
 
     .title {
-        margin-bottom: 1rem;
-
         text-align: center;
         font-size: 1.8rem;
         margin: 1rem 0;
@@ -124,7 +124,7 @@
                 opacity: 1;
             }
         }
-    
+
         @keyframes background-disappear {
             0% {
                 opacity: 1;
@@ -134,7 +134,7 @@
             }
         }
     }
-    
+
 
     .content {
         position: absolute;

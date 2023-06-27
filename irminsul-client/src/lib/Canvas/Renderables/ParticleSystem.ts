@@ -1,10 +1,12 @@
 import type { Renderable } from "../Renderable";
 import type { Canvas } from "../Canvas";
-import type { TimedParticle } from "./Particle";
+import type { ITimedParticle } from "./Particle";
 
-export class ParticleSystem implements Renderable<ParticleSystem> {
+type RenderableTimeParticle = Renderable & ITimedParticle;
+
+export class ParticleSystem implements Renderable {
     willBeDestroyed = false;
-    particles: Array<TimedParticle> = [];
+    particles: Array<RenderableTimeParticle> = [];
     additionalUpdate: (self: ParticleSystem) => void;
 
     constructor(additionalUpdate: (self: ParticleSystem) => void) {
@@ -16,8 +18,8 @@ export class ParticleSystem implements Renderable<ParticleSystem> {
         this.particles.forEach((particle) => particle.renderOn(canvas));
     }
 
-    update(self: ParticleSystem, canvas: Canvas) {
-        self.particles.forEach(particle => particle.update(particle, canvas))
-        self.additionalUpdate(self)
+    update(canvas: Canvas): void {
+        this.particles.forEach(particle => particle.update(canvas))
+        this.additionalUpdate(this)
     }
 }

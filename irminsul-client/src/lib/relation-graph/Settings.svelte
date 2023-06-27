@@ -10,6 +10,7 @@
     import { _ } from "svelte-i18n";
     import Other from "./Settings/Other.svelte";
     import Graphics from "./Settings/Graphics.svelte";
+    import {onMount} from "svelte";
 
     export let show: Writable<boolean>;
     export let lang: Writable<string>;
@@ -19,16 +20,18 @@
     export let reduceVisualEffect: Writable<string>;
     export let whoAmI: Writable<"aether" | "lumine">;
 
-    let displayed: boolean = false;
-    let selectedCategory: string = "file";
+    let displayed = false;
+    let selectedCategory = "file";
 
-    show.subscribe((_) => {
-        if ($show) {
-            displayed = true;
-        } else {
-            setTimeout(() => (displayed = false), 500);
-        }
-    });
+    onMount(() => {
+        show.subscribe(() => {
+            if ($show) {
+                displayed = true;
+            } else {
+                setTimeout(() => (displayed = false), 500);
+            }
+        });
+    })
 
     function handleKeyup(e: KeyboardEvent) {
         if (!$show) return;

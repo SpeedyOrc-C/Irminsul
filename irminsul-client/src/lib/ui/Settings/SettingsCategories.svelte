@@ -32,17 +32,17 @@
                 {/if}
             </div>
 
-            <div class="option-background" />
+            <div class="option-background"></div>
 
             <div class="option-bullet">
-                <div class="bullet-outer" />
+                <div class="bullet-outer"></div>
                 {#if selected}
                     <div class="bullet-arrow-with-background">
-                        <div class="bullet-background" />
-                        <div class="bullet-arrow" />
+                        <div class="bullet-background"></div>
+                        <div class="bullet-arrow"></div>
                     </div>
                 {:else}
-                    <div class="bullet-inner" />
+                    <div class="bullet-inner"></div>
                 {/if}
             </div>
 

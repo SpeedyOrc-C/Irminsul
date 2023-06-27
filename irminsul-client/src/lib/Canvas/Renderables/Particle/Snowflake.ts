@@ -1,9 +1,10 @@
 import { TimedParticle } from "../Particle";
-import type { Vector2 } from "../../../util/Vector2";
+import type { Vector2 } from "$lib/util/Vector2";
 import type { Canvas } from "../../Canvas";
-import { linearMap } from "../../../util/LinearMap";
+import { linearMap } from "$lib/util/LinearMap";
+import type {Renderable} from "$lib/Canvas/Renderable";
 
-export class Snowflake extends TimedParticle {
+export class Snowflake extends TimedParticle implements Renderable {
     fromX: number;
     toX: number
     maxRadius: number;

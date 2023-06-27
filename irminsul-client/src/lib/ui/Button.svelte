@@ -1,12 +1,12 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
 
-    export let action: string = "";
-    export let width: string = "";
-    export let height: string = "";
-    export let style: string = "";
-    export let hasBorder: boolean = false;
-    export let inSettings: boolean = false;
+    export let action = "";
+    export let width = "";
+    export let height = "";
+    export let style = "";
+    export let hasBorder = false;
+    export let inSettings = false;
 
     const dispatch = createEventDispatcher();
 </script>

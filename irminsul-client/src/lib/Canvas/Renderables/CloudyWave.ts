@@ -1,8 +1,9 @@
 import type { Canvas } from "../Canvas";
 import type { Renderable } from "../Renderable";
 
-export class CloudyWave implements Renderable<CloudyWave> {
+export class CloudyWave implements Renderable {
     willBeDestroyed = false;
+    t = 0;
 
     readonly f = (t: number, k: number, x: number) =>
         k * Math.sin(2 * Math.PI * (x - t)) * 4 * x * (1 - x) * Math.exp(-2 * x)
@@ -16,7 +17,7 @@ export class CloudyWave implements Renderable<CloudyWave> {
     }
 
     renderOn(canvas: Canvas) {
-        const t = canvas.getTime();
+        const t = this.t;
         const ctx = canvas.getContext();
         let x: number, y: number;
         let yDownward: number, yUpward: number, brightness: number;
@@ -39,7 +40,7 @@ export class CloudyWave implements Renderable<CloudyWave> {
         }
     }
 
-    update(self: CloudyWave, canvas: Canvas) {
-
-    };
+    update(canvas: Canvas): void {
+        this.t = canvas.getTime();
+    }
 }

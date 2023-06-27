@@ -4,8 +4,8 @@
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
     export let biRelations: Array<string>;
-    export let highlight: boolean = false;
-    export let dim: boolean = false;
+    export let highlight = false;
+    export let dim = false;
     export let subjectAnchor: Vector2;
     export let objectAnchor: Vector2;
 
@@ -14,7 +14,7 @@
     rotate themselves 90 degrees anti-clockwise when they are written vertically.
     As some relations are vertical, we need to rotate these characters.
     */
-    export let writingSystemIsCJK: boolean = false;
+    export let writingSystemIsCJK = false;
 
     import type { Vector2 } from "../util/Vector2";
 
@@ -23,12 +23,13 @@
         objectAnchor.x < subjectAnchor.x ||
         (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
-    let realForwardRelations: Array<string> = [];
+    let realForwardRelations: Array<string>;
+
     $: realForwardRelations = needReverse
         ? backwardRelations
         : forwardRelations;
 
-    let realBackwardRelations: Array<string> = [];
+    let realBackwardRelations: Array<string>;
     $: realBackwardRelations = needReverse
         ? forwardRelations
         : backwardRelations;

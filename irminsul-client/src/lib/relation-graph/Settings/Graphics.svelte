@@ -1,10 +1,9 @@
 <script lang="ts">
     import DropdownInSettings from "$lib/ui/Dropdown/DropdownInSettings.svelte";
-    import Seperator from "$lib/ui/Seperator.svelte";
     import ItemBar from "$lib/ui/Settings/ItemBar.svelte";
     import SubCategory from "$lib/ui/Settings/SubCategory.svelte";
     import type { Option } from "$lib/util/Option";
-    import { beforeUpdate, createEventDispatcher } from "svelte";
+    import {beforeUpdate, createEventDispatcher} from "svelte";
     import { _ } from "svelte-i18n";
     import { writable, type Writable } from "svelte/store";
 
@@ -17,8 +16,8 @@
     let options: Array<Option>;
     beforeUpdate(() => {
         options = [
-            { label: $_("settings.common.off"), value: "off" },
-            { label: $_("settings.common.on"), value: "on" },
+            new Option($_("settings.common.off"), "off"),
+            new Option($_("settings.common.on"), "on"),
         ];
     });
 </script>
@@ -55,7 +54,7 @@
             on:dropdown-change={(e) => {
                 dispatch("rg-action", {
                     action: "change-reduce-visual-effect",
-                    value: e.detail.value,
+                    value: e.detail.value
                 });
             }}
         />

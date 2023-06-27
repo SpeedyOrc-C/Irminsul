@@ -32,7 +32,7 @@
     onDestroy(() => effect.stopRendering());
 </script>
 
-<canvas bind:this={canvasEffect} />
+<canvas bind:this={canvasEffect}></canvas>
 
 <style>
     canvas {

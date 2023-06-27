@@ -1,8 +1,9 @@
 import { TimedParticle } from "../Particle";
 import type { Canvas } from "../../Canvas";
-import type { Vector2 } from "../../../util/Vector2";
+import type { Vector2 } from "$lib/util/Vector2";
+import type {Renderable} from "$lib/Canvas/Renderable";
 
-export class Star extends TimedParticle {
+export class Star extends TimedParticle implements Renderable {
     maxSize: number;
     opacity: number;
 

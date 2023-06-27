@@ -13,7 +13,7 @@
     export let translation: string;
     export let position: Vector2;
     export let size: Vector2;
-    export let showCoordinate: boolean = false;
+    export let showCoordinate = false;
     export let selected = false;
 
     const dispatch = createEventDispatcher();
@@ -129,8 +129,7 @@
         <div
             class="anchor-emphasis"
             style:left="{anchor.x - position.x + size.x / 2}rem"
-            style:top="{-(anchor.y - position.y - size.y / 2)}rem"
-        />
+            style:top="{-(anchor.y - position.y - size.y / 2)}rem"></div>
     {/if}
 </div>
 

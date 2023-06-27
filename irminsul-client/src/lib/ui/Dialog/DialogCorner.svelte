@@ -3,12 +3,12 @@
 </script>
 
 <div class="corner">
-    <div class="big-arc1" />
-    <div class="big-arc2" />
-    <div class="small-arc" />
+    <div class="big-arc1"></div>
+    <div class="big-arc2"></div>
+    <div class="small-arc"></div>
 
-    <div class="corner-shadow" />
-    <div class="corner-border" />
+    <div class="corner-shadow"></div>
+    <div class="corner-border"></div>
     <div class="star">
         <Star />
     </div>

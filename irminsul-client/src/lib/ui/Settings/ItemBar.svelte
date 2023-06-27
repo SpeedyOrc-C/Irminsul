@@ -29,7 +29,7 @@
         background-color: #ece5d8;
         opacity: 80%;
 
-        transition-property: box-shadow background-color;
+        transition-property: box-shadow, background-color;
         transition-duration: 0.1s;
         
         &:hover {

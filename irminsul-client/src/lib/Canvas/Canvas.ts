@@ -9,13 +9,13 @@ export class Canvas {
     readonly width: number;
     readonly fps: number;
 
-    elements: Array<Renderable<any>>;
+    elements: Array<Renderable>;
 
     private rendering = false;
     // private interval: number | null = null;
     private time: number;
     private deltaTime = 0;
-    private addedElements: Array<Renderable<any>> = [];
+    private addedElements: Array<Renderable> = [];
 
     readonly viewportMinX: number;
     readonly viewportMaxX: number;
@@ -29,7 +29,7 @@ export class Canvas {
         viewportMinX: number, viewportMaxX: number,
         viewportMinY: number, viewportMaxY: number,
         fps: number,
-        elements: Array<Renderable<any>>
+        elements: Array<Renderable>
     ) {
         canvas.height = height
         canvas.width = width;
@@ -50,11 +50,6 @@ export class Canvas {
 
         this.update = this.update.bind(this);
     }
-
-    public getCanvas(): HTMLCanvasElement {
-        return this.canvas;
-    }
-
     public getContext(): CanvasRenderingContext2D {
         return this.context;
     }
@@ -67,12 +62,12 @@ export class Canvas {
             this.elements.filter((element) => !element.willBeDestroyed))
 
         this.context.clearRect(0, 0, this.width, this.height)
+        this.elements.forEach(element => element.update(this))
         this.elements.forEach(element => element.renderOn(this))
-        this.elements.forEach(element => element.update(element, this))
         this.addedElements = [];
 
         if (this.rendering) {
-            requestAnimationFrame((_time) => this.update())
+            requestAnimationFrame(() => this.update())
         }
     }
 
@@ -92,11 +87,6 @@ export class Canvas {
     public stopRendering() {
         this.rendering = false;
     }
-
-    public addElement(element: Renderable<any>) {
-        this.addedElements.push(element);
-    }
-
     public mapViewport(v: Vector2): Vector2 {
         return { x: this.mapViewportX(v.x), y: this.mapViewportY(v.y)}
     }
@@ -108,11 +98,6 @@ export class Canvas {
     public mapViewportY(y: number): number {
         return linearMap(this.viewportMinY, y, this.viewportMaxY, this.height, 0)
     }
-
-    public mapCanvas(v: Vector2): Vector2 {
-        return { x: this.mapCanvasW(v.x), y: this.mapCanvasH(v.y)}
-    }
-
     public mapCanvasW(w: number): number {
         return linearMap(0, w, this.width, this.viewportMinX, this.viewportMaxX)
     }

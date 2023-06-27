@@ -1,6 +1,6 @@
 <script lang="ts">
-    export let offset: number = 0;
-    export let length: number = 500;
+    export let offset = 0;
+    export let length = 500;
     export let thickness: string;
     export let color: string;
     export let type: "horizontal" | "vertical" = "horizontal";
@@ -12,16 +12,14 @@
         style:width="{length}rem"
         style:height={thickness}
         style:background-color={color}
-        style:top="{-offset}rem"
-    />
+        style:top="{-offset}rem"></div>
 {:else if type === "vertical"}
     <div
         class="line"
         style:height="{length}rem"
         style:width={thickness}
         style:background-color={color}
-        style:left="{offset}rem"
-    />
+        style:left="{offset}rem"></div>
 {/if}
 
 <style lang="scss">

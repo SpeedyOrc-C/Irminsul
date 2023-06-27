@@ -12,9 +12,9 @@
     export let id: string;
     export let translation: string;
     export let position: Vector2;
-    export let showCoordinate: boolean = false;
-    export let selected: boolean = false;
-    export let dim: boolean = false;
+    export let showCoordinate = false;
+    export let selected = false;
+    export let dim = false;
 
     let avatarSrc: string = img_avatar_UnknownAvatar;
     onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
@@ -117,9 +117,9 @@
 
         &.dim {
             filter: brightness(50%) blur(0.1rem);
-        }
-        &.dim:hover {
-            filter: unset;
+            &:hover {
+                filter: unset;
+            }
         }
     }
 

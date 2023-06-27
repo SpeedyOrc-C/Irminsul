@@ -1,8 +1,15 @@
-import type {Renderable} from "../Renderable";
-import type {Vector2} from "../../util/Vector2";
+import type {Vector2} from "$lib/util/Vector2";
 import type {Canvas} from "../Canvas";
 
-export class TimedParticle implements Renderable<TimedParticle> {
+export interface ITimedParticle {
+    position: Vector2,
+    lasts: number,
+    t: number;
+    duration: number;
+    willBeDestroyed: boolean;
+}
+
+export class TimedParticle implements ITimedParticle {
     position: Vector2;
     lasts = 0;
     t = 0;
@@ -14,11 +21,7 @@ export class TimedParticle implements Renderable<TimedParticle> {
         this.duration = duration;
     }
 
-    renderOn(canvas: Canvas) {
-
-    }
-
-    update(_self: TimedParticle, canvas: Canvas) {
+    update(canvas: Canvas): void {
         this.lasts += canvas.getDeltaTime();
         if (this.lasts > this.duration) {
             this.willBeDestroyed = true;

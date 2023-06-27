@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
+    import {createEventDispatcher, onMount} from "svelte";
     import type { Writable } from "svelte/store";
     import type { Option } from "../util/Option";
 
@@ -11,15 +11,17 @@
 
     const dispatch = createEventDispatcher();
 
-    show.subscribe(() => {
-        if ($show) {
-            optionDisplayed = true;
-        } else {
-            setTimeout(() => {
-                optionDisplayed = false;
-            }, 200);
-        }
-    });
+    onMount(() => {
+        show.subscribe(() => {
+            if ($show) {
+                optionDisplayed = true;
+            } else {
+                setTimeout(() => {
+                    optionDisplayed = false;
+                }, 200);
+            }
+        });
+    })
 </script>
 
 <div
@@ -38,7 +40,7 @@
                 show.set(false);
             }}
         >
-            <div class="option-background" />
+            <div class="option-background"></div>
             <div class="option-label">{option.label}</div>
         </div>
     {/each}

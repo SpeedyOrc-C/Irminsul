@@ -15,7 +15,7 @@
             on:click={() => {
                 if (
                     // Prevent jumping if the user clicks on the last cluster
-                    pathElement.id != pathElements[pathElements.length - 1].id
+                    pathElement.id !== pathElements[pathElements.length - 1].id
                 ) {
                     dispatch("rg-action", {
                         action: "jump-to",

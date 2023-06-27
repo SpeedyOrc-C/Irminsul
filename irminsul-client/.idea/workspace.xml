@@ -5,17 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b95e76f7-3c9b-4340-bb38-060f2b484b81" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/../irminsul-api-server/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Abyss.hs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keyboard-layout.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/CommonRelations.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/CommonRelations.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Inazuma.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Inazuma.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/WangshengFuneralParlor.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Liyue/WangshengFuneralParlor.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Sumeru.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Sumeru.hs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Sumeru/AlcazarzarayPalace.hs" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/app/Root/Teyvat/Sumeru/AlcazarzarayPalace.hs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../irminsul-api-server/irminsul-api-server.cabal" beforeDir="false" afterPath="$PROJECT_DIR$/../irminsul-api-server/irminsul-api-server.cabal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/asset/Asset.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/asset/Asset.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Canvas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Canvas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Renderable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Renderables/CloudyWave.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderables/CloudyWave.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Renderables/Particle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderables/Particle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Renderables/Particle/Snowflake.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderables/Particle/Snowflake.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Renderables/Particle/Star.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderables/Particle/Star.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/Renderables/ParticleSystem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/Renderables/ParticleSystem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/Canvas/SettingsItemCloudyBackground.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/Canvas/SettingsItemCloudyBackground.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Atom.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Atom.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Cluster.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Cluster.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Line.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Line.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Path.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Path.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/RelationBetween.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/RelationBetween.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/RelationGraph.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/RelationGraph.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Settings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Settings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/relation-graph/Settings/Graphics.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/relation-graph/Settings/Graphics.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Button.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Button.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Button/ButtonInferior.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Button/ButtonInferior.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Dialog.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Dialog.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Dialog/DialogCorner.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Dialog/DialogCorner.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Dropdown/DropdownInSettings.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Dropdown/DropdownInSettings.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/DropdownList.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/DropdownList.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Seperator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Seperator.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Settings/ItemBar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Settings/ItemBar.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ui/Settings/SettingsCategories.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ui/Settings/SettingsCategories.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/util/Option.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/util/Option.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/EntityRelations.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RelationGraph.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RelationGraph.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/entity-relations/+page.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/entity-relations/EntityRelations.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/entity-relations/PartialRelation.svelte" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,24 +75,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "ts.rename.search.for.js.occurrences": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/chenzhanming/Documents/GitHub/Irminsul/irminsul-client/node_modules/typescript/lib&quot;,
+    &quot;ts.rename.search.for.js.occurrences&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/util" />
@@ -97,6 +122,8 @@
       <workItem from="1686172348784" duration="557000" />
       <workItem from="1686173185741" duration="348000" />
       <workItem from="1687860005052" duration="306000" />
+      <workItem from="1687863112744" duration="1842000" />
+      <workItem from="1687864986044" duration="3856000" />
     </task>
     <servers />
   </component>

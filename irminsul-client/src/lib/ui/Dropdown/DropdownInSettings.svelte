@@ -1,22 +1,24 @@
 <script lang="ts">
-    import type { Option } from "../../util/Option";
-    import { createEventDispatcher } from "svelte";
+    import type { Option } from "$lib/util/Option";
+    import {createEventDispatcher, onMount} from "svelte";
     import { writable, type Writable } from "svelte/store";
     import Button from "../Button.svelte";
     import DropdownList from "../DropdownList.svelte";
 
     export let options: Array<Option>;
     export let value: Writable<string>;
-    export let below: boolean = true;
+    export let below = true;
 
     let show: Writable<boolean> = writable(false);
     let label: string | null = null;
 
     const dispatch = createEventDispatcher();
 
-    value.subscribe((newValue) => { 
-        label = options?.find((op) => op.value === newValue)?.label ?? null;
-    });
+    onMount(() => {
+        value.subscribe((newValue) => {
+            label = options?.find((op) => op.value === newValue)?.label ?? null;
+        });
+    })
 </script>
 
 <Button inSettings={true}>
@@ -26,7 +28,7 @@
             {label}
         {/key}
     </div>
-    <div class="down-arrow" />
+    <div class="down-arrow"></div>
     <div class="dropdown-list" class:below>
         <DropdownList
             {options}

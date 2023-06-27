@@ -4,7 +4,7 @@
     onMount(() => (window.location.href = "/relation-graph"));
 </script>
 
-<div id="home" />
+<div id="home"></div>
 
 <style>
     #home {

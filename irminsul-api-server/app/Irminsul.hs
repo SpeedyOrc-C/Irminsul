@@ -119,6 +119,7 @@ data ClusterType
     | Country
     | Area
     | Organization
+    | Family
     | AnotherMe
     | Property
     deriving (Eq, Show)

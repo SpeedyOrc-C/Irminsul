@@ -7,7 +7,7 @@ import Irminsul
 import Shortcut
 import CommonRelations
 
-import Root.Teyvat.Inazuma.TriCommission.YashiroCommission
+import Root.Teyvat.Inazuma.Kaedehara
 import Root.Teyvat.Inazuma.AratakiGang
 import Root.Teyvat.Inazuma.TriCommission
 import Root.Teyvat.Inazuma.WatatsumiIsland
@@ -24,7 +24,6 @@ kunikuzushiRaiden = "KunikuzushiRaiden";
 mikoYae = "MikoYae"
 yoimiyaNaganohara = "YoimiyaNaganohara"
 
-kaedeharaKazuha = "KaedeharaKazuha"
 kirara = "Kirara"
 
 inazuma = clusterNode "Inazuma" Country
@@ -35,7 +34,6 @@ inazuma = clusterNode "Inazuma" Country
         kunikuzushiRaiden,
         mikoYae,
         yoimiyaNaganohara,
-        kaedeharaKazuha,
         kirara
     ]
     [
@@ -45,6 +43,7 @@ inazuma = clusterNode "Inazuma" Country
         triCommission,
         aratakiGang,
         watatsumiIsland,
-        shuumatsuban
+        shuumatsuban,
+        kaedehara
     ]
     Nothing

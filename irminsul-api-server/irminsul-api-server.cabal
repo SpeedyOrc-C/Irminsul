@@ -95,6 +95,7 @@ executable irminsul-api
         Root.Teyvat.Hexenzirkel,
         Root.Teyvat.Inazuma,
         Root.Teyvat.Inazuma.AratakiGang,
+        Root.Teyvat.Inazuma.Kaedehara,
         Root.Teyvat.Inazuma.Shuumatsuban,
         Root.Teyvat.Inazuma.TriCommission,
         Root.Teyvat.Inazuma.TriCommission.KanjouCommission,

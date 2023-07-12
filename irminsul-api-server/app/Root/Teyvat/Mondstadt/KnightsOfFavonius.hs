@@ -10,9 +10,9 @@ import Root.AnotherWorld
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
 import Root.Teyvat.Mondstadt.DawnWinery
+import Root.Teyvat.Mondstadt.Gunnhildr
 
 varka = "Varka"
-jeanGunnhildr = "JeanGunnhildr"
 
 lisa = "Lisa"
 amber = "Amber"

@@ -7,7 +7,6 @@ import Irminsul
 import Shortcut
 import CommonRelations
 
-import Root.AnotherWorld
 import Root.Teyvat.Liyue.Adepti
 import Root.Teyvat.Liyue.BubuPharmacy
 import Root.Teyvat.Liyue.CruxFleet

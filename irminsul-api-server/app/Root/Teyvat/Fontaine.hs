@@ -8,9 +8,14 @@ import Root.Teyvat.Fontaine.TheSteambird
 
 monaAstrologistMegistus = "MonaAstrologistMegistus"
 
+idyia = "Idyia"
+rhodeia = "Rhodeia"
+
 fontaine = clusterNode "Fontaine" Country
     [
-        monaAstrologistMegistus
+        monaAstrologistMegistus,
+        idyia,
+        rhodeia
     ]
     [
 

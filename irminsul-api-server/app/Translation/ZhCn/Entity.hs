@@ -30,6 +30,7 @@ import Root.Teyvat.Liyue.FeiyunCommerceGuild
 import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Byakuyakoku
+import Root.Teyvat.Mondstadt.Gunnhildr
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [

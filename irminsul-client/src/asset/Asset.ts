@@ -6,10 +6,7 @@ export function getImgAvatar(id: string, assign: (result: string) => void) {
     const path = `./img/avatar/${id}.png`
     try {
         asset[path]()
-            .then(result => {
-                console.log(result);
-                assign(result.default);
-            })
+            .then(result => assign(result.default))
             .catch(() => assign(img_avatar_UnknownAvatar))
     } catch (e) {
         assign(img_avatar_UnknownAvatar)

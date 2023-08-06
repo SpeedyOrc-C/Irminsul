@@ -11,7 +11,7 @@ cabal-version:      3.4
 --   http://haskell.org/cabal/users-guide/
 --
 -- The name of the package.
-name:               irminsul-api-server
+name:               irminsul-api
 
 -- The package version.
 -- See the Haskell package versioning policy (PVP) for standards
@@ -146,7 +146,7 @@ executable irminsul-api
 
     -- Other library packages from which modules are imported.
     build-depends:
-        base ^>= 4.17.1.0
+        base >= 4.17.1.0
         ,warp
         ,wai
         ,wai-extra

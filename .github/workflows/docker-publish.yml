@@ -14,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: ./irminsul-api-server/Dockerfile
-            image: ghcr.io/SpeedyOrc-C/irminsul-api-server
-            context: irminsul-api-server
+          - dockerfile: ./irminsul-api/Dockerfile
+            image: ghcr.io/SpeedyOrc-C/irminsul-api
+            context: irminsul-api
           - dockerfile: ./irminsul-client/Dockerfile
             image: ghcr.io/SpeedyOrc-C/irminsul-client
             context: irminsul-client

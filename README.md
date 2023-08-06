@@ -5,5 +5,4 @@
 这是一个用于呈现电子游戏《原神》中人物关系的东西。这个东西一共分为三部分：
 
 - [客户端](/irminsul-client/README.md)
-- [API 服务端](/irminsul-api-server/README.md)
-- [网站服务端](/irminsul-site-server/README.md)
+- [API 服务端](/irminsul-api/README.md)

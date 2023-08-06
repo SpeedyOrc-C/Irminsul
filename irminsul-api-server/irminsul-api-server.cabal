@@ -125,6 +125,7 @@ executable irminsul-api
         Root.Teyvat.Mondstadt.CatsTail,
         Root.Teyvat.Mondstadt.DawnWinery,
         Root.Teyvat.Mondstadt.FavoniusChurch,
+        Root.Teyvat.Mondstadt.Gunnhildr,
         Root.Teyvat.Mondstadt.KnightsOfFavonius,
         Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam,
         Root.Teyvat.Mondstadt.Lupical,

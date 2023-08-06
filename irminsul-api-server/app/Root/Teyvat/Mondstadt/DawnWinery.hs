@@ -7,14 +7,18 @@ import Shortcut
 import CommonRelations
 
 dilucRagvindr = "DilucRagvindr"
+crepusRagvindr = "CrepusRagvindr"
 kaeyaRagvindr = "KaeyaRagvindr"
 
 dawnWinery = clusterLeaf "DawnWinery" Organization
     [
         dilucRagvindr,
+        crepusRagvindr,
         kaeyaRagvindr
     ]
     [
+        crepusRagvindr `father` dilucRagvindr,
+        dilucRagvindr `son` crepusRagvindr,
         foster youngerBrother kaeyaRagvindr dilucRagvindr,
         foster elderBrother dilucRagvindr kaeyaRagvindr
     ]

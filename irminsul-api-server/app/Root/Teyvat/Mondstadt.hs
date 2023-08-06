@@ -12,9 +12,9 @@ import Root.Teyvat.Mondstadt.Lupical
 import Root.Teyvat.Mondstadt.CatsTail
 import Root.Teyvat.Fontaine
 import Root.Teyvat.Khaenriah
-import Root.Teyvat.Inazuma
 import Root.Teyvat.Mondstadt.TheFourWinds
 import Root.Teyvat.Mondstadt.Springvale
+import Root.Teyvat.Mondstadt.Gunnhildr
 
 bennett = "Bennett"
 thoma = "Thoma"

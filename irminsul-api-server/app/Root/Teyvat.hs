@@ -19,6 +19,8 @@ import Root.Teyvat.Mondstadt.CatsTail
 import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Mondstadt.TheFourWinds
 import Root.Teyvat.Liyue.Qixing
+import Root.Teyvat.Fontaine
+import Root.Teyvat.Mondstadt.Gunnhildr
 
 heavenlyPrinciple = ao "HeavenlyPrinciple"
 sustainerOfHeavenlyPrinciple = "SustainerOfHeavenlyPrinciple"
@@ -31,6 +33,7 @@ teyvat = clusterNode "Teyvat" World
     [
         alice `mother` klee,
         klee `daughter` alice,
+        alice `friend` idyia,
 
         venti `friend` zhongli,
         venti `friend` buer,

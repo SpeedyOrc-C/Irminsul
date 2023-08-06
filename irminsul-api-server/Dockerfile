@@ -1,4 +1,4 @@
-FROM haskell:9-slim
+FROM haskell:9.4.5
 
 WORKDIR /opt/irminsul
 

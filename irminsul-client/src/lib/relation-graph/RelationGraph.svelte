@@ -13,21 +13,21 @@
     import { saveStringAsFile } from "$lib/util/String";
     import Panel from "./Panel.svelte";
     import { onMount } from "svelte";
-    import type { ApiResponse, ApiStatusCode } from "$lib/util/Api";
     import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
     import Settings from "./Settings.svelte";
     import { writable, type Writable } from "svelte/store";
     import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
     import { _ } from "svelte-i18n";
+    import {RelationGraphLoader} from "$lib/relation-graph/RelationGraphLoader";
 
     export let id: string;
     export let lang: Writable<string>;
     export let reduceVisualEffect: Writable<string>;
     export let whoAmI: Writable<"aether" | "lumine">;
 
-    let relationGraph: RelationGraph | null = null;
-    let responseStatus: ApiStatusCode | null = null;
+    const loader = new RelationGraphLoader();
 
+    let relationGraph: RelationGraph | null = null;
     let jsonFileInput: HTMLInputElement;
     let jsonFileReader: FileReader;
 
@@ -42,8 +42,14 @@
     let viewY = 0;
     let viewAngle = 0;
     let viewScaleExponent = 0;
-    let viewScale: number = Math.pow(2, 0.5 * viewScaleExponent);
+    let viewScale: number;
+    let viewAngleRad: number;
+    let viewAngleSin: number;
+    let viewAngleCos: number;
     $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
+    $: viewAngleRad = (viewAngle * Math.PI) / 180;
+    $: viewAngleSin = Math.sin(viewAngleRad);
+    $: viewAngleCos = Math.cos(viewAngleRad);
 
     let contentOpacity = 1;
 
@@ -67,58 +73,39 @@
         selectedClusters = e.detail.clusters;
         selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
         selectedEntitiesInSelectedClusters = new Set(
-            relationGraph?.clusters
-                .filter((cluster) => selectedClusters.has(cluster.id))
-                .flatMap((cluster) => cluster.elements) ?? []
+            relationGraph.clusters
+                .filter(cluster => selectedClusters.has(cluster.id))
+                .flatMap(cluster => cluster.elements) ?? []
         );
     }
 
     function moveUp() {
-        let deltaViewX = 0;
-        let deltaViewY = 0;
-        let viewAngleRad = (viewAngle * Math.PI) / 180;
-
-        deltaViewX -= (10 / viewScale) * Math.sin(viewAngleRad);
-        deltaViewY -= (10 / viewScale) * Math.cos(viewAngleRad);
-
-        viewAngle %= 360;
-        viewX += deltaViewX;
-        viewY += deltaViewY;
+        viewX -= (10 / viewScale) * viewAngleSin;
+        viewY -= (10 / viewScale) * viewAngleCos;
     }
 
     function moveDown() {
-        let viewAngleRad = (viewAngle * Math.PI) / 180;
-        viewX += (10 / viewScale) * Math.sin(viewAngleRad);
-        viewY += (10 / viewScale) * Math.cos(viewAngleRad);
+        viewX += (10 / viewScale) * viewAngleSin;
+        viewY += (10 / viewScale) * viewAngleCos;
     }
 
     function moveLeft() {
-        let viewAngleRad = (viewAngle * Math.PI) / 180;
-        viewX += (10 / viewScale) * Math.cos(viewAngleRad);
-        viewY -= (10 / viewScale) * Math.sin(viewAngleRad);
+        viewX += (10 / viewScale) * viewAngleCos;
+        viewY -= (10 / viewScale) * viewAngleSin;
     }
 
     function moveRight() {
-        let viewAngleRad = (viewAngle * Math.PI) / 180;
-        viewX -= (10 / viewScale) * Math.cos(viewAngleRad);
-        viewY += (10 / viewScale) * Math.sin(viewAngleRad);
+        viewX -= (10 / viewScale) * viewAngleCos;
+        viewY += (10 / viewScale) * viewAngleSin;
     }
 
-    function zoomIn() {
-        viewScaleExponent += 1;
-    }
+    function zoomIn() { viewScaleExponent += 1; }
 
-    function zoomOut() {
-        viewScaleExponent -= 1;
-    }
+    function zoomOut() { viewScaleExponent -= 1; }
 
-    function rotateAnticlockwise() {
-        viewAngle += 22.5;
-    }
+    function rotateAnticlockwise() { viewAngle = (viewAngle + 22.5) % 360; }
 
-    function rotateClockwise() {
-        viewAngle -= 22.5;
-    }
+    function rotateClockwise() { viewAngle = (viewAngle - 22.5) % 360; }
 
     function resetView() {
         viewX = 0;
@@ -133,109 +120,79 @@
     }
 
     function keydownListener(e: KeyboardEvent) {
-        if (e.ctrlKey === e.metaKey) {
-            switch (e.code) {
-                case "KeyW":
-                    moveUp();
-                    break;
-                case "KeyS":
-                    moveDown();
-                    break;
-                case "KeyA":
-                    moveLeft();
-                    break;
-                case "KeyD":
-                    moveRight();
-                    break;
-                case "Minus":
-                    zoomOut();
-                    break;
-                case "Equal":
-                    zoomIn();
-                    break;
-                case "KeyQ":
-                    rotateClockwise();
-                    break;
-                case "KeyE":
-                    rotateAnticlockwise();
-                    break;
-                case "Digit0":
-                    resetView();
-                    break;
-                case "KeyX":
-                    showAxis.set(!$showAxis);
-                    break;
-                case "KeyG":
-                    showGrid.set(!$showGrid);
-                    break;
-                case "KeyC":
-                    showCoordinate = !showCoordinate;
-                    break;
-                default:
-                    if (relationGraph == null || !rootClusterSelected) return;
-                    switch (e.code) {
-                        case "KeyI":
-                            relationGraph.rootPosition.y += deadKeyMultiplier(e);
-                            break;
-                        case "KeyK":
-                            relationGraph.rootPosition.y -= deadKeyMultiplier(e);
-                            break;
-                        case "KeyJ":
-                            relationGraph.rootPosition.x -= deadKeyMultiplier(e);
-                            break;
-                        case "KeyL":
-                            relationGraph.rootPosition.x += deadKeyMultiplier(e);
-                            break;
-                    }
-                    break;
-            }
+        if (relationGraph == null) return;
+
+        if (e.ctrlKey !== e.metaKey) return;
+
+        if (e.code === "KeyW") {
+            moveUp();
+        } else if (e.code === "KeyS") {
+            moveDown();
+        } else if (e.code === "KeyA") {
+            moveLeft();
+        } else if (e.code === "KeyD") {
+            moveRight();
+        } else if (e.code === "Minus") {
+            zoomOut();
+        } else if (e.code === "Equal") {
+            zoomIn();
+        } else if (e.code === "KeyQ") {
+            rotateClockwise();
+        } else if (e.code === "KeyE") {
+            rotateAnticlockwise();
+        } else if (e.code === "Digit0") {
+            resetView();
+        } else if (e.code === "KeyX") {
+            showAxis.set(!$showAxis);
+        } else if (e.code === "KeyG") {
+            showGrid.set(!$showGrid);
+        } else if (e.code === "KeyC") {
+            showCoordinate = !showCoordinate;
+        } else if (!rootClusterSelected) {
+            return;
+        } else if (e.code === "KeyI") {
+            relationGraph.rootPosition.y += deadKeyMultiplier(e);
+        } else if (e.code === "KeyK") {
+            relationGraph.rootPosition.y -= deadKeyMultiplier(e);
+        } else if (e.code === "KeyJ") {
+            relationGraph.rootPosition.x -= deadKeyMultiplier(e);
+        } else if (e.code === "KeyL") {
+            relationGraph.rootPosition.x += deadKeyMultiplier(e);
         }
     }
 
-    function loadRelationGraph(to: string) {
-        console.info("Loading relation graph:", to);
+    async function loadRelationGraph(loadId: string) {
+        console.info("Loading relation graph:", loadId);
 
-        fetch(`/api/relation-graph/${to}/${$lang}`)
-            .then((response) => response.json())
-            .then((json: ApiResponse<RelationGraph>) => {
-                responseStatus = json.status;
+        let json: RelationGraph;
+        try {
+            json = await loader.load(loadId, $lang);
+        } catch (e) {
+            console.warn("Failed to load relation graph, error:", e);
+            switch (e) {
+                case "LayoutMissing":
+                    showLayoutMissing.set(true);
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
 
-                if (json.status != "OK") {
-                    console.warn(
-                        "Failed to load relation graph, error:",
-                        json.status
-                    );
-                    switch (json.status) {
-                        case "LayoutMissing":
-                            showLayoutMissing.set(true);
-                            break;
-                        default:
-                            break;
-                    }
-                    return;
-                }
+        contentOpacity = 0;
+        relationGraph = json;
+        selectedEntities.clear();
+        selectedAtoms.clear();
+        selectedClusters.clear();
+        updateEntityAnchor();
+        resetView();
+        id = loadId;
 
-                contentOpacity = 0;
-                relationGraph = json.body;
-                selectedEntities.clear();
-                selectedAtoms.clear();
-                selectedClusters.clear();
-                updateEntityAnchor();
-                resetView();
-                id = to;
+        window.history.replaceState(undefined, "", `/relation-graph/?id=${id}&lang=${$lang}`);
 
-                window.history.replaceState(
-                    undefined,
-                    "",
-                    `/relation-graph/?id=${id}&lang=${$lang}`
-                );
-
-                console.info("Relation graph loaded: ", relationGraph);
-
-                setTimeout(() => {
-                    contentOpacity = 1;
-                }, 300);
-            });
+        console.info("Relation graph loaded: ", json);
+        contentOpacity = 1;
+        // setTimeout(() => { contentOpacity = 1; }, 300);
     }
 
     function updateEntityAnchor() {

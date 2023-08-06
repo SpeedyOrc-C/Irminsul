@@ -12,17 +12,20 @@ kagemitsuKaedehara = "KagemitsuKaedehara"
 kageharuKaedehara = "KageharuKaedehara"
 kazuhaKaedehara = "KazuhaKaedehara"
 
+kageharuKaedeharaFather = "KageharuKaedeharaFather"
+
 kaedehara = clusterLeaf "Kaedehara" Family
     [
         yoshinoriKaedehara,
         hisamichiKaedehara,
         kagemitsuKaedehara,
         kageharuKaedehara,
-        kazuhaKaedehara
+        kazuhaKaedehara,
+        kageharuKaedeharaFather
     ]
     [
         kageharuKaedehara `father` kazuhaKaedehara,
-        undefined `father` kageharuKaedehara,
-        yoshinoriKaedehara `father` undefined
+        kageharuKaedeharaFather `father` kageharuKaedehara,
+        yoshinoriKaedehara `father` kageharuKaedeharaFather
     ]
     Nothing

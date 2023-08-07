@@ -31,6 +31,8 @@ import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Byakuyakoku
 import Root.Teyvat.Mondstadt.Gunnhildr
+import Root.Teyvat.Liyue.CruxFleet
+import Root.Teyvat.Liyue.Adepti.Yaksha
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -42,6 +44,7 @@ translationEntityZhCn = [
     ip amber "安柏" ["打火姬", "蒙德飞行冠军"] UntilNow "",
     ipn aru "亚琉",
     ipn barbaraPegg ("芭芭拉"."佩奇"),
+    ipn beidou "北斗",
     ipn bennett "班尼特",
     ipn boreas "玻瑞亚斯",
     ipn catsTail "猫尾酒馆",
@@ -60,6 +63,7 @@ translationEntityZhCn = [
     ipn fischlVonLuftschlossNarfidort ("菲谢尔"."冯"."露弗施洛斯"."那菲多特"),
     ipn ganyu "甘雨",
     ipn guerillaTeam "游击小队",
+    ipn hutao "胡桃",
     ipn inazuma "稻妻",
     ip jeanGunnhildr ("琴"."古恩希尔德") ["琴妈", "骑士团的魂"] UntilNow "",
     ip kaeya "凯亚" ["矿工头子"] UntilNow "",
@@ -76,6 +80,7 @@ translationEntityZhCn = [
     ip mikaSchmidt ("米卡"."施密特") ["前进测绘员"] UntilNow "",
     ipn monaAstrologistMegistus ("阿斯托洛吉斯"."莫娜"."梅姬斯图斯"),
     ipn mondstadt "蒙德",
+    ipn ningguang "凝光",
     ip noelle "诺艾尔" ["女仆", "高达", "岩王帝姬"] UntilNow "",
     ipn ozvaldoHrafnavins ("奥兹华尔多"."赫芙那梵茵斯"),
     ipn princeCat "小王子",
@@ -92,6 +97,8 @@ translationEntityZhCn = [
     ipn varka "法尔伽",
     ipn venti "温迪",
     ipn xiangling "香菱",
+    ipn xiao "魈",
     ipn xingqiu "行秋",
+    ipn yelan "夜兰",
     ipn zhongli "钟离"
     ]

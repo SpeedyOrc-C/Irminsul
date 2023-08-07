@@ -29,6 +29,8 @@ import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Byakuyakoku
 import Root.Teyvat.Mondstadt.Gunnhildr
+import Root.Teyvat.Liyue.CruxFleet
+import Root.Teyvat.Liyue.Adepti.Yaksha (xiao)
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -40,6 +42,7 @@ translationEntityEnUs = [
     ipn amber "Amber",
     ipn aru "Aru",
     ipn barbaraPegg "Barbara Pegg",
+    ipn beidou "Beidou",
     ipn bennett "Bennett",
     ipn boreas "Boreas",
     ipn catsTail "Cat's Tail",
@@ -58,6 +61,7 @@ translationEntityEnUs = [
     ipn fischlVonLuftschlossNarfidort "Fischl von Luftschloss Narfidort",
     ipn ganyu "Ganyu",
     ipn guerillaTeam "Guerilla Team",
+    ipn hutao "Hutao",
     ipn inazuma "Inazuma",
     ipn jeanGunnhildr "Jean Gunnhildr",
     ipn kaeya "Kaeya",
@@ -74,9 +78,10 @@ translationEntityEnUs = [
     ipn margaret "Margaret",
     ipn monaAstrologistMegistus "Mona Megistus, the Astrologist",
     ipn mondstadt "Mondstadt",
+    ipn ningguang "Ningguang",
+    ipn noelle "Noelle",
     ipn ozvaldoHrafnavins "Ozvaldo Hrafnavins",
     ipn princeCat "Prince",
-    ipn noelle "Noelle",
     ipn qingceVillage "Qingce Village",
     ipn razor "Razor",
     ipn rosaria "Rosaria",
@@ -90,6 +95,8 @@ translationEntityEnUs = [
     ipn varka "Varka",
     ipn venti "Venti",
     ipn xiangling "Xiangling",
+    ipn xiao "Xiao",
     ipn xingqiu "Xingqiu",
+    ipn yelan "Yelan",
     ipn zhongli "Zhongli"
     ]

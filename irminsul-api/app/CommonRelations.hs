@@ -39,6 +39,7 @@ appreciate = ra "Appreciate"
 like = ra "Like"
 create = ra "Create"
 hate = ra "Hate"
+lookAfter = ra "LookAfter"
 dislike = ra "Dislike"
 kill = ra "Kill"
 

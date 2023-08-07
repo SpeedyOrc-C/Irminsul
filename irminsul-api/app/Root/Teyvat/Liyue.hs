@@ -17,6 +17,7 @@ import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Liyue.YunHanOperaTroupe
 import Root.Teyvat.Liyue.QingceVillage
+import Root.Teyvat.Liyue.Adepti.Yaksha (xiao)
 
 chongyun = "Chongyun"
 
@@ -34,7 +35,10 @@ liyue = clusterNode "Liyue" Country
     ]
     [
         zhongli `rule` liyue,
-
+        zhongli `appreciate` keqing,
+        zhongli `appreciate` ningguang,
+        zhongli `lookAfter` xiao,
+        
         ningguang `friend` beidou,
         ningguang `friend` yelan,
         ningguang `appreciate` jinYun
@@ -47,13 +51,22 @@ liyue = clusterNode "Liyue" Country
         cruxFleet,
         wanminRestaurant,
         bubuPharmary,
-        yuehaiPavilion,
+        yuehaiPavilion, 
         yunHanOperaTroupe,
         qingceVillage
     ]
     (Just $ RelationGraphLayout {
         rootProperty=rl (-15, 15),
         elementProperties=[
-            al zhongli (-15, 0)
+            al zhongli (-15, 0),
+            al ningguang (0, 0),
+            al jinYun (0, -15),
+            al yelan (0, 15),
+            al beidou (15, 0),
+            al keqing (-15, -15),
+            al xiao (-30, 0),
+            al hutao (-30, -15),
+            al qiqi (-45, -15),
+            al baizhu (-45, 0)
         ]    
     })

@@ -1,6 +1,5 @@
 import type {RelationGraph} from "../../model/RelationGraph";
 import type {ApiResponse} from "$lib/util/Api";
-import {loop_guard} from "svelte/internal";
 
 export class RelationGraphLoader {
 

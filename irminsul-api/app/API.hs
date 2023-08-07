@@ -1,7 +1,7 @@
 {-
 All the APIs are defined here.
 -}
-module API (apiRelationGraph, apiUnknown) where
+module API (apiRelationGraph, illegalRequest, ApiStatusCode (..)) where
 
 import Irminsul
 import LanguagePack
@@ -18,7 +18,7 @@ This function embed the status code and the body into a new JSON.
 -}
 data ApiStatusCode
     = OK
-    | MissingParameter
+    | ParamNumMismatch { paramNumRequired :: Integer }
     | UnsupportedLanguage
     | NotImplementedCluster
     | NotImplementedEntity
@@ -32,6 +32,9 @@ apiResponse status body =
         ("status", JString $ show status),
         ("body", body)]
 
+-- |　Illegal API request.
+illegalRequest :: ApiStatusCode -> JSON
+illegalRequest = (`apiResponse` JNull)
 
 {- |
 Try to find a entity that matches the input ID.
@@ -60,7 +63,3 @@ apiRelationGraph inputId inputLang =
         (entityFromId inputId)
     )
     (readLanguageCode inputLang)
-
--- | Response with this if the input is illegal.
-apiUnknown :: JSON
-apiUnknown = apiResponse UnknownApi JNull

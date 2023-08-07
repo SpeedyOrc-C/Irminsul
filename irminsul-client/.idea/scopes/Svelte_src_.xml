@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Svelte src 文件夹" pattern="file[irminsul-client]:src//*" />
-</component>

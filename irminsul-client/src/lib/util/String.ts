@@ -2,7 +2,7 @@ export function lowercaseFirstLetter(s: string): string {
     return s.charAt(0).toLowerCase() + s.slice(1)
 }
 
-export function saveStringAsFile(str: string, filename: string) {
+export function saveStringAsFile(filename: string, str: string) {
     const blob = new Blob([str], { type: 'plain/text' });
     const url = URL.createObjectURL(blob);
     

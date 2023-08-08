@@ -3,7 +3,7 @@
     import Atom from "./Atom.svelte";
     import Cluster from "./Cluster.svelte";
     import {
-        dumpRelationGraphRelation2Haskell,
+        dumpRelationGraph2Haskell,
         type RelationGraph,
     } from "../../model/RelationGraph";
     import RelationBetween from "./RelationBetween.svelte";
@@ -103,9 +103,9 @@
 
     function zoomOut() { viewScaleExponent -= 1; }
 
-    function rotateAnticlockwise() { viewAngle = (viewAngle + 22.5) % 360; }
+    function rotateAnticlockwise() { viewAngle = viewAngle + 22.5; }
 
-    function rotateClockwise() { viewAngle = (viewAngle - 22.5) % 360; }
+    function rotateClockwise() { viewAngle = viewAngle - 22.5; }
 
     function resetView() {
         viewX = 0;
@@ -192,7 +192,6 @@
 
         console.info("Relation graph loaded: ", json);
         contentOpacity = 1;
-        // setTimeout(() => { contentOpacity = 1; }, 300);
     }
 
     function updateEntityAnchor() {
@@ -210,22 +209,25 @@
     }
 
     function exportHaskell() {
-        if (relationGraph == null) return;
+        if (relationGraph == null) {
+            console.error("No relation graph opened.");
+            return;
+        }
+        console.info("Saving as Haskell...");
 
         let fileName = `${relationGraph.id}-Haskell.txt`;
-        console.info("Saving as Haskell...", fileName);
-        saveStringAsFile(
-            dumpRelationGraphRelation2Haskell(relationGraph),
-            fileName
-        );
+        saveStringAsFile(fileName, dumpRelationGraph2Haskell(relationGraph));
     }
 
     function exportJson() {
-        if (relationGraph == null) return;
+        if (relationGraph == null) {
+            console.error("No relation graph opened.")
+            return;
+        }
+        console.info("Saving as JSON...");
 
         let fileName = `${relationGraph.id}-JSON.json`;
-        console.info("Saving as JSON...", fileName);
-        saveStringAsFile(JSON.stringify(relationGraph, null, 4), fileName);
+        saveStringAsFile(fileName, JSON.stringify(relationGraph, null, 4));
     }
 
     function importJson() {

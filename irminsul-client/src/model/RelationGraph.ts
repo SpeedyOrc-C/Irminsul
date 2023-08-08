@@ -49,7 +49,7 @@ export interface RelationGraph {
     relationsBetween: Array<RelationBetween>
 }
 
-export function dumpRelationGraphRelation2Haskell(rg: RelationGraph): string {
+export function dumpRelationGraph2Haskell(rg: RelationGraph): string {
     return [
         '(Just $ RelationGraphLayout {',
 

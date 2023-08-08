@@ -59,10 +59,10 @@ clusterNode name clusterType pEntities pRelations children =
     Cluster name clusterType
         (IndexedSetFamily
             (pEntities ++ children)
-            (pEntities ++ children ++ nub (concatMap (elements . entities) children)))
+            (nub (pEntities ++ children ++ concatMap (elements . entities) children)))
         (IndexedSetFamily
             pRelations
-            (pRelations ++ nub (concatMap (elements . relations) children)))
+            (nub (pRelations ++ concatMap (elements . relations) children)))
 
 {- |
     Create a new leaf node, which it has no children.

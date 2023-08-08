@@ -1,6 +1,3 @@
-{-
-All the APIs are defined here.
--}
 module API (apiRelationGraph, illegalRequest, ApiStatusCode (..)) where
 
 import Irminsul
@@ -29,17 +26,12 @@ data ApiStatusCode
 
 apiResponse :: ApiStatusCode -> JSON -> JSON
 apiResponse status body =
-    JObject [
-        ("status", JString $ show status),
-        ("body", body)]
+    JObject [("status", JString $ show status), ("body", body)]
 
--- |　Illegal API request.
 illegalRequest :: ApiStatusCode -> JSON
 illegalRequest = (`apiResponse` JNull)
 
-{- |
-Try to find a entity that matches the input ID.
--}
+-- | Try to find a entity that matches the input ID.
 entityFromId :: String -> Maybe Entity
 entityFromId "Root" = Just root
 entityFromId inputId =

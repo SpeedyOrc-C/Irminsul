@@ -4,7 +4,7 @@
     import { createEventDispatcher } from "svelte";
 
     import { _ } from "svelte-i18n";
-    import type {PathElement, RelationGraph} from "../../model/RelationGraph";
+    import type {RelationGraph} from "../../model/RelationGraph";
     import Path from "./Path.svelte";
 
     export let relationGraph: RelationGraph | null;

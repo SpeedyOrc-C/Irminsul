@@ -18,7 +18,7 @@
                 localStorage.getItem("lang") ??
                 "zh-cn"
         );
-        lang.subscribe((newLang) => {
+        lang.subscribe(newLang => {
             console.info("Change language into:", newLang);
             locale.set(newLang);
             localStorage.setItem("lang", newLang);
@@ -40,7 +40,7 @@
                 whoAmI.set("aether");
                 break;
         }
-        whoAmI.subscribe((v) => localStorage.setItem("who-am-i", v));
+        whoAmI.subscribe(whoAmI => localStorage.setItem("who-am-i", whoAmI));
     });
 </script>
 

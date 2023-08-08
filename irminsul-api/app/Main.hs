@@ -26,7 +26,7 @@ main = do
 Here defines all the possible paths of API requests.
 -}
 app :: Application
-app req respond = respond $ case (T.unpack <$> pathInfo req) of
+app req respond = respond $ case T.unpack <$> pathInfo req of
     "api" : params -> router params
     _ -> showResponse $ illegalRequest UnknownApi
 

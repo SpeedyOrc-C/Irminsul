@@ -24,6 +24,7 @@ data ApiStatusCode
     | NotImplementedEntity
     | LayoutMissing
     | UnknownApi
+    | InvalidTravellerName
     deriving (Eq, Show)
 
 apiResponse :: ApiStatusCode -> JSON -> JSON
@@ -50,16 +51,18 @@ entityFromId inputId =
 
 {- APIs -}
 
-apiRelationGraph :: String -> String -> JSON
-apiRelationGraph inputId inputLang =
-    maybe (apiResponse UnsupportedLanguage JNull)
-    (\language ->
-        maybe (apiResponse NotImplementedCluster JNull)
-        (\entity ->
-            if isNothing (layout entity)
-            then apiResponse LayoutMissing JNull
-            else apiResponse OK $ relationGraph language entity
-        )
-        (entityFromId inputId)
-    )
-    (readLanguageCode inputLang)
+apiRelationGraph :: String -> String -> String -> JSON
+apiRelationGraph inputId inputLang inputWhoAmI = let
+    maybeId = entityFromId inputId
+    maybeLang = readLanguageCode inputLang
+    maybeWhoAmI = readWhoAmI inputWhoAmI
+
+    response Nothing _ _ = illegalRequest NotImplementedCluster
+    response _ Nothing _ = illegalRequest UnsupportedLanguage
+    response _ _ Nothing = illegalRequest InvalidTravellerName
+    response (Just entityId) (Just lang) (Just whoAmI) =
+        if isNothing (layout entityId) then illegalRequest LayoutMissing
+        else apiResponse OK $ relationGraph lang entityId whoAmI
+
+    in response maybeId maybeLang maybeWhoAmI
+    

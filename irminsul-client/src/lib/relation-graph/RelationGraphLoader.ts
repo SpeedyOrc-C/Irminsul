@@ -5,20 +5,20 @@ export class RelationGraphLoader {
 
     cache: Map<string, Map<string, RelationGraph>> = new Map();
 
-    load(id: string, lang: string): Promise<RelationGraph> {
+    load(id: string, lang: string, whoAmI: "aether" | "lumine" = "aether"): Promise<RelationGraph> {
         const cachedRelationGraph = this.loadFromCache(id, lang);
         if (cachedRelationGraph == null) {
             console.info('Not found in cache, downloading...');
-            return this.downloadFromServer(id, lang);
+            return this.downloadFromServer(id, lang, whoAmI);
         }
 
         console.info('Found in cache.')
         return Promise.resolve(cachedRelationGraph);
     }
 
-    downloadFromServer(id: string, lang: string): Promise<RelationGraph> {
+    downloadFromServer(id: string, lang: string, whoAmI: "aether" | "lumine" = "aether"): Promise<RelationGraph> {
         return new Promise((resolve, reject) =>
-            fetch(`/api/relation-graph/${id}/${lang}`)
+            fetch(`/api/relation-graph/${id}/${lang}/${whoAmI}`)
                 .then(response => {
                     if (response.status < 200 || response.status > 299) {
                         reject(response.status);
@@ -63,4 +63,8 @@ export class RelationGraphLoader {
         }
     }
 
+    clearCache() {
+        this.cache.forEach(langMap => langMap.clear());
+        this.cache.clear();
+    }
 }

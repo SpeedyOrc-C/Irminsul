@@ -62,6 +62,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
             al noelle (15, 0),
             al eulaLawrence (0, -15),
             al mikaSchmidt (30, -15),
+            al travellerArchonSide (30, 0),
 
             cl guerillaTeam (18.5, -15) (18, -15) (15, 5)
         ]

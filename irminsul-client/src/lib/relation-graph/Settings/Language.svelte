@@ -29,10 +29,8 @@
     {/key}
 </ItemBar>
 
-<!-- TODO
-    <ItemBar caption={$_("settings.language.who-am-i")}>
-        {#key whoAmIOptions}
-            <DropdownInSettings options={whoAmIOptions} value={whoAmI} />
-        {/key}
-    </ItemBar>
--->
+<ItemBar caption={$_("settings.language.who-am-i")}>
+    {#key whoAmIOptions}
+        <DropdownInSettings options={whoAmIOptions} value={whoAmI} />
+    {/key}
+</ItemBar>

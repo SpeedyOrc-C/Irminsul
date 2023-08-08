@@ -166,7 +166,7 @@
 
         let json: RelationGraph;
         try {
-            json = await loader.load(loadId, $lang);
+            json = await loader.load(loadId, $lang, $whoAmI);
         } catch (e) {
             console.warn("Failed to load relation graph, error:", e);
             switch (e) {
@@ -188,7 +188,7 @@
         resetView();
         id = loadId;
 
-        window.history.replaceState(undefined, "", `/relation-graph/?id=${id}&lang=${$lang}`);
+        window.history.replaceState(undefined, "", `/relation-graph/?id=${id}&lang=${$lang}&who-am-i=${$whoAmI}`);
 
         console.info("Relation graph loaded: ", json);
         contentOpacity = 1;
@@ -280,6 +280,7 @@
             }
 
             const files = jsonFileInput.files;
+
             if (files?.length > 0) {
                 const file = files[0];
                 jsonFileReader.readAsText(file);
@@ -304,6 +305,10 @@
             }
         );
         lang.subscribe(() => loadRelationGraph(id));
+        whoAmI.subscribe(() => {
+            loader.clearCache();
+            loadRelationGraph(id);
+        });
     });
 </script>
 

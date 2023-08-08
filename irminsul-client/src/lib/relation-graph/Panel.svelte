@@ -4,10 +4,14 @@
     import { createEventDispatcher } from "svelte";
 
     import { _ } from "svelte-i18n";
-    import type { PathElement } from "../../model/RelationGraph";
+    import type {PathElement, RelationGraph} from "../../model/RelationGraph";
     import Path from "./Path.svelte";
 
-    export let pathElements: Array<PathElement>;
+    export let relationGraph: RelationGraph | null;
+
+    export let id: string;
+
+    // Path should contain the current cluster for better experience
 
     const dispatch = createEventDispatcher();
 
@@ -18,11 +22,17 @@
 
 <div class="panel font-hywh-65w">
     <Separator />
-    <ButtonInferior action="open-settings" on:button-clicked={dispatchRgAction}
-        >{$_("panel.settings")}</ButtonInferior
-    >
+
+    <ButtonInferior action="open-settings" on:button-clicked={dispatchRgAction}>
+        {$_("panel.settings")}
+    </ButtonInferior>
+
     <Separator width="4rem" />
-    <Path on:rg-action {pathElements} />
+
+    {#if relationGraph != null}
+        {@const pathElements = relationGraph.path.concat([{ id: id, translation: relationGraph.rootTranslation }])}
+        <Path on:rg-action {pathElements}/>
+    {/if}
 </div>
 
 <style lang="scss">

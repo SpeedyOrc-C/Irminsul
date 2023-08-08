@@ -392,15 +392,7 @@
         {/if}
     </div>
 
-    {#if relationGraph != null && id != null}
-        <!-- Path should contain the current cluster for better experience -->
-        <Panel
-            on:rg-action={handleRgAction}
-            pathElements={relationGraph.path.concat([
-                { id: id, translation: relationGraph.rootTranslation },
-            ])}
-        />
-    {/if}
+    <Panel on:rg-action={handleRgAction} {relationGraph} {id}/>
 
     <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
         {$_("error.layout-missing.detail")}

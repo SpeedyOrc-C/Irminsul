@@ -82,17 +82,15 @@
 <svelte:window on:keydown={keydown} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-    {id}
-    class="atom"
-    class:selected
-    class:dim
-    style:left="{position.x}rem"
-    style:top="{-position.y}rem"
+<div class="atom" class:selected class:dim
+    style:left="{position.x}rem" style:top="{-position.y}rem"
     on:click={toggleSelect}
+    {id}
 >
     <img class="avatar" src={avatarSrc} alt="" />
+
     <div class="translation font-hywh-65w">{translation}</div>
+
     {#if showCoordinate}
         <Coordinate coordinate={position} />
     {/if}

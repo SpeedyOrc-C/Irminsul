@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import {afterUpdate, onMount} from "svelte";
+    import type { Vector2 } from "../util/Vector2";
 
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
@@ -9,57 +10,14 @@
     export let subjectAnchor: Vector2;
     export let objectAnchor: Vector2;
 
-    /*
-    Chinese characters (in Chinese and Japanese) and Hangul (in Korean)
-    rotate themselves 90 degrees anti-clockwise when they are written vertically.
-    As some relations are vertical, we need to rotate these characters.
-    */
-    export let writingSystemIsCJK = false;
-
-    import type { Vector2 } from "../util/Vector2";
-
     let needReverse: boolean;
-    $: needReverse =
-        objectAnchor.x < subjectAnchor.x ||
-        (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
     let realForwardRelations: Array<string>;
-
-    $: realForwardRelations = needReverse
-        ? backwardRelations
-        : forwardRelations;
-
     let realBackwardRelations: Array<string>;
-    $: realBackwardRelations = needReverse
-        ? forwardRelations
-        : backwardRelations;
 
     let width: number;
-    $: width = Math.sqrt(
-        (subjectAnchor.x - objectAnchor.x) ** 2 +
-            (subjectAnchor.y - objectAnchor.y) ** 2
-    );
-
     let position: Vector2 = { x: 0, y: 0 };
-    $: position.x = (subjectAnchor.x + objectAnchor.x) / 2;
-    $: position.y = (subjectAnchor.y + objectAnchor.y) / 2;
-
     let rotation: number;
-    $: rotation =
-        -(
-            Math.atan(
-                (subjectAnchor.y - objectAnchor.y) /
-                    (subjectAnchor.x - objectAnchor.x)
-            ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
-        ) + (needReverse ? Math.PI : 0);
-
-    let hasBiRelation: boolean;
-    let hasForwardRelation: boolean;
-    let hasBackwardRelation: boolean;
-
-    $: hasBiRelation = biRelations.length > 0;
-    $: hasForwardRelation = realForwardRelations.length > 0;
-    $: hasBackwardRelation = realBackwardRelations.length > 0;
 
     let forwardRelationY: number;
     let backwardRelationY: number;
@@ -69,9 +27,40 @@
         objectAnchor = objectAnchor;
     }
 
-    onMount(() => {
-        // Bi-relations are always centered.
-        // But uni-directional relations' offset can change for better readability.
+    afterUpdate(() => {
+        let hasBiRelation = biRelations.length > 0;
+
+        needReverse =
+            objectAnchor.x < subjectAnchor.x ||
+            (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
+
+        realForwardRelations = needReverse
+            ? backwardRelations
+            : forwardRelations;
+
+        let hasForwardRelation = realForwardRelations.length > 0;
+
+        realBackwardRelations = needReverse
+            ? forwardRelations
+            : backwardRelations;
+
+        let hasBackwardRelation = realBackwardRelations.length > 0;
+
+        width = Math.sqrt(
+            (subjectAnchor.x - objectAnchor.x) ** 2 +
+            (subjectAnchor.y - objectAnchor.y) ** 2
+        );
+
+        position.x = (subjectAnchor.x + objectAnchor.x) / 2;
+        position.y = (subjectAnchor.y + objectAnchor.y) / 2;
+        rotation = -(
+                Math.atan(
+                    (subjectAnchor.y - objectAnchor.y) /
+                    (subjectAnchor.x - objectAnchor.x)
+                ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
+            ) + (needReverse ? Math.PI : 0);
+
+        // Bi-relations are always centered. // But uni-directional relations' offset can change for better readability.
         if (hasBiRelation) {
             // Uni-directional relations are placed
             // above or below the bi-relations.
@@ -108,7 +97,6 @@
     {#if biRelations.length > 0}
         <div
             class="bi-relation font-hywh-65w"
-            class:write-vertically={writingSystemIsCJK}
         >
             {#each biRelations as r}
                 <div>{r}</div>
@@ -116,23 +104,16 @@
         </div>
     {/if}
 
-    {#if realForwardRelations.length > 0}
-        <div
-            class="forward-relation font-hywh-65w rotate-cjk-clockwise"
-            style:top="calc(50% + {-forwardRelationY}rem)"
-        >
+    {#if realForwardRelations !== undefined && realForwardRelations?.length > 0}
+        <div class="forward-relation font-hywh-65w" style:top="calc(50% + {-forwardRelationY}rem)">
             {#each realForwardRelations as r}
                 <div>{r}</div>
             {/each}
         </div>
     {/if}
 
-    {#if realBackwardRelations.length > 0}
-        <div
-            class="backward-relation font-hywh-65w"
-            class:write-vertically={writingSystemIsCJK}
-            style:top="calc(50% + {-backwardRelationY}rem)"
-        >
+    {#if realBackwardRelations !== undefined && realBackwardRelations?.length > 0}
+        <div class="backward-relation font-hywh-65w" style:top="calc(50% + {-backwardRelationY}rem)">
             {#each realBackwardRelations as r}
                 <div>{r}</div>
             {/each}

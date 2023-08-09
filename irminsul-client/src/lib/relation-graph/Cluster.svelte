@@ -15,6 +15,7 @@
     export let size: Vector2;
     export let showCoordinate = false;
     export let selected = false;
+    export let elements: Array<string>;
 
     const dispatch = createEventDispatcher();
 

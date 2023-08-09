@@ -348,23 +348,15 @@
                         forwardRelations={relationBetween.forwardRelations}
                         backwardRelations={relationBetween.backwardRelations}
                         biRelations={relationBetween.biRelations}
-                        subjectAnchor={entityAnchor.get(
-                            relationBetween.subjectId
-                        ) ?? Vector2Zero}
-                        objectAnchor={entityAnchor.get(
-                            relationBetween.objectId
-                        ) ?? Vector2Zero}
+                        subjectAnchor={entityAnchor.get(relationBetween.subjectId) ?? Vector2Zero}
+                        objectAnchor={entityAnchor.get(relationBetween.objectId) ?? Vector2Zero}
                         {highlight}
                         {dim}
                     />
                 {/each}
 
                 {#each relationGraph.clusters as cluster}
-                    <Cluster
-                        {...cluster}
-                        {showCoordinate}
-                        on:rg-action={handleRgAction}
-                    />
+                    <Cluster {...cluster} {showCoordinate} on:rg-action={handleRgAction} />
                 {/each}
 
                 {#each relationGraph.atoms as atom}
@@ -372,12 +364,7 @@
                         !selectedAtoms.has(atom.id) &&
                         selectedEntities.size > 0 &&
                         !selectedEntitiesInSelectedClusters.has(atom.id)}
-                    <Atom
-                        {...atom}
-                        {showCoordinate}
-                        on:rg-action={handleRgAction}
-                        {dim}
-                    />
+                    <Atom {...atom} {showCoordinate} on:rg-action={handleRgAction} {dim}/>
                 {/each}
 
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -388,11 +375,7 @@
                     style:top="{-relationGraph.rootPosition.y}rem"
                     on:click={toggleRootClusterSelect}
                 >
-                    <img
-                        class="root-cluster-background"
-                        src={RootCluster_Background}
-                        alt=""
-                    />
+                    <img class="root-cluster-background" src={RootCluster_Background} alt=""/>
                     <div class="translation font-hywh-85w">
                         {relationGraph.rootTranslation}
                     </div>

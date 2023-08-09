@@ -11,8 +11,6 @@
 
     export let id: string;
 
-    // Path should contain the current cluster for better experience
-
     const dispatch = createEventDispatcher();
 
     function dispatchRgAction(e: CustomEvent) {

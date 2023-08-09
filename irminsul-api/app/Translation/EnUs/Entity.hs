@@ -30,7 +30,8 @@ import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Byakuyakoku
 import Root.Teyvat.Mondstadt.Gunnhildr
 import Root.Teyvat.Liyue.CruxFleet
-import Root.Teyvat.Liyue.Adepti.Yaksha (xiao)
+import Root.Teyvat.Liyue.Adepti.Yaksha
+import Root.Teyvat.Liyue.BubuPharmacy
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -83,6 +84,7 @@ translationEntityEnUs = [
     ipn ozvaldoHrafnavins "Ozvaldo Hrafnavins",
     ipn princeCat "Prince",
     ipn qingceVillage "Qingce Village",
+    ipn qiqi "Qiqi",
     ipn razor "Razor",
     ipn rosaria "Rosaria",
     ipn root "Root",

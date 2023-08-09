@@ -42,6 +42,7 @@ hate = ra "Hate"
 lookAfter = ra "LookAfter"
 dislike = ra "Dislike"
 kill = ra "Kill"
+afraidOf = ra "AfraidOf"
 
 superior = ra "Superior"
 

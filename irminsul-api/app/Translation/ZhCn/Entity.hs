@@ -33,6 +33,7 @@ import Root.Teyvat.Byakuyakoku
 import Root.Teyvat.Mondstadt.Gunnhildr
 import Root.Teyvat.Liyue.CruxFleet
 import Root.Teyvat.Liyue.Adepti.Yaksha
+import Root.Teyvat.Liyue.BubuPharmacy
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -85,6 +86,7 @@ translationEntityZhCn = [
     ipn ozvaldoHrafnavins ("奥兹华尔多"."赫芙那梵茵斯"),
     ipn princeCat "小王子",
     ipn qingceVillage "轻策庄",
+    ipn qiqi "七七",
     ipn razor "雷泽",
     ipn rosaria "罗莎莉亚",
     ipn root "树根",

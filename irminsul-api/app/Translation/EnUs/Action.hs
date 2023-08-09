@@ -8,6 +8,7 @@ translationActionEnUs = first Action <$> [
     ("ActingGrandMaster", "Acting grand master"),
     ("ActingGuardian", "Acting guardian"),
     ("Admire", "Admire"),
+    ("AfraidOf", "Afraid of"),
     ("AllergicTo", "Allergic to"),
     ("Appreciate", "Appreciate"),
     ("Attendant", "Attendant"),

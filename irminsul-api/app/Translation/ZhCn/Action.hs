@@ -8,6 +8,7 @@ translationActionZhCn = first Action <$> [
     ("ActingGrandMaster", "代理团长"),
     ("ActingGuardian", "代理监护人"),
     ("Admire", "仰慕"),
+    ("AfraidOf", "害怕"),
     ("AllergicTo", "过敏"),
     ("Appreciate", "欣赏"),
     ("Attendant", "扈从"),

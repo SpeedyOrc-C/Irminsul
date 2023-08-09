@@ -41,7 +41,9 @@ liyue = clusterNode "Liyue" Country
         
         ningguang `friend` beidou,
         ningguang `friend` yelan,
-        ningguang `appreciate` jinYun
+        ningguang `appreciate` jinYun,
+
+        qiqi `afraidOf` hutao
     ]
     [
         adepti,

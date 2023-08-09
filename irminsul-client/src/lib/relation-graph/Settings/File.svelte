@@ -10,7 +10,7 @@
 
 <SubCategory>{$_("settings.file.import")}</SubCategory>
 
-<ItemBar caption={$_("settings.file.import-json")} on:rg-action>
+<ItemBar text={$_("settings.file.import-json")} on:rg-action>
     <ButtonInSettings
         on:button-clicked={() => {
             dispatch("rg-action", { action: "import-json" });
@@ -22,7 +22,7 @@
 
 <SubCategory>{$_("settings.file.export")}</SubCategory>
 
-<ItemBar caption={$_("settings.file.export-json")}>
+<ItemBar text={$_("settings.file.export-json")}>
     <ButtonInSettings
         on:button-clicked={() => {
             dispatch("rg-action", { action: "export-json" });
@@ -32,7 +32,7 @@
     </ButtonInSettings>
 </ItemBar>
 
-<ItemBar caption={$_("settings.file.export-haskell")}>
+<ItemBar text={$_("settings.file.export-haskell")}>
     <ButtonInSettings
         on:button-clicked={() => {
             dispatch("rg-action", { action: "export-haskell" });

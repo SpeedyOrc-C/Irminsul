@@ -1,7 +1,7 @@
 <script lang="ts">
     import LeftArrow from '../../../asset/img/ui/UI-Settings-Item-LeftFigure-Colored.png'
     import ThreeStars from "../../../asset/img/ui/UI-Settings-Item-ThreeStars-Recolored.png";
-    export let caption: string;
+    export let text: string;
 </script>
 
 <div class="item-bar">
@@ -10,7 +10,7 @@
         <slot />
     </div>
     <img src={ThreeStars} alt="" class="three-stars">
-    <div class="caption">{caption}</div>
+    <div class="caption">{text}</div>
 </div>
 
 <style lang="scss">

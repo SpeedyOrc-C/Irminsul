@@ -23,13 +23,13 @@
     });
 </script>
 
-<ItemBar caption={$_("settings.language.interface-language")}>
+<ItemBar text={$_("settings.language.interface-language")}>
     {#key interfaceLanguageOptions}
         <DropdownInSettings options={interfaceLanguageOptions} value={lang} />
     {/key}
 </ItemBar>
 
-<ItemBar caption={$_("settings.language.who-am-i")}>
+<ItemBar text={$_("settings.language.who-am-i")}>
     {#key whoAmIOptions}
         <DropdownInSettings options={whoAmIOptions} value={whoAmI} />
     {/key}

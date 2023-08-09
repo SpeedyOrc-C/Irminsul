@@ -24,7 +24,7 @@
 
 <SubCategory>{$_("settings.graphics.relation-graph")}</SubCategory>
 
-<ItemBar caption={$_("settings.graphics.show-axis")}>
+<ItemBar text={$_("settings.graphics.show-axis")}>
     {#key options}
         <DropdownInSettings
             {options}
@@ -34,7 +34,7 @@
     {/key}
 </ItemBar>
 
-<ItemBar caption={$_("settings.graphics.show-grid")}>
+<ItemBar text={$_("settings.graphics.show-grid")}>
     {#key options}
         <DropdownInSettings
             {options}
@@ -46,7 +46,7 @@
 
 <SubCategory>{$_("settings.graphics.performance")}</SubCategory>
 
-<ItemBar caption={$_("settings.graphics.reduce-visual-effect")}>
+<ItemBar text={$_("settings.graphics.reduce-visual-effect")}>
     {#key options}
         <DropdownInSettings
             {options}

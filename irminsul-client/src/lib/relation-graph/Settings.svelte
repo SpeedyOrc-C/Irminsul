@@ -20,6 +20,9 @@
     export let reduceVisualEffect: Writable<string>;
     export let whoAmI: Writable<"aether" | "lumine">;
 
+    export let changeLanguage: () => void;
+    export let changeWhoAmI: () => void;
+
     let displayed = false;
     let selectedCategory = "file";
 
@@ -92,7 +95,7 @@
                 <Graphics {showAxis} {showGrid} {reduceVisualEffect} />
             {/if}
             {#if selectedCategory === "language"}
-                <Language {lang} {whoAmI} on:rg-action />
+                <Language {lang} {whoAmI} {changeLanguage} {changeWhoAmI} on:rg-action />
             {/if}
             {#if selectedCategory === "about"}
                 <About />

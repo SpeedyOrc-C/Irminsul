@@ -6,9 +6,9 @@
     import RelationGraph from "../../lib/relation-graph/RelationGraph.svelte";
 
     let id: string;
-    let lang: Writable<string> = writable("zh-cn");
-    let reduceVisualEffect: Writable<string> = writable("on");
-    let whoAmI: Writable<"aether" | "lumine"> = writable("aether");
+    let lang: Writable<string> = writable();
+    let reduceVisualEffect: Writable<string> = writable();
+    let whoAmI: Writable<"aether" | "lumine"> = writable();
 
     onMount(() => {
         id = $page.url.searchParams.get("id") ?? "Mondstadt";
@@ -24,12 +24,8 @@
             localStorage.setItem("lang", newLang);
         });
 
-        reduceVisualEffect.set(
-            localStorage.getItem("reduce-visual-effect") ?? "on"
-        );
-        reduceVisualEffect.subscribe((v) =>
-            localStorage.setItem("reduce-visual-effect", v)
-        );
+        reduceVisualEffect.set(localStorage.getItem("reduce-visual-effect") ?? "on");
+        reduceVisualEffect.subscribe(v => localStorage.setItem("reduce-visual-effect", v));
 
         switch (localStorage.getItem("who-am-i")) {
             case "lumine":

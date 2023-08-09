@@ -9,6 +9,9 @@
     export let lang: Writable<string>;
     export let whoAmI: Writable<"aether" | "lumine">;
 
+    export let changeLanguage: () => void;
+    export let changeWhoAmI: () => void;
+
     let interfaceLanguageOptions: Array<Option>;
     let whoAmIOptions: Array<Option>;
     beforeUpdate(() => {
@@ -25,12 +28,12 @@
 
 <ItemBar text={$_("settings.language.interface-language")}>
     {#key interfaceLanguageOptions}
-        <DropdownInSettings options={interfaceLanguageOptions} value={lang} />
+        <DropdownInSettings options={interfaceLanguageOptions} value={lang} on:dropdown-change={changeLanguage} />
     {/key}
 </ItemBar>
 
 <ItemBar text={$_("settings.language.who-am-i")}>
     {#key whoAmIOptions}
-        <DropdownInSettings options={whoAmIOptions} value={whoAmI} />
+        <DropdownInSettings options={whoAmIOptions} value={whoAmI} on:dropdown-change={changeWhoAmI} />
     {/key}
 </ItemBar>

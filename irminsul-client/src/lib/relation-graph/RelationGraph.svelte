@@ -270,6 +270,15 @@
         }
     }
 
+    function changeLanguage() {
+        loadRelationGraph(id);
+    }
+
+    function changeWhoAmI() {
+        loader.clearCache();
+        loadRelationGraph(id);
+    }
+
     onMount(() => {
         jsonFileReader = new FileReader();
 
@@ -304,11 +313,7 @@
                 }
             }
         );
-        lang.subscribe(() => loadRelationGraph(id));
-        whoAmI.subscribe(() => {
-            loader.clearCache();
-            loadRelationGraph(id);
-        });
+        loadRelationGraph(id);
     });
 </script>
 
@@ -405,14 +410,11 @@
         {$_("error.layout-missing.detail")}
     </DialogOk>
 
-    <Settings
-        show={showSettings}
-        on:rg-action={handleRgAction}
-        {lang}
+    <Settings show={showSettings} on:rg-action={handleRgAction}
+        {lang} {changeLanguage}
+        {whoAmI} {changeWhoAmI}
         {reduceVisualEffect}
-        {showAxis}
-        {showGrid}
-        {whoAmI}
+        {showAxis} {showGrid}
     />
 
     <input type="file" bind:this={jsonFileInput} style:display="none" />

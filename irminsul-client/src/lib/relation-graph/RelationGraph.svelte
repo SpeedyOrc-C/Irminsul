@@ -328,9 +328,6 @@
 </title>
 
 <div class="relation-graph">
-    <div class="background-dark-blue"></div>
-    <div class="background-cloud"></div>
-
     <div
         class="content"
         style:transform="rotate({-viewAngle}deg) scale({viewScale * 100}%)
@@ -421,15 +418,6 @@
 </div>
 
 <style lang="scss">
-    .background-dark-blue {
-        overflow: hidden;
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-
-        background: #171f2b;
-    }
-
     .content {
         position: absolute;
         top: 50%;

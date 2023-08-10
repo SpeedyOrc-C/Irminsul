@@ -19,11 +19,15 @@
     import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
     import { _ } from "svelte-i18n";
     import {RelationGraphLoader} from "$lib/relation-graph/RelationGraphLoader";
+    import ViewController from "$lib/relation-graph/ViewController";
+    import Joystick from "$lib/relation-graph/Joystick.svelte";
 
     export let id: string;
     export let lang: Writable<string>;
     export let reduceVisualEffect: Writable<string>;
     export let whoAmI: Writable<"aether" | "lumine">;
+
+    let view = new ViewController();
 
     const loader = new RelationGraphLoader();
 
@@ -38,19 +42,6 @@
     let showCoordinate = false;
     let showSettings: Writable<boolean> = writable(false);
 
-    let viewX = 0;
-    let viewY = 0;
-    let viewAngle = 0;
-    let viewScaleExponent = 0;
-    let viewScale: number;
-    let viewAngleRad: number;
-    let viewAngleSin: number;
-    let viewAngleCos: number;
-    $: viewScale = Math.pow(2, 0.5 * viewScaleExponent);
-    $: viewAngleRad = (viewAngle * Math.PI) / 180;
-    $: viewAngleSin = Math.sin(viewAngleRad);
-    $: viewAngleCos = Math.cos(viewAngleRad);
-
     let contentOpacity = 1;
 
     let selectedAtoms: Set<string> = new Set();
@@ -61,6 +52,8 @@
     let rootClusterSelected = false;
 
     let showLayoutMissing: Writable<boolean> = writable(false);
+
+    function updateView() { view = view; }
 
     function updateSelectedAtoms(e: CustomEvent) {
         selectedAtoms = e.detail.atoms;
@@ -79,42 +72,6 @@
         );
     }
 
-    function moveUp() {
-        viewX -= (10 / viewScale) * viewAngleSin;
-        viewY -= (10 / viewScale) * viewAngleCos;
-    }
-
-    function moveDown() {
-        viewX += (10 / viewScale) * viewAngleSin;
-        viewY += (10 / viewScale) * viewAngleCos;
-    }
-
-    function moveLeft() {
-        viewX += (10 / viewScale) * viewAngleCos;
-        viewY -= (10 / viewScale) * viewAngleSin;
-    }
-
-    function moveRight() {
-        viewX -= (10 / viewScale) * viewAngleCos;
-        viewY += (10 / viewScale) * viewAngleSin;
-    }
-
-    function zoomIn() { viewScaleExponent += 1; }
-
-    function zoomOut() { viewScaleExponent -= 1; }
-
-    function rotateAnticlockwise() { viewAngle = viewAngle + 22.5; }
-
-    function rotateClockwise() { viewAngle = viewAngle - 22.5; }
-
-    function resetView() {
-        viewX = 0;
-        viewY = 0;
-        viewScaleExponent = 0;
-        viewScale = 1;
-        viewAngle = 0;
-    }
-
     function toggleRootClusterSelect() {
         rootClusterSelected = !rootClusterSelected;
     }
@@ -124,24 +81,9 @@
 
         if (e.ctrlKey !== e.metaKey) return;
 
-        if (e.code === "KeyW") {
-            moveUp();
-        } else if (e.code === "KeyS") {
-            moveDown();
-        } else if (e.code === "KeyA") {
-            moveLeft();
-        } else if (e.code === "KeyD") {
-            moveRight();
-        } else if (e.code === "Minus") {
-            zoomOut();
-        } else if (e.code === "Equal") {
-            zoomIn();
-        } else if (e.code === "KeyQ") {
-            rotateClockwise();
-        } else if (e.code === "KeyE") {
-            rotateAnticlockwise();
-        } else if (e.code === "Digit0") {
-            resetView();
+        if (["KeyW", "KeyS", "KeyA", "KeyD", "Minus", "Equal", "KeyQ", "KeyE", "Digit0"].find(v => v === e.code)) {
+            view.keyboardEvent(e);
+            view = view;
         } else if (e.code === "KeyX") {
             showAxis.set(!$showAxis);
         } else if (e.code === "KeyG") {
@@ -185,7 +127,7 @@
         selectedAtoms.clear();
         selectedClusters.clear();
         updateEntityAnchor();
-        resetView();
+        view.reset();
         id = loadId;
 
         window.history.replaceState(undefined, "", `/relation-graph/?id=${id}&lang=${$lang}&who-am-i=${$whoAmI}`);
@@ -330,8 +272,8 @@
 <div class="relation-graph">
     <div
         class="content"
-        style:transform="rotate({-viewAngle}deg) scale({viewScale * 100}%)
-        translate({viewX}rem, {-viewY}rem)"
+        style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%)
+        translate({view.x}rem, {-view.y}rem)"
         style:opacity={contentOpacity}
     >
         {#if $showGrid} <Grid /> {/if}
@@ -384,6 +326,8 @@
         {/if}
     </div>
 
+    <Joystick callback={view.joystickEvent} on:update-view={updateView}/>
+
     <Panel on:rg-action={handleRgAction} {relationGraph} {id}/>
 
     <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
@@ -406,8 +350,13 @@
         top: 50%;
         left: 50%;
 
+        @media (pointer: coarse) {
+            transition-duration: 0.1s;
+            transition-timing-function: linear;
+        }
+
         transition-property: transform, opacity;
-        transition-duration: 0.3s;
+        transition-duration: 0.2s;
     }
 
     .root-cluster {

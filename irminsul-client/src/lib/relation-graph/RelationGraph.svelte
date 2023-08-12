@@ -223,6 +223,11 @@
         settings.save();
     }
 
+    function resetAll() {
+        localStorage.clear();
+        window.location.href = "/app";
+    }
+
     onMount(() => {
         showAxis = settings.preference.show_axis;
         showGrid = settings.preference.show_grid;
@@ -361,6 +366,7 @@
               on:set-reduce-visual-effect={e => setReduceVisualEffect(e.detail)}
               on:set-language={e => setLanguage(e.detail)}
               on:set-who-am-i={e => setWhoAmI(e.detail)}
+              on:reset-all={resetAll}
     />
 
     <input type="file" bind:this={jsonFileInput} style:display="none" />

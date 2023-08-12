@@ -60,12 +60,15 @@
             "miyoushe-obs": "米游社观测枢",
             "hoyolab-hoyowiki": "HoYoLab HoYoWiki",
             "fandom": "Fandom",
-            "bwiki": "B站百科"
+            "bwiki": "B站百科",
+            "reset": "重置",
+            "reset-all": "全部重置"
         },
         "msg": {
             "click-to-export": "点击导出",
             "click-to-import": "点击导入",
-            "click-to-proceed": "点击跳转"
+            "click-to-proceed": "点击跳转",
+            "click-to-reset": "点击重置"
         },
         "common": {
             "on": "打开",

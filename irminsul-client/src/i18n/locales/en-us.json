@@ -60,12 +60,15 @@
             "miyoushe-obs": "Guanceshu in Miyoushe",
             "hoyolab-hoyowiki": "HoYoWiki in HoYoLab",
             "fandom": "Fandom",
-            "bwiki": "Bilibili Wiki"
+            "bwiki": "Bilibili Wiki",
+            "reset": "Reset",
+            "reset-all": "Reset all"
         },
         "msg": {
             "click-to-export": "Click to Export",
             "click-to-import": "Click to Import",
-            "click-to-proceed": "Click to Proceed"
+            "click-to-proceed": "Click to Proceed",
+            "click-to-reset": "Click to Reset"
         },
         "common": {
             "on": "On",

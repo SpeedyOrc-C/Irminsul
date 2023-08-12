@@ -39,8 +39,6 @@
     let showCoordinate = false;
     let showJoystick: ShowJoystick = ShowJoystick.Never;
     let showSettings = false;
-
-    let contentOpacity = 1;
     let joystickSensibility = 4;
 
     let selectedAtoms: Set<string> = new Set();
@@ -122,7 +120,6 @@
             return;
         }
 
-        contentOpacity = 0;
         relationGraph = json;
         selectedEntities.clear();
         selectedAtoms.clear();
@@ -134,7 +131,6 @@
         window.history.replaceState(undefined, "", `/app/?id=${id}`);
 
         console.info("Relation graph loaded: ", json);
-        contentOpacity = 1;
     }
 
     function updateEntityAnchor() {
@@ -287,7 +283,6 @@
         class="content"
         style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%)
         translate({view.x}rem, {-view.y}rem)"
-        style:opacity={contentOpacity}
     >
         {#if showGrid} <Grid /> {/if}
         {#if showAxis} <Axis /> {/if}

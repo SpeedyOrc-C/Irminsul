@@ -25,9 +25,7 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="label" on:click={() => {show = !show}}>{label}</div>
     <div class="down-arrow"/>
-    <div class="dropdown-list" class:below>
-        <DropdownList {options} bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
-    </div>
+    <DropdownList {options} bind:below bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
 </Button>
 
 <style lang="scss">
@@ -41,20 +39,7 @@
         font-size: 1.3rem;
         color: #3b4255;
     }
-    .dropdown-list {
-        position: absolute;
-        width: 100%;
 
-        top: unset;
-        bottom: 3.5rem;
-        
-        z-index: 1;
-
-        &.below {
-            top: 3.2rem;
-            bottom: unset;
-        }
-    }
     .down-arrow {
         position: absolute;
         top: calc(50% - 0.4rem);

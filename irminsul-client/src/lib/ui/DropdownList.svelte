@@ -5,6 +5,7 @@
     export let options: Array<Option>;
     export let value: string;
     export let show: boolean;
+    export let below: boolean;
 
     let displayed = false;
 
@@ -18,25 +19,41 @@
     })
 </script>
 
-<div class="options" class:show style:display={displayed ? "block" : "none"}>
-    {#each options as option}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div
-            class="option"
-            class:triggered={option.value === value}
-            on:click={() => {
-                dispatch("dropdown-list-change", option.value);
-                value = option.value;
-                show = false;
-            }}
-        >
-            <div class="option-background"></div>
-            <div class="option-label">{option.label}</div>
-        </div>
-    {/each}
+<div class="dropdown-list" class:below>
+    <div class="options" class:show style:display={displayed ? "block" : "none"}>
+        {#each options as option}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div
+                class="option"
+                class:triggered={option.value === value}
+                on:click={() => {
+                    dispatch("dropdown-list-change", option.value);
+                    value = option.value;
+                    show = false;
+                }}
+            >
+                <div class="option-background"></div>
+                <div class="option-label">{option.label}</div>
+            </div>
+        {/each}
+    </div>
 </div>
 
 <style lang="scss">
+    .dropdown-list {
+        position: absolute;
+        width: 100%;
+
+        top: unset;
+        bottom: 3.5rem;
+
+        z-index: 1 !important;
+
+        &.below {
+            top: 3.2rem;
+            bottom: unset;
+        }
+    }
     .options {
         width: calc(100% - 2 * 0.3rem);
 

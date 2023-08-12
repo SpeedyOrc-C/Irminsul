@@ -229,6 +229,7 @@
         showGrid = settings.preference.show_grid;
         showJoystick = settings.preference.show_joystick;
         joystickSensibility = settings.preference.joystick_sensitivity;
+        locale.set(settings.preference.language);
 
         jsonFileReader = new FileReader();
 

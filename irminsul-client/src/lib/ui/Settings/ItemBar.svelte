@@ -1,7 +1,9 @@
 <script lang="ts">
     import LeftArrow from '../../../asset/img/ui/UI-Settings-Item-LeftFigure-Colored.png'
     import ThreeStars from "../../../asset/img/ui/UI-Settings-Item-ThreeStars-Recolored.png";
+
     export let text: string;
+    export let showStars = true;
 </script>
 
 <div class="item-bar">
@@ -9,7 +11,7 @@
     <div class="widget">
         <slot />
     </div>
-    <img src={ThreeStars} alt="" class="three-stars">
+    <img src={ThreeStars} alt="" class="three-stars" style:display={showStars ? "block" : "none"}>
     <div class="caption">{text}</div>
 </div>
 
@@ -26,20 +28,19 @@
         -webkit-user-select: none;
         -moz-user-select: none;
 
-        background-color: #ece5d8;
-        opacity: 80%;
+        background: rgba(236, 229, 216, 0.9);
 
         transition-property: box-shadow, background-color;
         transition-duration: 0.1s;
-        
+
         &:hover {
             box-shadow: 0 0 0 0.15rem white;
-            opacity: 100%;
+            background: rgba(236, 229, 216, 1);
         }
-        
+
         &:active {
             box-shadow: 0 0 0 0.15rem #ddd;
-            opacity: 100%;
+            background: rgba(236, 229, 216, 1);
         }
     }
 
@@ -48,16 +49,14 @@
         display: block;
 
         height: 3.2rem;
-        opacity: 40%;
     }
 
     .three-stars {
         position: absolute;
         display: block;
         right: 17.55rem;
-        
+
         height: 3.2rem;
-        opacity: 100%;
     }
 
     .caption {
@@ -73,6 +72,6 @@
 
     .widget {
         position: absolute;
-        right: 0rem;
+        right: 0;
     }
 </style>

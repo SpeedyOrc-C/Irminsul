@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {afterUpdate, onMount} from "svelte";
+    import {afterUpdate} from "svelte";
     import type { Vector2 } from "../util/Vector2";
 
     export let forwardRelations: Array<string>;

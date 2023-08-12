@@ -2,10 +2,9 @@
     import SettingsItemCloudyBackground from "$lib/Canvas/SettingsItemCloudyBackground.svelte";
     import { createEventDispatcher } from "svelte";
     import { _ } from "svelte-i18n";
-    import type { Writable } from "svelte/store";
 
     export let options: Array<string>;
-    export let reduceVisualEffect: Writable<string>;
+    export let reduceVisualEffect: boolean;
 
     export let selectedCategory: string;
     const dispatch = createEventDispatcher();
@@ -22,12 +21,12 @@
             on:click={() => {
                 selectedCategory = option;
                 dispatch("settings-categories-change", {
-                    category: selectedCategory,
+                    category: selectedCategory
                 });
             }}
         >
             <div class="cloudy-background">
-                {#if selected && $reduceVisualEffect === "off"}
+                {#if selected && !reduceVisualEffect}
                     <SettingsItemCloudyBackground />
                 {/if}
             </div>

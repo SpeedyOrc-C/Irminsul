@@ -1,44 +1,32 @@
 <script lang="ts">
     import type { Option } from "$lib/util/Option";
-    import {createEventDispatcher, onMount} from "svelte";
-    import { writable, type Writable } from "svelte/store";
+    import {beforeUpdate, createEventDispatcher} from "svelte";
     import Button from "../Button.svelte";
     import DropdownList from "../DropdownList.svelte";
 
     export let options: Array<Option>;
-    export let value: Writable<string>;
+    export let value: string;
     export let below = true;
-
-    let show: Writable<boolean> = writable(false);
-    let label: string | null = null;
 
     const dispatch = createEventDispatcher();
 
-    onMount(() => {
-        value.subscribe((newValue) => {
-            label = options?.find((op) => op.value === newValue)?.label ?? null;
-        });
-    })
+    let show = false;
+    let label = "option";
+
+    function dropdownListChange(e: CustomEvent) {
+        label = options.find(op => op.value === e.detail)?.label ?? "option";
+        dispatch("dropdown-change", e.detail);
+    }
+
+    beforeUpdate(() => {label = options.find(op => op.value === value)?.label ?? "option";});
 </script>
 
 <Button inSettings={true}>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="label" on:click={() => show.set(!$show)}>
-        {#key label}
-            {label}
-        {/key}
-    </div>
-    <div class="down-arrow"></div>
+    <div class="label" on:click={() => {show = !show}}>{label}</div>
+    <div class="down-arrow"/>
     <div class="dropdown-list" class:below>
-        <DropdownList
-            {options}
-            {show}
-            {value}
-            on:dropdown-list-change={(e) => {
-                value.set(e.detail.value);
-                dispatch("dropdown-change", e.detail);
-            }}
-        />
+        <DropdownList {options} bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
     </div>
 </Button>
 

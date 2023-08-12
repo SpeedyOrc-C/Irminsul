@@ -2,34 +2,31 @@
     import RootCluster_Background from "../../asset/img/ui/RootCluster-Background.png";
     import Atom from "./Atom.svelte";
     import Cluster from "./Cluster.svelte";
-    import {
-        dumpRelationGraph2Haskell,
-        type RelationGraph,
-    } from "../../model/RelationGraph";
+    import {dumpRelationGraph2Haskell, type RelationGraph,} from "../../model/RelationGraph";
     import RelationBetween from "./RelationBetween.svelte";
-    import { Vector2Zero, type Vector2 } from "../util/Vector2";
+    import {type Vector2, Vector2Zero} from "../util/Vector2";
     import Axis from "./Axis.svelte";
     import Grid from "./Grid.svelte";
-    import { saveStringAsFile } from "$lib/util/String";
+    import {saveStringAsFile} from "$lib/util/String";
     import Panel from "./Panel.svelte";
-    import { onMount } from "svelte";
-    import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
+    import {onMount} from "svelte";
+    import {deadKeyMultiplier} from "$lib/util/DeadKeyMultiplier";
     import Settings from "./Settings.svelte";
-    import { writable, type Writable } from "svelte/store";
+    import {writable, type Writable} from "svelte/store";
     import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
-    import { _ } from "svelte-i18n";
+    import {_, locale} from "svelte-i18n";
     import {RelationGraphLoader} from "$lib/relation-graph/RelationGraphLoader";
     import ViewController from "$lib/relation-graph/ViewController";
     import Joystick from "$lib/relation-graph/Joystick.svelte";
+    import RelationGraphSettings, {ShowJoystick, WhoAmI} from "$lib/relation-graph/RelationGraphSettings";
 
     export let id: string;
-    export let lang: Writable<string>;
-    export let reduceVisualEffect: Writable<string>;
-    export let whoAmI: Writable<"aether" | "lumine">;
 
     let view = new ViewController();
 
     const loader = new RelationGraphLoader();
+
+    const settings = new RelationGraphSettings("relation_graph_settings", "2023.08.12");
 
     let relationGraph: RelationGraph | null = null;
     let jsonFileInput: HTMLInputElement;
@@ -37,10 +34,11 @@
 
     let entityAnchor: Map<string, Vector2> = new Map();
 
-    let showAxis: Writable<boolean> = writable(false);
-    let showGrid: Writable<boolean> = writable(false);
+    let showAxis = false;
+    let showGrid = false;
     let showCoordinate = false;
-    let showSettings: Writable<boolean> = writable(false);
+    let showJoystick: ShowJoystick = ShowJoystick.Never;
+    let showSettings = false;
 
     let contentOpacity = 1;
 
@@ -55,15 +53,13 @@
 
     function updateView() { view = view; }
 
-    function updateSelectedAtoms(e: CustomEvent) {
-        selectedAtoms = e.detail.atoms;
+    function updateSelectedAtoms() {
         selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
     }
 
-    function updateSelectedClusters(e: CustomEvent) {
+    function updateSelectedClusters() {
         if (relationGraph == null) return;
 
-        selectedClusters = e.detail.clusters;
         selectedEntities = new Set([...selectedAtoms, ...selectedClusters]);
         selectedEntitiesInSelectedClusters = new Set(
             relationGraph.clusters
@@ -85,9 +81,9 @@
             view.keyboardEvent(e);
             view = view;
         } else if (e.code === "KeyX") {
-            showAxis.set(!$showAxis);
+            setShowAxis(!showAxis);
         } else if (e.code === "KeyG") {
-            showGrid.set(!$showGrid);
+            setShowGrid(!showGrid);
         } else if (e.code === "KeyC") {
             showCoordinate = !showCoordinate;
         } else if (!rootClusterSelected) {
@@ -103,12 +99,16 @@
         }
     }
 
-    async function loadRelationGraph(loadId: string) {
+    async function loadRelationGraph(
+        loadId: string,
+        language=settings.preference.language,
+        whoAmI_=settings.preference.who_am_i
+    ) {
         console.info("Loading relation graph:", loadId);
 
         let json: RelationGraph;
         try {
-            json = await loader.load(loadId, $lang, $whoAmI);
+            json = await loader.load(loadId, language, whoAmI_);
         } catch (e) {
             console.warn("Failed to load relation graph, error:", e);
             switch (e) {
@@ -130,7 +130,7 @@
         view.reset();
         id = loadId;
 
-        window.history.replaceState(undefined, "", `/relation-graph/?id=${id}&lang=${$lang}&who-am-i=${$whoAmI}`);
+        window.history.replaceState(undefined, "", `/app/?id=${id}`);
 
         console.info("Relation graph loaded: ", json);
         contentOpacity = 1;
@@ -178,50 +178,50 @@
     }
 
     function openSettings() {
-        showSettings.set(true);
+        showSettings = true;
     }
 
-    function handleRgAction(e: CustomEvent) {
-        switch (e.detail.action) {
-            case "import-json":
-                importJson();
-                break;
-            case "export-json":
-                exportJson();
-                break;
-            case "export-haskell":
-                exportHaskell();
-                break;
-            case "jump-to":
-                loadRelationGraph(e.detail.id);
-                break;
-            case "update-selected-atoms":
-                updateSelectedAtoms(e);
-                break;
-            case "update-selected-clusters":
-                updateSelectedClusters(e);
-                break;
-            case "change-lang":
-                lang.set(e.detail.lang);
-                break;
-            case "open-settings":
-                openSettings();
-                break;
-            default:
-                console.error("Unknown action:", e.detail);
-        }
-    }
-
-    function changeLanguage() {
+    function setLanguage(language: string) {
+        settings.preference.language = language;
+        settings.save();
+        locale.set(language);
         loadRelationGraph(id);
     }
 
-    function changeWhoAmI() {
+    function setWhoAmI(who_am_i: WhoAmI) {
+        settings.preference.who_am_i = who_am_i;
+        settings.save();
         loader.clearCache();
         loadRelationGraph(id);
     }
 
+    function setShowAxis(show_axis: boolean) {
+        showAxis = show_axis;
+        settings.preference.show_axis = show_axis;
+        settings.save();
+    }
+
+    function setShowGrid(show_grid: boolean) {
+        showGrid = show_grid;
+        settings.preference.show_grid = show_grid;
+        settings.save();
+    }
+
+    function setReduceVisualEffect(reduce_visual_effect: boolean) {
+        settings.preference.reduce_visual_effect = reduce_visual_effect;
+        settings.save();
+    }
+
+    function setShowJoystick(show_joystick: ShowJoystick) {
+        settings.preference.show_joystick = show_joystick;
+        settings.save();
+    }
+
     onMount(() => {
+        showAxis = settings.preference.show_axis;
+        showGrid = settings.preference.show_grid;
+        showJoystick = settings.preference.show_joystick;
+
         jsonFileReader = new FileReader();
 
         jsonFileInput.addEventListener("change", () => {
@@ -230,9 +230,9 @@
                 return;
             }
 
-            const files = jsonFileInput.files;
+            const files = jsonFileInput.files!;
 
-            if (files?.length > 0) {
+            if (files.length > 0) {
                 const file = files[0];
                 jsonFileReader.readAsText(file);
             }
@@ -255,6 +255,7 @@
                 }
             }
         );
+
         loadRelationGraph(id);
     });
 </script>
@@ -276,8 +277,8 @@
         translate({view.x}rem, {-view.y}rem)"
         style:opacity={contentOpacity}
     >
-        {#if $showGrid} <Grid /> {/if}
-        {#if $showAxis} <Axis /> {/if}
+        {#if showGrid} <Grid /> {/if}
+        {#if showAxis} <Axis /> {/if}
 
         {#if relationGraph != null}
             {#key relationGraph}
@@ -298,7 +299,9 @@
                 {/each}
 
                 {#each relationGraph.clusters as cluster}
-                    <Cluster {...cluster} {showCoordinate} on:rg-action={handleRgAction} />
+                    <Cluster on:update-selected-clusters={updateSelectedClusters}
+                             on:jump-to={e => loadRelationGraph(e.detail.id)}
+                             {...cluster} {showCoordinate} {selectedClusters}/>
                 {/each}
 
                 {#each relationGraph.atoms as atom}
@@ -306,7 +309,8 @@
                         !selectedAtoms.has(atom.id) &&
                         selectedEntities.size > 0 &&
                         !selectedEntitiesInSelectedClusters.has(atom.id)}
-                    <Atom {...atom} {showCoordinate} on:rg-action={handleRgAction} {dim}/>
+                    <Atom on:update-selected-atoms={updateSelectedAtoms}
+                          {...atom} {showCoordinate} {dim} {selectedAtoms}/>
                 {/each}
 
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -326,19 +330,29 @@
         {/if}
     </div>
 
-    <Joystick callback={view.joystickEvent} on:update-view={updateView}/>
+    <Joystick callback={view.joystickEvent}
+              bind:showJoystick={settings.preference.show_joystick}
+              on:update-view={updateView}/>
 
-    <Panel on:rg-action={handleRgAction} {relationGraph} {id}/>
+    <Panel on:jump-to={e => loadRelationGraph(e.detail)}
+           on:open-settings={openSettings}
+           {relationGraph} {id}/>
 
     <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
         {$_("error.layout-missing.detail")}
     </DialogOk>
 
-    <Settings show={showSettings} on:rg-action={handleRgAction}
-        {lang} {changeLanguage}
-        {whoAmI} {changeWhoAmI}
-        {reduceVisualEffect}
-        {showAxis} {showGrid}
+    <Settings {settings}
+              bind:show={showSettings}
+              on:import-json={importJson}
+              on:export-json={exportJson}
+              on:export-haskell={exportHaskell}
+              on:set-show-axis={e => setShowAxis(e.detail)} bind:showAxis
+              on:set-show-grid={e => setShowGrid(e.detail)} bind:showGrid
+              on:set-show-joystick={e => setShowJoystick(e.detail)} bind:showJoystick
+              on:set-reduce-visual-effect={e => setReduceVisualEffect(e.detail)}
+              on:set-language={e => setLanguage(e.detail)}
+              on:set-who-am-i={e => setWhoAmI(e.detail)}
     />
 
     <input type="file" bind:this={jsonFileInput} style:display="none" />

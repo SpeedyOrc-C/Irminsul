@@ -5,19 +5,22 @@
     import type { Option } from "$lib/util/Option";
     import {beforeUpdate, createEventDispatcher} from "svelte";
     import { _ } from "svelte-i18n";
-    import { writable, type Writable } from "svelte/store";
+    import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
+    import type {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
 
     const dispatch = createEventDispatcher();
 
-    export let showAxis: Writable<boolean>;
-    export let showGrid: Writable<boolean>;
-    export let reduceVisualEffect: Writable<string>;
+    export let settings: RelationGraphSettings;
+
+    export let showAxis: boolean;
+    export let showGrid: boolean;
+    export let showJoystick: ShowJoystick;
 
     let options: Array<Option>;
     beforeUpdate(() => {
         options = [
-            new Option($_("settings.common.off"), "off"),
-            new Option($_("settings.common.on"), "on"),
+            {value: "off", label: $_("settings.common.off")},
+            {value: "on", label: $_("settings.common.on")}
         ];
     });
 </script>
@@ -25,38 +28,34 @@
 <SubCategory>{$_("settings.graphics.relation-graph")}</SubCategory>
 
 <ItemBar text={$_("settings.graphics.show-axis")}>
-    {#key options}
-        <DropdownInSettings
-            {options}
-            value={writable($showAxis ? "on" : "off")}
-            on:dropdown-change={(e) => showAxis.set(e.detail.value === "on")}
-        />
-    {/key}
+    <DropdownInSettings {options}
+        value={showAxis ? "on" : "off"}
+        on:dropdown-change={e => dispatch("set-show-axis", e.detail === "on")}
+    />
 </ItemBar>
 
 <ItemBar text={$_("settings.graphics.show-grid")}>
-    {#key options}
-        <DropdownInSettings
-            {options}
-            value={writable($showGrid ? "on" : "off")}
-            on:dropdown-change={(e) => showGrid.set(e.detail.value === "on")}
-        />
-    {/key}
+    <DropdownInSettings {options}
+        value={showGrid ? "on" : "off"}
+        on:dropdown-change={e => dispatch("set-show-grid", e.detail === "on")}
+    />
+</ItemBar>
+
+<ItemBar text={$_("settings.graphics.show-joystick.self")}>
+    <DropdownInSettings
+        options={[{value: "never", label: $_("settings.common.never")},
+                  {value: "has-coarse-pointer", label: $_("settings.graphics.show-joystick.has-coarse-pointer")},
+                  {value: "always", label: $_("settings.common.always")}]}
+        bind:value={showJoystick}
+        on:dropdown-change={e => dispatch("set-show-joystick", e.detail)}
+    />
 </ItemBar>
 
 <SubCategory>{$_("settings.graphics.performance")}</SubCategory>
 
 <ItemBar text={$_("settings.graphics.reduce-visual-effect")}>
-    {#key options}
-        <DropdownInSettings
-            {options}
-            value={reduceVisualEffect}
-            on:dropdown-change={(e) => {
-                dispatch("rg-action", {
-                    action: "change-reduce-visual-effect",
-                    value: e.detail.value
-                });
-            }}
-        />
-    {/key}
+    <DropdownInSettings {options}
+        value={settings.preference.reduce_visual_effect ? "on" : "off"}
+        on:dropdown-change={e => dispatch("set-reduce-visual-effect", e.detail === "on")}
+    />
 </ItemBar>

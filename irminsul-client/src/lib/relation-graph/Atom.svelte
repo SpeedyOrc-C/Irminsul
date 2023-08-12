@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-    export let selectedAtoms: Set<string> = new Set();
-</script>
-
 <script lang="ts">
     import { createEventDispatcher, onMount } from "svelte";
     import { getImgAvatar, img_avatar_UnknownAvatar } from "../../asset/Asset";
@@ -15,6 +11,7 @@
     export let showCoordinate = false;
     export let selected = false;
     export let dim = false;
+    export let selectedAtoms: Set<string>;
 
     let avatarSrc: string = img_avatar_UnknownAvatar;
     onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
@@ -22,10 +19,7 @@
     const dispatch = createEventDispatcher();
 
     function dispatchUpdateSelectedAtoms() {
-        dispatch("rg-action", {
-            action: "update-selected-atoms",
-            atoms: selectedAtoms,
-        });
+        dispatch("update-selected-atoms");
     }
 
     function toggleSelect() {

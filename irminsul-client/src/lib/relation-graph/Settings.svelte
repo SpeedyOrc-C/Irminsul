@@ -4,60 +4,48 @@
     import ButtonClose from "$lib/ui/Button/ButtonClose.svelte";
     import Language from "$lib/relation-graph/Settings/Language.svelte";
     import SettingsCategories from "$lib/ui/Settings/SettingsCategories.svelte";
-    import type { Writable } from "svelte/store";
     import About from "./Settings/About.svelte";
     import File from "./Settings/File.svelte";
     import { _ } from "svelte-i18n";
     import Other from "./Settings/Other.svelte";
     import Graphics from "./Settings/Graphics.svelte";
-    import {onMount} from "svelte";
+    import {beforeUpdate, createEventDispatcher} from "svelte";
+    import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
+    import type {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
 
-    export let show: Writable<boolean>;
-    export let lang: Writable<string>;
-    
-    export let showAxis: Writable<boolean>;
-    export let showGrid: Writable<boolean>;
-    export let reduceVisualEffect: Writable<string>;
-    export let whoAmI: Writable<"aether" | "lumine">;
+    export let settings: RelationGraphSettings;
+    export let show: boolean;
 
-    export let changeLanguage: () => void;
-    export let changeWhoAmI: () => void;
+    export let showAxis: boolean;
+    export let showGrid: boolean;
+    export let showJoystick: ShowJoystick;
+
+    const dispatch = createEventDispatcher();
 
     let displayed = false;
     let selectedCategory = "file";
-
-    onMount(() => {
-        show.subscribe(() => {
-            if ($show) {
-                displayed = true;
-            } else {
-                setTimeout(() => (displayed = false), 500);
-            }
-        });
-    })
+    let reduceVisualEffect: boolean = settings.preference.reduce_visual_effect;
 
     function handleKeyup(e: KeyboardEvent) {
-        if (!$show) return;
-
-        switch (e.code) {
-            case "Escape":
-                show.set(false);
-                break;
-        }
+        if (!show) return;
+        if (e.code === "Escape") close();
     }
 
-    function close() {
-        show.set(false);
-    }
+    function close() { show = false; }
+
+    beforeUpdate(() => {
+        if (show)
+            displayed = true;
+        else
+            setTimeout(() => {displayed = false}, 500)
+    })
 </script>
 
 <svelte:window on:keyup={handleKeyup} />
 
 {#if displayed}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-        class="settings font-hywh-85w"
-        class:show={$show}
+    <div class="settings font-hywh-85w" class:show
         style:display={displayed ? "block" : "none"}
     >
         <!-- This is slightly different to the background in game -->
@@ -78,24 +66,36 @@
         </div>
 
         <div class="settings-categories">
-            <SettingsCategories
-                options={["file", "graphics", "language", "other", "about"]}
-                on:settings-categories-change={(e) =>
-                    (selectedCategory = e.detail.category)}
+            <SettingsCategories options={["file", "graphics", "language", "other", "about"]}
+                bind:reduceVisualEffect
+                on:settings-categories-change={e => (selectedCategory = e.detail.category)}
                 {selectedCategory}
-                {reduceVisualEffect}
             />
         </div>
 
         <div class="selected-category">
             {#if selectedCategory === "file"}
-                <File on:rg-action />
+                <File on:rg-action
+                      on:import-json
+                      on:export-json
+                      on:export-haskell/>
             {/if}
             {#if selectedCategory === "graphics"}
-                <Graphics {showAxis} {showGrid} {reduceVisualEffect} />
+                <Graphics {settings}
+                          on:set-show-axis bind:showAxis
+                          on:set-show-grid bind:showGrid
+                          on:set-show-joystick bind:showJoystick
+                          on:set-reduce-visual-effect={e => {
+                              reduceVisualEffect = e.detail;
+                              dispatch("set-reduce-visual-effect", e.detail);
+                          }}
+                />
             {/if}
             {#if selectedCategory === "language"}
-                <Language {lang} {whoAmI} {changeLanguage} {changeWhoAmI} on:rg-action />
+                <Language {settings}
+                          on:set-language
+                          on:set-who-am-i
+                />
             {/if}
             {#if selectedCategory === "about"}
                 <About />

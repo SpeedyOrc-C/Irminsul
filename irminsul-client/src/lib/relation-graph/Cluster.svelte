@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-    export let selectedClusters: Set<string> = new Set();
-</script>
-
 <script lang="ts">
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
@@ -15,15 +11,12 @@
     export let size: Vector2;
     export let showCoordinate = false;
     export let selected = false;
-    export let elements: Array<string>;
+    export let selectedClusters: Set<string>;
 
     const dispatch = createEventDispatcher();
 
     function dispatchUpdateSelectedClusters() {
-        dispatch("rg-action", {
-            action: "update-selected-clusters",
-            clusters: selectedClusters,
-        });
+        dispatch("update-selected-clusters")
     }
 
     function toggleSelect() {
@@ -119,7 +112,7 @@
     style:width="{size.x}rem"
     style:height="{size.y}rem"
     on:click={toggleSelect}
-    on:dblclick={() => dispatch("rg-action", { action: "jump-to", id: id })}
+    on:dblclick={() => dispatch("jump-to", {id})}
 >
     <div class="translation font-hywh-65w">
         {translation}

@@ -1,43 +1,33 @@
 <script lang="ts">
-    import {createEventDispatcher, onMount} from "svelte";
-    import type { Writable } from "svelte/store";
+    import {beforeUpdate, createEventDispatcher} from "svelte";
     import type { Option } from "../util/Option";
 
     export let options: Array<Option>;
-    export let value: Writable<string>;
-    export let show: Writable<boolean>;
+    export let value: string;
+    export let show: boolean;
 
-    let optionDisplayed = false;
+    let displayed = false;
 
     const dispatch = createEventDispatcher();
 
-    onMount(() => {
-        show.subscribe(() => {
-            if ($show) {
-                optionDisplayed = true;
-            } else {
-                setTimeout(() => {
-                    optionDisplayed = false;
-                }, 200);
-            }
-        });
+    beforeUpdate(() => {
+        if (show)
+            displayed = true;
+        else
+            setTimeout(() => {displayed = false}, 200);
     })
 </script>
 
-<div
-    class="options"
-    class:show={$show}
-    style:display={optionDisplayed ? "block" : "none"}
->
+<div class="options" class:show style:display={displayed ? "block" : "none"}>
     {#each options as option}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
             class="option"
-            class:triggered={option.value === $value}
+            class:triggered={option.value === value}
             on:click={() => {
-                dispatch("dropdown-list-change", { value: option.value });
-                value.set(option.value);
-                show.set(false);
+                dispatch("dropdown-list-change", option.value);
+                value = option.value;
+                show = false;
             }}
         >
             <div class="option-background"></div>

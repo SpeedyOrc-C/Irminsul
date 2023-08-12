@@ -12,16 +12,12 @@
     export let id: string;
 
     const dispatch = createEventDispatcher();
-
-    function dispatchRgAction(e: CustomEvent) {
-        dispatch("rg-action", e.detail);
-    }
 </script>
 
 <div class="panel font-hywh-65w">
     <Separator />
 
-    <ButtonInferior action="open-settings" on:button-clicked={dispatchRgAction}>
+    <ButtonInferior action="open-settings" on:button-clicked={() => dispatch("open-settings")}>
         {$_("panel.settings")}
     </ButtonInferior>
 
@@ -29,7 +25,7 @@
 
     {#if relationGraph != null}
         {@const pathElements = relationGraph.path.concat([{ id: id, translation: relationGraph.rootTranslation }])}
-        <Path on:rg-action {pathElements}/>
+        <Path on:jump-to {pathElements}/>
     {/if}
 </div>
 

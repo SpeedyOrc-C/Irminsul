@@ -2,15 +2,13 @@
     import ItemBar from "../../ui/Settings/ItemBar.svelte";
     import { _ } from "svelte-i18n";
     import DropdownInSettings from "../../ui/Dropdown/DropdownInSettings.svelte";
-    import { beforeUpdate } from "svelte";
-    import type { Writable } from "svelte/store";
+    import {beforeUpdate, createEventDispatcher} from "svelte";
     import type { Option } from "$lib/util/Option";
+    import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
 
-    export let lang: Writable<string>;
-    export let whoAmI: Writable<"aether" | "lumine">;
+    const dispatch = createEventDispatcher();
 
-    export let changeLanguage: () => void;
-    export let changeWhoAmI: () => void;
+    export let settings: RelationGraphSettings;
 
     let interfaceLanguageOptions: Array<Option>;
     let whoAmIOptions: Array<Option>;
@@ -27,13 +25,15 @@
 </script>
 
 <ItemBar text={$_("settings.language.interface-language")}>
-    {#key interfaceLanguageOptions}
-        <DropdownInSettings options={interfaceLanguageOptions} value={lang} on:dropdown-change={changeLanguage} />
-    {/key}
+    <DropdownInSettings options={interfaceLanguageOptions}
+        value={settings.preference.language}
+        on:dropdown-change={e => dispatch("set-language", e.detail)}
+    />
 </ItemBar>
 
 <ItemBar text={$_("settings.language.who-am-i")}>
-    {#key whoAmIOptions}
-        <DropdownInSettings options={whoAmIOptions} value={whoAmI} on:dropdown-change={changeWhoAmI} />
-    {/key}
+    <DropdownInSettings options={whoAmIOptions}
+        value={settings.preference.who_am_i}
+        on:dropdown-change={e => dispatch("set-who-am-i", e.detail)}
+    />
 </ItemBar>

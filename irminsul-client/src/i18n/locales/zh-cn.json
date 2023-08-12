@@ -39,6 +39,10 @@
             "relation-graph": "关系图",
             "show-axis": "显示坐标轴",
             "show-grid": "显示网格",
+            "show-joystick": {
+                "self": "显示摇杆",
+                "has-coarse-pointer": "用手指时"
+            },
             "performance": "性能",
             "reduce-visual-effect": "减少视觉效果"
         },
@@ -66,7 +70,9 @@
         },
         "common": {
             "on": "打开",
-            "off": "关闭"
+            "off": "关闭",
+            "always": "始终",
+            "never": "从不"
         }
     },
     "panel": {

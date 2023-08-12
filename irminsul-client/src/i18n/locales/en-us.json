@@ -39,6 +39,10 @@
             "relation-graph": "Relation Graph",
             "show-axis": "Show axis",
             "show-grid": "Show grid",
+            "show-joystick": {
+                "self": "Show joystick",
+                "has-coarse-pointer": "When using fingers"
+            },
             "performance": "Performance",
             "reduce-visual-effect": "Reduce visual effect"
         },
@@ -66,7 +70,9 @@
         },
         "common": {
             "on": "On",
-            "off": "Off"
+            "off": "Off",
+            "always": "Always",
+            "never": "Never"
         }
     },
     "panel": {

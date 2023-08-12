@@ -7,10 +7,7 @@
     function pathElementClick(pathElement: PathElement) {
         // Prevent jumping if the user clicks on the last cluster
         if (pathElement.id !== pathElements[pathElements.length - 1].id) {
-            dispatch("rg-action", {
-                action: "jump-to",
-                id: pathElement.id,
-            });
+            dispatch("jump-to", pathElement.id);
         }
     }
 

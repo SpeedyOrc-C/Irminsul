@@ -60,8 +60,7 @@ export default class ViewController {
         }
     }
 
-    joystickEvent = (dx: number, dy: number) => {
-        const multiplier = 0.1;
+    joystickEvent = (dx: number, dy: number, multiplier: number) => {
         this.moveDelta(dx * multiplier, -dy * multiplier);
     }
 }

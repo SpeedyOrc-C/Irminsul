@@ -1,37 +1,40 @@
 <script lang="ts">
-    import {createEventDispatcher} from "svelte";
+    import {createEventDispatcher, onMount} from "svelte";
     import Joystick from "$lib/relation-graph/Joystick";
     import {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
 
     export let callback: (dx: number, dy: number) => void;
     export let showJoystick: ShowJoystick;
 
-    const joystick = new Joystick(callback);
+    let joystick: Joystick;
 
     const dispatch = createEventDispatcher();
 
+    let innerCircle: HTMLElement;
     let moving: boolean;
     let angle: number;
 
+    function touchStart() {
+        moving = true;
+        joystick.start();
+    }
+
     function touchMove(e: TouchEvent) {
         const touch = e.targetTouches[0];
-        joystick.move(touch.screenX, touch.screenY);
-
+        joystick.move(touch.clientX, touch.clientY);
         angle = joystick.angle;
-        moving = joystick.moving;
 
         dispatch("update-view");
     }
 
-    function touchEnd() {
-        joystick.stop();
-        moving = joystick.moving;
-    }
+    onMount(() => joystick = new Joystick(innerCircle, callback))
 </script>
 
 {#if showJoystick !== ShowJoystick.Never}
 <div id="joystick" class:has-coarse-finter={showJoystick === ShowJoystick.HasCoarsePointer}
-     on:touchmove={touchMove} on:touchend={touchEnd}
+     on:touchstart={touchStart}
+     on:touchmove={touchMove}
+     on:touchend={() => moving = false}
 >
     <div id="outer-circle" style:rotate="{-angle + Math.PI / 4}rad" class:moving>
         <div id="pivot">
@@ -41,7 +44,7 @@
             </svg>
         </div>
     </div>
-    <div id="inner-circle"/>
+    <div id="inner-circle" bind:this={innerCircle}/>
 </div>
 {/if}
 

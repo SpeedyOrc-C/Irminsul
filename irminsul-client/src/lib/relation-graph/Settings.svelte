@@ -8,7 +8,7 @@
     import File from "./Settings/File.svelte";
     import { _ } from "svelte-i18n";
     import Other from "./Settings/Other.svelte";
-    import Graphics from "./Settings/Graphics.svelte";
+    import RelationGraph from "./Settings/RelationGraph.svelte";
     import {beforeUpdate, createEventDispatcher} from "svelte";
     import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
     import type {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
@@ -19,6 +19,7 @@
     export let showAxis: boolean;
     export let showGrid: boolean;
     export let showJoystick: ShowJoystick;
+    export let joystickSensibility: number;
 
     const dispatch = createEventDispatcher();
 
@@ -66,7 +67,7 @@
         </div>
 
         <div class="settings-categories">
-            <SettingsCategories options={["file", "graphics", "language", "other", "about"]}
+            <SettingsCategories options={["file", "relation-graph", "language", "other", "about"]}
                 bind:reduceVisualEffect
                 on:settings-categories-change={e => (selectedCategory = e.detail.category)}
                 {selectedCategory}
@@ -80,15 +81,16 @@
                       on:export-json
                       on:export-haskell/>
             {/if}
-            {#if selectedCategory === "graphics"}
-                <Graphics {settings}
-                          on:set-show-axis bind:showAxis
-                          on:set-show-grid bind:showGrid
-                          on:set-show-joystick bind:showJoystick
-                          on:set-reduce-visual-effect={e => {
-                              reduceVisualEffect = e.detail;
-                              dispatch("set-reduce-visual-effect", e.detail);
-                          }}
+            {#if selectedCategory === "relation-graph"}
+                <RelationGraph {settings}
+                               on:set-show-axis bind:showAxis
+                               on:set-show-grid bind:showGrid
+                               on:set-show-joystick bind:showJoystick
+                               on:set-joystick-sensibility bind:joystickSensibility
+                               on:set-reduce-visual-effect={e => {
+                                   reduceVisualEffect = e.detail;
+                                   dispatch("set-reduce-visual-effect", e.detail);
+                               }}
                 />
             {/if}
             {#if selectedCategory === "language"}
@@ -101,7 +103,7 @@
                 <About />
             {/if}
             {#if selectedCategory === "other"}
-                <Other />
+                <Other on:reset-all />
             {/if}
         </div>
     </div>

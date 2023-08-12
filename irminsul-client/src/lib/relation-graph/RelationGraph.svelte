@@ -26,7 +26,7 @@
 
     const loader = new RelationGraphLoader();
 
-    const settings = new RelationGraphSettings("relation_graph_settings", "2023.08.12");
+    const settings = new RelationGraphSettings("relation_graph_settings", "2023.08.12.2230");
 
     let relationGraph: RelationGraph | null = null;
     let jsonFileInput: HTMLInputElement;
@@ -41,6 +41,7 @@
     let showSettings = false;
 
     let contentOpacity = 1;
+    let joystickSensibility = 4;
 
     let selectedAtoms: Set<string> = new Set();
     let selectedClusters: Set<string> = new Set();
@@ -217,10 +218,16 @@
         settings.save();
     }
 
+    function setJoystickSensibility(joystick_sensibility: number) {
+        settings.preference.joystick_sensitivity = joystick_sensibility;
+        settings.save();
+    }
+
     onMount(() => {
         showAxis = settings.preference.show_axis;
         showGrid = settings.preference.show_grid;
         showJoystick = settings.preference.show_joystick;
+        joystickSensibility = settings.preference.joystick_sensitivity;
 
         jsonFileReader = new FileReader();
 
@@ -330,7 +337,7 @@
         {/if}
     </div>
 
-    <Joystick callback={view.joystickEvent}
+    <Joystick callback={(dx, dy) => view.joystickEvent(dx, dy, 0.1 * (0.25 + joystickSensibility / 4))}
               bind:showJoystick={settings.preference.show_joystick}
               on:update-view={updateView}/>
 
@@ -350,6 +357,7 @@
               on:set-show-axis={e => setShowAxis(e.detail)} bind:showAxis
               on:set-show-grid={e => setShowGrid(e.detail)} bind:showGrid
               on:set-show-joystick={e => setShowJoystick(e.detail)} bind:showJoystick
+              on:set-joystick-sensibility={e => setJoystickSensibility(e.detail)} bind:joystickSensibility
               on:set-reduce-visual-effect={e => setReduceVisualEffect(e.detail)}
               on:set-language={e => setLanguage(e.detail)}
               on:set-who-am-i={e => setWhoAmI(e.detail)}

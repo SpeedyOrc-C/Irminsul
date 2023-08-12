@@ -22,7 +22,7 @@
         "self": "Settings",
         "category": {
             "file": "File",
-            "graphics": "Graphics",
+            "relation-graph": "Relation Graph",
             "language": "Language",
             "key-bindings": "Key Bindings",
             "about": "About",
@@ -35,14 +35,13 @@
             "export-json": "Export relation graph layout as JSON used in web",
             "export-haskell": "Export relation graph layout as Haskell used in Irminsul project"
         },
-        "graphics": {
-            "relation-graph": "Relation Graph",
+        "relation-graph": {
+            "graphics": "Graphics",
             "show-axis": "Show axis",
             "show-grid": "Show grid",
-            "show-joystick": {
-                "self": "Show joystick",
-                "has-coarse-pointer": "When using fingers"
-            },
+            "control": "Control",
+            "show-joystick": { "self": "Show joystick",  "has-coarse-pointer": "When using fingers" },
+            "joystick-sensibility": "Joystick sensibility",
             "performance": "Performance",
             "reduce-visual-effect": "Reduce visual effect"
         },

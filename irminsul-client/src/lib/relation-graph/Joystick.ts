@@ -1,37 +1,32 @@
 export default class Joystick {
     callback: (dx: number, dy: number) => void;
 
-    moving = false;
+    innerCircle: HTMLElement;
+    angle = 0;
 
-    #firstX = 0;
-    #firstY = 0;
-
+    #posX = 0;
+    #posY = 0;
     #lastX = 0;
     #lastY = 0;
 
-    angle = 0;
-
-    constructor(callback: (dx: number, dy: number) => void) {
+    constructor(innerCircle: HTMLElement, callback: (dx: number, dy: number) => void) {
+        this.innerCircle = innerCircle;
         this.callback = callback;
     }
 
-    move(x: number, y: number) {
-        if (this.moving) {
-            this.angle = Math.atan(-(y - this.#firstY) / (x - this.#firstX)) + ((x - this.#firstX) < 0 ? Math.PI : 0);
-            this.callback(x - this.#lastX, y - this.#lastY);
-        } else {
-            this.moving = true;
-            this.#firstX = x;
-            this.#firstY = y;
-        }
+    start = () => {
+        const rect = this.innerCircle.getBoundingClientRect();
+        this.#posX = (rect.left + rect.right) / 2;
+        this.#posY = (rect.top + rect.bottom) / 2;
+        this.#lastX = this.#posX;
+        this.#lastY = this.#posY;
+    };
+
+    move = (x: number, y: number) => {
+        this.angle = Math.atan(-(y - this.#posY) / (x - this.#posX)) + ((x - this.#posX) < 0 ? Math.PI : 0);
+        this.callback(x - this.#lastX, y - this.#lastY);
+
         this.#lastX = x;
         this.#lastY = y;
-
-    }
-    
-    stop() {
-        this.moving = false;
-        this.#firstX = this.#lastX;
-        this.#firstY = this.#lastY;
-    }
+    };
 }

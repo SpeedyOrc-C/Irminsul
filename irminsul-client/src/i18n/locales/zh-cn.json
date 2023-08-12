@@ -22,7 +22,7 @@
         "self": "设置",
         "category": {
             "file": "文件",
-            "graphics": "画面",
+            "relation-graph": "关系图",
             "language": "语言",
             "key-bindings": "按键",
             "about": "关于",
@@ -35,14 +35,13 @@
             "export-json": "将关系图布局导出为网页端中使用的 JSON",
             "export-haskell": "将关系图布局导出为 Irminsul 项目中使用的 Haskell"
         },
-        "graphics": {
-            "relation-graph": "关系图",
+        "relation-graph": {
+            "graphics": "画面",
             "show-axis": "显示坐标轴",
             "show-grid": "显示网格",
-            "show-joystick": {
-                "self": "显示摇杆",
-                "has-coarse-pointer": "用手指时"
-            },
+            "control": "控制",
+            "show-joystick": { "self": "显示摇杆", "has-coarse-pointer": "用手指时" },
+            "joystick-sensibility": "摇杆灵敏度",
             "performance": "性能",
             "reduce-visual-effect": "减少视觉效果"
         },

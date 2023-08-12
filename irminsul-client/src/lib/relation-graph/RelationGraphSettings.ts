@@ -76,6 +76,7 @@ type RelationGraphPreference = BasePreference & {
     show_axis: boolean;
     show_grid: boolean;
     show_joystick: ShowJoystick;
+    joystick_sensitivity: number;
     reduce_visual_effect: boolean;
 }
 
@@ -88,6 +89,7 @@ export default class RelationGraphSettings extends BaseSettings<RelationGraphPre
             show_axis: false,
             show_grid: false,
             show_joystick: ShowJoystick.HasCoarsePointer,
+            joystick_sensitivity: 4,
             reduce_visual_effect: true,
         }
     }

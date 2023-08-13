@@ -68,12 +68,10 @@ expandBiRelation = concatMap p
         p (BiRelation action a b) = [Relation action a b, Relation action b a]
 
 sameEntityPair :: Relation -> Relation -> Bool
-sameEntityPair (Relation _ a b) (Relation _ c d) = sameEntityPair' a b c d
-sameEntityPair (BiRelation _ a b) (BiRelation _ c d) = sameEntityPair' a b c d
-sameEntityPair (BiRelation _ a b) (Relation _ c d) = sameEntityPair' a b c d
-sameEntityPair (Relation _ a b) (BiRelation _ c d) = sameEntityPair' a b c d
-sameEntityPair' :: Entity -> Entity -> Entity -> Entity -> Bool
-sameEntityPair' a b c d = a == c && b == d || a == d && b == c
+sameEntityPair r1 r2 = s1 == s2 && o1 == o2 || s1 == o2 && s2 == o1
+    where 
+        s1 = subject r1; o1 = object r1
+        s2 = subject r2; o2 = object r2
 
 subjectAndObject :: Relation -> (Entity, Entity)
 subjectAndObject (Relation _ a b) = (a, b)

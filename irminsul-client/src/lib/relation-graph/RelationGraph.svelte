@@ -126,6 +126,7 @@
         selectedClusters.clear();
         updateEntityAnchor();
         view.reset();
+        updateView();
         id = loadId;
 
         window.history.replaceState(undefined, "", `/app/?id=${id}`);

@@ -10,13 +10,8 @@
 
     export let settings: RelationGraphSettings;
 
-    let interfaceLanguageOptions: Array<Option>;
     let whoAmIOptions: Array<Option>;
     beforeUpdate(() => {
-        interfaceLanguageOptions = [
-            { label: $_("language.zh-cn"), value: "zh-cn" },
-            { label: $_("language.en-us"), value: "en-us" },
-        ];
         whoAmIOptions = [
             { label: $_("who-am-i.aether"), value: "aether" },
             { label: $_("who-am-i.lumine"), value: "lumine" },
@@ -25,7 +20,11 @@
 </script>
 
 <ItemBar text={$_("settings.language.interface-language")}>
-    <DropdownInSettings options={interfaceLanguageOptions}
+    <DropdownInSettings
+        options={[
+            { label: "简体中文", value: "zh-cn" },
+            { label: "English (US)", value: "en-us" },
+        ]}
         value={settings.preference.language}
         on:dropdown-change={e => dispatch("set-language", e.detail)}
     />

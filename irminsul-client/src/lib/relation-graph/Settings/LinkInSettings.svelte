@@ -8,7 +8,14 @@
 </script>
 
 <ItemBar {text}>
-    <ButtonInSettings on:on:button-clicked={() => window.open(link, "_blank")}>
-        {$_("settings.msg.click-to-proceed")}
-    </ButtonInSettings>
+    <a href={link}>
+        <ButtonInSettings>{$_("settings.msg.click-to-proceed")}</ButtonInSettings>
+    </a>
 </ItemBar>
+
+<style lang="scss">
+    a {
+        color: unset;
+        text-decoration: unset;
+    }
+</style>

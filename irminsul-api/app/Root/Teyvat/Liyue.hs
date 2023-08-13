@@ -17,7 +17,7 @@ import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Liyue.YunHanOperaTroupe
 import Root.Teyvat.Liyue.QingceVillage
-import Root.Teyvat.Liyue.Adepti.Yaksha (xiao)
+import Root.Teyvat.Liyue.Adepti.Yaksha
 
 chongyun = "Chongyun"
 
@@ -41,7 +41,11 @@ liyue = clusterNode "Liyue" Country
         
         ningguang `friend` beidou,
         ningguang `friend` yelan,
+        yelan `intelligenceOfficer` ningguang,
         ningguang `appreciate` jinYun,
+
+        beidou `appreciate` xiangling,
+        xiangling `cook` cruxFleet,
 
         qiqi `afraidOf` hutao
     ]
@@ -69,6 +73,9 @@ liyue = clusterNode "Liyue" Country
             al xiao (-30, 0),
             al hutao (-30, -15),
             al qiqi (-45, -15),
-            al baizhu (-45, 0)
+            al baizhu (-45, 0),
+            al xiangling (15, -15),
+
+            cl cruxFleet (35, 0) (35, 0) (15, 5)
         ]    
     })

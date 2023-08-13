@@ -32,6 +32,8 @@ import Root.Teyvat.Mondstadt.Gunnhildr
 import Root.Teyvat.Liyue.CruxFleet
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.BubuPharmacy
+import Root.Teyvat.Inazuma.Kaedehara
+import Root.Teyvat.Liyue.YunHanOperaTroupe (jinYun)
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -43,12 +45,14 @@ translationEntityEnUs = [
     ipn amber "Amber",
     ipn aru "Aru",
     ipn barbaraPegg "Barbara Pegg",
+    ipn baizhu "Baizhu",
     ipn beidou "Beidou",
     ipn bennett "Bennett",
     ipn boreas "Boreas",
     ipn catsTail "Cat's Tail",
     ipn charlotte "Charlotte",
     ipn chongyun "Chongyun",
+    ipn cruxFleet "Crux Fleet",
     ipn daimon "Daimon",
     ipn dawnWinery "Dawn Winery",
     ipn diane "Diane",
@@ -65,9 +69,11 @@ translationEntityEnUs = [
     ipn hutao "Hutao",
     ipn inazuma "Inazuma",
     ipn jeanGunnhildr "Jean Gunnhildr",
+    ipn jinYun "Yun Jin",
     ipn kaeya "Kaeya",
     ipn kaeyaAlberich "Kaeya Alberich",
     ipn kaeyaRagvindr "Kaeya Ragvindr",
+    ipn kazuhaKaedehara "Kaedehara Kazuha",
     ipn keqing "Keqing",
     ipn kirara "Kirara",
     ipn klee "Klee",

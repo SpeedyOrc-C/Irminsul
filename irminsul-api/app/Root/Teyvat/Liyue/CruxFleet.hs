@@ -5,8 +5,9 @@ module Root.Teyvat.Liyue.CruxFleet where
 
 import Irminsul
 import Shortcut
-import Root.Teyvat.Inazuma
-import Root.Teyvat.Inazuma.Kaedehara (kazuhaKaedehara)
+import CommonRelations
+
+import Root.Teyvat.Inazuma.Kaedehara
 
 beidou = "Beidou"
 
@@ -16,5 +17,9 @@ cruxFleet = clusterLeaf "CruxFleet" Organization
         kazuhaKaedehara
     ]
     [
+        beidou `seaCaptain` cruxFleet
     ]
-    Nothing
+    (Just $ RelationGraphLayout (rl (0, 15)) [
+        al beidou (-15, 0),
+        al kazuhaKaedehara (15, 0)
+    ])

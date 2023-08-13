@@ -34,6 +34,8 @@ import Root.Teyvat.Mondstadt.Gunnhildr
 import Root.Teyvat.Liyue.CruxFleet
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.BubuPharmacy
+import Root.Teyvat.Inazuma.Kaedehara
+import Root.Teyvat.Liyue.YunHanOperaTroupe (jinYun)
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -45,12 +47,14 @@ translationEntityZhCn = [
     ip amber "安柏" ["打火姬", "蒙德飞行冠军"] UntilNow "",
     ipn aru "亚琉",
     ipn barbaraPegg ("芭芭拉"."佩奇"),
+    ipn baizhu "白术",
     ipn beidou "北斗",
     ipn bennett "班尼特",
     ipn boreas "玻瑞亚斯",
     ipn catsTail "猫尾酒馆",
     ipn charlotte "夏洛蒂",
     ipn chongyun "重云",
+    ipn cruxFleet "南十字船队",
     ipn daimon "大门",
     ipn dawnWinery "晨曦酒庄",
     ipn diane "黛安",
@@ -67,9 +71,11 @@ translationEntityZhCn = [
     ipn hutao "胡桃",
     ipn inazuma "稻妻",
     ip jeanGunnhildr ("琴"."古恩希尔德") ["琴妈", "骑士团的魂"] UntilNow "",
+    ipn jinYun "云堇",
     ip kaeya "凯亚" ["矿工头子"] UntilNow "",
     ipn kaeyaAlberich ("凯亚"."亚尔伯里奇"),
     ipn kaeyaRagvindr ("凯亚"."莱艮芬德"),
+    ipn kazuhaKaedehara "枫原万叶",
     ipn keqing "刻晴",
     ipn kirara "绮良良",
     ip klee "可莉" ["蒙德最强战力", "火花骑士"] UntilNow "",

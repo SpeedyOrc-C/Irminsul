@@ -16,11 +16,25 @@ import qualified Data.ByteString.Lazy as BSL
 import qualified Data.ByteString as BS
 import qualified Data.Text.Encoding as E
 import qualified Data.Text as T
+import System.Environment (getArgs)
+import Text.Read (readMaybe)
+import Data.Maybe (isNothing, fromJust)
 
 main :: IO ()
 main = do
-    putStrLn "Irminsul API Server starts on port 50000..."
-    run 50000 app
+    args <- getArgs
+    if null args then runOn 50000
+    else do
+        let portMaybe = readMaybe (head args) :: Maybe Int
+        if isNothing portMaybe then putStrLn "Cannot read port number."
+        else do
+            let port = fromJust portMaybe
+            if port < 0 || port > 65535 then putStrLn "Invalid port number."
+            else runOn port
+    where 
+        runOn port = do
+            putStrLn $ "Irminsul API starts on port " ++ show port ++ "..."
+            run port app
 
 {-
 Here defines all the possible paths of API requests.

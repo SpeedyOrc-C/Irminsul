@@ -18,6 +18,7 @@ import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Liyue.YunHanOperaTroupe
 import Root.Teyvat.Liyue.QingceVillage
 import Root.Teyvat.Liyue.Adepti.Yaksha
+import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
 
 chongyun = "Chongyun"
 
@@ -47,7 +48,9 @@ liyue = clusterNode "Liyue" Country
         beidou `appreciate` xiangling,
         xiangling `cook` cruxFleet,
 
-        qiqi `afraidOf` hutao
+        qiqi `afraidOf` hutao,
+
+        xingqiu `friend` chongyun
     ]
     [
         adepti,
@@ -75,6 +78,10 @@ liyue = clusterNode "Liyue" Country
             al qiqi (-45, -15),
             al baizhu (-45, 0),
             al xiangling (15, -15),
+            al chongyun (30, 15),
+            al xingqiu (15, 15),
+            al shenhe (45, 15),
+            al xinyan (0, -30),
 
             cl cruxFleet (35, 0) (35, 0) (15, 5)
         ]    

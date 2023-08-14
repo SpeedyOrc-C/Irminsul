@@ -41,7 +41,7 @@
         dispatchUpdateSelectedAtoms();
     }
 
-    function keydown(e: KeyboardEvent) {
+    function keyDown(e: KeyboardEvent) {
         if (e.ctrlKey !== e.metaKey) {
             switch (e.code) {
                 case "KeyA":
@@ -74,13 +74,12 @@
     }
 </script>
 
-<svelte:window on:keydown={keydown} />
+<svelte:window on:keydown={keyDown} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="atom" class:selected class:dim
     style:left="{position.x}rem" style:top="{-position.y}rem"
     on:click={toggleSelect}
-    {id}
 >
     <img class="avatar" src={avatarSrc} alt={translation} />
 

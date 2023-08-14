@@ -82,7 +82,7 @@
     on:click={toggleSelect}
     {id}
 >
-    <img class="avatar" src={avatarSrc} alt="" />
+    <img class="avatar" src={avatarSrc} alt={translation} />
 
     <div class="translation font-hywh-65w">{translation}</div>
 

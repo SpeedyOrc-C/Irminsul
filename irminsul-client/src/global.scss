@@ -1,0 +1,22 @@
+@font-face {
+    font-family: HYWenHei-65W;
+    src: url("/font/HYWenHei-65W.ttf");
+}
+.font-hywh-65w { font-family: HYWenHei-65W, sans-serif; }
+
+@font-face {
+    font-family: HYWenHei-85W;
+    src: url("/font/HYWenHei-85W.ttf");
+}
+.font-hywh-85w { font-family: HYWenHei-85W, sans-serif; }
+
+@font-face {
+    font-family: fira-code-regular;
+    src: url("/font/FiraCode-Regular.ttf");
+}
+
+body {
+    background-color: #171f2b;
+    overflow: hidden;
+}
+

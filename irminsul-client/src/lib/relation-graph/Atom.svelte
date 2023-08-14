@@ -13,7 +13,8 @@
     export let dim = false;
     export let selectedAtoms: Set<string>;
 
-    let avatarSrc: string = img_avatar_UnknownAvatar;
+    let avatarSrc: string;
+
     onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
 
     const dispatch = createEventDispatcher();

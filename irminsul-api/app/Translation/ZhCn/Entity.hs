@@ -104,8 +104,10 @@ translationEntityZhCn = [
     ipn uda "宇陀",
     ipn varka "法尔伽",
     ipn venti "温迪",
+    ipn wangshengFuneralParlor "往生堂",
     ipn xiangling "香菱",
     ipn xiao "魈",
+    ipn xinyan "辛焱",
     ipn xingqiu "行秋",
     ipn yelan "夜兰",
     ipn zhongli "钟离"

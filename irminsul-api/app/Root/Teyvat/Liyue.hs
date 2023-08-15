@@ -19,6 +19,7 @@ import Root.Teyvat.Liyue.YunHanOperaTroupe
 import Root.Teyvat.Liyue.QingceVillage
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
+import Root.AnotherWorld (travellerArchonSide)
 
 chongyun = "Chongyun"
 
@@ -32,14 +33,15 @@ liyue = clusterNode "Liyue" Country
         chongyun,
         xinyan,
         yelan,
-        yanfei
+        yanfei,
+        travellerArchonSide
     ]
     [
         zhongli `rule` liyue,
         zhongli `appreciate` keqing,
         zhongli `appreciate` ningguang,
         zhongli `lookAfter` xiao,
-        
+
         ningguang `friend` beidou,
         ningguang `friend` yelan,
         yelan `intelligenceOfficer` ningguang,
@@ -50,7 +52,13 @@ liyue = clusterNode "Liyue" Country
 
         qiqi `afraidOf` hutao,
 
-        xingqiu `friend` chongyun
+        xingqiu `friend` chongyun,
+
+        xinyan `friend` xiangling,
+        xinyan `friend` jinYun,
+        jinYun `appreciate` xinyan,
+
+        Relation "Smuggle" beidou travellerArchonSide
     ]
     [
         adepti,
@@ -60,7 +68,7 @@ liyue = clusterNode "Liyue" Country
         cruxFleet,
         wanminRestaurant,
         bubuPharmary,
-        yuehaiPavilion, 
+        yuehaiPavilion,
         yunHanOperaTroupe,
         qingceVillage
     ]
@@ -82,7 +90,9 @@ liyue = clusterNode "Liyue" Country
             al xingqiu (15, 15),
             al shenhe (45, 15),
             al xinyan (0, -30),
+            al travellerArchonSide (30, 0),
 
-            cl cruxFleet (35, 0) (35, 0) (15, 5)
-        ]    
+            cl cruxFleet (35, -15) (30, -15) (15, 5),
+            cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (15, 5)
+        ]
     })

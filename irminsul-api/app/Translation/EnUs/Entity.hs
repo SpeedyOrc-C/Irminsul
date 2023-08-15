@@ -33,7 +33,7 @@ import Root.Teyvat.Liyue.CruxFleet
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.BubuPharmacy
 import Root.Teyvat.Inazuma.Kaedehara
-import Root.Teyvat.Liyue.YunHanOperaTroupe (jinYun)
+import Root.Teyvat.Liyue.YunHanOperaTroupe
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -102,9 +102,11 @@ translationEntityEnUs = [
     ipn uda "Uda",
     ipn varka "Varka",
     ipn venti "Venti",
+    ipn wangshengFuneralParlor "Wangsheng Funeral Parlor",
     ipn xiangling "Xiangling",
     ipn xiao "Xiao",
     ipn xingqiu "Xingqiu",
+    ipn xinyan "Xinyan",
     ipn yelan "Yelan",
     ipn zhongli "Zhongli"
     ]

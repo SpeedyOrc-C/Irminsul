@@ -1,8 +1,9 @@
 module Translation.ZhCn.Action where
 
 import Control.Arrow (Arrow(first))
-import Irminsul
+import Irminsul ( Action(Action) )
 
+translationActionZhCn :: [(Action, String)]
 translationActionZhCn = first Action <$> [
     ("ActingGrandMaster", "代理团长"),
     ("ActingGuardian", "代理监护人"),
@@ -27,6 +28,7 @@ translationActionZhCn = first Action <$> [
     ("GrandMaster", "团长"),
     ("Guardian", "监护人"),
     ("Hate", "讨厌"),
+    ("HelpTasteDishes", "帮忙试菜"),
     ("IntelligenceOfficer", "情报官"),
     ("Kill", "杀"),
     ("Like", "喜欢"),
@@ -40,6 +42,7 @@ translationActionZhCn = first Action <$> [
     ("SeaCaptain", "船长"),
     ("Son", "儿子"),
     ("Student", "学生"),
+    ("Smuggle", "偷渡"),
     ("Superior", "上级"),
     ("SupportInSilence", "暗中照顾"),
     ("TavernOwner", "酒馆老板"),
@@ -48,5 +51,6 @@ translationActionZhCn = first Action <$> [
     ("Translator", "译者"),
     ("YoungerBrother", "弟弟"),
     ("YoungerGeneration", "前辈"),
-    ("YoungerSister", "妹妹")
+    ("YoungerSister", "妹妹"),
+    ("YoungerSisterOfMother", "小姨")
     ]

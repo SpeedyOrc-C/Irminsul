@@ -1,9 +1,9 @@
 module Translation.EnUs.Action where
 
 import Control.Arrow (Arrow(first))
+import Irminsul ( Action(Action) )
 
-import Irminsul
-
+translationActionEnUs :: [(Action, String)]
 translationActionEnUs = first Action <$> [
     ("ActingGrandMaster", "Acting grand master"),
     ("ActingGuardian", "Acting guardian"),
@@ -28,6 +28,7 @@ translationActionEnUs = first Action <$> [
     ("GrandMaster", "Grand master"),
     ("Guardian", "Guardian"),
     ("Hate", "Hate"),
+    ("HelpTasteDishes", "Help taste the dishes"),
     ("IntelligenceOfficer", "Intelligence officer"),
     ("Kill", "Kill"),
     ("Like", "Like"),
@@ -41,6 +42,7 @@ translationActionEnUs = first Action <$> [
     ("SeaCaptain", "Sea captain"),
     ("Son", "Son"),
     ("Student", "Student"),
+    ("Smuggle", "Smuggle"),
     ("Superior", "Superior"),
     ("TavernOwner", "Tavern owner"),
     ("SupportInSilence", "Support in silence"),
@@ -49,5 +51,6 @@ translationActionEnUs = first Action <$> [
     ("Translator", "Translator"),
     ("YoungerBrother", "Younger brother"),
     ("YoungerGeneration", "Younger generation"),
-    ("YoungerSister", "Younger sister")
+    ("YoungerSister", "Younger sister"),
+    ("YoungerSisterOfMother", "Mother's younger sister")
     ]

@@ -35,7 +35,8 @@ import Root.Teyvat.Liyue.CruxFleet
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.BubuPharmacy
 import Root.Teyvat.Inazuma.Kaedehara
-import Root.Teyvat.Liyue.YunHanOperaTroupe (jinYun)
+import Root.Teyvat.Liyue.YunHanOperaTroupe
+import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -51,6 +52,7 @@ translationEntityZhCn = [
     ipn beidou "北斗",
     ipn bennett "班尼特",
     ipn boreas "玻瑞亚斯",
+    ipn bubuPharmary "不卜庐",
     ipn catsTail "猫尾酒馆",
     ipn charlotte "夏洛蒂",
     ipn chongyun "重云",
@@ -109,6 +111,7 @@ translationEntityZhCn = [
     ipn xiao "魈",
     ipn xinyan "辛焱",
     ipn xingqiu "行秋",
+    ipn yaoyao "瑶瑶",
     ipn yelan "夜兰",
     ipn zhongli "钟离"
     ]

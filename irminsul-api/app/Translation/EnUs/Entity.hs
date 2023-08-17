@@ -34,6 +34,7 @@ import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.BubuPharmacy
 import Root.Teyvat.Inazuma.Kaedehara
 import Root.Teyvat.Liyue.YunHanOperaTroupe
+import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
 
 translationEntityEnUs :: [(Entity, Information)]
 translationEntityEnUs = [
@@ -49,6 +50,7 @@ translationEntityEnUs = [
     ipn beidou "Beidou",
     ipn bennett "Bennett",
     ipn boreas "Boreas",
+    ipn bubuPharmary "Bubu Pharmacy",
     ipn catsTail "Cat's Tail",
     ipn charlotte "Charlotte",
     ipn chongyun "Chongyun",
@@ -107,6 +109,7 @@ translationEntityEnUs = [
     ipn xiao "Xiao",
     ipn xingqiu "Xingqiu",
     ipn xinyan "Xinyan",
+    ipn yaoyao "Yaoyao",
     ipn yelan "Yelan",
     ipn zhongli "Zhongli"
     ]

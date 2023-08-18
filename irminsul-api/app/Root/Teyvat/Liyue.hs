@@ -62,7 +62,9 @@ liyue = clusterNode "Liyue" Country
 
         Relation "Smuggle" beidou travellerArchonSide,
 
-        Relation "YoungerSisterOfMother" shenhe chongyun
+        Relation "YoungerSisterOfMother" shenhe chongyun,
+        shenhe `friend` ganyu,
+        acting guardian ganyu yaoyao
     ]
     [
         adepti,
@@ -83,22 +85,24 @@ liyue = clusterNode "Liyue" Country
             al ningguang (0, 0),
             al jinYun (0, -15),
             al yelan (0, 15),
-            al beidou (15, 0),
+            al beidou (15, -10.5),
             al keqing (-15, -15),
             al xiao (-30, 0),
             al hutao (-30, -15),
             al qiqi (-45, -15),
             al baizhu (-45, 0),
-            al xiangling (15, -22.5),
+            al xiangling (15, -30),
             al chongyun (30, 15),
             al xingqiu (15, 15),
             al shenhe (45, 15),
             al xinyan (0, -30),
-            al travellerArchonSide (30, 0),
-            al yaoyao (-30, 15),
+            al travellerArchonSide (30, -10.5),
+            al yaoyao (30, 0),
+            al ganyu (15, 0),
 
-            cl cruxFleet (35, -15) (30, -15) (15, 5),
+            cl cruxFleet (35, -30) (30, -30) (15, 5),
             cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (15, 5),
-            cl bubuPharmary (-45, -7.5) (-45, -7.5) (15, 5)
+            cl bubuPharmary (-45, -7.5) (-45, -7.5) (15, 5),
+            cl cloudRetainersAbode (42, 0) (42, 0) (15, 5)
         ]
     })

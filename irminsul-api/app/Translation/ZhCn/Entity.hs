@@ -28,7 +28,6 @@ import Root.Teyvat.Liyue.QingceVillage
 import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.FeiyunCommerceGuild
 import Root.Teyvat.Liyue.Qixing
-import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Byakuyakoku
 import Root.Teyvat.Mondstadt.Gunnhildr
 import Root.Teyvat.Liyue.CruxFleet
@@ -37,6 +36,7 @@ import Root.Teyvat.Liyue.BubuPharmacy
 import Root.Teyvat.Inazuma.Kaedehara
 import Root.Teyvat.Liyue.YunHanOperaTroupe
 import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
+import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -56,6 +56,7 @@ translationEntityZhCn = [
     ipn catsTail "猫尾酒馆",
     ipn charlotte "夏洛蒂",
     ipn chongyun "重云",
+    ipn cloudRetainersAbode "留云借风真君洞天",
     ipn cruxFleet "南十字船队",
     ipn daimon "大门",
     ipn dawnWinery "晨曦酒庄",
@@ -98,6 +99,7 @@ translationEntityZhCn = [
     ipn razor "雷泽",
     ipn rosaria "罗莎莉亚",
     ipn root "树根",
+    ipn shenhe "申鹤",
     ipn shuyun "恕筠",
     ip sucrose "砂糖" ["雷萤术士"] UntilNow "",
     ipn supadaNoHiko "须婆达之彦",

@@ -6,7 +6,7 @@ module Root.Teyvat.Liyue.YuehaiPavilion where
 import Shortcut
 import Irminsul
 
-ganyu = "Ganyu"
+import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
 
 yuehaiPavilion = clusterLeaf "YuehaiPavilion" Organization
     [

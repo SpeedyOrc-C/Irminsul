@@ -3,7 +3,7 @@
     import ItemBar from "$lib/ui/Settings/ItemBar.svelte";
     import { createEventDispatcher } from "svelte";
     import { _ } from "svelte-i18n";
-    import SubCategory from "../../ui/Settings/SubCategory.svelte";
+    import SubCategory from "$lib/ui/Settings/SubCategory.svelte";
 
     const dispatch = createEventDispatcher();
 </script>

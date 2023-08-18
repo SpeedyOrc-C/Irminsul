@@ -1,7 +1,7 @@
 <script lang="ts">
     import {createEventDispatcher, onMount} from "svelte";
-    import Joystick from "$lib/relation-graph/Joystick";
-    import {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
+    import Joystick from "./Joystick";
+    import {ShowJoystick} from "./RelationGraphSettings";
 
     export let callback: (dx: number, dy: number) => void;
     export let showJoystick: ShowJoystick;

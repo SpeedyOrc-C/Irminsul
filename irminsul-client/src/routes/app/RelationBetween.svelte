@@ -1,6 +1,6 @@
 <script lang="ts">
     import {afterUpdate} from "svelte";
-    import type { Vector2 } from "../util/Vector2";
+    import type { Vector2 } from "$lib/util/Vector2";
 
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
@@ -85,10 +85,7 @@
 
 <svelte:window on:keyup={updateTransform} />
 
-<div
-    class="relation-between"
-    class:highlight
-    class:dim
+<div class="relation-between" class:highlight class:dim
     style:width="{width}rem"
     style:left="{position.x}rem"
     style:top="{-position.y}rem"

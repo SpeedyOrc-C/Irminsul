@@ -2,7 +2,7 @@
     import Background from "../../asset/img/ui/UI-Settings-Background.png";
     import Icon from "../../asset/img/ui/UI-Settings-Icon.png";
     import ButtonClose from "$lib/ui/Button/ButtonClose.svelte";
-    import Language from "$lib/relation-graph/Settings/Language.svelte";
+    import Language from "./Settings/Language.svelte";
     import SettingsCategories from "$lib/ui/Settings/SettingsCategories.svelte";
     import About from "./Settings/About.svelte";
     import File from "./Settings/File.svelte";
@@ -10,8 +10,8 @@
     import Other from "./Settings/Other.svelte";
     import RelationGraph from "./Settings/RelationGraph.svelte";
     import {beforeUpdate, createEventDispatcher} from "svelte";
-    import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
-    import type {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
+    import type RelationGraphSettings from "./RelationGraphSettings";
+    import type {ShowJoystick} from "./RelationGraphSettings";
 
     export let settings: RelationGraphSettings;
     export let show: boolean;

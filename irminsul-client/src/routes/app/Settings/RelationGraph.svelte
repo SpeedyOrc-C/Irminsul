@@ -5,8 +5,8 @@
     import type { Option } from "$lib/util/Option";
     import {beforeUpdate, createEventDispatcher} from "svelte";
     import { _ } from "svelte-i18n";
-    import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
-    import type {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
+    import type RelationGraphSettings from "../RelationGraphSettings";
+    import type {ShowJoystick} from "../RelationGraphSettings";
     import SliderInSettings from "$lib/ui/SliderInSettings.svelte";
 
     const dispatch = createEventDispatcher();

@@ -2,8 +2,8 @@
     import { createEventDispatcher, onMount } from "svelte";
     import { getImgAvatar, img_avatar_UnknownAvatar } from "../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
-    import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
-    import type { Vector2 } from "../util/Vector2";
+    import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
+    import type { Vector2 } from "$lib/util/Vector2";
 
     export let id: string;
     export let translation: string;

@@ -4,7 +4,7 @@
     import Cluster from "./Cluster.svelte";
     import {dumpRelationGraph2Haskell, type RelationGraph,} from "../../model/RelationGraph";
     import RelationBetween from "./RelationBetween.svelte";
-    import {type Vector2, Vector2Zero} from "../util/Vector2";
+    import {type Vector2, Vector2Zero} from "$lib/util/Vector2";
     import Axis from "./Axis.svelte";
     import Grid from "./Grid.svelte";
     import {saveStringAsFile} from "$lib/util/String";
@@ -15,10 +15,10 @@
     import {writable, type Writable} from "svelte/store";
     import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
     import {_, locale} from "svelte-i18n";
-    import {RelationGraphLoader} from "$lib/relation-graph/RelationGraphLoader";
-    import ViewController from "$lib/relation-graph/ViewController";
-    import Joystick from "$lib/relation-graph/Joystick.svelte";
-    import RelationGraphSettings, {ShowJoystick, WhoAmI} from "$lib/relation-graph/RelationGraphSettings";
+    import {RelationGraphLoader} from "./RelationGraphLoader";
+    import ViewController from "./ViewController";
+    import Joystick from "./Joystick.svelte";
+    import RelationGraphSettings, {ShowJoystick, WhoAmI} from "./RelationGraphSettings";
 
     export let id: string;
 

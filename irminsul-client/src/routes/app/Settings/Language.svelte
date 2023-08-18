@@ -1,10 +1,10 @@
 <script lang="ts">
-    import ItemBar from "../../ui/Settings/ItemBar.svelte";
+    import ItemBar from "$lib/ui/Settings/ItemBar.svelte";
     import { _ } from "svelte-i18n";
-    import DropdownInSettings from "../../ui/Dropdown/DropdownInSettings.svelte";
+    import DropdownInSettings from "$lib/ui/Dropdown/DropdownInSettings.svelte";
     import {beforeUpdate, createEventDispatcher} from "svelte";
     import type { Option } from "$lib/util/Option";
-    import type RelationGraphSettings from "$lib/relation-graph/RelationGraphSettings";
+    import type RelationGraphSettings from "../RelationGraphSettings";
 
     const dispatch = createEventDispatcher();
 

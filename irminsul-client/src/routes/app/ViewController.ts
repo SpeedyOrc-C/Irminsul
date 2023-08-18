@@ -35,10 +35,10 @@ export default class ViewController {
         this.scale = 1;
     }
 
-    moveUp = () => this.moveDelta(0, 10);
-    moveDown = () => this.moveDelta(0, -10);
-    moveLeft = () => this.moveDelta(-10, 0);
-    moveRight = () => this.moveDelta(10, 0);
+    moveUp = () => this.moveDelta(0, 7.5);
+    moveDown = () => this.moveDelta(0, -7.5);
+    moveLeft = () => this.moveDelta(-7.5, 0);
+    moveRight = () => this.moveDelta(7.5, 0);
 
     zoomIn() { this.scaleExponent += 1; this.#update(); }
     zoomOut() { this.scaleExponent -= 1; this.#update(); }

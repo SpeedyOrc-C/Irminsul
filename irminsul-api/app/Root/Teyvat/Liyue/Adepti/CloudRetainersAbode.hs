@@ -6,12 +6,14 @@ import Shortcut
 import Irminsul
 
 cloudRetainer = "CloudRetainer"
+ganyu = "Ganyu"
 shenhe = "Shenhe"
 
 cloudRetainersAbode = clusterLeaf "CloudRetainersAbode" Organization
     [
         cloudRetainer,
-        shenhe
+        shenhe,
+        ganyu
     ]
     [
 

@@ -23,6 +23,9 @@ newtype Action = Action {actionId :: String} deriving (Eq)
 instance Show Action where
     show (Action id) = id
 
+instance IsString Action where
+    fromString = Action
+
 data Relation
     = Relation {action::Action, subject::Entity, object:: Entity}
     | BiRelation {action::Action, subject::Entity, object:: Entity}

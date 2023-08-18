@@ -28,14 +28,15 @@ import Root.Teyvat.Liyue.QingceVillage
 import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Liyue.FeiyunCommerceGuild
 import Root.Teyvat.Liyue.Qixing
-import Root.Teyvat.Liyue.YuehaiPavilion
 import Root.Teyvat.Byakuyakoku
 import Root.Teyvat.Mondstadt.Gunnhildr
 import Root.Teyvat.Liyue.CruxFleet
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.BubuPharmacy
 import Root.Teyvat.Inazuma.Kaedehara
-import Root.Teyvat.Liyue.YunHanOperaTroupe (jinYun)
+import Root.Teyvat.Liyue.YunHanOperaTroupe
+import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
+import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
 
 translationEntityZhCn :: [(Entity, Information)]
 translationEntityZhCn = [
@@ -51,9 +52,11 @@ translationEntityZhCn = [
     ipn beidou "北斗",
     ipn bennett "班尼特",
     ipn boreas "玻瑞亚斯",
+    ipn bubuPharmary "不卜庐",
     ipn catsTail "猫尾酒馆",
     ipn charlotte "夏洛蒂",
     ipn chongyun "重云",
+    ipn cloudRetainersAbode "留云借风真君洞天",
     ipn cruxFleet "南十字船队",
     ipn daimon "大门",
     ipn dawnWinery "晨曦酒庄",
@@ -96,6 +99,7 @@ translationEntityZhCn = [
     ipn razor "雷泽",
     ipn rosaria "罗莎莉亚",
     ipn root "树根",
+    ipn shenhe "申鹤",
     ipn shuyun "恕筠",
     ip sucrose "砂糖" ["雷萤术士"] UntilNow "",
     ipn supadaNoHiko "须婆达之彦",
@@ -104,9 +108,12 @@ translationEntityZhCn = [
     ipn uda "宇陀",
     ipn varka "法尔伽",
     ipn venti "温迪",
+    ipn wangshengFuneralParlor "往生堂",
     ipn xiangling "香菱",
     ipn xiao "魈",
+    ipn xinyan "辛焱",
     ipn xingqiu "行秋",
+    ipn yaoyao "瑶瑶",
     ipn yelan "夜兰",
     ipn zhongli "钟离"
     ]

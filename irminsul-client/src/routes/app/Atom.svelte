@@ -1,9 +1,9 @@
 <script lang="ts">
     import { createEventDispatcher, onMount } from "svelte";
-    import { getImgAvatar, img_avatar_UnknownAvatar } from "../../asset/Asset";
+    import { getImgAvatar } from "../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
-    import { deadKeyMultiplier } from "../util/DeadKeyMultiplier";
-    import type { Vector2 } from "../util/Vector2";
+    import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
+    import type { Vector2 } from "$lib/util/Vector2";
 
     export let id: string;
     export let translation: string;
@@ -153,6 +153,7 @@
         width: 10rem;
         top: 7rem;
         left: 0;
+        border: 0.1rem solid #fff4;
         border-radius: 0.2rem;
 
         background: #404756;

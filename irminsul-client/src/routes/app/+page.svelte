@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import RelationGraph from "$lib/relation-graph/RelationGraph.svelte";
+    import RelationGraph from "./RelationGraph.svelte";
     import {page} from "$app/stores";
 
     import "../../global.scss"

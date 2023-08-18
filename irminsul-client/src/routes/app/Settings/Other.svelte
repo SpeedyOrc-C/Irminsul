@@ -1,7 +1,7 @@
 <script lang="ts">
     import { _ } from "svelte-i18n";
-    import SubCategory from "../../ui/Settings/SubCategory.svelte";
-    import LinkInSettings from "$lib/relation-graph/Settings/LinkInSettings.svelte";
+    import SubCategory from "$lib/ui/Settings/SubCategory.svelte";
+    import LinkInSettings from "./LinkInSettings.svelte";
     import ItemBar from "$lib/ui/Settings/ItemBar.svelte";
     import ButtonInSettings from "$lib/ui/Button/ButtonInSettings.svelte";
     import {createEventDispatcher} from "svelte";

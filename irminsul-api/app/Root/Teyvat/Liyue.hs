@@ -19,6 +19,8 @@ import Root.Teyvat.Liyue.YunHanOperaTroupe
 import Root.Teyvat.Liyue.QingceVillage
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
+import Root.AnotherWorld
+import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
 
 chongyun = "Chongyun"
 
@@ -32,25 +34,37 @@ liyue = clusterNode "Liyue" Country
         chongyun,
         xinyan,
         yelan,
-        yanfei
+        yanfei,
+        travellerArchonSide
     ]
     [
         zhongli `rule` liyue,
         zhongli `appreciate` keqing,
         zhongli `appreciate` ningguang,
         zhongli `lookAfter` xiao,
-        
+
         ningguang `friend` beidou,
         ningguang `friend` yelan,
         yelan `intelligenceOfficer` ningguang,
         ningguang `appreciate` jinYun,
 
         beidou `appreciate` xiangling,
+        Relation "HelpTasteDishes" beidou xiangling,
         xiangling `cook` cruxFleet,
 
         qiqi `afraidOf` hutao,
 
-        xingqiu `friend` chongyun
+        xingqiu `friend` chongyun,
+
+        xinyan `friend` xiangling,
+        xinyan `friend` jinYun,
+        jinYun `appreciate` xinyan,
+
+        Relation "Smuggle" beidou travellerArchonSide,
+
+        Relation "YoungerSisterOfMother" shenhe chongyun,
+        shenhe `friend` ganyu,
+        acting guardian ganyu yaoyao
     ]
     [
         adepti,
@@ -60,7 +74,7 @@ liyue = clusterNode "Liyue" Country
         cruxFleet,
         wanminRestaurant,
         bubuPharmary,
-        yuehaiPavilion, 
+        yuehaiPavilion,
         yunHanOperaTroupe,
         qingceVillage
     ]
@@ -71,18 +85,24 @@ liyue = clusterNode "Liyue" Country
             al ningguang (0, 0),
             al jinYun (0, -15),
             al yelan (0, 15),
-            al beidou (15, 0),
+            al beidou (15, -10.5),
             al keqing (-15, -15),
             al xiao (-30, 0),
             al hutao (-30, -15),
             al qiqi (-45, -15),
             al baizhu (-45, 0),
-            al xiangling (15, -15),
+            al xiangling (15, -30),
             al chongyun (30, 15),
             al xingqiu (15, 15),
             al shenhe (45, 15),
             al xinyan (0, -30),
+            al travellerArchonSide (30, -10.5),
+            al yaoyao (30, 0),
+            al ganyu (15, 0),
 
-            cl cruxFleet (35, 0) (35, 0) (15, 5)
-        ]    
+            cl cruxFleet (35, -30) (30, -30) (15, 5),
+            cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (15, 5),
+            cl bubuPharmary (-45, -7.5) (-45, -7.5) (15, 5),
+            cl cloudRetainersAbode (42, 0) (42, 0) (15, 5)
+        ]
     })

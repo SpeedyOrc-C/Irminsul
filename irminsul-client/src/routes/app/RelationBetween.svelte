@@ -1,6 +1,6 @@
 <script lang="ts">
     import {afterUpdate} from "svelte";
-    import type { Vector2 } from "../util/Vector2";
+    import type { Vector2 } from "$lib/util/Vector2";
 
     export let forwardRelations: Array<string>;
     export let backwardRelations: Array<string>;
@@ -12,8 +12,8 @@
 
     let needReverse: boolean;
 
-    let realForwardRelations: Array<string>;
-    let realBackwardRelations: Array<string>;
+    let realForwardRelations: Array<string> = [];
+    let realBackwardRelations: Array<string> = [];
 
     let width: number;
     let position: Vector2 = { x: 0, y: 0 };
@@ -85,38 +85,41 @@
 
 <svelte:window on:keyup={updateTransform} />
 
-<div
-    class="relation-between"
-    class:highlight
-    class:dim
+<div class="relation-between" class:highlight class:dim
     style:width="{width}rem"
     style:left="{position.x}rem"
     style:top="{-position.y}rem"
     style:transform="translate(-50%, -50%) rotate({rotation}rad)"
 >
     {#if biRelations.length > 0}
-        <div
-            class="bi-relation font-hywh-65w"
-        >
-            {#each biRelations as r}
-                <div>{r}</div>
-            {/each}
+        <div class="bi-relation font-hywh-65w">
+            <div>
+                {#each biRelations as r}
+                    <span class="relation">{r}</span>
+                {/each}
+            </div>
         </div>
     {/if}
 
-    {#if realForwardRelations !== undefined && realForwardRelations?.length > 0}
-        <div class="forward-relation font-hywh-65w" style:top="calc(50% + {-forwardRelationY}rem)">
-            {#each realForwardRelations as r}
-                <div>{r}</div>
-            {/each}
+    {#if realForwardRelations?.length > 0}
+        <div class="forward-relation font-hywh-65w"
+             style:top="calc(50% + {-forwardRelationY}rem)">
+            <div>
+                {#each realForwardRelations as r}
+                    <span class="relation">{r}</span>
+                {/each}
+            </div>
         </div>
     {/if}
 
-    {#if realBackwardRelations !== undefined && realBackwardRelations?.length > 0}
-        <div class="backward-relation font-hywh-65w" style:top="calc(50% + {-backwardRelationY}rem)">
-            {#each realBackwardRelations as r}
-                <div>{r}</div>
-            {/each}
+    {#if realBackwardRelations?.length > 0}
+        <div class="backward-relation font-hywh-65w"
+             style:top="calc(50% + {-backwardRelationY}rem)">
+            <div>
+                {#each realBackwardRelations as r}
+                    <span class="relation">{r}</span>
+                {/each}
+            </div>
         </div>
     {/if}
 </div>
@@ -181,6 +184,8 @@
     .forward-relation {
         @extend %uni-relation-shared;
 
+        //padding-left: 6rem;
+
         background-image: linear-gradient(
             90deg,
             #ffbd22aa 0%,
@@ -190,8 +195,7 @@
 
         & > div {
             position: absolute;
-            left: 3.5rem;
-            font-feature-settings: "vert";
+            left: 3rem;
         }
     }
 
@@ -207,7 +211,13 @@
 
         & > div {
             position: absolute;
-            right: 3.5rem;
+            right: 3rem;
         }
+    }
+
+    .relation:nth-child(n+2) {
+        margin-left: 0.3rem;
+        border-left: 0.1rem solid #0004;
+        padding-left: 0.3rem;
     }
 </style>

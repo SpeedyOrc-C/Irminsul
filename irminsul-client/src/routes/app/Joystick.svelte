@@ -1,7 +1,7 @@
 <script lang="ts">
     import {createEventDispatcher, onMount} from "svelte";
-    import Joystick from "$lib/relation-graph/Joystick";
-    import {ShowJoystick} from "$lib/relation-graph/RelationGraphSettings";
+    import Joystick from "./Joystick";
+    import {ShowJoystick} from "./RelationGraphSettings";
 
     export let callback: (dx: number, dy: number) => void;
     export let showJoystick: ShowJoystick;
@@ -31,7 +31,7 @@
 </script>
 
 {#if showJoystick !== ShowJoystick.Never}
-<div id="joystick" class:has-coarse-finter={showJoystick === ShowJoystick.HasCoarsePointer}
+<div id="joystick" class:has-coarse-pointer={showJoystick === ShowJoystick.HasCoarsePointer}
      on:touchstart={touchStart}
      on:touchmove={touchMove}
      on:touchend={() => moving = false}

@@ -125,5 +125,7 @@
         translate: -50% -50%;
 
         height: 3.2rem; width: 3.2rem;
+
+        cursor: pointer;
     }
 </style>

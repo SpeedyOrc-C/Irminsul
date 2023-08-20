@@ -5,13 +5,13 @@ import Data.List (nub)
 import Data.Vector
 
 -- | Shortcut for (Entity, Information)
-ip :: a -> String -> [String] -> Existence -> String -> (a, Information)
-ip entity name aliases existence information =
-    (entity, Information name aliases existence information)
+ip :: a -> String -> [String] -> String -> (a, Information)
+ip entity name aliases information =
+    (entity, Information name aliases information)
 
 -- | Shortcut for (Entity, Information) but only name is provided
 ipn :: a -> String -> (a, Information)
-ipn entity name = (entity, Information name [] UntilNow "")
+ipn entity name = (entity, Information name [] "")
 
 -- Shortcuts for relation
 ra :: String -> Entity -> Entity -> Relation

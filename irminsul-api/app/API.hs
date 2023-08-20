@@ -1,7 +1,7 @@
 module API (apiRelationGraph, illegalRequest, ApiStatusCode (..)) where
 
 import Irminsul
-import LanguagePack
+import Translation
 import Root
 
 import Data.JSON

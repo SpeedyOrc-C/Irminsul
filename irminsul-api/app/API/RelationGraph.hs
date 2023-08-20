@@ -5,7 +5,6 @@ Providing a language code and a cluster id, return a layout for this cluster.
 module API.RelationGraph (relationGraph, readWhoAmI) where
 
 import Irminsul
-import LanguagePack
 import Translation
 import Root
 

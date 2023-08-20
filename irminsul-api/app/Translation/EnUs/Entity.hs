@@ -1,117 +1,87 @@
 module Translation.EnUs.Entity where
 
-import Irminsul
+import Irminsul ( Information )
 import Shortcut
 
-import Root
-import Root.AnotherWorld
-import Root.Teyvat
-import Root.Teyvat.Mondstadt
-import Root.Teyvat.Mondstadt.CatsTail
-import Root.Teyvat.Mondstadt.DawnWinery
-import Root.Teyvat.Mondstadt.FavoniusChurch
-import Root.Teyvat.Mondstadt.Lupical
-import Root.Teyvat.Mondstadt.KnightsOfFavonius
-import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
-import Root.Teyvat.Kaeya
-import Root.Teyvat.Khaenriah
-import Root.Teyvat.Hexenzirkel
-import Root.Teyvat.Fontaine
-import Root.Teyvat.Mondstadt.TheFourWinds
-import Root.Teyvat.Liyue
-import Root.Teyvat.Inazuma
-import Root.Teyvat.Liyue.WangshengFuneralParlor
-import Root.Teyvat.Fontaine.TheSteambird
-import Root.Teyvat.Liyue.QingceVillage
-import Root.Teyvat.Liyue.WanminRestaurant
-import Root.Teyvat.Liyue.FeiyunCommerceGuild
-import Root.Teyvat.Liyue.Qixing
-import Root.Teyvat.Byakuyakoku
-import Root.Teyvat.Mondstadt.Gunnhildr
-import Root.Teyvat.Liyue.CruxFleet
-import Root.Teyvat.Liyue.Adepti.Yaksha
-import Root.Teyvat.Liyue.BubuPharmacy
-import Root.Teyvat.Inazuma.Kaedehara
-import Root.Teyvat.Liyue.YunHanOperaTroupe
-import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
-import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
-
-translationEntityEnUs :: [(Entity, Information)]
+translationEntityEnUs :: [(String, Information)]
 translationEntityEnUs = [
-    ipn aberaku "Aberaku",
-    ipn adonis "Adonis",
-    ipn aether "Aether",
-    ipn albedo "Albedo",
-    ipn alice "Alice",
-    ipn amber "Amber",
-    ipn aru "Aru",
-    ipn barbaraPegg "Barbara Pegg",
-    ipn baizhu "Baizhu",
-    ipn beidou "Beidou",
-    ipn bennett "Bennett",
-    ipn boreas "Boreas",
-    ipn bubuPharmary "Bubu Pharmacy",
-    ipn catsTail "Cat's Tail",
-    ipn charlotte "Charlotte",
-    ipn chongyun "Chongyun",
-    ipn cloudRetainersAbode "Cloud Retainer's Abode",
-    ipn cruxFleet "Crux Fleet",
-    ipn daimon "Daimon",
-    ipn dawnWinery "Dawn Winery",
-    ipn diane "Diane",
-    ipn dilucRagvindr "Diluc Ragvindr",
-    ipn dionaKatzlein "Diona Katzlein",
-    ipn dvalin "Dvalin",
-    ipn eboshi "Eboshi",
-    ipn ema "Ema",
-    ipn eulaLawrence "Eula Lawrence",
-    ipn favoniusChurch "Favonius Church",
-    ipn fischlVonLuftschlossNarfidort "Fischl von Luftschloss Narfidort",
-    ipn ganyu "Ganyu",
-    ipn guerillaTeam "Guerilla Team",
-    ipn hutao "Hutao",
-    ipn inazuma "Inazuma",
-    ipn jeanGunnhildr "Jean Gunnhildr",
-    ipn jinYun "Yun Jin",
-    ipn kaeya "Kaeya",
-    ipn kaeyaAlberich "Kaeya Alberich",
-    ipn kaeyaRagvindr "Kaeya Ragvindr",
-    ipn kazuhaKaedehara "Kaedehara Kazuha",
-    ipn keqing "Keqing",
-    ipn kirara "Kirara",
-    ipn klee "Klee",
-    ipn knightsOfFavonius "Knights of Favonius",
-    ipn lisa "Lisa",
-    ipn liyue "Liyue",
-    ipn lumine "Lumine",
-    ipn mikaSchmidt "Mika Schmidt",
-    ipn margaret "Margaret",
-    ipn monaAstrologistMegistus "Mona Megistus, the Astrologist",
-    ipn mondstadt "Mondstadt",
-    ipn ningguang "Ningguang",
-    ipn noelle "Noelle",
-    ipn ozvaldoHrafnavins "Ozvaldo Hrafnavins",
-    ipn princeCat "Prince",
-    ipn qingceVillage "Qingce Village",
-    ipn qiqi "Qiqi",
-    ipn razor "Razor",
-    ipn rosaria "Rosaria",
-    ipn root "Root",
-    ipn shenhe "Shenhe",
-    ipn shuyun "Shuyun",
-    ipn sucrose "Sucrose",
-    ipn supadaNoHiko "Supada no Hiko",
-    ipn teyvat "Teyvat",
-    ipn theFourWinds "The Four Winds",
-    ipn uda "Uda",
-    ipn varka "Varka",
-    ipn venti "Venti",
-    ipn wangshengFuneralParlor "Wangsheng Funeral Parlor",
-    ipn xiangling "Xiangling",
-    ipn xiao "Xiao",
-    ipn xingqiu "Xingqiu",
-    ipn xinyan "Xinyan",
-    ipn yaoyao "Yaoyao",
-    ipn yelan "Yelan",
-    ipn zhongli "Zhongli"
+    ipn "Aberaku" "Aberaku",
+    ipn "Adonis" "Adonis",
+    ipn "Aether" "Aether",
+    ipn "Albedo" "Albedo",
+    ipn "Alice" "Alice",
+    ipn "Amber" "Amber",
+    ipn "Aru" "Aru",
+    ipn "BarbaraPegg" "Barbara Pegg",
+    ipn "Baizhu" "Baizhu",
+    ipn "Beidou" "Beidou",
+    ipn "Bennett" "Bennett",
+    ipn "Boreas" "Boreas",
+    ipn "BubuPharmacy" "Bubu Pharmacy",
+    ipn "CatsTail" "Cat's Tail",
+    ipn "Charlotte" "Charlotte",
+    ipn "Chongyun" "Chongyun",
+    ipn "CloudRetainersAbode" "Cloud Retainer's Abode",
+    ipn "CruxFleet" "Crux Fleet",
+    ipn "Daimon" "Daimon",
+    ipn "DawnWinery" "Dawn Winery",
+    ipn "Deshret" "Deshret",
+    ipn "Diane" "Diane",
+    ipn "DilucRagvindr" "Diluc Ragvindr",
+    ipn "DionaKatzlein" "Diona Katzlein",
+    ipn "Dvalin" "Dvalin",
+    ipn "Eboshi" "Eboshi",
+    ipn "Ema" "Ema",
+    ipn "EulaLawrence" "Eula Lawrence",
+    ipn "FavoniusChurch" "Favonius Church",
+    ipn "FischlVonLuftschlossNarfidort" "Fischl von Luftschloss Narfidort",
+    ipn "Fontaine" "Fontaine",
+    ipn "Ganyu" "Ganyu",
+    ipn "GuerillaTeam" "Guerilla Team",
+    ipn "Hutao" "Hutao",
+    ipn "Inazuma" "Inazuma",
+    ipn "JeanGunnhildr" "Jean Gunnhildr",
+    ipn "JinYun" "Yun Jin",
+    ipn "Kaeya" "Kaeya",
+    ipn "KaeyaAlberich" "Kaeya Alberich",
+    ipn "KaeyaRagvindr" "Kaeya Ragvindr",
+    ipn "KazuhaKaedehara" "Kaedehara Kazuha",
+    ipn "Keqing" "Keqing",
+    ipn "Kirara" "Kirara",
+    ipn "Klee" "Klee",
+    ipn "KnightsOfFavonius" "Knights of Favonius",
+    ipn "Lisa" "Lisa",
+    ipn "Liyue" "Liyue",
+    ipn "Lumine" "Lumine",
+    ipn "MikaSchmidt" "Mika Schmidt",
+    ipn "Margaret" "Margaret",
+    ipn "MonaAstrologistMegistus" "Mona Megistus, the Astrologist",
+    ipn "Mondstadt" "Mondstadt",
+    ipn "Ningguang" "Ningguang",
+    ipn "Noelle" "Noelle",
+    ipn "OzvaldoHrafnavins" "Ozvaldo Hrafnavins",
+    ipn "PrinceCat" "Prince",
+    ipn "QingceVillage" "Qingce Village",
+    ipn "Qiqi" "Qiqi",
+    ipn "Razor" "Razor",
+    ipn "Rosaria" "Rosaria",
+    ipn "Root" "Root",
+    ipn "Shenhe" "Shenhe",
+    ipn "Shuyun" "Shuyun",
+    ipn "Sucrose" "Sucrose",
+    ipn "Sumeru" "Sumeru",
+    ipn "SupadaNoHiko" "Supada no Hiko",
+    ipn "Teyvat" "Teyvat",
+    ipn "TheFourWinds" "The Four Winds",
+    ipn "Uda" "Uda",
+    ipn "Varka" "Varka",
+    ipn "Venti" "Venti",
+    ipn "WangshengFuneralParlor" "Wangsheng Funeral Parlor",
+    ipn "Xiangling" "Xiangling",
+    ipn "Xiao" "Xiao",
+    ipn "Xingqiu" "Xingqiu",
+    ipn "Xinyan" "Xinyan",
+    ipn "Yaoyao" "Yaoyao",
+    ipn "Yelan" "Yelan",
+    ipn "Zhongli" "Zhongli"
     ]

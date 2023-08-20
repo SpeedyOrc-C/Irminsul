@@ -1,10 +1,7 @@
 module Translation.ZhCn.Action where
 
-import Control.Arrow (Arrow(first))
-import Irminsul ( Action(Action) )
-
-translationActionZhCn :: [(Action, String)]
-translationActionZhCn = first Action <$> [
+translationActionZhCn :: [(String, String)]
+translationActionZhCn = [
     ("ActingGrandMaster", "代理团长"),
     ("ActingGuardian", "代理监护人"),
     ("Admire", "仰慕"),

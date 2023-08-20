@@ -1,10 +1,8 @@
 module Translation.EnUs.Action where
 
-import Control.Arrow (Arrow(first))
-import Irminsul ( Action(Action) )
 
-translationActionEnUs :: [(Action, String)]
-translationActionEnUs = first Action <$> [
+translationActionEnUs :: [(String, String)]
+translationActionEnUs = [
     ("ActingGrandMaster", "Acting grand master"),
     ("ActingGuardian", "Acting guardian"),
     ("Admire", "Admire"),

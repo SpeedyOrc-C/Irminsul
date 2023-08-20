@@ -80,19 +80,6 @@ subjectAndObject :: Relation -> (Entity, Entity)
 subjectAndObject (Relation _ a b) = (a, b)
 subjectAndObject (BiRelation _ a b) = (a, b)
 
-data Time
-    = YearsAgo Integer
-    deriving Show
-
-data Existence
-    = Always
-    | Before Time
-    | After Time
-    | Time `Between` Time
-    | UntilNow
-    | Unknown
-    deriving Show
-
 data Alias = Alias {
         alias :: String,
         explanation :: String
@@ -101,7 +88,6 @@ data Alias = Alias {
 data Information = Information {
         name :: String,
         aliases :: [String],
-        existence :: Existence,
         detail :: String
     } deriving Show
 

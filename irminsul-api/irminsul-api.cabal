@@ -65,7 +65,6 @@ executable irminsul-api
     other-modules:
         CommonRelations,
         Irminsul,
-        LanguagePack,
         API,
         API.RelationGraph,
         Shortcut,
@@ -75,10 +74,8 @@ executable irminsul-api
         Data.JSON,
         
         Translation,
-        Translation.EnUs,
         Translation.EnUs.Action,
         Translation.EnUs.Entity,
-        Translation.ZhCn,
         Translation.ZhCn.Action,
         Translation.ZhCn.Entity,
         Translation.ZhCn.Utility,

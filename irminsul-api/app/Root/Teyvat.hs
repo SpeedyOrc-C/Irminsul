@@ -21,8 +21,9 @@ import Root.Teyvat.Mondstadt.TheFourWinds
 import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Fontaine
 import Root.Teyvat.Mondstadt.Gunnhildr
+import Root.Teyvat.Deshret
 
-heavenlyPrinciple = ao "HeavenlyPrinciple"
+heavenlyPrinciple = "HeavenlyPrinciple"
 sustainerOfHeavenlyPrinciple = "SustainerOfHeavenlyPrinciple"
 
 teyvat = clusterNode "Teyvat" World
@@ -47,15 +48,21 @@ teyvat = clusterNode "Teyvat" World
         mondstadt,
         liyue,
         inazuma,
+        sumeru,
+        deshret,
+        fontaine,
         snezhnaya,
         khaenriah,
         hexenzirkel
     ]
     (Just $ RelationGraphLayout {
-        rootProperty=rl (-15, 15),
+        rootProperty=rl (0, 15),
         elementProperties=[
-            cl mondstadt (15, 15) (15, 15) (15, 5),
-            cl liyue (0, 0) (0, 0) (15, 5),
-            cl inazuma (15, -15) (15, -15) (15, 5)
+            cl mondstadt (24, 15) (24, 15) (12, 5),
+            cl liyue (14, 0) (14, 0) (12, 5),
+            cl inazuma (24, -15) (24, -15) (12, 5),
+            cl sumeru (-6, 0) (-6, 0) (12, 5),
+            cl deshret (-26, 0) (-26, 0) (12, 5),
+            cl fontaine (-26, 15) (-26, 15) (12, 5)
         ]
     })

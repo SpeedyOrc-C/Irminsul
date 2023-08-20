@@ -16,6 +16,7 @@ grandharvaVille = clusterLeaf "GrandharvaVille" Area
         collei
     ]
     [
-        tighnari `teacher` collei
+        tighnari `teacher` collei,
+        collei `student` tighnari
     ]
     Nothing

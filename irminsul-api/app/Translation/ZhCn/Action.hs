@@ -36,6 +36,7 @@ translationActionZhCn = [
     ("Partner", "搭档"),
     ("Pet", "宠物"),
     ("Rule", "统治"),
+    ("Samsara", "转生"),
     ("SeaCaptain", "船长"),
     ("Son", "儿子"),
     ("Student", "学生"),

@@ -1,6 +1,5 @@
 module Translation.EnUs.Action where
 
-
 translationActionEnUs :: [(String, String)]
 translationActionEnUs = [
     ("ActingGrandMaster", "Acting grand master"),
@@ -43,6 +42,7 @@ translationActionEnUs = [
     ("Smuggle", "Smuggle"),
     ("Superior", "Superior"),
     ("TavernOwner", "Tavern owner"),
+    ("Samsara", "Samsara"),
     ("SupportInSilence", "Support in silence"),
     ("Teacher", "Teacher"),
     ("TeamCaptain", "Team captain"),

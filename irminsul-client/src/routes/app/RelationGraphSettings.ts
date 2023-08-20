@@ -1,3 +1,5 @@
+import {browser} from "$app/environment";
+
 type BasePreference = { readonly version: string; }
 
 interface ISettings<P> {
@@ -82,9 +84,19 @@ type RelationGraphPreference = BasePreference & {
 
 export default class RelationGraphSettings extends BaseSettings<RelationGraphPreference> {
     getDefault() {
+        const preferredLanguages = navigator.languages;
+        let language = "en-us";
+        for (let i = 0; i < preferredLanguages.length; i++) {
+            const preferredLanguage = preferredLanguages[i];
+            if (preferredLanguage.startsWith("zh")) {
+                language = "zh-cn";
+                break;
+            }
+        }
+
         return {
             version: this.version,
-            language: 'en-us',
+            language: language,
             who_am_i: WhoAmI.Aether,
             show_axis: false,
             show_grid: false,

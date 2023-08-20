@@ -73,7 +73,7 @@ liyue = clusterNode "Liyue" Country
         wangshengFuneralParlor,
         cruxFleet,
         wanminRestaurant,
-        bubuPharmary,
+        bubuPharmacy,
         yuehaiPavilion,
         yunHanOperaTroupe,
         qingceVillage
@@ -102,7 +102,7 @@ liyue = clusterNode "Liyue" Country
 
             cl cruxFleet (35, -30) (30, -30) (15, 5),
             cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (15, 5),
-            cl bubuPharmary (-45, -7.5) (-45, -7.5) (15, 5),
+            cl bubuPharmacy (-45, -7.5) (-45, -7.5) (15, 5),
             cl cloudRetainersAbode (42, 0) (42, 0) (15, 5)
         ]
     })

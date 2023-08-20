@@ -9,7 +9,7 @@ import Shortcut
 qiqi = "Qiqi"
 baizhu = "Baizhu"
 
-bubuPharmary = clusterLeaf "BubuPharmacy" Organization
+bubuPharmacy = clusterLeaf "BubuPharmacy" Organization
     [
         qiqi,
         baizhu

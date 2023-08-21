@@ -157,11 +157,8 @@ isAtom (Atom {}) = True
 isAtom _ = False
 
 instance Eq Entity where
-    (Atom id1 type1) == (Atom id2 type2) =
-        id1 == id2 && type1 == type2
-    (Cluster id1 type1 _ _ _) == (Cluster id2 type2 _ _ _) =
-        id1 == id2 && type1 == type2
-    _ == _ = False
+    (==) :: Entity -> Entity -> Bool
+    e1 == e2 = entityId e1 == entityId e2
 
 instance Ord Entity where
     x <= y = entityId x <= entityId y

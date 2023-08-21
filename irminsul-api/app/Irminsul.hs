@@ -70,8 +70,7 @@ sameEntityPair r1 r2 = s1 == s2 && o1 == o2 || s1 == o2 && s2 == o1
         s2 = subject r2; o2 = object r2
 
 subjectAndObject :: Relation -> (Entity, Entity)
-subjectAndObject (Relation _ a b) = (a, b)
-subjectAndObject (BiRelation _ a b) = (a, b)
+subjectAndObject relation = (subject relation, object relation)
 
 data Alias = Alias {
         alias :: String,

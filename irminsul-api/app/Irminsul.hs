@@ -5,6 +5,7 @@ module Irminsul where
 import Data.List (intercalate)
 import Data.Vector
 import Data.String
+import Prelude hiding (id)
 
 
 newtype Path = Path [Entity] deriving (Eq, Ord)
@@ -56,6 +57,7 @@ swapBiRelationSubject :: Entity -> Relation -> Relation
 swapBiRelationSubject subject r@(BiRelation action rSubject rObject) =
     if subject == rSubject then r else
     BiRelation action rObject rSubject
+swapBiRelationSubject _ _ = error "Only BiRelation is allowed."
 
 expandBiRelation :: [Relation] -> [Relation]
 expandBiRelation = concatMap p
@@ -149,9 +151,11 @@ data Entity
         layout :: Maybe RelationGraphLayout
     }
 
+isCluster :: Entity -> Bool
 isCluster (Cluster {}) = True
 isCluster _ = False
 
+isAtom :: Entity -> Bool
 isAtom (Atom {}) = True
 isAtom _ = False
 

@@ -9,9 +9,9 @@ import Translation
 import Root
 
 import Data.JSON
-import Data.Maybe
-import Data.List
-import Control.Applicative
+import Data.Maybe ( fromJust )
+import Data.List ( groupBy )
+import Control.Applicative ( Alternative(empty) )
 import Root.AnotherWorld (lumine, aether)
 import Control.Arrow (Arrow(first))
 

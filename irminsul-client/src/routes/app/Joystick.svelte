@@ -57,6 +57,10 @@
         height: 12vw;
         width: 12vw;
 
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+
         &.has-coarse-pointer {
             display: none;
             @media (pointer: coarse) {

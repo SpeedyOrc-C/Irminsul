@@ -18,17 +18,10 @@ depth (Path path) = length path
 instance Show Path where
     show (Path path) = intercalate " > " (map entityId path)
 
-newtype Action = Action {actionId :: String} deriving (Eq)
-
-instance Show Action where
-    show (Action id) = id
-
-instance IsString Action where
-    fromString = Action
 
 data Relation
-    = Relation {action::Action, subject::Entity, object:: Entity}
-    | BiRelation {action::Action, subject::Entity, object:: Entity}
+    = Relation {action::String, subject::Entity, object:: Entity}
+    | BiRelation {action::String, subject::Entity, object:: Entity}
 
 instance Eq Relation where
     (Relation a1 s1 o1) == (Relation a2 s2 o2) =

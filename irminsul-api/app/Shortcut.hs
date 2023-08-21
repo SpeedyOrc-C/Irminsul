@@ -15,9 +15,9 @@ ipn entity name = (entity, Information name [] "")
 
 -- Shortcuts for relation
 ra :: String -> Entity -> Entity -> Relation
-ra = Relation . Action
+ra = Relation
 ba :: String -> Entity -> Entity -> Relation
-ba = BiRelation . Action
+ba = BiRelation
 
 -- | Shortcut of creating an Atom Character
 -- ach :: String -> Entity

@@ -35,7 +35,6 @@ translateEntityWith (LanguagePack _ translationEntities _) entity =
     let eid = entityId entity in
     maybe ("Entity-" ++ eid) name (lookup eid translationEntities)
 
-translateActionWith :: LanguagePack -> Action -> String
+translateActionWith :: LanguagePack -> String -> String
 translateActionWith (LanguagePack _ _ translationActions) action =
-    fromMaybe ("Action-" ++ actionId action)
-        (lookup (actionId action) translationActions)
+    fromMaybe ("Action-" ++ action) (lookup action translationActions)

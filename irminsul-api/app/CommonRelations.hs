@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+
 module CommonRelations where
 
 import Irminsul
@@ -49,11 +51,11 @@ afraidOf = ra "AfraidOf"
 
 superior = ra "Superior"
 
-foster relation x y = Relation (Action ("Foster" ++ id)) x y where
-    (Relation (Action id) _ _) = relation x y
+foster relation x y = Relation ("Foster" ++ id) x y where
+    (Relation id _ _) = relation x y
 
-acting relation x y = Relation (Action ("Acting" ++ id)) x y where
-    (Relation (Action id) _ _) = relation x y
+acting relation x y = Relation ("Acting" ++ id) x y where
+    (Relation id _ _) = relation x y
 
 samsara = ra "Samsara"
 tavernOwner = ra "TavernOwner"

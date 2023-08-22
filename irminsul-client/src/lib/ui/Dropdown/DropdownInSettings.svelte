@@ -22,9 +22,9 @@
 </script>
 
 <Button inSettings={true}>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="label" on:click={() => {show = !show}}>{label}</div>
     <div class="down-arrow"/>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div class="label" on:click={() => show = !show}>{label}</div>
     <DropdownList {options} bind:below bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
 </Button>
 

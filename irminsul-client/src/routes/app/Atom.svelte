@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher, onMount } from "svelte";
+    import {createEventDispatcher, onDestroy, onMount} from "svelte";
     import { getImgAvatar } from "../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
@@ -14,10 +14,39 @@
     export let selectedAtoms: Set<string>;
 
     let avatarSrc: string;
+    let glitched = false;
+    let glitchedName: string = id;
+    let updateGlitchedTextInterval: number | null = null;
 
-    onMount(() => getImgAvatar(id, (result) => (avatarSrc = result)));
+    onMount(() => getImgAvatar(id, result => {
+        avatarSrc = result;
+        if (id === "RukkhadevataGreaterLord") {
+            updateGlitchedTextInterval = setInterval(updateGlitchedText, 100);
+            glitched = true;
+        }
+    }));
+
+    onDestroy(() => {
+        if (updateGlitchedTextInterval !== null) {
+            clearInterval(updateGlitchedTextInterval);
+            updateGlitchedTextInterval = null;
+        }
+    })
 
     const dispatch = createEventDispatcher();
+
+    function updateGlitchedText() {
+        const characters = "!@#$%^&*()/|\\";
+        glitchedName = "";
+        for (let i = 0; i < translation.length; i++) {
+            const char = translation.charAt(i);
+            if (Math.random() > 0.2 || char === " ") {
+                glitchedName += char;
+            } else {
+                glitchedName += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+        }
+    }
 
     function dispatchUpdateSelectedAtoms() {
         dispatch("update-selected-atoms");
@@ -77,13 +106,15 @@
 <svelte:window on:keydown={keyDown} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="atom" class:selected class:dim
+<div class="atom" class:selected class:dim class:glitched
     style:left="{position.x}rem" style:top="{-position.y}rem"
     on:click={toggleSelect}
 >
     <img class="avatar" src={avatarSrc} alt={translation} />
 
-    <div class="translation font-hywh-65w">{translation}</div>
+    <div class="translation font-hywh-65w">
+        {glitched ? glitchedName : translation}
+    </div>
 
     {#if showCoordinate}
         <Coordinate coordinate={position} />

@@ -78,5 +78,9 @@
         "import-json": "导入 JSON",
         "export-json": "导出 JSON",
         "export-haskell": "导出 Haskell"
+    },
+    "view-options": {
+        "show-coordinates": "显示坐标",
+        "edit-mode": "编辑模式"
     }
 }

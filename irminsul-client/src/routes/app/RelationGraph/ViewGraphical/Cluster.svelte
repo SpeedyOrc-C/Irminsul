@@ -2,21 +2,37 @@
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
     import type { Vector2 } from "$lib/util/Vector2";
-    import { createEventDispatcher } from "svelte";
+    import {beforeUpdate, createEventDispatcher} from "svelte";
 
     export let id: string;
     export let anchor: Vector2;
     export let translation: string;
     export let position: Vector2;
     export let size: Vector2;
-    export let showCoordinate = false;
-    export let selected = false;
+    export let showCoordinates = false;
+
+    export let selectedAtoms: Set<string>;
     export let selectedClusters: Set<string>;
+    export let selectedEntities: Set<string>;
+    export let selectedEntitiesInSelectedClusters: Set<string>;
+    export let editMode: boolean;
+
+    let dim: boolean;
+    let selected = false;
 
     const dispatch = createEventDispatcher();
 
+    beforeUpdate(() => {
+        selected = selectedClusters.has(id);
+
+        dim = !editMode
+            && !selectedClusters.has(id)
+            && selectedEntities.size > 0
+            && !selectedEntitiesInSelectedClusters.has(id);
+    });
+
     function dispatchUpdateSelectedClusters() {
-        dispatch("update-selected-clusters")
+        dispatch("update-selected-clusters");
     }
 
     function toggleSelect() {
@@ -26,13 +42,15 @@
     }
 
     function select() {
-        selected = true;
+        if (!editMode) {
+            selectedAtoms.clear();
+            selectedClusters.clear();
+        }
         selectedClusters.add(id);
         dispatchUpdateSelectedClusters();
     }
 
     function deselect() {
-        selected = false;
         selectedClusters.delete(id);
         dispatchUpdateSelectedClusters();
     }
@@ -86,15 +104,19 @@
                 // Moving anchor
                 case "ArrowUp":
                     anchor.y += delta;
+                    dispatch("update-anchors");
                     break;
                 case "ArrowDown":
                     anchor.y -= delta;
+                    dispatch("update-anchors");
                     break;
                 case "ArrowLeft":
                     anchor.x -= delta;
+                    dispatch("update-anchors");
                     break;
                 case "ArrowRight":
                     anchor.x += delta;
+                    dispatch("update-anchors");
                     break;
             }
         }
@@ -106,19 +128,20 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
     class="cluster"
+    class:dim
     class:selected
     style:left="{position.x}rem"
     style:top="{-position.y}rem"
     style:width="{size.x}rem"
     style:height="{size.y}rem"
     on:click={toggleSelect}
-    on:dblclick={() => dispatch("jump-to", {id})}
+    on:dblclick={() => { if (!editMode) dispatch("jump-to", {id}); } }
 >
     <div class="translation font-hywh-65w">
         {translation}
     </div>
 
-    {#if showCoordinate}
+    {#if showCoordinates}
         <Coordinate coordinate={position} {size} />
         <div
             class="anchor-emphasis"
@@ -136,18 +159,25 @@
         border: 0.2rem solid #bda277;
         border-radius: 0.5rem;
 
-        z-index: 10000;
+        z-index: 10;
 
         cursor: pointer;
         user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
 
+        transition-property: filter;
+        transition-duration: 0.2s;
+
         &.selected {
-            border-color: orange;
-            border-width: 0.5rem;
+            border-color: #0ff;
+            border-width: 0.3rem;
         }
-        &:hover {
+        &.dim {
+            filter: brightness(50%) blur(0.1rem);
+            &:hover {
+                filter: unset;
+            }
         }
     }
 
@@ -169,11 +199,11 @@
         position: absolute;
         transform: translate(-50%, -50%);
 
-        background-color: orange;
+        background-color: #0ff;
         border-radius: 100%;
-        height: 3rem;
-        width: 3rem;
+        height: 1rem;
+        width: 1rem;
 
-        z-index: 100000;
+        z-index: 10000;
     }
 </style>

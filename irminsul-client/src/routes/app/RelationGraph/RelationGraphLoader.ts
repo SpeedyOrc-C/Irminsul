@@ -1,4 +1,4 @@
-import type {RelationGraph} from "../../model/RelationGraph";
+import type {RelationGraph} from "../../../model/RelationGraph";
 import type {ApiResponse} from "$lib/util/Api";
 
 export class RelationGraphLoader {

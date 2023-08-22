@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import type { PathElement } from "../../model/RelationGraph";
+    import type { PathElement } from "../../../model/RelationGraph";
 
     export let pathElements: Array<PathElement>;
 

@@ -1,11 +1,19 @@
 <script lang="ts">
     import IconCross from "../../asset/icon/IconCross.svelte";
     import IconTick from "../../asset/icon/IconTick.svelte";
+    import {createEventDispatcher} from "svelte";
+
+    const dispatch = createEventDispatcher();
+
+    function click() {
+        value = !value;
+        dispatch("switch-change", value);
+    }
 
     export let value = false;
 </script>
 
-<div id="switch" class:checked={value} on:click={() => value = !value}>
+<div id="switch" class:checked={value} on:click={click}>
     <div id="inner">
         <div id="bullet">
             <div id="tick"><IconTick color="#808d9d"/></div>

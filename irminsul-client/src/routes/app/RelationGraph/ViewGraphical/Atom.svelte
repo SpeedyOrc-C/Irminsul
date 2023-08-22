@@ -1,6 +1,6 @@
 <script lang="ts">
-    import {createEventDispatcher, onDestroy, onMount} from "svelte";
-    import { getImgAvatar } from "../../asset/Asset";
+    import {beforeUpdate, createEventDispatcher, onDestroy, onMount} from "svelte";
+    import { getImgAvatar } from "../../../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
     import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
     import type { Vector2 } from "$lib/util/Vector2";
@@ -8,15 +8,29 @@
     export let id: string;
     export let translation: string;
     export let position: Vector2;
-    export let showCoordinate = false;
-    export let selected = false;
-    export let dim = false;
+    export let showCoordinates = false;
+
     export let selectedAtoms: Set<string>;
+    export let selectedClusters: Set<string>;
+    export let selectedEntities: Set<string>;
+    export let selectedEntitiesInSelectedClusters: Set<string>;
+    export let editMode: boolean;
 
     let avatarSrc: string;
+    let selected = false;
+    let dim = false;
     let glitched = false;
     let glitchedName: string = id;
     let updateGlitchedTextInterval: number | null = null;
+
+    beforeUpdate(() => {
+        selected = selectedEntities.has(id);
+
+        dim = !editMode
+            && !selectedAtoms.has(id)
+            && selectedEntities.size > 0
+            && !selectedEntitiesInSelectedClusters.has(id);
+    });
 
     onMount(() => getImgAvatar(id, result => {
         avatarSrc = result;
@@ -31,7 +45,7 @@
             clearInterval(updateGlitchedTextInterval);
             updateGlitchedTextInterval = null;
         }
-    })
+    });
 
     const dispatch = createEventDispatcher();
 
@@ -59,13 +73,15 @@
     }
 
     function select() {
-        selected = true;
+        if (!editMode) {
+            selectedAtoms.clear();
+            selectedClusters.clear();
+        }
         selectedAtoms.add(id);
         dispatchUpdateSelectedAtoms();
     }
 
     function deselect() {
-        selected = false;
         selectedAtoms.delete(id);
         dispatchUpdateSelectedAtoms();
     }
@@ -88,15 +104,19 @@
             switch (e.code) {
                 case "KeyI":
                     position.y += delta;
+                    dispatch("update-anchors");
                     break;
                 case "KeyK":
                     position.y -= delta;
+                    dispatch("update-anchors");
                     break;
                 case "KeyJ":
                     position.x -= delta;
+                    dispatch("update-anchors");
                     break;
                 case "KeyL":
                     position.x += delta;
+                    dispatch("update-anchors");
                     break;
             }
         }
@@ -116,7 +136,7 @@
         {glitched ? glitchedName : translation}
     </div>
 
-    {#if showCoordinate}
+    {#if showCoordinates}
         <Coordinate coordinate={position} />
     {/if}
 </div>
@@ -128,7 +148,7 @@
         width: fit-content;
         height: fit-content;
 
-        z-index: 10000;
+        z-index: 100;
 
         cursor: pointer;
         user-select: none;
@@ -146,7 +166,7 @@
         }
 
         &.selected, &:hover {
-            z-index: 10001;
+            z-index: 200;
         }
     }
 

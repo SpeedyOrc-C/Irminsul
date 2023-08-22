@@ -1,5 +1,3 @@
-import {browser} from "$app/environment";
-
 type BasePreference = { readonly version: string; }
 
 interface ISettings<P> {

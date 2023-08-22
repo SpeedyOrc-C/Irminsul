@@ -1,15 +1,16 @@
 <script lang="ts">
-    import {afterUpdate} from "svelte";
+    import {beforeUpdate} from "svelte";
     import type { Vector2 } from "$lib/util/Vector2";
+    import {Vector2Zero} from "$lib/util/Vector2";
+    import type {RelationBetween} from "../../../../model/RelationGraph";
 
-    export let forwardRelations: Array<string>;
-    export let backwardRelations: Array<string>;
-    export let biRelations: Array<string>;
-    export let highlight = false;
-    export let dim = false;
-    export let subjectAnchor: Vector2;
-    export let objectAnchor: Vector2;
+    export let relationBetween: RelationBetween;
+    export let entityAnchor: Map<string, Vector2>;
+    export let selectedEntities: Set<string>;
+    export let editMode: boolean;
 
+    let highlight = false;
+    let dim = false;
     let needReverse: boolean;
 
     let realForwardRelations: Array<string> = [];
@@ -22,27 +23,31 @@
     let forwardRelationY: number;
     let backwardRelationY: number;
 
-    function updateTransform() {
-        subjectAnchor = subjectAnchor;
-        objectAnchor = objectAnchor;
-    }
+    let subjectAnchor: Vector2 = entityAnchor.get(relationBetween.subjectId) ?? Vector2Zero;
+    let objectAnchor: Vector2 = entityAnchor.get(relationBetween.objectId) ?? Vector2Zero;
 
-    afterUpdate(() => {
-        let hasBiRelation = biRelations.length > 0;
+    beforeUpdate(() => {
+        highlight =
+            selectedEntities.has(relationBetween.subjectId) ||
+            selectedEntities.has(relationBetween.objectId);
+
+        dim = !editMode && !highlight && selectedEntities.size > 0;
+
+        let hasBiRelation = relationBetween.biRelations.length > 0;
 
         needReverse =
             objectAnchor.x < subjectAnchor.x ||
             (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
         realForwardRelations = needReverse
-            ? backwardRelations
-            : forwardRelations;
+            ? relationBetween.backwardRelations
+            : relationBetween.forwardRelations;
 
         let hasForwardRelation = realForwardRelations.length > 0;
 
         realBackwardRelations = needReverse
-            ? forwardRelations
-            : backwardRelations;
+            ? relationBetween.forwardRelations
+            : relationBetween.backwardRelations;
 
         let hasBackwardRelation = realBackwardRelations.length > 0;
 
@@ -79,11 +84,11 @@
                 backwardRelationY = -0.7;
             }
         }
-        updateTransform();
+
+        subjectAnchor = subjectAnchor;
+        objectAnchor = objectAnchor;
     });
 </script>
-
-<svelte:window on:keyup={updateTransform} />
 
 <div class="relation-between" class:highlight class:dim
     style:width="{width}rem"
@@ -91,10 +96,10 @@
     style:top="{-position.y}rem"
     style:transform="translate(-50%, -50%) rotate({rotation}rad)"
 >
-    {#if biRelations.length > 0}
+    {#if relationBetween.biRelations.length > 0}
         <div class="bi-relation font-hywh-65w">
             <div>
-                {#each biRelations as r}
+                {#each relationBetween.biRelations as r}
                     <span class="relation">{r}</span>
                 {/each}
             </div>
@@ -130,7 +135,7 @@
         transform: translate(-50%, -50%);
 
         height: 5.4rem;
-        z-index: 1000;
+        z-index: 1;
 
         user-select: none;
         -webkit-user-select: none;
@@ -141,14 +146,14 @@
 
         &:hover,
         &:active {
-            z-index: 2000;
+            z-index: 2;
             background-color: #bda27733;
         }
         &.dim {
             filter: brightness(50%) blur(0.1rem);
         }
         &.highlight {
-            z-index: 2000;
+            z-index: 2;
         }
     }
 

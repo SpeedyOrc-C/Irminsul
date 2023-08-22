@@ -18,7 +18,7 @@ interface Cluster {
     size: Vector2
 }
 
-interface RelationBetween {
+export interface RelationBetween {
     subjectId: string
     objectId: string
 

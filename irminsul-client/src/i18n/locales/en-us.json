@@ -78,5 +78,9 @@
         "import-json": "Import from JSON",
         "export-json": "Export as JSON",
         "export-haskell": "Export as Haskell"
+    },
+    "view-options": {
+        "show-coordinates": "Show coordinates",
+        "edit-mode": "Edit mode"
     }
 }

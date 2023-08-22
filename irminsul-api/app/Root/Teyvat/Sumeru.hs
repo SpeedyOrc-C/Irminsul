@@ -10,6 +10,9 @@ import Root.Teyvat.Sumeru.Akademiya
 import Root.Teyvat.Sumeru.GrandharvaVille
 import Root.Teyvat.Inazuma
 import Root.Teyvat.Sumeru.Akademiya.Haravatat
+import Root.Teyvat.Sumeru.Akademiya.Kshahrewar
+import Root.Teyvat.Sumeru.AlcazarzarayPalace
+import Root.Teyvat.Sumeru.Akademiya.Rtawahist (layla)
 
 rukkhadevataGreaterLord = "RukkhadevataGreaterLord"
 
@@ -21,36 +24,62 @@ wanderer = "Wanderer"
 dehya = "Dehya"
 kusayla = "Kusayla"
 
+nilou = "Nilou"
+
 sumeru = clusterNode "Sumeru" Country
     [
         nahida,
         rukkhadevataGreaterLord,
         wanderer,
         dehya,
-        kusayla
+        kusayla,
+        nilou
     ]
     [
         rukkhadevataGreaterLord `samsara` nahida,
+        nahida `kill` rukkhadevataGreaterLord,
         nahida `rule` sumeru,
         scaramouche `samsara` wanderer,
+
         kusayla `father` dehya,
         dehya `son` kusayla,
-
         faruzan `teacher` collei,
-        collei `student` faruzan
+        collei `student` faruzan,
+        tighnari `friend` faruzan,
+        cyno `friend` tighnari,
+        cyno `friend` collei,
+        cyno `friend` faruzan,
+        Relation "HisJokeIsBoring" faruzan cyno,
+        cyno `appreciate` alhaitham,
+        cyno `esteem` nahida,
+        kaveh `friend` alhaitham,
+
+        nahida `longTimeAudience` nilou,
+        collei `longTimeAudience` nilou,
+
+        cyno `customer` dori,
+        alhaitham `customer` dori,
+        tighnari `customer` dori,
+        layla `customer` dori
     ]
     [
         akademiya,
-        grandharvaVille
+        grandharvaVille,
+        alcazarzarayPalace
     ]
     (Just $ RelationGraphLayout {
-        rootProperty=rl (0, 15),
+        rootProperty=rl (-15, 15),
         elementProperties=[
-            al rukkhadevataGreaterLord (-7.5, 0),
-            al nahida (7.5, 0),
-
-            al faruzan (45, -15),
-            al tighnari (15, -15),
-            al collei (30, -15)
+            al nahida (-15, 0),
+            al rukkhadevataGreaterLord (-30, 0),
+            al nilou (-15, -15),
+            al alhaitham (0, 15),
+            al cyno (0, 0),
+            al faruzan (0, -30),
+            al kaveh (15, 15),
+            al tighnari (30, -30),
+            al collei (10, -20),
+            al dori (30, 0),
+            al layla (20, -10)
         ]
     })

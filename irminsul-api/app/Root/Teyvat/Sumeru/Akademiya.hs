@@ -8,6 +8,7 @@ import CommonRelations
 
 import Root.Teyvat.Sumeru.Akademiya.Haravatat
 import Root.Teyvat.Sumeru.Akademiya.Rtawahist
+import Root.Teyvat.Sumeru.Akademiya.Kshahrewar
 
 alhaitham = "Alhaitham"
 cyno = "Cyno"
@@ -22,6 +23,7 @@ akademiya = clusterNode "Akademiya" Organization
     ]
     [
         haravatat,
-        rtawahist
+        rtawahist,
+        kshahrewar
     ]
     Nothing

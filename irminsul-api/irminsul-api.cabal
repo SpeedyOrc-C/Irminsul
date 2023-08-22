@@ -135,6 +135,7 @@ executable irminsul-api
         Root.Teyvat.Sumeru.Akademiya,
         Root.Teyvat.Sumeru.Akademiya.Rtawahist,
         Root.Teyvat.Sumeru.Akademiya.Haravatat,
+        Root.Teyvat.Sumeru.Akademiya.Kshahrewar,
         Root.Teyvat.Sumeru.AlcazarzarayPalace,
         Root.Teyvat.Sumeru.GrandharvaVille
 

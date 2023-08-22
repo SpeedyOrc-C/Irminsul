@@ -144,6 +144,10 @@
                 filter: unset;
             }
         }
+
+        &.selected, &:hover {
+            z-index: 10001;
+        }
     }
 
     .avatar {
@@ -172,8 +176,8 @@
         }
 
         .atom.selected > & {
-            border-color: orange;
-            border-width: 0.5rem;
+            border-color: #0ff;
+            border-width: 0.3rem;
         }
     }
 

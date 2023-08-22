@@ -19,6 +19,7 @@
     import ViewController from "./ViewController";
     import Joystick from "./Joystick.svelte";
     import RelationGraphSettings, {ShowJoystick, WhoAmI} from "./RelationGraphSettings";
+    import Switch from "$lib/ui/Switch.svelte";
 
     export let id: string;
 
@@ -343,6 +344,17 @@
               bind:showJoystick={settings.preference.show_joystick}
               on:update-view={updateView}/>
 
+    <div id="view-options">
+        <div class="view-option font-hywh-65w">
+            <div class="view-option-label">显示坐标</div>
+            <Switch bind:value={showCoordinate} />
+        </div>
+<!--        <div class="view-option font-hywh-65w">-->
+<!--            <div class="view-option-label">编辑模式</div>-->
+<!--            <Switch />-->
+<!--        </div>-->
+    </div>
+
     <Panel on:jump-to={e => loadRelationGraph(e.detail)}
            on:open-settings={openSettings}
            {relationGraph} {id}/>
@@ -418,5 +430,20 @@
 
         width: 20rem;
         height: calc(20rem * 101 / 327);
+    }
+
+    #view-options {
+        position: absolute;
+        left: 2rem;
+        bottom: 2rem;
+    }
+
+    .view-option {
+        margin: 1rem 0;
+    }
+
+    .view-option-label {
+        margin: 0.5rem 0 0.5rem 0.5rem;
+        color: #fffc;
     }
 </style>

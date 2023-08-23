@@ -28,7 +28,7 @@
         width: fit-content;
         display: inline-block;
         padding: 0.1rem 0.1rem 0.1rem 0.2rem;
-        border-left: 0.5rem solid rgb(255, 189, 34);
+        border-left: 0.5rem solid #ffbd22;
 
         background-color: #bda277;
     }

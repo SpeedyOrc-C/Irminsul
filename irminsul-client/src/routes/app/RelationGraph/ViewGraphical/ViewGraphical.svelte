@@ -58,19 +58,19 @@
             case "KeyG": dispatch("set-show-grid", !showGrid); break;
             case "KeyC": showCoordinates = !showCoordinates; break;
 
-            default:
-                if (editor.isEditing()) {
-                    switch (e.code) {
-                        case "KeyI": editor.moveSelectedElements({x: 0, y: distance}); break;
-                        case "KeyK": editor.moveSelectedElements({x: 0, y: -distance}); break;
-                        case "KeyJ": editor.moveSelectedElements({x: -distance, y: 0}); break;
-                        case "KeyL": editor.moveSelectedElements({x: distance, y: 0}); break;
+            default: if (!editor.isEditing()) return;
+                switch (e.code) {
+                    case "KeyI": editor.moveSelectedElements({x: 0, y: distance}); break;
+                    case "KeyK": editor.moveSelectedElements({x: 0, y: -distance}); break;
+                    case "KeyJ": editor.moveSelectedElements({x: -distance, y: 0}); break;
+                    case "KeyL": editor.moveSelectedElements({x: distance, y: 0}); break;
 
-                        case "ArrowUp": editor.moveSelectedClustersAnchors({x: 0, y: distance}); break;
-                        case "ArrowDown": editor.moveSelectedClustersAnchors({x: 0, y: -distance}); break;
-                        case "ArrowLeft": editor.moveSelectedClustersAnchors({x: -distance, y: 0}); break;
-                        case "ArrowRight": editor.moveSelectedClustersAnchors({x: distance, y: 0}); break;
-                    }
+                    case "ArrowUp": editor.moveSelectedClustersAnchors({x: 0, y: distance}); break;
+                    case "ArrowDown": editor.moveSelectedClustersAnchors({x: 0, y: -distance}); break;
+                    case "ArrowLeft": editor.moveSelectedClustersAnchors({x: -distance, y: 0}); break;
+                    case "ArrowRight": editor.moveSelectedClustersAnchors({x: distance, y: 0}); break;
+
+                    default: return;
                 }
         }
 

@@ -1,20 +1,17 @@
 <script lang="ts">
-    import {beforeUpdate, createEventDispatcher, onDestroy, onMount} from "svelte";
-    import { getImgAvatar } from "../../../../asset/Asset";
+    import {afterUpdate, createEventDispatcher, onDestroy, onMount} from "svelte";
+    import {getImgAvatar} from "../../../../asset/Asset";
     import Coordinate from "./Coordinate.svelte";
-    import { deadKeyMultiplier } from "$lib/util/DeadKeyMultiplier";
-    import type { Vector2 } from "$lib/util/Vector2";
+    import type {Vector2} from "$lib/util/Vector2";
+    import type Editor from "./Editor";
+
+    const dispatch = createEventDispatcher();
 
     export let id: string;
-    export let translation: string;
-    export let position: Vector2;
-    export let showCoordinates = false;
+    export let label: string;
 
-    export let selectedAtoms: Set<string>;
-    export let selectedClusters: Set<string>;
-    export let selectedEntities: Set<string>;
-    export let selectedEntitiesInSelectedClusters: Set<string>;
-    export let editMode: boolean;
+    export let showCoordinates = false;
+    export let editor: Editor;
 
     let avatarSrc: string;
     let selected = false;
@@ -22,14 +19,13 @@
     let glitched = false;
     let glitchedName: string = id;
     let updateGlitchedTextInterval: number | null = null;
+    let position: Vector2 = {x: 0, y: 0};
 
-    beforeUpdate(() => {
-        selected = selectedEntities.has(id);
-
-        dim = !editMode
-            && !selectedAtoms.has(id)
-            && selectedEntities.size > 0
-            && !selectedEntitiesInSelectedClusters.has(id);
+    afterUpdate(() => {
+        selected = editor.isSelected(id);
+        dim = !editor.isEditing() && !selected && editor.numSelected() > 0
+            && !editor.isEntityInSelectedCluster(id);
+        position = editor.anchorOf(id);
     });
 
     onMount(() => getImgAvatar(id, result => {
@@ -47,13 +43,11 @@
         }
     });
 
-    const dispatch = createEventDispatcher();
-
     function updateGlitchedText() {
         const characters = "!@#$%^&*()/|\\";
         glitchedName = "";
-        for (let i = 0; i < translation.length; i++) {
-            const char = translation.charAt(i);
+        for (let i = 0; i < label.length; i++) {
+            const char = label.charAt(i);
             if (Math.random() > 0.2 || char === " ") {
                 glitchedName += char;
             } else {
@@ -62,82 +56,23 @@
         }
     }
 
-    function dispatchUpdateSelectedAtoms() {
-        dispatch("update-selected-atoms");
-    }
-
-    function toggleSelect() {
-        selected = !selected;
-        if (selected) select();
-        else deselect();
-    }
-
-    function select() {
-        if (!editMode) {
-            selectedAtoms.clear();
-            selectedClusters.clear();
-        }
-        selectedAtoms.add(id);
-        dispatchUpdateSelectedAtoms();
-    }
-
-    function deselect() {
-        selectedAtoms.delete(id);
-        dispatchUpdateSelectedAtoms();
-    }
-
-    function keyDown(e: KeyboardEvent) {
-        if (e.ctrlKey !== e.metaKey) {
-            switch (e.code) {
-                case "KeyA":
-                    e.preventDefault();
-                    if (e.altKey) deselect();
-                    else if (e.shiftKey) toggleSelect();
-                    else select();
-                    break;
-            }
-        } else {
-            if (!selected) return;
-
-            let delta = deadKeyMultiplier(e);
-
-            switch (e.code) {
-                case "KeyI":
-                    position.y += delta;
-                    dispatch("update-anchors");
-                    break;
-                case "KeyK":
-                    position.y -= delta;
-                    dispatch("update-anchors");
-                    break;
-                case "KeyJ":
-                    position.x -= delta;
-                    dispatch("update-anchors");
-                    break;
-                case "KeyL":
-                    position.x += delta;
-                    dispatch("update-anchors");
-                    break;
-            }
-        }
+    function click() {
+        dispatch("toggle-atom", id);
     }
 </script>
 
-<svelte:window on:keydown={keyDown} />
-
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="atom" class:selected class:dim class:glitched
-    style:left="{position.x}rem" style:top="{-position.y}rem"
-    on:click={toggleSelect}
+<div class="atom" class:selected class:dim class:glitched on:click={click}
+     style:left="{position.x}rem" style:top="{-position.y}rem"
 >
-    <img class="avatar" src={avatarSrc} alt={translation} />
+    <img class="avatar" src={avatarSrc} alt={label}/>
 
-    <div class="translation font-hywh-65w">
-        {glitched ? glitchedName : translation}
+    <div id="label" class="font-hywh-65w">
+        {glitched ? glitchedName : label}
     </div>
 
     {#if showCoordinates}
-        <Coordinate coordinate={position} />
+        <Coordinate coordinate={position}/>
     {/if}
 </div>
 
@@ -160,6 +95,7 @@
 
         &.dim {
             filter: brightness(50%) blur(0.1rem);
+
             &:hover {
                 filter: unset;
             }
@@ -184,7 +120,7 @@
         display: block;
         margin: 0 auto;
 
-        transition-property: transform, border-color, border-width, box-shadow;
+        transition-property: transform, border-color, box-shadow;
         transition-duration: 0.2s;
 
         &:hover {
@@ -201,7 +137,7 @@
         }
     }
 
-    .translation {
+    #label {
         position: absolute;
         transform: translate(-50%, -50%);
 

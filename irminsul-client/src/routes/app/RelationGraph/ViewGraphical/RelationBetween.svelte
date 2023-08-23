@@ -1,17 +1,14 @@
 <script lang="ts">
-    import {beforeUpdate} from "svelte";
+    import {afterUpdate} from "svelte";
     import type { Vector2 } from "$lib/util/Vector2";
-    import {Vector2Zero} from "$lib/util/Vector2";
     import type {RelationBetween} from "../../../../model/RelationGraph";
+    import type Editor from "./Editor";
 
     export let relationBetween: RelationBetween;
-    export let entityAnchor: Map<string, Vector2>;
-    export let selectedEntities: Set<string>;
-    export let editMode: boolean;
+    export let editor: Editor;
 
     let highlight = false;
     let dim = false;
-    let needReverse: boolean;
 
     let realForwardRelations: Array<string> = [];
     let realBackwardRelations: Array<string> = [];
@@ -23,21 +20,20 @@
     let forwardRelationY: number;
     let backwardRelationY: number;
 
-    let subjectAnchor: Vector2 = entityAnchor.get(relationBetween.subjectId) ?? Vector2Zero;
-    let objectAnchor: Vector2 = entityAnchor.get(relationBetween.objectId) ?? Vector2Zero;
+    afterUpdate(() => {
+        let subjectAnchor = editor.anchorOf(relationBetween.subjectId);
+        let objectAnchor = editor.anchorOf(relationBetween.objectId);
 
-    beforeUpdate(() => {
-        highlight =
-            selectedEntities.has(relationBetween.subjectId) ||
-            selectedEntities.has(relationBetween.objectId);
+        highlight = editor.isSelected(relationBetween.subjectId)
+                 || editor.isSelected(relationBetween.objectId);
 
-        dim = !editMode && !highlight && selectedEntities.size > 0;
+        dim = !editor.isEditing() && !highlight && editor.numSelected() > 0;
 
         let hasBiRelation = relationBetween.biRelations.length > 0;
 
-        needReverse =
-            objectAnchor.x < subjectAnchor.x ||
-            (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
+        let needReverse: boolean =
+                objectAnchor.x < subjectAnchor.x
+            || (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
 
         realForwardRelations = needReverse
             ? relationBetween.backwardRelations
@@ -84,9 +80,6 @@
                 backwardRelationY = -0.7;
             }
         }
-
-        subjectAnchor = subjectAnchor;
-        objectAnchor = objectAnchor;
     });
 </script>
 
@@ -106,7 +99,7 @@
         </div>
     {/if}
 
-    {#if realForwardRelations?.length > 0}
+    {#if realForwardRelations.length > 0}
         <div class="forward-relation font-hywh-65w"
              style:top="calc(50% + {-forwardRelationY}rem)">
             <div>
@@ -117,7 +110,7 @@
         </div>
     {/if}
 
-    {#if realBackwardRelations?.length > 0}
+    {#if realBackwardRelations.length > 0}
         <div class="backward-relation font-hywh-65w"
              style:top="calc(50% + {-backwardRelationY}rem)">
             <div>
@@ -140,18 +133,24 @@
         user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
-        
-        transition-property: filter;
-        transition-duration: 0.2s;
 
         &:hover,
         &:active {
             z-index: 2;
             background-color: #bda27733;
         }
+
+        transition-property: filter;
+        transition-duration: 0.2s;
+
         &.dim {
             filter: brightness(50%) blur(0.1rem);
+
+            &:hover, &:active {
+                filter: none;
+            }
         }
+
         &.highlight {
             z-index: 2;
         }
@@ -188,8 +187,6 @@
 
     .forward-relation {
         @extend %uni-relation-shared;
-
-        //padding-left: 6rem;
 
         background-image: linear-gradient(
             90deg,

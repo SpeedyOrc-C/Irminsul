@@ -1,9 +1,11 @@
 <script lang="ts">
     import {_} from "svelte-i18n";
     import Switch from "$lib/ui/Switch.svelte";
+    import {createEventDispatcher} from "svelte";
+
+    const dispatch = createEventDispatcher();
 
     export let showCoordinates: boolean;
-    export let editMode: boolean;
 </script>
 
 <div id="options">
@@ -13,7 +15,7 @@
     </div>
     <div class="option font-hywh-65w">
         <div class="label">{$_("view-options.edit-mode")}</div>
-        <Switch bind:value={editMode}/>
+        <Switch value={false} on:switch-change={e => dispatch("set-editing", e.detail)} />
     </div>
 </div>
 
@@ -22,6 +24,9 @@
         position: absolute;
         left: 2rem;
         bottom: 2rem;
+
+        background-color: #0002;
+        box-shadow: 0 0 5rem 5rem #0002;
     }
 
     .option {

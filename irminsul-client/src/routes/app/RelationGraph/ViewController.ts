@@ -46,20 +46,6 @@ export default class ViewController {
     rotateAnticlockwise() { this.angle += 22.5; this.#update(); }
     rotateClockwise() { this.angle -= 22.5; this.#update(); }
 
-    keyboardEvent(e: KeyboardEvent) {
-        switch (e.code) {
-            case "KeyW"   : this.moveUp();              break;
-            case "KeyS"   : this.moveDown();            break;
-            case "KeyA"   : this.moveLeft();            break;
-            case "KeyD"   : this.moveRight();           break;
-            case "Minus"  : this.zoomOut();             break;
-            case "Equal"  : this.zoomIn();              break;
-            case "KeyQ"   : this.rotateClockwise();     break;
-            case "KeyE"   : this.rotateAnticlockwise(); break;
-            case "Digit0" : this.reset();               break;
-        }
-    }
-
     joystickEvent = (dx: number, dy: number, multiplier: number) => {
         this.moveDelta(dx * multiplier, -dy * multiplier);
     }

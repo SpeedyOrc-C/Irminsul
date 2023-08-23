@@ -13,10 +13,12 @@
     import RelationGraphSettings, {ShowJoystick, WhoAmI} from "./RelationGraphSettings";
     import ViewOptions from "./ViewOptions.svelte";
     import ViewGraphical from "./ViewGraphical/ViewGraphical.svelte";
+    import Editor from "./ViewGraphical/Editor";
 
     export let id: string;
 
     let view = new ViewController();
+    let editor: Editor;
 
     const loader = new RelationGraphLoader();
 
@@ -32,8 +34,6 @@
     let showJoystick: ShowJoystick = ShowJoystick.Never;
     let showSettings = false;
     let joystickSensibility = 4;
-
-    let editMode = false;
 
     let showLayoutMissing: Writable<boolean> = writable(false);
 
@@ -66,6 +66,7 @@
         }
 
         relationGraph = json;
+        editor = new Editor(relationGraph);
         view.reset();
         updateView();
         id = loadId;
@@ -147,6 +148,11 @@
         settings.save();
     }
 
+    function setEditing(editing: boolean) {
+        editor.setEditing(editing);
+        editor = editor;
+    }
+
     function resetAll() {
         localStorage.clear();
         window.location.href = "/app";
@@ -207,10 +213,10 @@
     {#if relationGraph !== null}
         <ViewGraphical bind:relationGraph
                bind:view
+               bind:editor
                bind:showAxis on:set-show-axis={e => setShowAxis(e.detail)}
                bind:showGrid on:set-show-grid={e => setShowGrid(e.detail)}
                bind:showCoordinates
-               bind:editMode
                on:jump-to={e => loadRelationGraph(e.detail.id)}
         />
     {/if}
@@ -219,7 +225,7 @@
               bind:showJoystick={settings.preference.show_joystick}
               on:update-view={updateView}/>
 
-    <ViewOptions bind:editMode bind:showCoordinates />
+    <ViewOptions bind:showCoordinates on:set-editing={e => setEditing(e.detail)} />
 
     <Panel on:jump-to={e => loadRelationGraph(e.detail)}
            on:open-settings={openSettings}

@@ -1,5 +1,5 @@
 import type {Vector2} from "$lib/util/Vector2";
-import type {RelationGraph} from "../../../../model/RelationGraph";
+import type {RelationGraph} from "../RelationGraph";
 
 export default class Editor {
     relationGraph: RelationGraph;

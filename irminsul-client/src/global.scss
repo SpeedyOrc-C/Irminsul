@@ -16,7 +16,18 @@
 }
 
 body {
-    background-color: #171f2b;
     overflow: hidden;
+}
+
+@media (prefers-color-scheme: no-preference), (prefers-color-scheme: dark) {
+    body {
+        background-color: #171f2b;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #171f2b;
+    }
 }
 

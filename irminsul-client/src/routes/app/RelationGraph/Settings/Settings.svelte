@@ -44,70 +44,64 @@
 
 <svelte:window on:keyup={handleKeyup} />
 
-{#if displayed}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="settings font-hywh-85w" class:show
-        style:display={displayed ? "block" : "none"}
-    >
-        <!-- This is slightly different to the background in game -->
-        <img class="background" src={Background} alt="" />
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div id="settings" class="font-hywh-85w" class:show
+    style:display={displayed ? "block" : "none"}
+>
+    <!-- This is slightly different to the background in game -->
+    <img class="background" src={Background} alt="" />
 
-        <div class="top-bar">
-            <img class="icon" src={Icon} alt="" />
+    <div class="top-bar">
+        <img class="icon" src={Icon} alt="" />
 
-            <div class="button-close" on:click={close}>
-                <ButtonClose />
-            </div>
-
-            <div class="title">
-                {$_("settings.self")}&nbsp;&nbsp;/&nbsp;&nbsp;{$_(
-                    `settings.category.${selectedCategory}`
-                )}
-            </div>
+        <div class="button-close" on:click={close}>
+            <ButtonClose />
         </div>
 
-        <div class="settings-categories">
-            <SettingsCategories options={["file", "relation-graph", "language", "other", "about"]}
-                bind:reduceVisualEffect
-                on:settings-categories-change={e => (selectedCategory = e.detail.category)}
-                {selectedCategory}
-            />
-        </div>
-
-        <div class="selected-category">
-            {#if selectedCategory === "file"}
-                <File on:rg-action
-                      on:import-json
-                      on:export-json
-                      on:export-haskell/>
-            {/if}
-            {#if selectedCategory === "relation-graph"}
-                <RelationGraph {settings}
-                               on:set-show-axis bind:showAxis
-                               on:set-show-grid bind:showGrid
-                               on:set-show-joystick bind:showJoystick
-                               on:set-joystick-sensibility bind:joystickSensibility
-                               on:set-reduce-visual-effect={e => {
-                                   reduceVisualEffect = e.detail;
-                                   dispatch("set-reduce-visual-effect", e.detail);
-                               }}
-                />
-            {/if}
-            {#if selectedCategory === "language"}
-                <Language {settings}
-                          on:set-language
-                          on:set-who-am-i
-                />
-            {/if}
-            {#if selectedCategory === "about"}
-                <About />
-            {/if}
-            {#if selectedCategory === "other"}
-                <Other on:reset-all />
-            {/if}
+        <div class="title">
+            {$_("settings.self")}&nbsp;&nbsp;/&nbsp;&nbsp;{$_(`settings.category.${selectedCategory}`)}
         </div>
     </div>
-{/if}
+
+    <SettingsCategories options={["file", "relation-graph", "language", "other", "about"]}
+        bind:reduceVisualEffect bind:show
+        on:settings-categories-change={e => (selectedCategory = e.detail.category)}
+        {selectedCategory}
+    />
+
+    <div id="selected-category">
+        {#if selectedCategory === "file"}
+            <File on:rg-action
+                  on:import-json
+                  on:export-json
+                  on:export-haskell/>
+        {/if}
+        {#if selectedCategory === "relation-graph"}
+            <RelationGraph {settings}
+                           on:set-show-axis bind:showAxis
+                           on:set-show-grid bind:showGrid
+                           on:set-show-joystick bind:showJoystick
+                           on:set-joystick-sensibility bind:joystickSensibility
+                           on:set-reduce-visual-effect={e => {
+                               reduceVisualEffect = e.detail;
+                               dispatch("set-reduce-visual-effect", e.detail);
+                           }}
+            />
+        {/if}
+        {#if selectedCategory === "language"}
+            <Language {settings}
+                      on:set-language
+                      on:set-who-am-i
+            />
+        {/if}
+        {#if selectedCategory === "about"}
+            <About />
+        {/if}
+        {#if selectedCategory === "other"}
+            <Other on:reset-all />
+        {/if}
+    </div>
+</div>
 
 <style lang="scss">
     %ease-out-expo {
@@ -144,9 +138,9 @@
         font-size: 1.3rem;
         color: #d3bc8e;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
     }
 
     .top-bar {
@@ -192,13 +186,13 @@
         }
     }
 
-    .settings {
+    #settings {
         position: absolute;
         width: 100%;
         height: 100%;
 
-        backdrop-filter: blur(0.5rem);
         -webkit-backdrop-filter: blur(0.5rem);
+        backdrop-filter: blur(0.5rem);
 
         animation: settings-disappear-ani 0.5s;
         animation-fill-mode: forwards;
@@ -231,47 +225,15 @@
         }
     }
 
-    .selected-category {
+    #selected-category {
         position: absolute;
-        min-width: 30rem;
 
-        left: 26.5rem;
+        left: 25vw;
         top: 6.5rem;
-        right: 6.5rem;
+        right: 6vw;
         bottom: 3rem;
 
         overflow-y: auto;
         overflow-x: hidden;
-    }
-
-    .settings-categories {
-        animation-fill-mode: forwards;
-
-        .settings > & {
-            animation-name: settings-categories-disappear;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-out;
-            @keyframes settings-categories-disappear {
-                from {
-                    transform: translateX(0);
-                }
-                to {
-                    transform: translateX(-3rem);
-                }
-            }
-        }
-        .settings.show > & {
-            animation-name: settings-categories-appear;
-            animation-duration: 0.2s;
-            animation-timing-function: ease-in;
-            @keyframes settings-categories-appear {
-                from {
-                    transform: translateX(-3rem);
-                }
-                to {
-                    transform: translateX(0);
-                }
-            }
-        }
     }
 </style>

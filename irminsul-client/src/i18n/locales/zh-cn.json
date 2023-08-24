@@ -26,10 +26,10 @@
         },
         "file": {
             "import": "导入",
-            "import-json": "导入关系图布局",
+            "import-json": "导入布局",
             "export": "导出",
-            "export-json": "将关系图布局导出为网页端中使用的 JSON",
-            "export-haskell": "将关系图布局导出为 Irminsul 项目中使用的 Haskell"
+            "export-json": "将布局导出为网页端中使用的 JSON",
+            "export-haskell": "将布局导出为 Irminsul 项目中使用的 Haskell"
         },
         "relation-graph": {
             "graphics": "画面",

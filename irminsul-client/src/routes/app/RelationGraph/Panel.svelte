@@ -4,7 +4,7 @@
     import { createEventDispatcher } from "svelte";
 
     import { _ } from "svelte-i18n";
-    import type {RelationGraph} from "../../../model/RelationGraph";
+    import type {RelationGraph} from "./RelationGraph";
     import Path from "./Path.svelte";
 
     export let relationGraph: RelationGraph | null;
@@ -37,11 +37,11 @@
 
         display: flex;
         align-items: center;
-        width: 100vw;
+        width: 100%;
         height: 4rem;
 
         background-color: #3e4457cc;
-        backdrop-filter: blur(0.2rem);
         -webkit-backdrop-filter: blur(0.2rem);
+        backdrop-filter: blur(0.2rem);
     }
 </style>

@@ -17,17 +17,16 @@
     .bar {
         position: absolute;
         top: 50%; left: 50%;
-        translate: -50% -50%;
 
         border-radius: 999rem;
         height: 10%; width: 55%;
     }
 
     #bar1 {
-        rotate: 45deg;
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 
     #bar2 {
-        rotate: -45deg;
+        transform: translate(-50%, -50%) rotate(-45deg);
     }
 </style>

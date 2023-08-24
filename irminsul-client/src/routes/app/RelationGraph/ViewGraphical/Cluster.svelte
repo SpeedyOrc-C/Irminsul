@@ -63,10 +63,10 @@
 
         z-index: 10;
 
-        cursor: pointer;
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
+        cursor: pointer;
 
         transition-property: filter;
         transition-duration: 0.2s;

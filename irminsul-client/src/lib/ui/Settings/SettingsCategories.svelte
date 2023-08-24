@@ -5,19 +5,18 @@
 
     export let options: Array<string>;
     export let reduceVisualEffect: boolean;
-
+    export let show: boolean;
     export let selectedCategory: string;
+
     const dispatch = createEventDispatcher();
 </script>
 
-<div class="settings-categories">
+<div id="settings-categories" class:show>
     {#each options as option}
         {@const selected = option === selectedCategory}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- 小小的一个点竟然暗藏玄机，真有你的！ -->
-        <div
-            class="option"
-            class:selected
+        <div class="option" class:selected
             on:click={() => {
                 selectedCategory = option;
                 dispatch("settings-categories-change", {
@@ -25,11 +24,9 @@
                 });
             }}
         >
-            <div class="cloudy-background">
-                {#if selected && !reduceVisualEffect}
-                    <SettingsItemCloudyBackground />
-                {/if}
-            </div>
+            {#if selected && !reduceVisualEffect}
+                <SettingsItemCloudyBackground />
+            {/if}
 
             <div class="option-background"></div>
 
@@ -51,18 +48,38 @@
 </div>
 
 <style lang="scss">
-    .settings-categories {
+    #settings-categories {
         position: absolute;
         top: 7rem;
-        left: 5.5rem;
+        left: 5vw;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
-    }
+        user-select: none;
 
-    .cloudy-background {
-        position: absolute;
+        animation-fill-mode: forwards;
+
+        & {
+            animation-name: settings-categories-disappear;
+            animation-duration: 0.5s;
+            animation-timing-function: ease-out;
+        }
+
+        &.show {
+            animation-name: settings-categories-appear;
+            animation-duration: 0.2s;
+            animation-timing-function: ease-in;
+        }
+
+        @keyframes settings-categories-appear {
+            from { transform: translateX(-3rem); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes settings-categories-disappear {
+            from { transform: translateX(0); }
+            to { transform: translateX(-3rem); }
+        }
     }
 
     .option {

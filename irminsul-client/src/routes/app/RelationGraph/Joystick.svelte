@@ -3,16 +3,15 @@
     import Joystick from "./Joystick";
     import {ShowJoystick} from "./RelationGraphSettings";
 
+    const dispatch = createEventDispatcher();
+
     export let callback: (dx: number, dy: number) => void;
     export let showJoystick: ShowJoystick;
 
     let joystick: Joystick;
-
-    const dispatch = createEventDispatcher();
-
     let innerCircle: HTMLElement;
-    let moving: boolean;
-    let angle: number;
+    let moving = false;
+    let angle = 0;
 
     function touchStart() {
         moving = true;
@@ -36,7 +35,7 @@
      on:touchmove={touchMove}
      on:touchend={() => moving = false}
 >
-    <div id="outer-circle" style:rotate="{-angle + Math.PI / 4}rad" class:moving>
+    <div id="outer-circle" style:transform="translate(-50%, -50%) rotate({-angle + Math.PI / 4}rad)" class:moving>
         <div id="pivot">
             <svg id="direction-indicator" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 105 2.5 A 102.5 102.5 0 0 1 207.5 105"
@@ -57,9 +56,9 @@
         height: 12vw;
         width: 12vw;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
 
         &.has-coarse-pointer {
             display: none;
@@ -73,7 +72,6 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        translate: -50% -50%;
 
         height: 14vw;
         width: 14vw;
@@ -91,7 +89,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        translate: -50% -50%;
+        transform: translate(-50%, -50%);
 
         height: 14vw;
         width: 14vw;
@@ -100,7 +98,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            translate: -50% -50%;
+            transform: translate(-50%, -50%);
+
             height: calc(14vw + 0.6rem);
             width: calc(14vw + 0.6rem);
         }
@@ -110,7 +109,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        translate: -50% -50%;
+        transform: translate(-50%, -50%);
 
         height: 2.5vw;
         width: 2.5vw;

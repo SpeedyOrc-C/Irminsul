@@ -64,7 +64,7 @@
     %bar-common {
         position: absolute;
         top: 50%;
-        translate: 0 -50%;
+        transform: translate(0, -50%);
 
         height: 0.5rem;
         border-radius: 0.25rem;
@@ -93,8 +93,7 @@
     #outer-square {
         position: absolute;
         top: 50%;
-        translate: -50% -50%;
-        rotate: 45deg;
+        transform: translate(-50%, -50%) rotate(45deg);
 
         background: #0004;
         box-shadow: 0 0 0.1rem 0.1rem #0004;
@@ -111,8 +110,7 @@
     #inner-square {
         position: absolute;
         top: 50%; left: 50%;
-        translate: -50% -50%;
-        rotate: 45deg;
+        transform: translate(-50%, -50%) rotate(45deg);
 
         height: 0.8rem; width: 0.8rem;
         border-radius: 0.1rem;
@@ -122,7 +120,7 @@
     #touch-area {
         position: absolute;
         top: 50%; left: 50%;
-        translate: -50% -50%;
+        transform: translate(-50%, -50%);
 
         height: 3.2rem; width: 3.2rem;
 

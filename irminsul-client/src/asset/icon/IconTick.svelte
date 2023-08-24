@@ -24,13 +24,11 @@
 
     #bar1 {
         width: 35%;
-        translate: -100% 70%;
-        rotate: 45deg;
+        transform: translate(-100%, 70%) rotate(45deg);
     }
 
     #bar2 {
         width: 60%;
-        translate: -30% -30%;
-        rotate: -45deg;
+        transform: translate(-30%, -30%) rotate(-45deg);
     }
 </style>

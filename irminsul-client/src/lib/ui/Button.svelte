@@ -34,9 +34,9 @@
         box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0 transparent,
             inset 0 0 0 0 transparent;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
         cursor: pointer;
 
         transition-property: background-color, box-shadow;

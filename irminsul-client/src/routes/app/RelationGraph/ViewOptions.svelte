@@ -37,8 +37,8 @@
         margin: 0.5rem 0 0.5rem 0.5rem;
         color: #fffc;
 
-        user-select: none;
         -moz-user-select: none;
         -webkit-user-select: none;
+        user-select: none;
     }
 </style>

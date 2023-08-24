@@ -18,13 +18,17 @@
         dispatch("dropdown-change", e.detail);
     }
 
+    function click() {
+        show = !show;
+    }
+
     beforeUpdate(() => {label = options.find(op => op.value === value)?.label ?? "option";});
 </script>
 
 <Button inSettings={true}>
     <div class="down-arrow"/>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="label" on:click={() => show = !show}>{label}</div>
+    <div class="label" on:click={click}>{label}</div>
     <DropdownList {options} bind:below bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
 </Button>
 

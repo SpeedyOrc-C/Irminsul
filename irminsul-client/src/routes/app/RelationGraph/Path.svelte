@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import type { PathElement } from "../../../model/RelationGraph";
+    import type { PathElement } from "./RelationGraph";
 
     export let pathElements: Array<PathElement>;
 
@@ -41,9 +41,9 @@
         background-color: #ece5d8;
         color: #3b4255;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
         cursor: pointer;
 
         transition-property: transform, box-shadow;

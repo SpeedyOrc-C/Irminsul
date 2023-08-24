@@ -38,9 +38,9 @@
 
         z-index: 1000;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
 
         transition-property: filter;
         transition-duration: 0.2s;

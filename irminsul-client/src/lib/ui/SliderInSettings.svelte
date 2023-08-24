@@ -23,7 +23,7 @@
     #value {
         position: absolute;
         top: 50%;
-        translate: 0 -50%;
+        transform: translate(0, -50%);
 
         border: 0.15rem solid #0001;
         border-radius: 0.4rem;

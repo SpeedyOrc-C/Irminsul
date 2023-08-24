@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {beforeUpdate, createEventDispatcher} from "svelte";
+    import {afterUpdate, createEventDispatcher} from "svelte";
     import type { Option } from "../util/Option";
 
     export let options: Array<Option>;
@@ -11,16 +11,16 @@
 
     const dispatch = createEventDispatcher();
 
-    beforeUpdate(() => {
+    afterUpdate(() => {
         if (show)
             displayed = true;
         else
-            setTimeout(() => {displayed = false}, 200);
+            setTimeout(() => displayed = false, 200);
     })
 </script>
 
 <div class="dropdown-list" class:below>
-    <div class="options" class:show style:display={displayed ? "block" : "none"}>
+    <div id="options" class:show class:displayed>
         {#each options as option}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div
@@ -54,7 +54,7 @@
             bottom: unset;
         }
     }
-    .options {
+    #options {
         width: calc(100% - 2 * 0.3rem);
 
         padding: 0.1rem 0.3rem;
@@ -64,11 +64,16 @@
 
         background-color: #495366;
 
-        animation: option-disappear 0.2s;
         animation-fill-mode: forwards;
 
+        animation: option-disappear 0.2s;
         &.show {
             animation: option-appear 0.2s;
+        }
+
+        display: none;
+        &.displayed {
+            display: block;
         }
     }
 
@@ -127,9 +132,9 @@
             text-align: center;
             font-size: 1.3rem;
 
-            user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
+            user-select: none;
             cursor: pointer;
 
             color: #ece4d8;

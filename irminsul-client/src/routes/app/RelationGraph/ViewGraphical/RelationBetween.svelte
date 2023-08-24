@@ -1,7 +1,7 @@
 <script lang="ts">
     import {afterUpdate} from "svelte";
     import type { Vector2 } from "$lib/util/Vector2";
-    import type {RelationBetween} from "../../../../model/RelationGraph";
+    import type {RelationBetween} from "../RelationGraph";
     import type Editor from "./Editor";
 
     export let relationBetween: RelationBetween;
@@ -130,9 +130,9 @@
         height: 5.4rem;
         z-index: 1;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
 
         &:hover,
         &:active {

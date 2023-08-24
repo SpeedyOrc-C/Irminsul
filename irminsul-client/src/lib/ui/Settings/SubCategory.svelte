@@ -9,8 +9,8 @@
         font-size: 1.5rem;
         color: white;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
     }
 </style>

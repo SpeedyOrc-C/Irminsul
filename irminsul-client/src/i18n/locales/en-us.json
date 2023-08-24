@@ -26,10 +26,10 @@
         },
         "file": {
             "import": "Import",
-            "import-json": "Import relation graph layout",
+            "import-json": "Import layout",
             "export": "Export",
-            "export-json": "Export relation graph layout as JSON used in web",
-            "export-haskell": "Export relation graph layout as Haskell used in Irminsul project"
+            "export-json": "Export layout as JSON used in web",
+            "export-haskell": "Export layout as Haskell used in Irminsul project"
         },
         "relation-graph": {
             "graphics": "Graphics",

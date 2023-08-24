@@ -12,21 +12,26 @@
         <slot />
     </div>
     <img src={ThreeStars} alt="" class="three-stars" style:display={showStars ? "block" : "none"}>
-    <div class="caption">{text}</div>
+    <div class="caption">
+        <div id="caption-text">
+            {text}
+        </div>
+    </div>
 </div>
 
 <style lang="scss">
     .item-bar {
         position: relative;
-        
+        //overflow-x: hidden;
+
         margin: 0.6rem 0.2rem;
         width: calc(100% - 0.4rem);
         height: 3.2rem;
         border-radius: 1.6rem;
 
-        user-select: none;
         -webkit-user-select: none;
         -moz-user-select: none;
+        user-select: none;
 
         background: rgba(236, 229, 216, 0.9);
 
@@ -61,13 +66,19 @@
 
     .caption {
         position: absolute;
+        width: calc(100% - 29rem);
+        overflow-x: auto; overflow-y: hidden;
+
         left: 1.6rem;
-
         height: 3.2rem;
-        line-height: 3.2rem;
+    }
 
+    #caption-text {
         font-size: 1.3rem;
         color: #485265;
+        line-height: 3.2rem;
+        text-align: left;
+        white-space: nowrap;
     }
 
     .widget {

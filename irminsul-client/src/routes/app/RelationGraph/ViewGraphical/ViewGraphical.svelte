@@ -4,7 +4,7 @@
     import Cluster from "./Cluster.svelte";
     import Grid from "./Grid.svelte";
     import RelationBetween from "./RelationBetween.svelte";
-    import type {RelationGraph} from "../../../../model/RelationGraph";
+    import type {RelationGraph} from "../RelationGraph";
     import {createEventDispatcher} from "svelte";
     import type ViewController from "../ViewController";
     import {deadKeyMultiplier} from "$lib/util/DeadKeyMultiplier";
@@ -92,43 +92,65 @@
         editor.toggleRoot();
         editor = editor;
     }
+
+    function deselectAll() {
+        editor.deselectAll();
+        editor = editor;
+    }
 </script>
 
 <svelte:window on:keydown={keydown}/>
 
-<div id="view-graphical"
-     style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%) translate({view.x}rem, {-view.y}rem)"
->
-    {#if showGrid} <Grid/> {/if}
-    {#if showAxis} <Axis/> {/if}
+<div id="view-graphical">
+    <div id="deselect-all-touch-area" on:click={deselectAll}></div>
+    <div id="origin"
+         style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%) translate({view.x}rem, {-view.y}rem)"
+    >
+        {#if showGrid} <Grid/> {/if}
+        {#if showAxis} <Axis/> {/if}
 
-    {#each relationGraph.relationsBetween as relationBetween}
-        <RelationBetween {editor} {relationBetween}/>
-    {/each}
+        {#each relationGraph.relationsBetween as relationBetween}
+            <RelationBetween {editor} {relationBetween}/>
+        {/each}
 
-    {#each relationGraph.clusters as cluster}
-        <Cluster id={cluster.id} label={cluster.translation} size={cluster.size}
-                 on:toggle-cluster={e => toggleCluster(e.detail)}
-                 on:jump-to
-                 {showCoordinates} {editor}
-        />
-    {/each}
+        {#each relationGraph.clusters as cluster}
+            <Cluster id={cluster.id} label={cluster.translation} size={cluster.size}
+                     on:toggle-cluster={e => toggleCluster(e.detail)}
+                     on:jump-to
+                     {showCoordinates} {editor}
+            />
+        {/each}
 
-    {#each relationGraph.atoms as atom}
-        <Atom id={atom.id} label={atom.translation}
-              on:toggle-atom={e => toggleAtom(e.detail)}
-              {editor} {showCoordinates}
-        />
-    {/each}
+        {#each relationGraph.atoms as atom}
+            <Atom id={atom.id} label={atom.translation}
+                  on:toggle-atom={e => toggleAtom(e.detail)}
+                  {editor} {showCoordinates}
+            />
+        {/each}
 
-    <RootCluster on:toggle-root={toggleRoot} {editor} />
+        <RootCluster on:toggle-root={toggleRoot} {editor} />
+    </div>
 </div>
 
 <style lang="scss">
     #view-graphical {
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+
+        overflow: hidden;
+    }
+
+    #deselect-all-touch-area {
+        position: absolute;
+        width: 100%; height: 100%;
+    }
+
+    #origin {
+        position: absolute;
+        top: 50%; left: 50%;
 
         @media (pointer: coarse) {
             transition-duration: 0.1s;

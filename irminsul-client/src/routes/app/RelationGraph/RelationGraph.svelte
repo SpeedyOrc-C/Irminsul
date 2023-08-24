@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {dumpRelationGraph2Haskell, type RelationGraph,} from "../../../model/RelationGraph";
+    import {dumpRelationGraph2Haskell, type RelationGraph,} from "./RelationGraph";
     import {saveStringAsFile} from "$lib/util/String";
     import Panel from "./Panel.svelte";
     import {onMount} from "svelte";
@@ -42,7 +42,7 @@
     async function loadRelationGraph(
         loadId: string,
         language=settings.preference.language,
-        whoAmI_=settings.preference.who_am_i
+        whoAmI=settings.preference.who_am_i
     ) {
         console.info("Loading relation graph:", loadId);
 
@@ -51,7 +51,7 @@
         let json: RelationGraph;
         try {
             relationGraph = null;
-            json = await loader.load(loadId, language, whoAmI_);
+            json = await loader.load(loadId, language, whoAmI);
         } catch (e) {
             console.warn("Failed to load relation graph, error:", e);
             relationGraph = previous;
@@ -200,7 +200,15 @@
 
         loadRelationGraph(id);
     });
+
+    function keydown(e: KeyboardEvent) {
+        if (e.ctrlKey !== e.metaKey && e.code === "Comma") {
+            openSettings();
+        }
+    }
 </script>
+
+<svelte:window on:keydown={keydown} />
 
 <title>
     Irminsul
@@ -250,7 +258,8 @@
               on:reset-all={resetAll}
     />
 
-    <input type="file" bind:this={jsonFileInput} style:display="none" />
+    <label for="json-file-input" />
+    <input id="json-file-input" type="file" bind:this={jsonFileInput} style:display="none" />
 </div>
 
 <style lang="scss">

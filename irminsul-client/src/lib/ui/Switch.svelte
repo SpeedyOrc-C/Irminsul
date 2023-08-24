@@ -63,12 +63,12 @@
         box-shadow: 0 0 0.2rem 0 white;
 
         transition-duration: 0.2s;
-        transition-property: translate;
+        transition-property: transform;
 
-        translate: calc(-50% - 1.5rem) -50%;
+        transform: translate(calc(-50% - 1.5rem), -50%);
 
         #switch.checked & {
-            translate: calc(-50% + 1.5rem) -50%;
+            transform: translate(calc(-50% + 1.5rem), -50%);
         }
     }
 
@@ -78,24 +78,24 @@
         position: absolute;
 
         transition-duration: 0.2s;
-        transition-property: opacity, scale;
+        transition-property: opacity, transform;
     }
 
     #tick {
         opacity: 0%;
-        scale: 80%;
+        transform: scale(80%);
         #switch.checked & {
             opacity: 100%;
-            scale: 100%;
+            transform: scale(100%);
         }
     }
 
     #cross {
         opacity: 100%;
-        scale: 100%;
+        transform: scale(100%);
         #switch.checked & {
             opacity: 0%;
-            scale: 80%;
+            transform: scale(80%);
         }
     }
 </style>

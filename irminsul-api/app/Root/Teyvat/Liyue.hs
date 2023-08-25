@@ -21,7 +21,7 @@ import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode
 import Root.AnotherWorld
 import Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode
-import Root.Teyvat.Liyue.Shenhe
+import Root.Teyvat.Inazuma.Kaedehara
 
 chongyun = "Chongyun"
 
@@ -30,15 +30,17 @@ xinyan = "Xinyan"
 yelan = "Yelan"
 yanfei = "Yanfei"
 
-liyue = clusterNode "Liyue" Country
-    [
+liyue = clusterNodeWithExclusion "Liyue" Country
+    ([
         chongyun,
         xinyan,
         yelan,
         yanfei,
         shenhe,
         travellerArchonSide
-    ]
+    ], [
+        kazuhaKaedehara
+    ])
     [
         zhongli `rule` liyue,
         zhongli `appreciate` keqing,
@@ -67,7 +69,6 @@ liyue = clusterNode "Liyue" Country
         Relation "Smuggle" beidou travellerArchonSide,
 
         Relation "YoungerSisterOfMother" shenhe chongyun,
-        shenhe `friend` ganyu,
 
         yanfei `friend` ganyu,
         yanfei `rival` ningguang,
@@ -103,15 +104,14 @@ liyue = clusterNode "Liyue" Country
             al xingqiu (15, 15),
             al shenhe (45, 15),
             al xinyan (0, -30),
-            al travellerArchonSide (7.5, -22.5),
-            al yaoyao (30, -15),
+            al travellerArchonSide (30, -15),
+            al yaoyao (45, 0),
             al ganyu (30, 0),
             al yanfei (15, 0),
 
             cl cruxFleet (35, -30) (30, -30) (15, 5),
             cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (15, 5),
             cl bubuPharmacy (-45, -7.5) (-45, -7.5) (15, 5),
-            cl cloudRetainersAbode (42, 0) (42, 0) (15, 5),
             cl adepti (-35, 15) (-35, 15) (12, 5)
         ]
     })

@@ -14,6 +14,7 @@ translationActionEnUs = [
     ("Create", "Create"),
     ("Customer", "Customer"),
     ("Daughter", "Daughter"),
+    ("Disciple", "Disciple"),
     ("Dislike", "Dislike"),
     ("ElderBrother", "Elder brother"),
     ("ElderSister", "Elder sister"),

@@ -14,6 +14,7 @@ translationActionZhCn = [
     ("Create", "创造"),
     ("Customer", "顾客"),
     ("Daughter", "女儿"),
+    ("Disciple", "弟子"),
     ("Dislike", "不喜欢"),
     ("ElderBrother", "哥哥"),
     ("ElderSister", "姐姐"),

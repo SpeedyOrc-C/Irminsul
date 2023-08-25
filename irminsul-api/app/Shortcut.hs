@@ -24,7 +24,7 @@ ba = BiRelation
 -- ach = (`Atom` Character)
 -- | Shortcut of creating an Atom Object
 ao :: String -> Entity
-ao = (`Atom` Object) 
+ao = (`Atom` Object)
 
 -- | Shortcut of a root's title's layout
 rl :: (Double, Double) -> ShowcaseElementProperty
@@ -47,22 +47,46 @@ cl entity (x, y) (anchorX, anchorY) (width, height) =
     Create a new cluster node, where all entities and relations from children
     are appended to this new node.
 -}
-clusterNode ::
-        String      -- node name
-    ->  ClusterType -- node type
-    ->  [Entity]    -- entities
-    ->  [Relation]  -- relations
-    ->  [Entity]    -- child clusters
+clusterNode
+    :: String      -- ^ node name
+    -> ClusterType -- ^ node type
+    -> [Entity]    -- ^ entities
+    -> [Relation]  -- ^ relations
+    -> [Entity]    -- ^ child clusters
     -> Maybe RelationGraphLayout
-    ->  Entity
+    -> Entity
 clusterNode name clusterType pEntities pRelations children =
     Cluster name clusterType
         (IndexedSetFamily
             (pEntities ++ children)
-            (nub (pEntities ++ children ++ concatMap (elements . entities) children)))
+            (nub $ pEntities ++ children ++ concatMap (elements.entities) children))
         (IndexedSetFamily
             pRelations
-            (nub (pRelations ++ concatMap (elements . relations) children)))
+            (nub $ pRelations ++ concatMap (elements.relations) children))
+
+{- |
+    Similar to `clusterNode`, but this one can exclude specified entities.
+-}
+clusterNodeWithExclusion
+    :: String               -- ^ node name
+    -> ClusterType          -- ^ node type
+    -> ([Entity], [Entity]) -- ^ (entities, excluded entities)
+    -> [Relation]           -- ^ relations
+    -> [Entity]             -- ^ child clusters
+    -> Maybe RelationGraphLayout
+    -> Entity
+clusterNodeWithExclusion name -- ^ node name
+ clusterType (pEntities, pExcluded) pRelations children =
+    Cluster name clusterType
+        (IndexedSetFamily
+            (excludeEntity $ pEntities ++ children)
+            (excludeEntity . nub $
+                pEntities ++ children ++ concatMap (elements.entities) children))
+        (IndexedSetFamily
+            pRelations
+            (nub $ pRelations ++ concatMap (elements.relations) children))
+    where
+        excludeEntity = filter (`notElem` pExcluded)
 
 {- |
     Create a new leaf node, which it has no children.

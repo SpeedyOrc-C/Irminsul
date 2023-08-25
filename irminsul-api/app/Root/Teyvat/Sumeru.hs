@@ -56,11 +56,14 @@ sumeru = clusterNode "Sumeru" Country
 
         nahida `longTimeAudience` nilou,
         collei `longTimeAudience` nilou,
+        collei `friend` nilou,
 
         cyno `customer` dori,
         alhaitham `customer` dori,
         tighnari `customer` dori,
-        layla `customer` dori
+        layla `customer` dori,
+
+        layla `admire` alhaitham
     ]
     [
         akademiya,
@@ -73,13 +76,13 @@ sumeru = clusterNode "Sumeru" Country
             al nahida (-15, 0),
             al rukkhadevataGreaterLord (-30, 0),
             al nilou (-15, -15),
-            al alhaitham (0, 15),
+            al alhaitham (15, 15),
             al cyno (0, 0),
             al faruzan (0, -30),
-            al kaveh (15, 15),
+            al kaveh (0, 15),
             al tighnari (30, -30),
             al collei (10, -20),
             al dori (30, 0),
-            al layla (20, -10)
+            al layla (30, 15)
         ]
     })

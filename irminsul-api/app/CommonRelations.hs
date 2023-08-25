@@ -24,6 +24,7 @@ youngerGeneration = ra "YoungerGeneration"
 olderGeneration = ra "OlderGeneration"
 
 student = ra "Student"
+disciple = ra "Disciple"
 teacher = ra "Teacher"
 mentor = ra "Mentor"
 guardian = ra "Guardian"

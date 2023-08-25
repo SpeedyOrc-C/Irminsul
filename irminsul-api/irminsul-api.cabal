@@ -111,7 +111,6 @@ executable irminsul-api
         Root.Teyvat.Liyue.BubuPharmacy,
         Root.Teyvat.Liyue.CruxFleet,
         Root.Teyvat.Liyue.FeiyunCommerceGuild,
-        Root.Teyvat.Liyue.Shenhe,
         Root.Teyvat.Liyue.TianhengThaumaturges,
         Root.Teyvat.Liyue.QingceVillage,
         Root.Teyvat.Liyue.Qixing,

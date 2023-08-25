@@ -16,11 +16,13 @@ moonCarver = "MoonCarver"
 mountainShaper = "MountainShaper"
 
 
-adepti = clusterNode "Adepti" Organization
-    [
+adepti = clusterNodeWithExclusion "Adepti" Organization
+    ([
         moonCarver,
         mountainShaper
-    ]
+    ], [
+        shenhe
+    ])
     [
         acting guardian ganyu yaoyao
     ]
@@ -41,6 +43,7 @@ adepti = clusterNode "Adepti" Organization
             al mountainShaper (0, 15),
             al xiao (-30, 0),
 
-            cl yaksha (-30, 15) (-30, 15) (12, 5)
+            cl yaksha (-30, 15) (-30, 15) (12, 5),
+            cl cloudRetainersAbode (22.5, 7.5) (22.5, 7.5) (15, 5)
         ]
     })

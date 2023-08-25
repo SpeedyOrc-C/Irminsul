@@ -1,9 +1,6 @@
 <script lang="ts">
     import {_} from "svelte-i18n";
     import Switch from "$lib/ui/Switch.svelte";
-    import {createEventDispatcher} from "svelte";
-
-    const dispatch = createEventDispatcher();
 
     export let showCoordinates: boolean;
     export let editing: boolean;

@@ -20,7 +20,7 @@
     export let editor: Editor;
 
     function keydown(e: KeyboardEvent) {
-        if (e.ctrlKey !== e.metaKey) {
+        if (editor.isEditing() && e.ctrlKey !== e.metaKey) {
             if (e.code === "KeyA") {
                 e.preventDefault();
                 if (e.shiftKey) {
@@ -75,6 +75,7 @@
                 }
         }
 
+        e.preventDefault();
         view = view;
         editor = editor;
     }

@@ -116,6 +116,10 @@
         position: absolute;
         transform: translate(-37%, -38%);
 
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+
         filter: blur(0.1rem);
         opacity: 5%;
     }
@@ -123,6 +127,10 @@
     .icon {
         position: absolute;
         display: block;
+
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
 
         top: 1.2rem;
         left: 2.4rem;

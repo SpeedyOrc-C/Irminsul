@@ -6,6 +6,7 @@
     const dispatch = createEventDispatcher();
 
     export let showCoordinates: boolean;
+    export let editing: boolean;
 </script>
 
 <div id="options">
@@ -15,7 +16,7 @@
     </div>
     <div class="option font-hywh-65w">
         <div class="label">{$_("view-options.edit-mode")}</div>
-        <Switch value={false} on:switch-change={e => dispatch("set-editing", e.detail)} />
+        <Switch bind:value={editing} />
     </div>
 </div>
 

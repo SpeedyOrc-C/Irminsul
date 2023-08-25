@@ -2,7 +2,7 @@
     import {dumpRelationGraph2Haskell, type RelationGraph,} from "./RelationGraph";
     import {saveStringAsFile} from "$lib/util/String";
     import Panel from "./Panel.svelte";
-    import {onMount} from "svelte";
+    import {afterUpdate, onMount} from "svelte";
     import Settings from "./Settings/Settings.svelte";
     import {writable, type Writable} from "svelte/store";
     import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
@@ -19,6 +19,7 @@
 
     let view = new ViewController();
     let editor: Editor;
+    let editing: boolean;
 
     const loader = new RelationGraphLoader();
 
@@ -85,6 +86,7 @@
 
         let fileName = `${relationGraph.id}-Haskell.txt`;
         saveStringAsFile(fileName, dumpRelationGraph2Haskell(relationGraph));
+        editing = false;
     }
 
     function exportJson() {
@@ -96,6 +98,7 @@
 
         let fileName = `${relationGraph.id}-JSON.json`;
         saveStringAsFile(fileName, JSON.stringify(relationGraph, null, 4));
+        editing = false;
     }
 
     function importJson() {
@@ -206,6 +209,14 @@
             openSettings();
         }
     }
+
+    afterUpdate(() => {
+        if (editor !== undefined) {
+            if (editing !== editor.isEditing()) {
+                setEditing(editing);
+            }
+        }
+    })
 </script>
 
 <svelte:window on:keydown={keydown} />
@@ -233,7 +244,7 @@
               bind:showJoystick={settings.preference.show_joystick}
               on:update-view={updateView}/>
 
-    <ViewOptions bind:showCoordinates on:set-editing={e => setEditing(e.detail)} />
+    <ViewOptions bind:showCoordinates bind:editing />
 
     <Panel on:jump-to={e => loadRelationGraph(e.detail)}
            on:open-settings={openSettings}

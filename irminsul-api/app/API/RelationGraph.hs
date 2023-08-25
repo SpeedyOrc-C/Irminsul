@@ -114,7 +114,7 @@ relationGraph lang notReplacedCluster whoAmI = let
             ("id",          JString $ entityId renderedCluster),
             ("translation", JString $ translateEntity renderedCluster),
             ("elements",    JArray $ JString .
-                entityId <$> indices (entities renderedCluster)),
+                entityId <$> elements (entities renderedCluster)),
             ("position",    toJSON $ position   layout),
             ("anchor",      toJSON $ anchor     layout),
             ("size",        toJSON $ size       layout)

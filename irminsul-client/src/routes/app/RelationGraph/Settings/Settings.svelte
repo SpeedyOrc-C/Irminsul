@@ -9,7 +9,7 @@
     import { _ } from "svelte-i18n";
     import Other from "./Other.svelte";
     import RelationGraph from "./RelationGraph.svelte";
-    import {beforeUpdate, createEventDispatcher} from "svelte";
+    import {afterUpdate, createEventDispatcher} from "svelte";
     import type RelationGraphSettings from "../RelationGraphSettings";
     import type {ShowJoystick} from "../RelationGraphSettings";
 
@@ -27,22 +27,22 @@
     let selectedCategory = "file";
     let reduceVisualEffect: boolean = settings.preference.reduce_visual_effect;
 
-    function handleKeyup(e: KeyboardEvent) {
-        if (!show) return;
-        if (e.code === "Escape") close();
-    }
-
     function close() { show = false; }
 
-    beforeUpdate(() => {
+    afterUpdate(() => {
         if (show)
             displayed = true;
         else
-            setTimeout(() => {displayed = false}, 500)
-    })
+            setTimeout(() => {displayed = false}, 500);
+    });
+
+    function keyup(e: KeyboardEvent) {
+        if (!show) return;
+        if (e.code === "Escape") close();
+    }
 </script>
 
-<svelte:window on:keyup={handleKeyup} />
+<svelte:window on:keyup={keyup} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div id="settings" class="font-hywh-85w" class:show

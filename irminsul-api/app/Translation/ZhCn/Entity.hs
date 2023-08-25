@@ -9,6 +9,7 @@ import Translation.ZhCn.Utility
 translationEntityZhCn :: [(String, Information)]
 translationEntityZhCn = [
     ipn "Aberaku" "阿倍良久",
+    ipn "Adepti" "仙人",
     ipn "Adonis" "阿多尼斯",
     ipn "Aether" "空",
     ip "Albedo" "阿贝多" ["阿贝多先生", "白垩之子"] "",
@@ -25,6 +26,7 @@ translationEntityZhCn = [
     ipn "CatsTail" "猫尾酒馆",
     ipn "Charlotte" "夏洛蒂",
     ipn "Chongyun" "重云",
+    ipn "CloudRetainer" "流云借风",
     ipn "CloudRetainersAbode" "留云借风真君洞天",
     ipn "Collei" "柯莱",
     ipn "CruxFleet" "南十字船队",
@@ -67,6 +69,8 @@ translationEntityZhCn = [
     ip "MikaSchmidt" ("米卡"."施密特") ["前进测绘员"] "",
     ipn "MonaAstrologistMegistus" ("阿斯托洛吉斯"."莫娜"."梅姬斯图斯"),
     ipn "Mondstadt" "蒙德",
+    ipn "MoonCarver" "削月筑阳",
+    ipn "MountainShaper" "移霄导天",
     ipn "Nahida" "纳西妲",
     ipn "Nilou" "妮露",
     ipn "Ningguang" "凝光",
@@ -78,6 +82,7 @@ translationEntityZhCn = [
     ipn "Razor" "雷泽",
     ipn "Rosaria" "罗莎莉亚",
     ipn "Root" "树根",
+    ipn "StreetwardRambler" "歌尘浪市",
     ipn "RukkhadevataGreaterLord" "大慈树王",
     ipn "Shenhe" "申鹤",
     ipn "Shuyun" "恕筠",
@@ -95,6 +100,7 @@ translationEntityZhCn = [
     ipn "Xiao" "魈",
     ipn "Xinyan" "辛焱",
     ipn "Xingqiu" "行秋",
+    ipn "Yanfei" "烟绯",
     ipn "Yaoyao" "瑶瑶",
     ipn "Yelan" "夜兰",
     ipn "Zhongli" "钟离"

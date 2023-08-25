@@ -5,6 +5,7 @@ module Root.Teyvat.Liyue.Adepti where
 
 import Irminsul
 import Shortcut
+import CommonRelations
 
 import Root.Teyvat.Liyue.Adepti.Yaksha
 import Root.Teyvat.Liyue.Adepti.SeaGazersAbode
@@ -21,7 +22,7 @@ adepti = clusterNode "Adepti" Organization
         mountainShaper
     ]
     [
-
+        acting guardian ganyu yaoyao
     ]
     [
         yaksha,
@@ -29,4 +30,17 @@ adepti = clusterNode "Adepti" Organization
         streetwardRamblersAbode,
         seaGazersAbode
     ]
-    Nothing
+    (Just $ RelationGraphLayout {
+        rootProperty=rl (0, 0),
+        elementProperties=[
+            al cloudRetainer (15, 0),
+            al ganyu (30, 0),
+            al streetwardRambler (0, -15),
+            al yaoyao (15, -15),
+            al moonCarver (-15, 0),
+            al mountainShaper (0, 15),
+            al xiao (-30, 0),
+
+            cl yaksha (-30, 15) (-30, 15) (12, 5)
+        ]
+    })

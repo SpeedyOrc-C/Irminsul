@@ -6,6 +6,7 @@ import Shortcut
 translationEntityEnUs :: [(String, Information)]
 translationEntityEnUs = [
     ipn "Aberaku" "Aberaku",
+    ipn "Adepti" "Adepti",
     ipn "Adonis" "Adonis",
     ipn "Aether" "Aether",
     ipn "Albedo" "Albedo",
@@ -22,6 +23,7 @@ translationEntityEnUs = [
     ipn "CatsTail" "Cat's Tail",
     ipn "Charlotte" "Charlotte",
     ipn "Chongyun" "Chongyun",
+    ipn "CloudRetainer" "Cloud Retainer",
     ipn "CloudRetainersAbode" "Cloud Retainer's Abode",
     ipn "Collei" "Collei",
     ipn "CruxFleet" "Crux Fleet",
@@ -64,6 +66,8 @@ translationEntityEnUs = [
     ipn "Margaret" "Margaret",
     ipn "MonaAstrologistMegistus" "Mona Megistus, the Astrologist",
     ipn "Mondstadt" "Mondstadt",
+    ipn "MoonCarver" "Moon Carver",
+    ipn "MountainShaper" "Mountain Shaper",
     ipn "Nahida" "Nahida",
     ipn "Nilou" "Nilou",
     ipn "Ningguang" "Ningguang",
@@ -75,6 +79,7 @@ translationEntityEnUs = [
     ipn "Razor" "Razor",
     ipn "Rosaria" "Rosaria",
     ipn "Root" "Root",
+    ipn "StreetwardRambler" "Streetward Rambler",
     ipn "RukkhadevataGreaterLord" "Greater Lord Rukkhadevata",
     ipn "Shenhe" "Shenhe",
     ipn "Shuyun" "Shuyun",
@@ -92,6 +97,7 @@ translationEntityEnUs = [
     ipn "Xiao" "Xiao",
     ipn "Xingqiu" "Xingqiu",
     ipn "Xinyan" "Xinyan",
+    ipn "Yanfei" "Yanfei",
     ipn "Yaoyao" "Yaoyao",
     ipn "Yelan" "Yelan",
     ipn "Zhongli" "Zhongli"

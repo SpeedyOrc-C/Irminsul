@@ -210,6 +210,13 @@
         }
     }
 
+    function beforeunload(e: BeforeUnloadEvent) {
+        if (editor.isEditing()) {
+            e.preventDefault();
+            e.returnValue = "";
+        }
+    }
+
     afterUpdate(() => {
         if (editor !== undefined) {
             if (editing !== editor.isEditing()) {
@@ -219,7 +226,7 @@
     })
 </script>
 
-<svelte:window on:keydown={keydown} />
+<svelte:window on:keydown={keydown} on:beforeunload={beforeunload} />
 
 <title>
     Irminsul

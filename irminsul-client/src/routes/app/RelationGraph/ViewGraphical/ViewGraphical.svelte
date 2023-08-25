@@ -6,9 +6,8 @@
     import RelationBetween from "./RelationBetween.svelte";
     import type {RelationGraph} from "../RelationGraph";
     import {createEventDispatcher} from "svelte";
-    import type ViewController from "../ViewController";
-    import {deadKeyMultiplier} from "$lib/util/DeadKeyMultiplier";
-    import type Editor from "./Editor";
+    import ViewController from "../ViewController";
+    import Editor from "./Editor";
     import RootCluster from "./RootCluster.svelte";
 
     const dispatch = createEventDispatcher();
@@ -41,15 +40,17 @@
             return;
         }
 
-        const distance = deadKeyMultiplier(e);
+        const entityMove = Editor.moveDeadKeyMultiplier(e);
+        const viewMoveMultiplier = ViewController.moveDeadKeyMultiplier(e);
+        const viewRotateMultiplier = ViewController.rotateDeadKeyMultiplier(e);
 
         switch (e.code) {
-            case "KeyW": view.moveUp(); break;
-            case "KeyS": view.moveDown(); break;
-            case "KeyA": view.moveLeft(); break;
-            case "KeyD": view.moveRight(); break;
-            case "KeyQ": view.rotateClockwise(); break;
-            case "KeyE": view.rotateAnticlockwise(); break;
+            case "KeyW": view.moveDelta(0, 7.5 * viewMoveMultiplier); break;
+            case "KeyS": view.moveDelta(0, -7.5 * viewMoveMultiplier); break;
+            case "KeyA": view.moveDelta(-7.5 * viewMoveMultiplier, 0); break;
+            case "KeyD": view.moveDelta(7.5 * viewMoveMultiplier, 0); break;
+            case "KeyQ": view.rotateDelta(-45 * viewRotateMultiplier); break;
+            case "KeyE": view.rotateDelta(45 * viewRotateMultiplier); break;
             case "Minus": view.zoomOut(); break;
             case "Equal": view.zoomIn(); break;
             case "Digit0": view.reset(); break;
@@ -60,15 +61,15 @@
 
             default: if (!editor.isEditing()) return;
                 switch (e.code) {
-                    case "KeyI": editor.moveSelectedElements({x: 0, y: distance}); break;
-                    case "KeyK": editor.moveSelectedElements({x: 0, y: -distance}); break;
-                    case "KeyJ": editor.moveSelectedElements({x: -distance, y: 0}); break;
-                    case "KeyL": editor.moveSelectedElements({x: distance, y: 0}); break;
+                    case "KeyI": editor.moveSelectedElements({x: 0, y: entityMove}); break;
+                    case "KeyK": editor.moveSelectedElements({x: 0, y: -entityMove}); break;
+                    case "KeyJ": editor.moveSelectedElements({x: -entityMove, y: 0}); break;
+                    case "KeyL": editor.moveSelectedElements({x: entityMove, y: 0}); break;
 
-                    case "ArrowUp": editor.moveSelectedClustersAnchors({x: 0, y: distance}); break;
-                    case "ArrowDown": editor.moveSelectedClustersAnchors({x: 0, y: -distance}); break;
-                    case "ArrowLeft": editor.moveSelectedClustersAnchors({x: -distance, y: 0}); break;
-                    case "ArrowRight": editor.moveSelectedClustersAnchors({x: distance, y: 0}); break;
+                    case "ArrowUp": editor.moveSelectedClustersAnchors({x: 0, y: entityMove}); break;
+                    case "ArrowDown": editor.moveSelectedClustersAnchors({x: 0, y: -entityMove}); break;
+                    case "ArrowLeft": editor.moveSelectedClustersAnchors({x: -entityMove, y: 0}); break;
+                    case "ArrowRight": editor.moveSelectedClustersAnchors({x: entityMove, y: 0}); break;
 
                     default: return;
                 }

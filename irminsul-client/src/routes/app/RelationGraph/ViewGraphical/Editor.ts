@@ -23,6 +23,14 @@ export default class Editor {
         this.updateAnchors();
     }
 
+    static moveDeadKeyMultiplier(e: KeyboardEvent): number {
+        if (e.shiftKey)
+            return 5;
+        if (e.altKey)
+            return 0.25;
+        return 1;
+    }
+
     isEditing() {
         return this.editMode;
     }

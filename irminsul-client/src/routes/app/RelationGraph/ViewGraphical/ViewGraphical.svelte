@@ -3,12 +3,13 @@
     import Axis from "./Axis.svelte";
     import Cluster from "./Cluster.svelte";
     import Grid from "./Grid.svelte";
-    import RelationBetween from "./RelationBetween.svelte";
+    import RelationBetween from "./RelationBetween/RelationBetween.svelte";
     import type {RelationGraph} from "../RelationGraph";
     import {createEventDispatcher} from "svelte";
     import ViewController from "../ViewController";
     import Editor from "./Editor";
     import RootCluster from "./RootCluster.svelte";
+    import type RelationGraphSettings from "../RelationGraphSettings";
 
     const dispatch = createEventDispatcher();
 
@@ -18,6 +19,7 @@
     export let showAxis: boolean;
     export let showCoordinates: boolean;
     export let editor: Editor;
+    export let settings: RelationGraphSettings;
 
     function keydown(e: KeyboardEvent) {
         if (editor.isEditing() && e.ctrlKey !== e.metaKey) {
@@ -112,7 +114,7 @@
         {#if showAxis} <Axis/> {/if}
 
         {#each relationGraph.relationsBetween as relationBetween}
-            <RelationBetween {editor} {relationBetween}/>
+            <RelationBetween {editor} {relationBetween} {settings}/>
         {/each}
 
         {#each relationGraph.clusters as cluster}

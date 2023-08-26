@@ -244,6 +244,7 @@
                bind:showGrid on:set-show-grid={e => setShowGrid(e.detail)}
                bind:showCoordinates
                on:jump-to={e => loadRelationGraph(e.detail.id)}
+               {settings}
         />
     {/if}
 

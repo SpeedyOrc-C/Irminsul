@@ -1,17 +1,19 @@
 <script lang="ts">
     import {afterUpdate} from "svelte";
     import type { Vector2 } from "$lib/util/Vector2";
-    import type {RelationBetween} from "../RelationGraph";
-    import type Editor from "./Editor";
+    import type {RelationBetween} from "../../RelationGraph";
+    import type Editor from "../Editor";
+    import type RelationGraphSettings from "../../RelationGraphSettings";
+    import RelationText from "./RelationText.svelte";
 
     export let relationBetween: RelationBetween;
     export let editor: Editor;
+    export let settings: RelationGraphSettings;
 
     let highlight = false;
     let dim = false;
-
-    let realForwardRelations: Array<string> = [];
-    let realBackwardRelations: Array<string> = [];
+    let flip = false;
+    let cjkRotateLeft = false;
 
     let width: number;
     let position: Vector2 = { x: 0, y: 0 };
@@ -21,53 +23,44 @@
     let backwardRelationY: number;
 
     afterUpdate(() => {
-        let subjectAnchor = editor.anchorOf(relationBetween.subjectId);
-        let objectAnchor = editor.anchorOf(relationBetween.objectId);
-
         highlight = editor.isSelected(relationBetween.subjectId)
                  || editor.isSelected(relationBetween.objectId);
 
         dim = !editor.isEditing() && !highlight && editor.numSelected() > 0;
 
-        let hasBiRelation = relationBetween.biRelations.length > 0;
+        const subjectAnchor = editor.anchorOf(relationBetween.subjectId);
+        const objectAnchor = editor.anchorOf(relationBetween.objectId);
+        const ox = objectAnchor.x;
+        const oy = objectAnchor.y;
+        const sx = subjectAnchor.x;
+        const sy = subjectAnchor.y;
+        const y = oy - sy;
+        const x = ox - sx;
 
-        let needReverse: boolean =
-                objectAnchor.x < subjectAnchor.x
-            || (objectAnchor.x == subjectAnchor.x && objectAnchor.y > subjectAnchor.y);
+        if (settings.preference.language === "zh-cn") {
+            flip = x <= 0 && y >= x || x > 0 && y > x;
+            cjkRotateLeft = y > x && y > -x || y < x && y < -x;
+        } else {
+            flip = x < 0 || (x == 0 && y > 0);
+        }
 
-        realForwardRelations = needReverse
-            ? relationBetween.backwardRelations
-            : relationBetween.forwardRelations;
+        width = Math.sqrt(x ** 2 + y ** 2);
 
-        let hasForwardRelation = realForwardRelations.length > 0;
+        position.x = (sx + ox) / 2;
+        position.y = (sy + oy) / 2;
+        rotation = -Math.atan((sy - oy) / (sx - ox)) - (ox <= sx ? Math.PI : 0);
 
-        realBackwardRelations = needReverse
-            ? relationBetween.forwardRelations
-            : relationBetween.backwardRelations;
+        const hasBiRelation = relationBetween.biRelations.length > 0;
 
-        let hasBackwardRelation = realBackwardRelations.length > 0;
-
-        width = Math.sqrt(
-            (subjectAnchor.x - objectAnchor.x) ** 2 +
-            (subjectAnchor.y - objectAnchor.y) ** 2
-        );
-
-        position.x = (subjectAnchor.x + objectAnchor.x) / 2;
-        position.y = (subjectAnchor.y + objectAnchor.y) / 2;
-        rotation = -(
-                Math.atan(
-                    (subjectAnchor.y - objectAnchor.y) /
-                    (subjectAnchor.x - objectAnchor.x)
-                ) + (objectAnchor.x <= subjectAnchor.x ? Math.PI : 0)
-            ) + (needReverse ? Math.PI : 0);
-
-        // Bi-relations are always centered. // But uni-directional relations' offset can change for better readability.
+        // Bi-relations are always centered. But uni-directional relations' offset can change for better readability.
         if (hasBiRelation) {
             // Uni-directional relations are placed
             // above or below the bi-relations.
             forwardRelationY = 1.4;
             backwardRelationY = -1.4;
         } else {
+            const hasBackwardRelation = relationBetween.backwardRelations.length > 0;
+            const hasForwardRelation = relationBetween.forwardRelations.length > 0;
             // If there is only one uni-directional relation
             if (hasForwardRelation !== hasBackwardRelation) {
                 // It is placed in the middle.
@@ -83,7 +76,7 @@
     });
 </script>
 
-<div class="relation-between" class:highlight class:dim
+<div class="relation-between" class:highlight class:dim class:flip
     style:width="{width}rem"
     style:left="{position.x}rem"
     style:top="{-position.y}rem"
@@ -91,31 +84,37 @@
 >
     {#if relationBetween.biRelations.length > 0}
         <div class="bi-relation font-hywh-65w">
-            <div>
-                {#each relationBetween.biRelations as r}
-                    <span class="relation">{r}</span>
+            <div class="relations">
+                {#each relationBetween.biRelations as relation}
+                    <div class="relation">
+                        <RelationText {relation} {flip} {cjkRotateLeft} />
+                    </div>
                 {/each}
             </div>
         </div>
     {/if}
 
-    {#if realForwardRelations.length > 0}
+    {#if relationBetween.forwardRelations.length > 0}
         <div class="forward-relation font-hywh-65w"
              style:top="calc(50% + {-forwardRelationY}rem)">
-            <div>
-                {#each realForwardRelations as r}
-                    <span class="relation">{r}</span>
+            <div class="relations">
+                {#each relationBetween.forwardRelations as relation}
+                    <div class="relation">
+                        <RelationText {relation} {flip} {cjkRotateLeft} />
+                    </div>
                 {/each}
             </div>
         </div>
     {/if}
 
-    {#if realBackwardRelations.length > 0}
+    {#if relationBetween.backwardRelations.length > 0}
         <div class="backward-relation font-hywh-65w"
              style:top="calc(50% + {-backwardRelationY}rem)">
-            <div>
-                {#each realBackwardRelations as r}
-                    <span class="relation">{r}</span>
+            <div class="relations">
+                {#each relationBetween.backwardRelations as relation}
+                    <div class="relation">
+                         <RelationText {relation} {flip} {cjkRotateLeft} />
+                    </div>
                 {/each}
             </div>
         </div>
@@ -215,6 +214,10 @@
             position: absolute;
             right: 3rem;
         }
+    }
+
+    .relation {
+        display: inline-block;
     }
 
     .relation:nth-child(n+2) {

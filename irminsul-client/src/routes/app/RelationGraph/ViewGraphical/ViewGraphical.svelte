@@ -22,8 +22,10 @@
     export let settings: RelationGraphSettings;
 
     function keydown(e: KeyboardEvent) {
-        if (editor.isEditing() && e.ctrlKey !== e.metaKey) {
-            if (e.code === "KeyA") {
+        if (e.ctrlKey && e.metaKey) return;
+
+        if (editor.isEditing() && e.ctrlKey != e.metaKey) {
+            if (e.code == "KeyA") {
                 e.preventDefault();
                 if (e.shiftKey) {
                     if (!e.altKey) {

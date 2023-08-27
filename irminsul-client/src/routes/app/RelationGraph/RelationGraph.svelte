@@ -256,7 +256,8 @@
 
     <Panel on:jump-to={e => loadRelationGraph(e.detail)}
            on:open-settings={openSettings}
-           {relationGraph} {id}/>
+           bind:relationGraph
+           {editing} {id}/>
 
     <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
         {$_("error.layout-missing.detail")}

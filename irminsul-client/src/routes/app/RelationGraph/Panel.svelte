@@ -8,8 +8,8 @@
     import Path from "./Path.svelte";
 
     export let relationGraph: RelationGraph | null;
-
     export let id: string;
+    export let editing: boolean;
 
     const dispatch = createEventDispatcher();
 </script>
@@ -25,7 +25,7 @@
 
     {#if relationGraph != null}
         {@const pathElements = relationGraph.path.concat([{ id: id, translation: relationGraph.rootTranslation }])}
-        <Path on:jump-to {pathElements}/>
+        <Path enabled={!editing} on:jump-to {pathElements}/>
     {/if}
 </div>
 

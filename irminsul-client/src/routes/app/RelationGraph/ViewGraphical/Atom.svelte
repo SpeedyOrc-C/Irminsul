@@ -102,7 +102,7 @@
         }
 
         &.selected, &:hover {
-            z-index: 200;
+            z-index: 2000;
         }
     }
 

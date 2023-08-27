@@ -10,7 +10,7 @@ import Root.AnotherWorld
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.KnightsOfFavonius.GuerillaTeam
 import Root.Teyvat.Mondstadt.DawnWinery
-import Root.Teyvat.Mondstadt.Gunnhildr
+import Root.Teyvat.Mondstadt.GunnhildrPegg
 
 varka = "Varka"
 
@@ -40,10 +40,11 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
         amber `friend` eulaLawrence,
         albedo `teacher` sucrose,
         sucrose `student` albedo,
+        sucrose `assistant` albedo,
         foster elderBrother albedo klee,
         foster youngerSister klee albedo,
         acting guardian jeanGunnhildr klee,
-        ra "SupportInSilence" kaeyaRagvindr noelle
+        Relation "SupportInSilence" kaeyaRagvindr noelle
     ]
     [
         guerillaTeam
@@ -51,7 +52,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
     (Just $ RelationGraphLayout {
         rootProperty = rl (-37, 15),
         elementProperties = [
-            al varka (-22.5, 7.5),
+            al varka (-37, 0),
             al jeanGunnhildr (-15, 15),
             al lisa (-15, 0),
             al kaeyaRagvindr (0, 0),
@@ -62,7 +63,7 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
             al noelle (15, 0),
             al eulaLawrence (0, -15),
             al mikaSchmidt (30, -15),
-            al travellerArchonSide (30, 0),
+            al travellerArchonSide (-30, -15),
 
             cl guerillaTeam (18.5, -15) (18, -15) (15, 5)
         ]

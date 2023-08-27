@@ -20,7 +20,7 @@ import Root.Teyvat.Liyue.WanminRestaurant
 import Root.Teyvat.Mondstadt.TheFourWinds
 import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Fontaine
-import Root.Teyvat.Mondstadt.Gunnhildr
+import Root.Teyvat.Mondstadt.GunnhildrPegg
 import Root.Teyvat.Deshret
 
 heavenlyPrinciple = "HeavenlyPrinciple"

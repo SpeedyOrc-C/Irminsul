@@ -5,23 +5,25 @@ module Root.Teyvat.Mondstadt.FavoniusChurch where
 import Irminsul
 import Shortcut
 import CommonRelations
+import Root.Teyvat.Mondstadt.GunnhildrPegg
 
-barbaraPegg = "BarbaraPegg"
 rosaria = "Rosaria"
 
 favoniusChurch = clusterLeaf "FavoniusChurch"
     Organization
     [
         barbaraPegg,
-        rosaria
+        rosaria,
+        simonPegg
     ]
     [
         
     ]
     (Just $ RelationGraphLayout {
-        rootProperty=rl (0, 10),
+        rootProperty=rl (0, 15),
         elementProperties=[
-            al barbaraPegg (-10, 0),
-            al rosaria (10, 0)
+            al simonPegg (-15, 0),
+            al barbaraPegg (0, 0),
+            al rosaria (15, 0)
         ]
     })

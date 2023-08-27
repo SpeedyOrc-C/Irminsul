@@ -14,7 +14,7 @@ import Root.Teyvat.Fontaine
 import Root.Teyvat.Khaenriah
 import Root.Teyvat.Mondstadt.TheFourWinds
 import Root.Teyvat.Mondstadt.Springvale
-import Root.Teyvat.Mondstadt.Gunnhildr
+import Root.Teyvat.Mondstadt.GunnhildrPegg
 
 bennett = "Bennett"
 thoma = "Thoma"
@@ -42,6 +42,7 @@ mondstadt = clusterNode "Mondstadt" Country
         fischlVonLuftschlossNarfidort `friend` monaAstrologistMegistus,
         ozvaldoHrafnavins `attendant` fischlVonLuftschlossNarfidort,
         albedo `friend` monaAstrologistMegistus,
+        rosaria `bewareOf` albedo,
         klee `friend` monaAstrologistMegistus,
 
         dilucRagvindr `youngerGeneration` jeanGunnhildr,
@@ -56,10 +57,7 @@ mondstadt = clusterNode "Mondstadt" Country
         draff `father` dionaKatzlein,
 
         razor `friend` klee,
-        razor `like` venti,
-
-        barbaraPegg `youngerSister` jeanGunnhildr,
-        jeanGunnhildr `elderSister` barbaraPegg
+        razor `like` venti
     ]
     [
         favoniusChurch,
@@ -68,31 +66,34 @@ mondstadt = clusterNode "Mondstadt" Country
         catsTail,
         lupical,
         theFourWinds,
-        springvale
+        springvale,
+        gunnhildrPegg
     ]
     (Just $ RelationGraphLayout {
-        rootProperty = rl (-15, 15),
+        rootProperty = rl (-15, 0),
         elementProperties = [
-            al dvalin (-7.5, -7.5),
-            al venti (-15, 0),
-            al bennett (0, 0),
-            al fischlVonLuftschlossNarfidort (15, 15),
-            al ozvaldoHrafnavins (7.5, 22.5),
-            al monaAstrologistMegistus (30, 15),
+            al dvalin (-7.5, 7.5),
+            al venti (-15, 15),
+            al bennett (15, 15),
+            al fischlVonLuftschlossNarfidort (30, 15),
+            al ozvaldoHrafnavins (20, 5),
+            al monaAstrologistMegistus (30, 0),
             al barbaraPegg (0, -30),
-            al varka (15, -15),
-            al jeanGunnhildr (0, -15),
-            al klee (15, 0),
-            al albedo (30, 0),
-            al dilucRagvindr (-15, -15),
-            al kaeyaRagvindr (-15, -30),
-            al dionaKatzlein (-30, -15),
+            al varka (-5, -5),
+            al jeanGunnhildr (-15, -30),
+            al kaeyaRagvindr (-30, -30),
+            al klee (0, -15),
+            al albedo (30, -15),
+            al dilucRagvindr (-30, -15),
+            al dionaKatzlein (-30, 0),
             al razor (0, 15),
+            al rosaria (30, -30),
 
-            cl knightsOfFavonius (17, -30) (15, -30) (15, 5),
-            cl catsTail (-45, -15) (-45, -15) (15, 5),
-            cl dawnWinery (-30, -30) (-30, -30) (15, 5),
-            cl favoniusChurch (0, -40) (0, -40) (15, 5),
-            cl theFourWinds (-30, 0) (-30, 0) (15, 5)
+            cl favoniusChurch (15, -22.5) (15, -22.5) (15, 5),
+            cl knightsOfFavonius (-15, -15) (-15, -15) (15, 5),
+            cl dawnWinery (-45, -15) (-45, -15) (12, 5),
+            cl catsTail (-45, 0) (-45, 0) (12, 5),
+            cl theFourWinds (-30, 15) (-30, 15) (15, 5),
+            cl gunnhildrPegg (15, -30) (15, -30) (12, 5)
         ]
     })

@@ -25,6 +25,7 @@ olderGeneration = ra "OlderGeneration"
 
 student = ra "Student"
 disciple = ra "Disciple"
+assistant = ra "Assistant"
 teacher = ra "Teacher"
 mentor = ra "Mentor"
 guardian = ra "Guardian"
@@ -54,6 +55,7 @@ dislike = ra "Dislike"
 notSatisfiedWith = ra "NotSatisfiedWith"
 kill = ra "Kill"
 afraidOf = ra "AfraidOf"
+bewareOf = ra "BewareOf"
 
 superior = ra "Superior"
 

@@ -23,8 +23,8 @@
         left: 2rem;
         bottom: 2rem;
 
-        background-color: #0002;
-        box-shadow: 0 0 5rem 5rem #0002;
+        background-color: #0003;
+        box-shadow: 0 0 5rem 5rem #0003;
     }
 
     .option {

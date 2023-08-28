@@ -30,8 +30,18 @@ cabal repl
 
 所有的 API 将可以在端口 50000 上访问。
 
-试一试通过[这个链接](http://localhost:50000/api/relation-graph/KnightsOfFavonius/zh-cn)获取简体中文的西风骑士团的数据吧：
+### 关系图
+
+#### 格式
 
 ```
-http://localhost:50000/api/relation-graph/KnightsOfFavonius/zh-cn
+/api/relation-graph/<集合ID>/<语言代码>/<主角>
+```
+
+#### 例子
+
+简体中文的以空为视角的西风骑士团的数据：
+
+```
+http://localhost:50000/api/relation-graph/KnightsOfFavonius/zh-cn/aether
 ```

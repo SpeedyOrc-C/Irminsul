@@ -51,6 +51,8 @@ router params = showResponse $ case params of
     Path: api/relation-graph/<cluster-id>/<language-code>
     -}
     "relation-graph" : [clusterId, lang, whoAmI] -> apiRelationGraph clusterId lang whoAmI
+    "relation-graph" : [clusterId, lang]         -> apiRelationGraph clusterId lang "aether"
+    "relation-graph" : [clusterId]               -> apiRelationGraph clusterId "en-us" "aether"
     "relation-graph" : _                         -> illegalRequest (ParamNumMismatch 3)
 
     -- It goes here if the request doesn't match any of the paths above.

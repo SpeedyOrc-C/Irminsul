@@ -21,27 +21,44 @@
     let updateGlitchedTextInterval: number | null = null;
     let position: Vector2 = {x: 0, y: 0};
 
+    const theDisappeared: Array<string> = [
+        "RukkhadevataGreaterLord",
+        "KunikuzushiRaiden",
+    ];
+
     afterUpdate(() => {
         selected = editor.isSelected(id);
         dim = !editor.isEditing() && !selected && editor.numSelected() > 0
             && !editor.isEntityInSelectedCluster(id);
         position = editor.anchorOf(id);
+
+        if (!editor.isEditing() && theDisappeared.find(name => name === id) !== undefined) {
+            glitchEffectStart();
+        } else {
+            glitchEffectStop();
+        }
     });
 
-    onMount(() => getImgAvatar(id, result => {
-        avatarSrc = result;
-        if (id === "RukkhadevataGreaterLord") {
+    onMount(() => {
+        getImgAvatar(id, result => { avatarSrc = result });
+    });
+
+    onDestroy(() => glitchEffectStop());
+
+    function glitchEffectStart() {
+        if (updateGlitchedTextInterval === null) {
             updateGlitchedTextInterval = setInterval(updateGlitchedText, 100);
             glitched = true;
         }
-    }));
+    }
 
-    onDestroy(() => {
+    function glitchEffectStop() {
         if (updateGlitchedTextInterval !== null) {
             clearInterval(updateGlitchedTextInterval);
             updateGlitchedTextInterval = null;
+            glitched = false;
         }
-    });
+    }
 
     function updateGlitchedText() {
         const characters = "!@#$%^&*()/|\\";

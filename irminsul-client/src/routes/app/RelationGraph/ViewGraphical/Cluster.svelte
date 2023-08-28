@@ -39,9 +39,7 @@
      style:left="{position.x}rem" style:top="{-position.y}rem"
      style:width="{size.x}rem" style:height="{size.y}rem"
 >
-    <div id="label" class="font-hywh-65w">
-        {label}
-    </div>
+    <div class="label font-hywh-65w">{label}</div>
 
     {#if showCoordinates}
         <Coordinate coordinate={position} {size}/>
@@ -78,21 +76,17 @@
 
         &.dim {
             filter: brightness(50%) blur(0.1rem);
-
             &:hover {
                 filter: unset;
             }
         }
     }
 
-    #label {
+    .label {
         position: absolute;
-        top: 50%;
-
-        width: 100%;
-        height: fit-content;
-        transform: translate(0, -50%);
-        border-radius: 0.3rem;
+        width: calc(100% - 1rem);
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
 
         text-align: center;
         font-size: 1.2rem;

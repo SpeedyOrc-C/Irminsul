@@ -22,66 +22,87 @@
     export let settings: RelationGraphSettings;
 
     function keydown(e: KeyboardEvent) {
-        if (e.ctrlKey && e.metaKey) return;
-
-        if (editor.isEditing() && e.ctrlKey != e.metaKey) {
-            if (e.code == "KeyA") {
-                e.preventDefault();
-                if (e.shiftKey) {
-                    if (!e.altKey) {
-                        editor.reverseSelect();
+        function isSelecting(): boolean {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.code == "KeyA") {
+                    if (editor.isEditing()) {
+                        if (e.shiftKey) {
+                            if (!e.altKey) {
+                                editor.reverseSelect(); // CTRL + SHIFT + A
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            if (e.altKey) {
+                                editor.deselectAll(); // CTRL + ALT + A
+                            } else {
+                                editor.selectAll(); // CTRL + A
+                            }
+                        }
+                        e.preventDefault();
+                        editor = editor;
+                        return true;
                     }
-                } else {
-                    if (e.altKey) {
-                        editor.deselectAll();
-                    } else {
-                        editor.selectAll();
-                    }
+                    return false;
                 }
+                return false;
             }
+            return false;
+        }
 
+        function isEditing(): boolean {
+            if (!editor.isEditing()) return false;
+            if (e.ctrlKey || e.metaKey) return false;
+
+            const entityMove = Editor.moveDeadKeyMultiplier(e);
+            switch (e.code) {
+                case "KeyI": editor.moveSelectedElements(0, entityMove); break;
+                case "KeyK": editor.moveSelectedElements(0, -entityMove); break;
+                case "KeyJ": editor.moveSelectedElements(-entityMove, 0); break;
+                case "KeyL": editor.moveSelectedElements(entityMove, 0); break;
+
+                case "ArrowUp": editor.moveSelectedClustersAnchors(0,entityMove); break;
+                case "ArrowDown": editor.moveSelectedClustersAnchors(0, -entityMove); break;
+                case "ArrowLeft": editor.moveSelectedClustersAnchors(-entityMove, 0); break;
+                case "ArrowRight": editor.moveSelectedClustersAnchors(entityMove, 0); break;
+
+                default: return false;
+            }
+            e.preventDefault();
             editor = editor;
-            return;
+            return true;
         }
 
-        const entityMove = Editor.moveDeadKeyMultiplier(e);
-        const viewMoveMultiplier = ViewController.moveDeadKeyMultiplier(e);
-        const viewRotateMultiplier = ViewController.rotateDeadKeyMultiplier(e);
+        function isMoving(): boolean {
+            if (e.ctrlKey || e.metaKey) return false;
 
-        switch (e.code) {
-            case "KeyW": view.moveDelta(0, 7.5 * viewMoveMultiplier); break;
-            case "KeyS": view.moveDelta(0, -7.5 * viewMoveMultiplier); break;
-            case "KeyA": view.moveDelta(-7.5 * viewMoveMultiplier, 0); break;
-            case "KeyD": view.moveDelta(7.5 * viewMoveMultiplier, 0); break;
-            case "KeyQ": view.rotateDelta(-45 * viewRotateMultiplier); break;
-            case "KeyE": view.rotateDelta(45 * viewRotateMultiplier); break;
-            case "Minus": view.zoomOut(); break;
-            case "Equal": view.zoomIn(); break;
-            case "Digit0": view.reset(); break;
+            const viewMoveMultiplier = ViewController.moveDeadKeyMultiplier(e);
+            const viewRotateMultiplier = ViewController.rotateDeadKeyMultiplier(e);
+            switch (e.code) {
+                case "KeyW": view.moveDelta(0, 7.5 * viewMoveMultiplier); break;
+                case "KeyS": view.moveDelta(0, -7.5 * viewMoveMultiplier); break;
+                case "KeyA": view.moveDelta(-7.5 * viewMoveMultiplier, 0); break;
+                case "KeyD": view.moveDelta(7.5 * viewMoveMultiplier, 0); break;
 
-            case "KeyX": dispatch("set-show-axis", !showAxis); break;
-            case "KeyG": dispatch("set-show-grid", !showGrid); break;
-            case "KeyC": showCoordinates = !showCoordinates; break;
+                case "KeyQ": view.rotateDelta(-45 * viewRotateMultiplier); break;
+                case "KeyE": view.rotateDelta(45 * viewRotateMultiplier); break;
 
-            default: if (!editor.isEditing()) return;
-                switch (e.code) {
-                    case "KeyI": editor.moveSelectedElements({x: 0, y: entityMove}); break;
-                    case "KeyK": editor.moveSelectedElements({x: 0, y: -entityMove}); break;
-                    case "KeyJ": editor.moveSelectedElements({x: -entityMove, y: 0}); break;
-                    case "KeyL": editor.moveSelectedElements({x: entityMove, y: 0}); break;
+                case "Minus": view.zoomOut(); break;
+                case "Equal": view.zoomIn(); break;
+                case "Digit0": view.reset(); break;
 
-                    case "ArrowUp": editor.moveSelectedClustersAnchors({x: 0, y: entityMove}); break;
-                    case "ArrowDown": editor.moveSelectedClustersAnchors({x: 0, y: -entityMove}); break;
-                    case "ArrowLeft": editor.moveSelectedClustersAnchors({x: -entityMove, y: 0}); break;
-                    case "ArrowRight": editor.moveSelectedClustersAnchors({x: entityMove, y: 0}); break;
+                case "KeyX": dispatch("set-show-axis", !showAxis); break;
+                case "KeyG": dispatch("set-show-grid", !showGrid); break;
+                case "KeyC": showCoordinates = !showCoordinates; break;
 
-                    default: return;
-                }
+                default: return false;
+            }
+            e.preventDefault();
+            view = view;
+            return true;
         }
 
-        e.preventDefault();
-        view = view;
-        editor = editor;
+        isSelecting() || isEditing() || isMoving();
     }
 
     function toggleAtom(id: string) {

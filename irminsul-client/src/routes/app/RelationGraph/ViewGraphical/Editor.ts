@@ -138,38 +138,38 @@ export default class Editor {
         this.updateSelection();
     }
 
-    moveSelectedElements(delta: Vector2) {
+    moveSelectedElements(dx: number, dy: number) {
         this.relationGraph.atoms
             .filter(a => this.selectedAtoms.has(a.id))
             .forEach(a => {
-                a.position.x += delta.x;
-                a.position.y += delta.y;
+                a.position.x += dx;
+                a.position.y += dy;
             });
 
         this.relationGraph.clusters
             .filter(c => this.selectedClusters.has(c.id))
             .forEach(c => {
-                c.position.x += delta.x;
-                c.position.y += delta.y;
+                c.position.x += dx;
+                c.position.y += dy;
                 // Anchor is relative to the cluster position, move it too.
-                c.anchor.x += delta.x;
-                c.anchor.y += delta.y;
+                c.anchor.x += dx;
+                c.anchor.y += dy;
             });
 
         if (this.rootSelected) {
-            this.rootAnchor.x += delta.x;
-            this.rootAnchor.y += delta.y;
+            this.rootAnchor.x += dx;
+            this.rootAnchor.y += dy;
         }
 
         this.updateAnchors();
     }
 
-    moveSelectedClustersAnchors(delta: Vector2) {
+    moveSelectedClustersAnchors(dx: number, dy: number) {
         this.relationGraph.clusters
             .filter(c => this.selectedClusters.has(c.id))
             .forEach(c => {
-                c.anchor.x += delta.x;
-                c.anchor.y += delta.y;
+                c.anchor.x += dx;
+                c.anchor.y += dy;
             });
 
         this.updateAnchors();

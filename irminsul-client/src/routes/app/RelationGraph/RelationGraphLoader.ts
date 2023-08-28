@@ -17,26 +17,26 @@ export class RelationGraphLoader {
     }
 
     downloadFromServer(id: string, lang: string, whoAmI: "aether" | "lumine" = "aether"): Promise<RelationGraph> {
-        return new Promise((resolve, reject) =>
+        return new Promise((resolve, reject) => {
             fetch(`/api/relation-graph/${id}/${lang}/${whoAmI}`)
                 .then(response => {
                     if (response.status < 200 || response.status > 299) {
                         reject(response.status);
-                        return;
+                    } else {
+                        response.json()
+                            .then((json: ApiResponse<RelationGraph>) => {
+                                if (json.status === 'OK') {
+                                    this.saveToCache(id, lang, json.body);
+                                    resolve(json.body);
+                                } else {
+                                    reject(json.status);
+                                }
+                            })
+                            .catch(() => reject("Failed to decode JSON."));
                     }
-                    return response.json()
-                        .then((json: ApiResponse<RelationGraph>) => {
-                            if (json.status === 'OK') {
-                                this.saveToCache(id, lang, json.body);
-                                resolve(json.body);
-                            } else {
-                                reject(json.status);
-                            }
-                        })
-                        .catch(() => reject('Failed to decode JSON.'));
                 })
-                .catch(() => reject('Failed to download relation graph.'))
-        );
+                .catch(() => reject("Failed to download relation graph."));
+        });
     }
 
     loadFromCache(id: string, lang: string): RelationGraph | null {

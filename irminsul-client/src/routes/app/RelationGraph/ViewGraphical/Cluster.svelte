@@ -30,7 +30,7 @@
     }
 
     function dblclick() {
-        if (!editor.isEditing()) dispatch("jump-to", {id});
+        if (!editor.isEditing()) dispatch("jump-to", id);
     }
 </script>
 

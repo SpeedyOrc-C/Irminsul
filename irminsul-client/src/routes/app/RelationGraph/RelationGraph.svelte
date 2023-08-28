@@ -242,7 +242,7 @@
                bind:showAxis on:set-show-axis={e => setShowAxis(e.detail)}
                bind:showGrid on:set-show-grid={e => setShowGrid(e.detail)}
                bind:showCoordinates
-               on:jump-to={e => loadRelationGraph(e.detail.id)}
+               on:jump-to={e => loadRelationGraph(e.detail)}
                {settings}
         />
     {/if}

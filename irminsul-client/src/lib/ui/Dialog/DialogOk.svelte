@@ -2,25 +2,24 @@
     import { _ } from "svelte-i18n";
     import Dialog from "../Dialog.svelte";
     import ButtonBig from "../Button/ButtonBig.svelte";
-    import type { Writable } from "svelte/store";
 
     export let title: string;
-    export let show: Writable<boolean>;
+    export let show: boolean;
+
+    function keydown(e: KeyboardEvent) {
+        if (e.code === "Escape") {
+            show = false;
+        }
+    }
 </script>
 
-<svelte:body on:keydown={event => {
-    if (event.key === "Escape") {
-        show.set(false);
-    }
-}} />
+<svelte:window on:keydown={keydown} />
 
-<Dialog {title} {show}>
-    <div class="content">
-        <slot />
-    </div>
+<Dialog {title} bind:show>
+    <div class="content"><slot /></div>
 
     <div class="button-ok">
-        <ButtonBig on:button-clicked={() => show.set(false)}>
+        <ButtonBig on:button-clicked={() => show = false}>
             {$_("prompt.button.confirm")}
         </ButtonBig>
     </div>

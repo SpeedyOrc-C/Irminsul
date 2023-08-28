@@ -4,7 +4,6 @@
     import Panel from "./Panel.svelte";
     import {afterUpdate, onMount} from "svelte";
     import Settings from "./Settings/Settings.svelte";
-    import {writable, type Writable} from "svelte/store";
     import DialogOk from "$lib/ui/Dialog/DialogOk.svelte";
     import {_, locale} from "svelte-i18n";
     import {RelationGraphLoader} from "./RelationGraphLoader";
@@ -36,7 +35,7 @@
     let showSettings = false;
     let joystickSensibility = 4;
 
-    let showLayoutMissing: Writable<boolean> = writable(false);
+    let showLayoutMissing = false;
 
     function updateView() { view = view; }
 
@@ -58,7 +57,7 @@
             relationGraph = previous;
             switch (e) {
                 case "LayoutMissing":
-                    showLayoutMissing.set(true);
+                    showLayoutMissing = true;
                     break;
                 default:
                     break;
@@ -259,7 +258,7 @@
            bind:relationGraph
            {editing} {id}/>
 
-    <DialogOk title={$_("error.layout-missing.self")} show={showLayoutMissing}>
+    <DialogOk title={$_("error.layout-missing.self")} bind:show={showLayoutMissing}>
         {$_("error.layout-missing.detail")}
     </DialogOk>
 

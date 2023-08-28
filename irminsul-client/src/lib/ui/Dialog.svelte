@@ -1,34 +1,24 @@
 <script lang="ts">
-    import type { Writable } from "svelte/store";
-    import PromptCorner from "./Dialog/DialogCorner.svelte";
-    import {onMount} from "svelte";
+    import DialogCorner from "./Dialog/DialogCorner.svelte";
+    import {afterUpdate} from "svelte";
 
     export let title: string;
-    export let show: Writable<boolean>;
+    export let show: boolean;
 
     let displayed = false;
 
-    onMount(() => {
-        show.subscribe(() => {
-            if ($show) {
-                displayed = true;
-            } else {
-                setTimeout(() => (displayed = false), 200);
-            }
-        });
+    afterUpdate(() => {
+        if (show) {
+            displayed = true;
+        } else {
+            setTimeout(() => (displayed = false), 200);
+        }
     })
 </script>
 
-<div
-    class="background"
-    class:show={$show}
-    style:display={displayed ? "block" : "none"}></div>
+<div class="background" class:show style:display={displayed ? "block" : "none"}/>
 
-<div
-    class="prompt"
-    class:show={$show}
-    style:display={displayed ? "block" : "none"}
->
+<div class="dialog" class:show style:display={displayed ? "block" : "none"}>
     <div style="position: relative">
         <div class="decoration">
             <div class="inner-line-top"></div>
@@ -36,23 +26,21 @@
             <div class="inner-line-left"></div>
             <div class="inner-line-right"></div>
 
-            <div class="corner-upper-left"><PromptCorner /></div>
-            <div class="corner-upper-right"><PromptCorner /></div>
-            <div class="corner-lower-left"><PromptCorner /></div>
-            <div class="corner-lower-right"><PromptCorner /></div>
+            <div class="corner-upper-left"><DialogCorner /></div>
+            <div class="corner-upper-right"><DialogCorner /></div>
+            <div class="corner-lower-left"><DialogCorner /></div>
+            <div class="corner-lower-right"><DialogCorner /></div>
         </div>
 
         <div class="content">
             <div class="title font-hywh-85w">{@html title}</div>
-            <div class="body font-hywh-65w">
-                <slot />
-            </div>
+            <div class="body font-hywh-65w"><slot /></div>
         </div>
     </div>
 </div>
 
 <style lang="scss">
-    .prompt {
+    .dialog {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -101,6 +89,10 @@
         font-size: 1.8rem;
         margin: 1rem 0;
         color: #d2bc8d;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
     }
 
     .background {
@@ -135,7 +127,6 @@
         }
     }
 
-
     .content {
         position: absolute;
         width: calc(35rem - 2 * 0.3rem);
@@ -150,6 +141,10 @@
 
         font-size: 1.2rem;
         color: #f2ebdd;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
     }
 
     :global(em) {

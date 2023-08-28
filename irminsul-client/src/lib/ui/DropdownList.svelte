@@ -17,20 +17,22 @@
         else
             setTimeout(() => displayed = false, 200);
     })
+
+    function click(newValue: string) {
+        if (value !== newValue) {
+            dispatch("dropdown-list-change", newValue);
+            value = newValue;
+        }
+        show = false;
+    }
 </script>
 
 <div class="dropdown-list" class:below>
     <div id="options" class:show class:displayed>
         {#each options as option}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div
-                class="option"
-                class:triggered={option.value === value}
-                on:click={() => {
-                    dispatch("dropdown-list-change", option.value);
-                    value = option.value;
-                    show = false;
-                }}
+            <div class="option" class:triggered={option.value === value}
+                on:click={() => click(option.value)}
             >
                 <div class="option-background"></div>
                 <div class="option-label">{option.label}</div>

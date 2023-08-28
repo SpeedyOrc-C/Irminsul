@@ -31,9 +31,9 @@
 
 {#if showJoystick !== ShowJoystick.Never}
 <div id="joystick" class:has-coarse-pointer={showJoystick === ShowJoystick.HasCoarsePointer}
-     on:touchstart={touchStart}
-     on:touchmove={touchMove}
-     on:touchend={() => moving = false}
+     on:touchstart|preventDefault={touchStart}
+     on:touchmove|preventDefault={touchMove}
+     on:touchend|preventDefault={() => moving = false}
 >
     <div id="outer-circle" style:transform="translate(-50%, -50%) rotate({-angle + Math.PI / 4}rad)" class:moving>
         <div id="pivot">

@@ -286,5 +286,7 @@
     #relation-graph {
         height: 100vh;
         width: 100vw;
+
+        touch-action: manipulation;
     }
 </style>

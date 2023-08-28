@@ -110,8 +110,8 @@ liyue = clusterNodeWithExclusion "Liyue" Country
             al yanfei (15, 0),
 
             cl cruxFleet (35, -30) (30, -30) (15, 5),
-            cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (15, 5),
-            cl bubuPharmacy (-45, -7.5) (-45, -7.5) (15, 5),
+            cl wangshengFuneralParlor (-30, -22.5) (-30, -22.5) (12, 5),
+            cl bubuPharmacy (-45, -7.5) (-45, -7.5) (12, 5),
             cl adepti (-35, 15) (-35, 15) (12, 5)
         ]
     })

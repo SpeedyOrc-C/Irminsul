@@ -12,7 +12,9 @@ import Root.Teyvat.Inazuma
 import Root.Teyvat.Sumeru.Akademiya.Haravatat
 import Root.Teyvat.Sumeru.Akademiya.Kshahrewar
 import Root.Teyvat.Sumeru.AlcazarzarayPalace
-import Root.Teyvat.Sumeru.Akademiya.Rtawahist (layla)
+import Root.Teyvat.Sumeru.Akademiya.Rtawahist
+import Root.Teyvat.Deshret.AaruVillage
+import Root.Teyvat.Deshret.AaruVillage (candace)
 
 rukkhadevataGreaterLord = "RukkhadevataGreaterLord"
 
@@ -30,6 +32,7 @@ sumeru = clusterNode "Sumeru" Country
     [
         nahida,
         rukkhadevataGreaterLord,
+        scaramouche,
         wanderer,
         dehya,
         kusayla,
@@ -39,6 +42,7 @@ sumeru = clusterNode "Sumeru" Country
         rukkhadevataGreaterLord `samsara` nahida,
         nahida `kill` rukkhadevataGreaterLord,
         nahida `rule` sumeru,
+        wanderer `student` nahida,
         scaramouche `samsara` wanderer,
 
         kusayla `father` dehya,
@@ -63,12 +67,15 @@ sumeru = clusterNode "Sumeru" Country
         tighnari `customer` dori,
         layla `customer` dori,
 
-        layla `admire` alhaitham
+        layla `admire` alhaitham,
+
+        candace `friend` dehya
     ]
     [
         akademiya,
         grandharvaVille,
-        alcazarzarayPalace
+        alcazarzarayPalace,
+        aaruVillage
     ]
     (Just $ RelationGraphLayout {
         rootProperty=rl (-15, 15),
@@ -83,6 +90,10 @@ sumeru = clusterNode "Sumeru" Country
             al tighnari (30, -30),
             al collei (10, -20),
             al dori (30, 0),
-            al layla (30, 15)
+            al layla (30, 15),
+            al wanderer (-30, -15),
+            al scaramouche (-45, -15),
+            al candace (15, -5),
+            al dehya (25, -15)
         ]
     })

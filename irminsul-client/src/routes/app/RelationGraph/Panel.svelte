@@ -1,7 +1,7 @@
 <script lang="ts">
     import ButtonInferior from "$lib/ui/Button/ButtonInferior.svelte";
     import Separator from "$lib/ui/Seperator.svelte";
-    import { createEventDispatcher } from "svelte";
+    import {createEventDispatcher} from "svelte";
 
     import { _ } from "svelte-i18n";
     import type {RelationGraph} from "./RelationGraph";
@@ -10,18 +10,25 @@
     export let relationGraph: RelationGraph | null;
     export let id: string;
     export let editing: boolean;
+    export let hideUi: boolean;
 
     const dispatch = createEventDispatcher();
 </script>
 
-<div class="panel font-hywh-65w">
+<div class="panel font-hywh-65w" class:hidden={hideUi}>
     <Separator />
 
-    <ButtonInferior action="open-settings" on:button-clicked={() => dispatch("open-settings")}>
+    <ButtonInferior on:button-clicked={() => dispatch("open-settings")}>
         {$_("panel.settings")}
     </ButtonInferior>
 
-    <Separator width="4rem" />
+    <Separator width="2rem" />
+
+    <ButtonInferior on:button-clicked={() => hideUi = true}>
+        {$_("panel.hide-ui")}
+    </ButtonInferior>
+
+    <Separator width="2rem" />
 
     {#if relationGraph != null}
         {@const pathElements = relationGraph.path.concat([{ id: id, translation: relationGraph.rootTranslation }])}
@@ -43,5 +50,13 @@
         background-color: #3e4457cc;
         -webkit-backdrop-filter: blur(0.2rem);
         backdrop-filter: blur(0.2rem);
+
+        transition-property: transform;
+        transition-duration: 0.5s;
+        transform: translate(0, 0);
+
+        &.hidden {
+            transform: translate(0, -100%);
+        }
     }
 </style>

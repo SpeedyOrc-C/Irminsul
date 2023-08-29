@@ -20,6 +20,7 @@
     export let showCoordinates: boolean;
     export let editor: Editor;
     export let settings: RelationGraphSettings;
+    export let hideUi: boolean;
 
     function keydown(e: KeyboardEvent) {
         function isSelecting(): boolean {
@@ -124,12 +125,17 @@
         editor.deselectAll();
         editor = editor;
     }
+
+    function clickBackground() {
+        hideUi = false;
+        deselectAll();
+    }
 </script>
 
 <svelte:window on:keydown={keydown}/>
 
 <div id="view-graphical">
-    <div id="deselect-all-touch-area" on:click={deselectAll}></div>
+    <div id="deselect-all-touch-area" on:click={clickBackground}></div>
     <div id="origin"
          style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%) translate({view.x}rem, {-view.y}rem)"
     >

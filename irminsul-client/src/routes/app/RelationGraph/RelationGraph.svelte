@@ -18,7 +18,8 @@
 
     let view = new ViewController();
     let editor: Editor;
-    let editing: boolean;
+    let editing = false;
+    let hideUi = false;
 
     const loader = new RelationGraphLoader();
 
@@ -206,6 +207,8 @@
     function keydown(e: KeyboardEvent) {
         if (e.ctrlKey !== e.metaKey && e.code === "Comma") {
             openSettings();
+        } else if (e.code == "KeyH") {
+            hideUi = !hideUi;
         }
     }
 
@@ -242,6 +245,7 @@
                bind:showAxis on:set-show-axis={e => setShowAxis(e.detail)}
                bind:showGrid on:set-show-grid={e => setShowGrid(e.detail)}
                bind:showCoordinates
+               bind:hideUi
                on:jump-to={e => loadRelationGraph(e.detail)}
                {settings}
         />
@@ -249,13 +253,15 @@
 
     <Joystick callback={(dx, dy) => view.joystickEvent(dx, dy, 0.1 * (0.25 + joystickSensibility / 4))}
               bind:showJoystick={settings.preference.show_joystick}
+              bind:hideUi
               on:update-view={updateView}/>
 
-    <ViewOptions bind:showCoordinates bind:editing />
+    <ViewOptions bind:showCoordinates bind:editing bind:hideUi />
 
     <Panel on:jump-to={e => loadRelationGraph(e.detail)}
            on:open-settings={openSettings}
            bind:relationGraph
+           bind:hideUi
            {editing} {id}/>
 
     <DialogOk title={$_("error.layout-missing.self")} bind:show={showLayoutMissing}>

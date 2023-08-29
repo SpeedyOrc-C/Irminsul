@@ -1,7 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
 
-    export let action = "";
     export let width = "";
     export let height = "";
     export let style = "";
@@ -9,17 +8,16 @@
     export let inSettings = false;
 
     const dispatch = createEventDispatcher();
+
+    function click() {
+        dispatch("button-clicked");
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-    class="button"
-    style:height
-    style:width
-    {style}
-    class:has-border={hasBorder}
-    class:in-settings={inSettings}
-    on:click={() => dispatch("button-clicked", { action: action })}
+<div class="button" class:has-border={hasBorder} class:in-settings={inSettings}
+    style:height style:width {style}
+    on:click={click}
 >
     <slot />
 </div>

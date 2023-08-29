@@ -1,10 +1,8 @@
 <script lang="ts">
     import Button from "../Button.svelte";
-
-    export let action = "";
 </script>
 
-<Button height="2.2rem" style="min-width: 10rem" {action} on:button-clicked>
+<Button height="2.2rem" style="min-width: 10rem" on:button-clicked>
     <div class="content font-hywh-85w"><slot /></div>
 </Button>
 

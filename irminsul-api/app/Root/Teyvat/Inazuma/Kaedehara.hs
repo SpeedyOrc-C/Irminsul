@@ -24,7 +24,15 @@ kaedehara = clusterLeaf "Kaedehara" Family
     ]
     [
         kageharuKaedehara `father` kazuhaKaedehara,
+        kazuhaKaedehara `son` kageharuKaedehara,
         kageharuKaedeharaFather `father` kageharuKaedehara,
-        yoshinoriKaedehara `father` kageharuKaedeharaFather
+        kageharuKaedehara `son` kageharuKaedeharaFather,
+        yoshinoriKaedehara `father` kageharuKaedeharaFather,
+        kageharuKaedeharaFather `son` yoshinoriKaedehara
     ]
-    Nothing
+    (layout (-30, 15) [
+        al kazuhaKaedehara (-30, 0),
+        al kageharuKaedehara (-15, 0),
+        al kageharuKaedeharaFather (0, 0),
+        al yoshinoriKaedehara (15, 0)
+    ])

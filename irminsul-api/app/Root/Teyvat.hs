@@ -21,6 +21,7 @@ import Root.Teyvat.Liyue.Qixing
 import Root.Teyvat.Fontaine
 import Root.Teyvat.Mondstadt.GunnhildrPegg
 import Root.Teyvat.Deshret
+import Root.Teyvat.Byakuyakoku
 
 heavenlyPrinciple = "HeavenlyPrinciple"
 sustainerOfHeavenlyPrinciple = "SustainerOfHeavenlyPrinciple"
@@ -52,13 +53,16 @@ teyvat = clusterNode "Teyvat" World
         fontaine,
         snezhnaya,
         khaenriah,
-        hexenzirkel
+        hexenzirkel,
+        byakuyakoku
     ]
     (layout (0, 15) [
         cl mondstadt (24, 15) (24, 15) (12, 5),
         cl liyue (14, 0) (14, 0) (12, 5),
         cl inazuma (24, -15) (24, -15) (12, 5),
+        cl byakuyakoku (6, -15) (6, -15) (12, 5),
         cl sumeru (-6, 0) (-6, 0) (12, 5),
         cl deshret (-26, 0) (-26, 0) (12, 5),
-        cl fontaine (-26, 15) (-26, 15) (12, 5)
+        cl fontaine (-26, 15) (-26, 15) (12, 5),
+        cl khaenriah (-41, 7.5) (-41, 7.5) (12, 5)
     ])

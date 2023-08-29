@@ -36,7 +36,8 @@ inazuma = clusterNode "Inazuma" Country
         kirara
     ]
     [
-        eiRaiden `rule` inazuma
+        eiRaiden `rule` inazuma,
+        mikoYae `familiar` eiRaiden
     ]
     [
         triCommission,
@@ -45,4 +46,12 @@ inazuma = clusterNode "Inazuma" Country
         shuumatsuban,
         kaedehara
     ]
-    Nothing
+    (layout (-15, 15) [
+        al eiRaiden (-15, 0),
+        al mikoYae (-30, 0),
+        al makotoRaiden (-15, -15),
+        al kunikuzushiRaiden (-30, -15),
+        al kazuhaKaedehara (0, 0),
+
+        cl kaedehara (7.5, 7.5) (7.5, 7.5) (12, 5)
+    ])

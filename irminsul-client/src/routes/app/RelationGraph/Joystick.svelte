@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {createEventDispatcher, onMount} from "svelte";
+    import {afterUpdate, createEventDispatcher, onMount} from "svelte";
     import Joystick from "./Joystick";
     import {ShowJoystick} from "./RelationGraphSettings";
 
@@ -7,11 +7,14 @@
 
     export let callback: (dx: number, dy: number) => void;
     export let showJoystick: ShowJoystick;
+    export let hideUi: boolean;
 
     let joystick: Joystick;
     let innerCircle: HTMLElement;
     let moving = false;
     let angle = 0;
+
+    $: show = showJoystick !== ShowJoystick.Never && !hideUi;
 
     function touchStart() {
         moving = true;
@@ -26,10 +29,14 @@
         dispatch("update-view");
     }
 
-    onMount(() => joystick = new Joystick(innerCircle, callback))
+    afterUpdate(() => {
+        if (!moving && show) {
+            joystick = new Joystick(innerCircle, callback);
+        }
+    })
 </script>
 
-{#if showJoystick !== ShowJoystick.Never}
+{#if show}
 <div id="joystick" class:has-coarse-pointer={showJoystick === ShowJoystick.HasCoarsePointer}
      on:touchstart|preventDefault={touchStart}
      on:touchmove|preventDefault={touchMove}

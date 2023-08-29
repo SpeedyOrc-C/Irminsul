@@ -75,9 +75,7 @@
     },
     "panel": {
         "settings": "Settings",
-        "import-json": "Import from JSON",
-        "export-json": "Export as JSON",
-        "export-haskell": "Export as Haskell"
+        "hide-ui": "Hide UI"
     },
     "view-options": {
         "show-coordinates": "Show coordinates",

@@ -75,9 +75,7 @@
     },
     "panel": {
         "settings": "设置",
-        "import-json": "导入 JSON",
-        "export-json": "导出 JSON",
-        "export-haskell": "导出 Haskell"
+        "hide-ui": "隐藏界面"
     },
     "view-options": {
         "show-coordinates": "显示坐标",

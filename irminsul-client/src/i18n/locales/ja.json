@@ -1,0 +1,47 @@
+{
+  "who-am-i": {
+    "aether": "空",
+    "lumine": "蛍"
+  },
+  "error": {
+    "layout-missing": {
+    }
+  },
+  "prompt": {
+    "button": {
+      "confirm": "确定"
+    }
+  },
+  "settings": {
+    "self": "設定",
+    "category": {
+      "file": "ファイル",
+      "relation-graph": "関係グラフ",
+      "language": "言語",
+      "other": "その他",
+      "about": "私たちについて"
+    },
+    "file": {
+      "import": "インポート",
+      "export": "エクスポート"
+    },
+    "relation-graph": {
+    },
+    "language": {
+      "interface-language": "UI言語",
+      "who-am-i": "私はだれ？"
+    },
+    "other": {
+    },
+    "msg": {
+    },
+    "common": {
+    }
+  },
+  "panel": {
+    "settings": "設定",
+    "hide-ui": "UIを隠す"
+  },
+  "view-options": {
+  }
+}

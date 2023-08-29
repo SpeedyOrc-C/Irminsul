@@ -24,7 +24,6 @@
         left: 2rem;
         bottom: 2rem;
 
-
         transition-property: transform, box-shadow, background-color;
         transition-duration: 0.5s;
 
@@ -36,6 +35,10 @@
             box-shadow: 0 0 5rem 5rem transparent;
             background-color: transparent;
             transform: translate(calc(-100% - 2rem), 0);
+        }
+
+        @media print {
+            display: none;
         }
     }
 

@@ -159,7 +159,7 @@
 
         background-color: #0004;
 
-        .settings > & {
+        #settings > & {
             animation-name: top-bar-disappear-ani;
             animation-duration: 0.5s;
             @extend %ease-in-expo;
@@ -173,7 +173,7 @@
             }
         }
 
-        .settings.show > & {
+        #settings.show > & {
             animation-name: top-bar-appear-ani;
             animation-duration: 0.3s;
             @extend %ease-out-expo;
@@ -230,6 +230,10 @@
                 background-color: #6668;
                 opacity: 0%;
             }
+        }
+
+        @media print {
+            display: none;
         }
     }
 

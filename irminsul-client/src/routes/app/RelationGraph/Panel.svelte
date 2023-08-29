@@ -58,5 +58,9 @@
         &.hidden {
             transform: translate(0, -100%);
         }
+
+        @media print {
+            display: none;
+        }
     }
 </style>

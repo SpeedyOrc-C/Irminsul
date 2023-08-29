@@ -16,35 +16,46 @@
 </script>
 
 <div class="path" class:enabled>
-    {#each pathElements as pathElement}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <div class="path-element" on:click={() => pathElementClick(pathElement)}>
-            {pathElement.translation}
-        </div>
-    {/each}
+    <div class="path-elements">
+        {#each pathElements as pathElement}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div class="path-element" on:click={() => pathElementClick(pathElement)}>
+                {pathElement.translation}
+            </div>
+        {/each}
+    </div>
 </div>
 
 <style lang="scss">
     .path {
-        width: fit-content;
-        display: inline-block;
-        padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+        position: relative;
+        margin-right: 1rem;
         border-left: 0.5rem solid #ffbd22;
+        padding: 0.1rem 0.1rem 0.1rem 0.2rem;
 
         background-color: #bda277;
 
+        overflow-y: hidden;
+        overflow-x: auto;
 
         opacity: 50%;
         filter: saturate(0);
         cursor: not-allowed;
+
         &.enabled {
             cursor: unset;
             opacity: unset;
             filter: unset;
         }
     }
+
+    .path-elements {
+        display: flex;
+    }
+
     .path-element {
-        display: inline-block;
+        flex-shrink: 0;
+
         padding: 0.3rem 0.8rem;
         margin: 0.1rem;
         border-radius: 0.2rem;
@@ -56,18 +67,17 @@
         -moz-user-select: none;
         user-select: none;
 
-        transition-property: transform, box-shadow;
+        transition-property: color, background-color;
         transition-duration: 0.1s;
 
         .path.enabled & {
             cursor: pointer;
             &:hover {
-                transform: scale(130%);
-                box-shadow: 0 0 0.5rem 0.5rem #0003;
+                background-color: white;
             }
             &:active {
-                transform: scale(120%);
-                box-shadow: 0 0 0.4rem 0.4rem #0003;
+                background-color: #3b4255;
+                color: #ece5d8;
             }
         }
     }

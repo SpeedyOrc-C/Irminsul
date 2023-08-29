@@ -3,7 +3,6 @@
 module Root.Teyvat.Inazuma.WatatsumiIsland where
 
 import Irminsul
-import Shortcut
 
 kokomiSangonomiya = "KokomiSangonomiya"
 gorou = "Gorou"

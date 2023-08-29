@@ -1,7 +1,6 @@
 module Root where
 
 import Irminsul
-import Shortcut
 import Root.Teyvat
 
 alloy = "Alloy"

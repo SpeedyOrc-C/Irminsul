@@ -4,7 +4,6 @@ module Root.Teyvat.Liyue.FeiyunCommerceGuild where
 -- 飞云商会
 
 import Irminsul
-import Shortcut
 
 xingqiu = "Xingqiu"
 

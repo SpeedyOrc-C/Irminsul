@@ -4,7 +4,6 @@ module Root.Teyvat.Inazuma where
 -- 稲妻
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 import Root.Teyvat.Inazuma.Kaedehara

@@ -1,7 +1,6 @@
 module Translation.EnUs.Entity where
 
-import Irminsul ( Information )
-import Shortcut
+import Irminsul
 
 translationEntityEnUs :: [(String, Information)]
 translationEntityEnUs = [

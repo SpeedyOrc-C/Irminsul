@@ -3,7 +3,6 @@
 module Root.Teyvat.Inazuma.AratakiGang where
 
 import Irminsul
-import Shortcut
 
 shinobuKuki = "ShinobuKuki"
 ittoArataki = "IttoArataki"

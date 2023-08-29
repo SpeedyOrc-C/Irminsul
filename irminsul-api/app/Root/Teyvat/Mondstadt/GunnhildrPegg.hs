@@ -3,7 +3,6 @@
 module Root.Teyvat.Mondstadt.GunnhildrPegg where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 
@@ -25,7 +24,7 @@ gunnhildrPegg = clusterLeaf "GunnhildrPegg" Family
 
         fredericaGunnhildr `mother` barbaraPegg,
         barbaraPegg `daughter` fredericaGunnhildr,
-        
+
         simonPegg `father` jeanGunnhildr,
         jeanGunnhildr `daughter` simonPegg,
 
@@ -35,12 +34,9 @@ gunnhildrPegg = clusterLeaf "GunnhildrPegg" Family
         barbaraPegg `youngerSister` jeanGunnhildr,
         jeanGunnhildr `elderSister` barbaraPegg
     ]
-    (Just $ RelationGraphLayout
-        (rl (0, 15))
-        [
-            al fredericaGunnhildr (-7.5, 0),
-            al simonPegg (7.5, 0),
-            al jeanGunnhildr (-7.5, -15),
-            al barbaraPegg (7.5, -15)
-        ]
-    )
+    (layout (0, 15) [
+        al fredericaGunnhildr (-7.5, 0),
+        al simonPegg (7.5, 0),
+        al jeanGunnhildr (-7.5, -15),
+        al barbaraPegg (7.5, -15)
+    ])

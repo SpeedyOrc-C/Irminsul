@@ -2,8 +2,8 @@
 
 module Irminsul where
 
-import Data.List (intercalate)
-import Data.Vector ( Vector2 )
+import Data.List (intercalate, nub)
+import Data.Vector ( Vector2 (Vector2) )
 import Data.String ( IsString(..) )
 import Prelude hiding (id)
 
@@ -14,12 +14,13 @@ instance Semigroup Path where
     (<>) :: Path -> Path -> Path
     (Path path1) <> (Path path2) = Path $ path1 <> path2
 
-depth :: Path -> Int
-depth (Path path) = length path
-
 instance Show Path where
     show :: Path -> String
     show (Path path) = intercalate " > " (map entityId path)
+
+depth :: Path -> Int
+depth (Path path) = length path
+
 
 
 data Relation
@@ -79,14 +80,33 @@ sameEntityPair r1 r2 = s1 == s2 && o1 == o2 || s1 == o2 && s2 == o1
 subjectAndObject :: Relation -> (Entity, Entity)
 subjectAndObject relation = (subject relation, object relation)
 
+ra :: String -> Entity -> Entity -> Relation
+ra = Relation
+ba :: String -> Entity -> Entity -> Relation
+ba = BiRelation
+
+
 data Alias = Alias {
         alias :: String,
         explanation :: String
     } deriving Show
 
+
+
 data Information = 
     Information { name :: String, aliases :: [String], detail :: String }
     deriving Show
+
+-- | Shortcut for (Entity, Information)
+ip :: a -> String -> [String] -> String -> (a, Information)
+ip entity name aliases information =
+    (entity, Information name aliases information)
+
+-- | Shortcut for (Entity, Information) but only name is provided
+ipn :: a -> String -> (a, Information)
+ipn entity name = (entity, Information name [] "")
+
+
 
 data AtomType
     = Character
@@ -97,6 +117,8 @@ instance Show AtomType where
     show :: AtomType -> String
     show Character = "CHR"
     show Object = "OBJ"
+
+
 
 data ClusterType
     = Root
@@ -109,26 +131,54 @@ data ClusterType
     | Property
     deriving (Eq, Show)
 
+
+
 data IndexedSetFamily a = IndexedSetFamily { indices :: [a], elements :: [a] }
 
 instance Show a => Show (IndexedSetFamily a) where
   show :: Show a => IndexedSetFamily a -> String
   show = show . indices
 
-data RelationGraphLayout = RelationGraphLayout {
-    rootProperty :: ShowcaseElementProperty,
-    elementProperties :: [(Entity, ShowcaseElementProperty)]
+
+
+data Layout = Layout {
+    rootTransform :: Transform,
+    elementsTransforms :: [(Entity, Transform)]
 }
 
-data ShowcaseElementProperty = ShowcaseElementProperty {
+layout :: (Double, Double) -> [(Entity, Transform)] -> Maybe Layout
+layout (rootPositionX, rootPositionY) elements = Just $ Layout
+    (Transform 
+        (Vector2 rootPositionX rootPositionY)
+        (Vector2 rootPositionX rootPositionY) (Vector2 0 0))
+    elements
+
+-- | Shortcut of a root's title's layout
+rl :: (Double, Double) -> Transform
+rl (x, y) = Transform (Vector2 x y) (Vector2 x y) (Vector2 0 0)
+
+-- | Shortcut of an atom's layout
+al :: Entity -> (Double, Double) -> (Entity, Transform)
+al entity (x, y) =
+    (entity, Transform (Vector2 x y) (Vector2 x y) (Vector2 0 0))
+
+-- | Shortcut of a cluster's layout
+cl :: Entity ->
+    (Double, Double) -> (Double, Double) -> (Double, Double) ->
+    (Entity, Transform)
+cl entity (x, y) (anchorX, anchorY) (width, height) =
+    (entity, Transform
+        (Vector2 x y) (Vector2 anchorX anchorY) (Vector2 width height))
+
+
+
+data Transform = Transform {
     position :: Vector2,
     anchor :: Vector2,
     size :: Vector2
 } deriving Show
 
-elemLayout :: Entity -> RelationGraphLayout -> Bool
-entity `elemLayout` (RelationGraphLayout _ entities) =
-    entity `elem` (fst <$> entities)
+
 
 {- |
     An entity could be an Atom or a Cluster.
@@ -147,7 +197,7 @@ data Entity
         clusterType :: ClusterType,
         entities :: IndexedSetFamily Entity,
         relations :: IndexedSetFamily Relation,
-        layout :: Maybe RelationGraphLayout
+        clusterLayout :: Maybe Layout
     }
 
 instance IsString Entity where
@@ -177,3 +227,63 @@ isCluster _ = False
 isAtom :: Entity -> Bool
 isAtom (Atom {}) = True
 isAtom _ = False
+
+{- |
+    Create a new cluster node, where all entities and relations from children
+    are appended to this new node.
+-}
+clusterNode
+    :: String      -- ^ node name
+    -> ClusterType -- ^ node type
+    -> [Entity]    -- ^ entities
+    -> [Relation]  -- ^ relations
+    -> [Entity]    -- ^ child clusters
+    -> Maybe Layout
+    -> Entity
+clusterNode name clusterType pEntities pRelations children =
+    Cluster name clusterType
+        (IndexedSetFamily
+            (pEntities ++ children)
+            (nub $ pEntities ++ children ++ concatMap (elements.entities) children))
+        (IndexedSetFamily
+            pRelations
+            (nub $ pRelations ++ concatMap (elements.relations) children))
+
+{- |
+    Similar to `clusterNode`, but this one can exclude specified entities.
+-}
+clusterNodeWithExclusion
+    :: String               -- ^ node name
+    -> ClusterType          -- ^ node type
+    -> ([Entity], [Entity]) -- ^ (entities, excluded entities)
+    -> [Relation]           -- ^ relations
+    -> [Entity]             -- ^ child clusters
+    -> Maybe Layout
+    -> Entity
+clusterNodeWithExclusion name -- ^ node name
+ clusterType (pEntities, pExcluded) pRelations children =
+    Cluster name clusterType
+        (IndexedSetFamily
+            (excludeEntity $ pEntities ++ children)
+            (excludeEntity . nub $
+                pEntities ++ children ++ concatMap (elements.entities) children))
+        (IndexedSetFamily
+            pRelations
+            (nub $ pRelations ++ concatMap (elements.relations) children))
+    where
+        excludeEntity = filter (`notElem` pExcluded)
+
+{- |
+    Create a new leaf node without any children.
+-}
+clusterLeaf ::
+        String      -- leaf name
+    ->  ClusterType -- leaf type
+    ->  [Entity]    -- entities
+    ->  [Relation]  -- relations
+    -> Maybe Layout
+    ->  Entity
+clusterLeaf name clusterType entities relations =
+    Cluster name clusterType
+        (IndexedSetFamily entities entities)
+        (IndexedSetFamily relations relations)

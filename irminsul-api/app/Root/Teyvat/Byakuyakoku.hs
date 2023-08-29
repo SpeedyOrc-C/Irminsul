@@ -3,7 +3,6 @@
 module Root.Teyvat.Byakuyakoku where
 
 import Irminsul
-import Shortcut
 
 aberaku = "Aberaku"
 adonis = "Adonis"

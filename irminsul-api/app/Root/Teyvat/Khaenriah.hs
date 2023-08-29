@@ -3,7 +3,6 @@
 module Root.Teyvat.Khaenriah where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 import Root.Teyvat.Khaenriah.Schwaneritter
 

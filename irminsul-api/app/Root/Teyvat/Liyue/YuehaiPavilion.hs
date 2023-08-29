@@ -3,7 +3,6 @@
 module Root.Teyvat.Liyue.YuehaiPavilion where
 -- 月海亭
 
-import Shortcut
 import Irminsul
 
 import Root.Teyvat.Liyue.Adepti.CloudRetainersAbode

@@ -4,7 +4,6 @@ module Root.Teyvat.Liyue.WanminRestaurant where
 -- 万民堂
 
 import Irminsul
-import Shortcut
 
 xiangling = "Xiangling"
 guoba = "Guoba";

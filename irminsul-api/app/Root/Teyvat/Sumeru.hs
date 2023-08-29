@@ -3,7 +3,6 @@
 module Root.Teyvat.Sumeru where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 import Root.Teyvat.Sumeru.Akademiya
@@ -14,7 +13,6 @@ import Root.Teyvat.Sumeru.Akademiya.Kshahrewar
 import Root.Teyvat.Sumeru.AlcazarzarayPalace
 import Root.Teyvat.Sumeru.Akademiya.Rtawahist
 import Root.Teyvat.Deshret.AaruVillage
-import Root.Teyvat.Deshret.AaruVillage (candace)
 
 rukkhadevataGreaterLord = "RukkhadevataGreaterLord"
 
@@ -77,23 +75,20 @@ sumeru = clusterNode "Sumeru" Country
         alcazarzarayPalace,
         aaruVillage
     ]
-    (Just $ RelationGraphLayout {
-        rootProperty=rl (-15, 15),
-        elementProperties=[
-            al nahida (-15, 0),
-            al rukkhadevataGreaterLord (-30, 0),
-            al nilou (-15, -15),
-            al alhaitham (15, 15),
-            al cyno (0, 0),
-            al faruzan (0, -30),
-            al kaveh (0, 15),
-            al tighnari (30, -30),
-            al collei (10, -20),
-            al dori (30, 0),
-            al layla (30, 15),
-            al wanderer (-30, -15),
-            al scaramouche (-45, -15),
-            al candace (15, -5),
-            al dehya (25, -15)
-        ]
-    })
+    (layout (-15, 15) [
+        al nahida (-15, 0),
+        al rukkhadevataGreaterLord (-30, 0),
+        al nilou (-15, -15),
+        al alhaitham (15, 15),
+        al cyno (0, 0),
+        al faruzan (0, -30),
+        al kaveh (0, 15),
+        al tighnari (30, -30),
+        al collei (10, -20),
+        al dori (30, 0),
+        al layla (30, 15),
+        al wanderer (-30, -15),
+        al scaramouche (-45, -15),
+        al candace (15, -5),
+        al dehya (25, -15)
+    ])

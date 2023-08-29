@@ -3,7 +3,6 @@
 module Root.Teyvat.Khaenriah.Schwaneritter where
 
 import Irminsul
-import Shortcut
 
 hadura = "Hadura"
 ynghildr = "Ynghildr"

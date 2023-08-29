@@ -3,7 +3,6 @@
 module Root.Teyvat.Mondstadt.KnightsOfFavonius where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 import Root.AnotherWorld
@@ -49,22 +48,19 @@ knightsOfFavonius = clusterNode "KnightsOfFavonius" Organization
     [
         guerillaTeam
     ]
-    (Just $ RelationGraphLayout {
-        rootProperty = rl (-37, 15),
-        elementProperties = [
-            al varka (-37, 0),
-            al jeanGunnhildr (-15, 15),
-            al lisa (-15, 0),
-            al kaeyaRagvindr (0, 0),
-            al amber (-15, -15),
-            al klee (0, 15),
-            al albedo (15, 15),
-            al sucrose (30, 15),
-            al noelle (15, 0),
-            al eulaLawrence (0, -15),
-            al mikaSchmidt (30, -15),
-            al travellerArchonSide (-30, -15),
+    (layout (-37, 15) [
+        al varka (-37, 0),
+        al jeanGunnhildr (-15, 15),
+        al lisa (-15, 0),
+        al kaeyaRagvindr (0, 0),
+        al amber (-15, -15),
+        al klee (0, 15),
+        al albedo (15, 15),
+        al sucrose (30, 15),
+        al noelle (15, 0),
+        al eulaLawrence (0, -15),
+        al mikaSchmidt (30, -15),
+        al travellerArchonSide (-30, -15),
 
-            cl guerillaTeam (18.5, -15) (18, -15) (15, 5)
-        ]
-    })
+        cl guerillaTeam (18.5, -15) (18, -15) (15, 5)
+    ])

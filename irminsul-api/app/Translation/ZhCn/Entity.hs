@@ -1,8 +1,6 @@
 module Translation.ZhCn.Entity where
 
-import Irminsul ( Information )
-import Shortcut
-
+import Irminsul
 import Prelude hiding ((.))
 import Translation.ZhCn.Utility
 

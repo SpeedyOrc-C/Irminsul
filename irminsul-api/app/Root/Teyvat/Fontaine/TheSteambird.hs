@@ -3,7 +3,6 @@
 module Root.Teyvat.Fontaine.TheSteambird where
 
 import Irminsul
-import Shortcut
 
 charlotte = "Charlotte"
 

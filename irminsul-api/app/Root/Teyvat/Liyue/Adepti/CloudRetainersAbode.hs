@@ -2,7 +2,6 @@
 
 module Root.Teyvat.Liyue.Adepti.CloudRetainersAbode where
 
-import Shortcut
 import Irminsul
 import CommonRelations
 
@@ -22,11 +21,8 @@ cloudRetainersAbode = clusterLeaf "CloudRetainersAbode" Organization
     
         ganyu `friend` shenhe
     ]
-    (Just $ RelationGraphLayout {
-        rootProperty=rl (0, 15),
-        elementProperties=[
-            al cloudRetainer (0, 0),
-            al ganyu (-15, -15),
-            al shenhe (15, -15)
-        ]
-    })
+    (layout (0, 15) [
+        al cloudRetainer (0, 0),
+        al ganyu (-15, -15),
+        al shenhe (15, -15)
+    ])

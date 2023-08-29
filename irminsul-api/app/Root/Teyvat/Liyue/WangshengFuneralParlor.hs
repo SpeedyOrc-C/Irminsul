@@ -4,7 +4,6 @@ module Root.Teyvat.Liyue.WangshengFuneralParlor where
 -- 往生堂
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 zhongli = "Zhongli";

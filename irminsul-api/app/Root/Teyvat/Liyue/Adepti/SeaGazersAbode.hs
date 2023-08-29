@@ -3,7 +3,6 @@
 module Root.Teyvat.Liyue.Adepti.SeaGazersAbode where
 
 import Irminsul
-import Shortcut
 
 seaGazer = "SeaGazer"
 

@@ -3,7 +3,6 @@
 module Root.Teyvat.Inazuma.Kaedehara where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 yoshinoriKaedehara = "YoshinoriKaedehara"

@@ -3,7 +3,7 @@
 module CommonRelations where
 
 import Irminsul
-import Shortcut
+
 
 
 -- Unidirectional relations

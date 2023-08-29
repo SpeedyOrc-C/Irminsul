@@ -67,7 +67,6 @@ executable irminsul-api
         Irminsul,
         API,
         API.RelationGraph,
-        Shortcut,
 
         Data.Xml,
         Data.Vector,
@@ -145,6 +144,7 @@ executable irminsul-api
     -- Other library packages from which modules are imported.
     build-depends:
         base >= 4.17.1.0
+        ,containers
         ,warp
         ,wai
         ,wai-extra

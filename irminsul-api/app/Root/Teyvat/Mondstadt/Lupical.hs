@@ -3,7 +3,6 @@
 module Root.Teyvat.Mondstadt.Lupical where
 
 import Irminsul
-import Shortcut
 
 razor = "Razor"
 andrius = "Andrius"

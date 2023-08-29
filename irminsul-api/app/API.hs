@@ -53,7 +53,7 @@ apiRelationGraph inputId inputLang inputWhoAmI = let
     response _ Nothing _ = illegalRequest UnsupportedLanguage
     response _ _ Nothing = illegalRequest InvalidTravellerName
     response (Just entityId) (Just lang) (Just whoAmI) =
-        if isNothing (layout entityId) then illegalRequest LayoutMissing
+        if isNothing (clusterLayout entityId) then illegalRequest LayoutMissing
         else apiResponse OK $ relationGraph lang entityId whoAmI
 
     in response maybeId maybeLang maybeWhoAmI

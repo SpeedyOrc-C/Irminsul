@@ -3,7 +3,6 @@
 module Root.Teyvat.Sumeru.GrandharvaVille where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 

@@ -3,7 +3,6 @@
 module Root.Teyvat.Inazuma.TriCommission.YashiroCommission where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 ayakaKamisato = "AyakaKamisato"

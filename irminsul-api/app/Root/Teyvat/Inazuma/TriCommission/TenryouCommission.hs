@@ -3,7 +3,6 @@
 module Root.Teyvat.Inazuma.TriCommission.TenryouCommission where
 
 import Irminsul
-import Shortcut
 
 saraKujo = "SaraKujo"
 heizouShikanoin = "HeizouShikanoin"

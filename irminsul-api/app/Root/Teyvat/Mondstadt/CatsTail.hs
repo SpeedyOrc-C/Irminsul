@@ -3,7 +3,6 @@
 module Root.Teyvat.Mondstadt.CatsTail where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 dionaKatzlein = "DionaKatzlein"
@@ -25,13 +24,10 @@ catsTail = clusterLeaf "CatsTail" Organization
         shuyun `translator` princeCat,
         princeCat `pet` margaret
     ]
-    (Just $ RelationGraphLayout {
-        rootProperty = rl (0, 15),
-        elementProperties = [
-            al dionaKatzlein (-15, -15),
-            al margaret (-15, 0),
-            al shuyun (15, 0),
-            al princeCat (0, 0),
-            al diane (15, -15)
-        ]
-    })
+    (layout (0, 15) [
+        al dionaKatzlein (-15, -15),
+        al margaret (-15, 0),
+        al shuyun (15, 0),
+        al princeCat (0, 0),
+        al diane (15, -15)
+    ])

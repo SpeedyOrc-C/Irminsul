@@ -3,7 +3,6 @@
 module Root.Teyvat where
 
 import Irminsul
-import Shortcut
 import CommonRelations
 
 import Root.Teyvat.Mondstadt
@@ -55,14 +54,11 @@ teyvat = clusterNode "Teyvat" World
         khaenriah,
         hexenzirkel
     ]
-    (Just $ RelationGraphLayout {
-        rootProperty=rl (0, 15),
-        elementProperties=[
-            cl mondstadt (24, 15) (24, 15) (12, 5),
-            cl liyue (14, 0) (14, 0) (12, 5),
-            cl inazuma (24, -15) (24, -15) (12, 5),
-            cl sumeru (-6, 0) (-6, 0) (12, 5),
-            cl deshret (-26, 0) (-26, 0) (12, 5),
-            cl fontaine (-26, 15) (-26, 15) (12, 5)
-        ]
-    })
+    (layout (0, 15) [
+        cl mondstadt (24, 15) (24, 15) (12, 5),
+        cl liyue (14, 0) (14, 0) (12, 5),
+        cl inazuma (24, -15) (24, -15) (12, 5),
+        cl sumeru (-6, 0) (-6, 0) (12, 5),
+        cl deshret (-26, 0) (-26, 0) (12, 5),
+        cl fontaine (-26, 15) (-26, 15) (12, 5)
+    ])

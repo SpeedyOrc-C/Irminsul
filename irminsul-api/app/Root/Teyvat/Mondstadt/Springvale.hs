@@ -3,7 +3,6 @@
 module Root.Teyvat.Mondstadt.Springvale where
 
 import Irminsul
-import Shortcut
 
 draff = "Draff"
 

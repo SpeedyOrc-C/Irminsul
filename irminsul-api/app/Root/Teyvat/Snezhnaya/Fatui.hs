@@ -3,7 +3,6 @@
 module Root.Teyvat.Snezhnaya.Fatui where
 
 import Irminsul
-import Shortcut
 import Root.Teyvat.Inazuma
 
 tartaglia = "Tartaglia";

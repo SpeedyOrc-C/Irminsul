@@ -22,8 +22,8 @@
         position: absolute;
         transform: translate(-50%, 0);
         
-        bottom: 2rem;
-        width: 4rem;
+        bottom: 1rem;
+        width: 4.5rem;
         padding: 0.2rem 0.4rem;
         border-radius: 0.2rem;
         border: 1px solid #444;

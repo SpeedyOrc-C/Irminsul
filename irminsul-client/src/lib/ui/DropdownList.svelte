@@ -8,14 +8,22 @@
     export let below: boolean;
 
     let displayed = false;
+    let self: HTMLElement;
 
     const dispatch = createEventDispatcher();
 
     afterUpdate(() => {
-        if (show)
+        if (show) {
+            if (displayed == false) {
+                below = self.getBoundingClientRect().bottom + 100 < document.body.getBoundingClientRect().bottom;
+            }
             displayed = true;
-        else
-            setTimeout(() => displayed = false, 200);
+        } else {
+            setTimeout(() => {
+                displayed = false;
+                below = true;
+            }, 200);
+        }
     })
 
     function click(newValue: string) {
@@ -27,8 +35,8 @@
     }
 </script>
 
-<div class="dropdown-list" class:below>
-    <div id="options" class:show class:displayed>
+<div class="dropdown-list" class:below bind:this={self}>
+    <div class="options" class:show class:displayed>
         {#each options as option}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div class="option" class:triggered={option.value === value}
@@ -56,7 +64,7 @@
             bottom: unset;
         }
     }
-    #options {
+    .options {
         width: calc(100% - 2 * 0.3rem);
 
         padding: 0.1rem 0.3rem;

@@ -11,6 +11,7 @@ import Root.Teyvat.Inazuma.AratakiGang
 import Root.Teyvat.Inazuma.TriCommission
 import Root.Teyvat.Inazuma.WatatsumiIsland
 import Root.Teyvat.Inazuma.Shuumatsuban
+import Root.Teyvat.Inazuma.TriCommission.TenryouCommission
 
 eiRaiden = "EiRaiden";
     beelzebul = eiRaiden
@@ -52,6 +53,7 @@ inazuma = clusterNode "Inazuma" Country
         al makotoRaiden (-15, -15),
         al kunikuzushiRaiden (-30, -15),
         al kazuhaKaedehara (0, 0),
+        al saraKujo (0, -15),
 
         cl kaedehara (7.5, 7.5) (7.5, 7.5) (12, 5)
     ])

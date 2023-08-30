@@ -70,7 +70,7 @@
         transition-property: color, background-color;
         transition-duration: 0.1s;
 
-        .path.enabled & {
+        .path.enabled &:not(:last-child) {
             cursor: pointer;
             &:hover {
                 background-color: white;

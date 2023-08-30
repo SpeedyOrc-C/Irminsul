@@ -3,6 +3,7 @@
 module Translation where
 
 import Data.Maybe ( fromMaybe )
+import Data.Char (toLower)
 
 import Irminsul
 import Translation.ZhCn.Entity (translationEntityZhCn)
@@ -14,9 +15,14 @@ data Language = ZhCn | EnUs
     deriving (Eq, Show)
 
 readLanguageCode :: String -> Maybe Language
-readLanguageCode lang = lookup lang [
+readLanguageCode lang = lookup (toLower <$> lang) [
+    ("zh", ZhCn),
+    ("zh-tw", ZhCn),
     ("zh-cn", ZhCn),
-    ("en-us", EnUs)]
+    ("en", EnUs),
+    ("en-us", EnUs),
+    ("en-gb", EnUs)
+    ]
 
 data LanguagePack = LanguagePack {
     language :: Language,

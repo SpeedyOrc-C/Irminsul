@@ -1,13 +1,12 @@
 import { init, register } from 'svelte-i18n'
 
-const defaultLocale = 'en-us'
+const defaultLocale = 'en-US'
 
 init({
 	fallbackLocale: defaultLocale,
 	initialLocale: defaultLocale,
 });
 
-register('en-us', () => import('./locales/en-us.json'));
-register('zh-cn', () => import('./locales/zh-cn.json'));
+register('en-US', () => import('./locales/en-US.json'));
+register('zh-CN', () => import('./locales/zh-CN.json'));
 register('ja', () => import('./locales/ja.json'));
-

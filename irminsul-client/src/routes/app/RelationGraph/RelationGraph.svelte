@@ -23,7 +23,7 @@
 
     const loader = new RelationGraphLoader();
 
-    const settings = new RelationGraphSettings("relation_graph_settings", "2023.08.12.2230");
+    const settings = new RelationGraphSettings("relation_graph_settings", "2023.08.30.1357");
 
     let relationGraph: RelationGraph | null = null;
     let jsonFileInput: HTMLInputElement;

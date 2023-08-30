@@ -37,7 +37,7 @@
         const y = oy - sy;
         const x = ox - sx;
 
-        if (settings.preference.language === "zh-cn") {
+        if (settings.preference.language == "zh-CN") {
             flip = x <= 0 && y >= x || x > 0 && y > x;
             cjkRotateLeft = y > x && y > -x || y < x && y < -x;
         } else {

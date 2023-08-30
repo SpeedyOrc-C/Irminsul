@@ -23,9 +23,16 @@
     },
     "file": {
       "import": "インポート",
-      "export": "エクスポート"
+      "import-json": "レイアウトをインポートする",
+      "export-json": "ウェブで使用する JSON としてレイアウトをエクスポートする",
+      "export-haskell": "Irminsul で使用する Haskell としてレイアウトをエクスポートする"
     },
     "relation-graph": {
+      "show-joystick": {
+        "self": "ジョイスティック表示",
+        "has-coarse-pointer": "指を使えば"
+      },
+      "joystick-sensibility": "ジョイスティック感度"
     },
     "language": {
       "interface-language": "UI言語",
@@ -36,6 +43,10 @@
     "msg": {
     },
     "common": {
+      "on": "On",
+      "off": "Off",
+      "always": "いつも",
+      "never": "決して"
     }
   },
   "panel": {

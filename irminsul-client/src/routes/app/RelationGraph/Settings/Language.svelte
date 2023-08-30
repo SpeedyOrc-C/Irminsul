@@ -22,8 +22,9 @@
 <ItemBar text={$_("settings.language.interface-language")}>
     <DropdownInSettings
         options={[
-            { label: "简体中文", value: "zh-cn" },
-            { label: "English (US)", value: "en-us" },
+            { label: "简体中文", value: "zh-CN" },
+            { label: "English (US)", value: "en-US" },
+            { label: "日本語", value: "ja"},
         ]}
         value={settings.preference.language}
         on:dropdown-change={e => dispatch("set-language", e.detail)}

@@ -25,17 +25,22 @@
         anchor = editor.anchorOf(id);
     });
 
-    function click() {
+    function mouseup() {
         dispatch("toggle-cluster", id);
     }
 
     function dblclick() {
         if (!editor.isEditing()) dispatch("jump-to", id);
     }
+
+    function touchend() {
+        if (!editor.isEditing() && selected) {
+            dispatch("jump-to", id);
+        }
+    }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="cluster" class:dim class:selected on:click={click} on:dblclick={dblclick}
+<div class="cluster" class:dim class:selected on:mouseup={mouseup} on:dblclick={dblclick} on:touchend={touchend}
      style:left="{position.x}rem" style:top="{-position.y}rem"
      style:width="{size.x}rem" style:height="{size.y}rem"
 >

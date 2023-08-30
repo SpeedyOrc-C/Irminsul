@@ -15,7 +15,7 @@
     afterUpdate(() => {
         if (show) {
             if (displayed == false) {
-                below = self.getBoundingClientRect().bottom + 100 < document.body.getBoundingClientRect().bottom;
+                below = self.getBoundingClientRect().bottom + 300 < document.body.getBoundingClientRect().bottom;
             }
             displayed = true;
         } else {

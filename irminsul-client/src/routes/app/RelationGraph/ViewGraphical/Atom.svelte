@@ -97,8 +97,6 @@
     .atom {
         position: absolute;
         transform: translate(-50%, -50%);
-        width: fit-content;
-        height: fit-content;
 
         z-index: 100;
 

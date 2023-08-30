@@ -2,13 +2,13 @@
     export let color = "black";
 </script>
 
-<div id="tick">
-    <div id="bar1" class="bar" style:background-color={color}/>
-    <div id="bar2" class="bar" style:background-color={color}/>
+<div class="tick">
+    <div class="bar1 bar" style:background-color={color}/>
+    <div class="bar2 bar" style:background-color={color}/>
 </div>
 
 <style lang="scss">
-    #tick {
+    .tick {
         position: relative;
         height: 100%;
         width: 100%;
@@ -22,12 +22,12 @@
         height: 10%;
     }
 
-    #bar1 {
+    .bar1 {
         width: 35%;
         transform: translate(-100%, 70%) rotate(45deg);
     }
 
-    #bar2 {
+    .bar2 {
         width: 60%;
         transform: translate(-30%, -30%) rotate(-45deg);
     }

@@ -2,13 +2,13 @@
     export let color = "black";
 </script>
 
-<div id="cross">
-    <div id="bar1" class="bar" style:background-color={color}/>
-    <div id="bar2" class="bar" style:background-color={color}/>
+<div class="cross">
+    <div class="bar1 bar" style:background-color={color}/>
+    <div class="bar2 bar" style:background-color={color}/>
 </div>
 
 <style lang="scss">
-    #cross {
+    .cross {
         position: relative;
         height: 100%;
         width: 100%;
@@ -22,11 +22,11 @@
         height: 10%; width: 55%;
     }
 
-    #bar1 {
+    .bar1 {
         transform: translate(-50%, -50%) rotate(45deg);
     }
 
-    #bar2 {
+    .bar2 {
         transform: translate(-50%, -50%) rotate(-45deg);
     }
 </style>

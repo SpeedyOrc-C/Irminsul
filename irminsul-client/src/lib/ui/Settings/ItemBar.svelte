@@ -13,7 +13,7 @@
     </div>
     <img src={ThreeStars} alt="" class="three-stars" style:display={showStars ? "block" : "none"}>
     <div class="caption">
-        <div id="caption-text">
+        <div class="caption-text">
             {text}
         </div>
     </div>
@@ -73,7 +73,7 @@
         height: 3.2rem;
     }
 
-    #caption-text {
+    .caption-text {
         font-size: 1.3rem;
         color: #485265;
         line-height: 3.2rem;

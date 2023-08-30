@@ -42,21 +42,21 @@
     on:touchend={stop}
 />
 
-<div id="slider" bind:this={sliderDom}>
-    <div id="bar"/>
-    <div id="filled-bar" style:width="{percentageValue}%"></div>
-    <div id="bullet" style:left="{percentageValue}%"
+<div class="slider" bind:this={sliderDom}>
+    <div class="bar"/>
+    <div class="filled-bar" style:width="{percentageValue}%"></div>
+    <div class="bullet" style:left="{percentageValue}%"
          on:mousedown={slider.start}
          on:touchstart={slider.start}
     >
-        <div id="outer-square"/>
-        <div id="inner-square"/>
-        <div id="touch-area"/>
+        <div class="outer-square"/>
+        <div class="inner-square"/>
+        <div class="touch-area"/>
     </div>
 </div>
 
 <style lang="scss">
-    #slider {
+    .slider {
         height: 100%;
         width: 100%;
     }
@@ -69,28 +69,28 @@
         height: 0.5rem;
         border-radius: 0.25rem;
     }
-    #bar {
+    .bar {
         @extend %bar-common;
         width: 100%;
         background: #7c7872;
     }
-    #filled-bar {
+    .filled-bar {
         @extend %bar-common;
         background: #fff7e9;
     }
 
-    #bullet {
+    .bullet {
         position: absolute;
         top: 50%;
 
-        &:hover > #outer-square {
+        &:hover > .outer-square {
             border: 0.2rem solid white;
         }
 
         outline: 1px solid red;
     }
 
-    #outer-square {
+    .outer-square {
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
@@ -107,7 +107,7 @@
         transition-duration: 0.15s;
     }
 
-    #inner-square {
+    .inner-square {
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
@@ -117,7 +117,7 @@
         background: #ece5d8;
     }
 
-    #touch-area {
+    .touch-area {
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);

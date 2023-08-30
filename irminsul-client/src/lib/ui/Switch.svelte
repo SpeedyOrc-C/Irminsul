@@ -13,17 +13,17 @@
     export let value = false;
 </script>
 
-<div id="switch" class:checked={value} on:click={click}>
-    <div id="inner">
-        <div id="bullet">
-            <div id="tick"><IconTick color="#808d9d"/></div>
-            <div id="cross"><IconCross color="#d3bc8e"/></div>
+<div class="switch" class:checked={value} on:click={click}>
+    <div class="inner">
+        <div class="bullet">
+            <div class="tick"><IconTick color="#808d9d"/></div>
+            <div class="cross"><IconCross color="#d3bc8e"/></div>
         </div>
     </div>
 </div>
 
 <style lang="scss">
-    #switch {
+    .switch {
         position: relative;
 
         height: 2.5rem;
@@ -34,7 +34,7 @@
         cursor: pointer;
     }
 
-    #inner {
+    .inner {
         height: 100%;
         width: 100%;
         border-radius: 2.5rem;
@@ -45,13 +45,13 @@
         box-shadow: inset 0 0 0 2px #0004;
         background-color: #353d4f;
 
-        #switch.checked > & {
+        .switch.checked > & {
             box-shadow: inset 0 0 0 2px #0002;
             background-color: #d3bc8e;
         }
     }
 
-    #bullet {
+    .bullet {
         position: absolute;
         top: 50%; left: 50%;
 
@@ -67,12 +67,12 @@
 
         transform: translate(calc(-50% - 1.5rem), -50%);
 
-        #switch.checked & {
+        .switch.checked & {
             transform: translate(calc(-50% + 1.5rem), -50%);
         }
     }
 
-    #bullet > div {
+    .bullet > div {
         height: 100%;
         width: 100%;
         position: absolute;
@@ -81,19 +81,19 @@
         transition-property: opacity, transform;
     }
 
-    #tick {
+    .tick {
         opacity: 0%;
         transform: scale(80%);
-        #switch.checked & {
+        .switch.checked & {
             opacity: 100%;
             transform: scale(100%);
         }
     }
 
-    #cross {
+    .cross {
         opacity: 100%;
         transform: scale(100%);
-        #switch.checked & {
+        .switch.checked & {
             opacity: 0%;
             transform: scale(80%);
         }

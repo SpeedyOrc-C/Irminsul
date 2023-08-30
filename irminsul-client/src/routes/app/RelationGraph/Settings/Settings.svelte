@@ -9,7 +9,7 @@
     import { _ } from "svelte-i18n";
     import Other from "./Other.svelte";
     import RelationGraph from "./RelationGraph.svelte";
-    import {afterUpdate, createEventDispatcher} from "svelte";
+    import {afterUpdate, createEventDispatcher, onMount} from "svelte";
     import type RelationGraphSettings from "../RelationGraphSettings";
     import type {ShowJoystick} from "../RelationGraphSettings";
 
@@ -69,7 +69,7 @@
         {selectedCategory}
     />
 
-    <div id="selected-category">
+    <div class="selected-category">
         {#if selectedCategory === "file"}
             <File on:rg-action
                   on:import-json
@@ -237,7 +237,7 @@
         }
     }
 
-    #selected-category {
+    .selected-category {
         position: absolute;
 
         left: 25vw;

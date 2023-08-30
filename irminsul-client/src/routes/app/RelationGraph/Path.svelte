@@ -19,7 +19,7 @@
     <div class="path-elements">
         {#each pathElements as pathElement}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="path-element" on:click={() => pathElementClick(pathElement)}>
+            <div class="path-element" on:click={() => pathElementClick(pathElement)} tabindex="0">
                 {pathElement.translation}
             </div>
         {/each}
@@ -72,7 +72,7 @@
 
         .path.enabled &:not(:last-child) {
             cursor: pointer;
-            &:hover {
+            &:hover, &:focus {
                 background-color: white;
             }
             &:active {

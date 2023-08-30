@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {afterUpdate, createEventDispatcher, onMount} from "svelte";
+    import {afterUpdate, createEventDispatcher} from "svelte";
     import Joystick from "./Joystick";
     import {ShowJoystick} from "./RelationGraphSettings";
 

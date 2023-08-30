@@ -3,15 +3,17 @@
 
     export let coordinate: Vector2;
     export let size: Vector2 | null = null;
+
+    const numFormat = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
 </script>
 
 <div class="coordinate">
-    <div>x: {coordinate.x}</div>
-    <div>y: {coordinate.y}</div>
+    <div>x: {numFormat.format(coordinate.x)}</div>
+    <div>y: {numFormat.format(coordinate.y)}</div>
     <!-- Only cluster has size, atom does not have a size. -->
     {#if size != null}
-        <div>w: {size.x}</div>
-        <div>h: {size.y}</div>
+        <div>w: {numFormat.format(size.x)}</div>
+        <div>h: {numFormat.format(size.y)}</div>
     {/if}
 </div>
 

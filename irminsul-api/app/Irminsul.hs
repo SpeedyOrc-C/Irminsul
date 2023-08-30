@@ -3,7 +3,7 @@
 module Irminsul where
 
 import Data.List (intercalate, nub)
-import Data.Vector ( Vector2 (Vector2) )
+import Data.Vector ( Vector2 (Vector2), p )
 import Data.String ( IsString(..) )
 import Prelude hiding (id)
 
@@ -159,8 +159,13 @@ rl (x, y) = Transform (Vector2 x y) (Vector2 x y) (Vector2 0 0)
 
 -- | Shortcut of an atom's layout
 al :: Entity -> (Double, Double) -> (Entity, Transform)
-al entity (x, y) =
-    (entity, Transform (Vector2 x y) (Vector2 x y) (Vector2 0 0))
+al entity (x, y) = (entity, Transform v v (Vector2 0 0)) where
+    v = Vector2 x y
+
+-- | Similar to `al`, but takes a polar coordinate.
+alp :: Entity -> (Double, Double) -> (Entity, Transform)
+alp entity (magnitude, angleDeg) = (entity, Transform v v (Vector2 0 0)) where
+    v = p magnitude angleDeg
 
 -- | Shortcut of a cluster's layout
 cl :: Entity ->

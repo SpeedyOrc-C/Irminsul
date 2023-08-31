@@ -17,4 +17,7 @@ yashiroCommission = clusterLeaf "YashiroCommission" Organization
         ayakaKamisato `youngerSister` ayatoKamisato,
         ayatoKamisato `elderBrother` ayakaKamisato
     ]
-    Nothing
+    (layout (0, 15) [
+        al ayakaKamisato (-15, 0),
+        al ayatoKamisato (15, 0)
+    ])

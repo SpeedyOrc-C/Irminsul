@@ -38,7 +38,8 @@ inazuma = clusterNode "Inazuma" Country
     ]
     [
         eiRaiden `rule` inazuma,
-        mikoYae `familiar` eiRaiden
+        mikoYae `familiar` eiRaiden,
+        eiRaiden `create` kunikuzushiRaiden
     ]
     [
         triCommission,
@@ -55,5 +56,6 @@ inazuma = clusterNode "Inazuma" Country
         al kazuhaKaedehara (0, 0),
         al saraKujo (0, -15),
 
-        cl kaedehara (7.5, 7.5) (7.5, 7.5) (12, 5)
+        cl kaedehara (7.5, 7.5) (7.5, 7.5) (12, 5),
+        cl triCommission (0, -30) (0, -30) (15, 5)
     ])

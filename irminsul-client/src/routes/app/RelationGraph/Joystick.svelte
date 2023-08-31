@@ -5,32 +5,59 @@
 
     const dispatch = createEventDispatcher();
 
-    export let callback: (dx: number, dy: number) => void;
+    export let callback: (x: number, y: number, dx: number, dy: number) => void;
     export let showJoystick: ShowJoystick;
     export let hideUi: boolean;
+    export let smoothMovement: boolean;
 
     let joystick: Joystick;
     let innerCircle: HTMLElement;
-    let moving = false;
     let angle = 0;
+
+    let lastX = 0;
+    let lastY = 0;
 
     $: show = showJoystick !== ShowJoystick.Never && !hideUi;
 
-    function touchStart() {
-        moving = true;
+    function touchStart(e: TouchEvent) {
+        const touch = e.targetTouches[0];
+        lastX = touch.clientX;
+        lastY = touch.clientY;
+
         joystick.start();
+        joystick = joystick;
+
+        smoothMovement = false;
+        loop();
     }
 
     function touchMove(e: TouchEvent) {
         const touch = e.targetTouches[0];
-        joystick.move(touch.clientX, touch.clientY);
-        angle = joystick.angle;
+        lastX = touch.clientX;
+        lastY = touch.clientY;
+    }
 
-        dispatch("update-view");
+    function loop() {
+        requestAnimationFrame(() => {
+            if (joystick.isMoving()) {
+                joystick.move(lastX, lastY);
+                angle = joystick.angle;
+                dispatch("update-view");
+
+                loop();
+            }
+        });
+    }
+
+    function touchEnd() {
+        joystick.end();
+        joystick = joystick;
+
+        smoothMovement = true;
     }
 
     afterUpdate(() => {
-        if (!moving && show) {
+        if (!joystick?.isMoving() && show) {
             joystick = new Joystick(innerCircle, callback);
         }
     })
@@ -40,9 +67,9 @@
 <div id="joystick" class:has-coarse-pointer={showJoystick === ShowJoystick.HasCoarsePointer}
      on:touchstart|preventDefault={touchStart}
      on:touchmove|preventDefault={touchMove}
-     on:touchend|preventDefault={() => moving = false}
+     on:touchend|preventDefault={touchEnd}
 >
-    <div id="outer-circle" style:transform="translate(-50%, -50%) rotate({-angle + Math.PI / 4}rad)" class:moving>
+    <div id="outer-circle" style:transform="translate(-50%, -50%) rotate({-angle + Math.PI / 4}rad)" class:moving={joystick?.isMoving()}>
         <div id="pivot">
             <svg id="direction-indicator" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 105 2.5 A 102.5 102.5 0 0 1 207.5 105"

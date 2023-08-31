@@ -35,6 +35,7 @@
     let showJoystick: ShowJoystick = ShowJoystick.Never;
     let showSettings = false;
     let joystickSensibility = 4;
+    let smoothMovement = true;
 
     let showLayoutMissing = false;
 
@@ -247,13 +248,14 @@
                bind:showCoordinates
                bind:hideUi
                on:jump-to={e => loadRelationGraph(e.detail)}
-               {settings}
+               {settings} {smoothMovement}
         />
     {/if}
 
-    <Joystick callback={(dx, dy) => view.joystickEvent(dx, dy, 0.1 * (0.25 + joystickSensibility / 4))}
+    <Joystick callback={(x, y, dx, dy) => view.joystickEvent(x, y, dx, dy, 0.005 * (0.25 + joystickSensibility / 4))}
               bind:showJoystick={settings.preference.show_joystick}
               bind:hideUi
+              bind:smoothMovement
               on:update-view={updateView}/>
 
     <ViewOptions bind:showCoordinates bind:editing bind:hideUi />

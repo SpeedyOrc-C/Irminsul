@@ -21,6 +21,7 @@
     export let editor: Editor;
     export let settings: RelationGraphSettings;
     export let hideUi: boolean;
+    export let smoothMovement: boolean;
 
     function keydown(e: KeyboardEvent) {
         function isSelecting(): boolean {
@@ -136,7 +137,7 @@
 
 <div id="view-graphical">
     <div id="deselect-all-touch-area" on:click={clickBackground}></div>
-    <div id="origin"
+    <div id="origin" class:smooth-movement={smoothMovement}
          style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%) translate({view.x}rem, {-view.y}rem)"
     >
         {#if showGrid} <Grid/> {/if}
@@ -185,12 +186,9 @@
         position: absolute;
         top: 50%; left: 50%;
 
-        @media (pointer: coarse) {
-            transition-duration: 0.1s;
-            transition-timing-function: linear;
+        &.smooth-movement {
+            transition-property: transform, opacity;
+            transition-duration: 0.2s;
         }
-
-        transition-property: transform, opacity;
-        transition-duration: 0.2s;
     }
 </style>

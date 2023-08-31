@@ -96,3 +96,5 @@ export default class RelationGraphSettings extends BaseSettings<RelationGraphPre
         }
     }
 }
+
+export {}

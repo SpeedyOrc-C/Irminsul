@@ -59,7 +59,7 @@ export default class ViewController {
     zoomIn() { this.scaleExponent += 1; this.update(); }
     zoomOut() { this.scaleExponent -= 1; this.update(); }
 
-    joystickEvent = (dx: number, dy: number, multiplier: number) => {
-        this.moveDelta(dx * multiplier, -dy * multiplier);
+    joystickEvent = (x: number, y: number, dx: number, dy: number, multiplier: number) => {
+        this.moveDelta(x * multiplier, -y * multiplier);
     }
 }

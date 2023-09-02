@@ -85,6 +85,7 @@ translationEntityEnUs = [
     ipn "Nilou" "Nilou",
     ipn "Ningguang" "Ningguang",
     ipn "Noelle" "Noelle",
+    ipn "Orobaxi" "Orobaxi",
     ipn "OzvaldoHrafnavins" "Ozvaldo Hrafnavins",
     ipn "PrinceCat" "Prince",
     ipn "QingceVillage" "Qingce Village",

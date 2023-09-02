@@ -39,7 +39,9 @@ inazuma = clusterNode "Inazuma" Country
     [
         eiRaiden `rule` inazuma,
         mikoYae `familiar` eiRaiden,
-        eiRaiden `create` kunikuzushiRaiden
+        eiRaiden `create` kunikuzushiRaiden,
+        eiRaiden `youngerSister` makotoRaiden,
+        makotoRaiden `elderSister` eiRaiden
     ]
     [
         triCommission,

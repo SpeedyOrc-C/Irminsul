@@ -87,6 +87,7 @@ translationEntityZhCn = [
     ipn "Nilou" "妮露",
     ipn "Ningguang" "凝光",
     ip "Noelle" "诺艾尔" ["女仆", "高达", "岩王帝姬"] "",
+    ipn "Orobaxi" "奥罗巴斯",
     ipn "OzvaldoHrafnavins" ("奥兹华尔多"."赫芙那梵茵斯"),
     ipn "PrinceCat" "小王子",
     ipn "QingceVillage" "轻策庄",

@@ -4,6 +4,8 @@ module Root.Teyvat.Byakuyakoku where
 
 import Irminsul
 
+orobaxi = "Orobaxi"
+
 aberaku = "Aberaku"
 adonis = "Adonis"
 aru = "Aru"
@@ -20,6 +22,7 @@ tsumi = "Tsumi"
 
 byakuyakoku = clusterLeaf "Byakuyakoku" Country
     [
+        orobaxi,
         aberaku,
         adonis,
         aru,

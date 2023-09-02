@@ -42,7 +42,9 @@ teyvat = clusterNode "Teyvat" World
         dionaKatzlein `friend` xiangling,
 
         ningguang `appreciate` jeanGunnhildr,
-        ningguang `partner` jeanGunnhildr
+        ningguang `partner` jeanGunnhildr,
+
+        eiRaiden `kill` orobaxi
     ]
     [
         mondstadt,
@@ -57,6 +59,9 @@ teyvat = clusterNode "Teyvat" World
         byakuyakoku
     ]
     (layout (0, 15) [
+        al orobaxi (6, -25.5),
+        al eiRaiden (24, -25.5),
+
         cl mondstadt (24, 15) (24, 15) (12, 5),
         cl liyue (14, 0) (14, 0) (12, 5),
         cl inazuma (24, -15) (24, -15) (12, 5),

@@ -131,11 +131,40 @@
         hideUi = false;
         deselectAll();
     }
+
+    function wheel(e: WheelEvent) {
+        if (e.deltaY == 0) return;
+        e.preventDefault();
+
+        if (e.ctrlKey || e.metaKey) {
+            if (e.deltaY > 0) {
+                view.zoomOut();
+            } else {
+                view.zoomIn();
+            }
+        } else {
+            if (!e.shiftKey) {
+                if (e.deltaY > 0) {
+                    view.moveDelta(0, -7.5);
+                } else {
+                    view.moveDelta(0, 7.5);
+                }
+            } else {
+                if (e.deltaY > 0) {
+                    view.moveDelta(-7.5, 0);
+                } else {
+                    view.moveDelta(7.5, 0);
+                }
+            }
+        }
+
+        view = view;
+    }
 </script>
 
 <svelte:window on:keydown={keydown}/>
 
-<div id="view-graphical">
+<div id="view-graphical" on:wheel={wheel}>
     <div id="deselect-all-touch-area" on:click={clickBackground}></div>
     <div id="origin" class:smooth-movement={smoothMovement}
          style:transform="rotate({-view.angle}deg) scale({view.scale * 100}%) translate({view.x}rem, {-view.y}rem)"

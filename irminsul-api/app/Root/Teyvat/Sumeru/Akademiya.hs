@@ -25,4 +25,13 @@ akademiya = clusterNode "Akademiya" Organization
         rtawahist,
         kshahrewar
     ]
-    Nothing
+    (layout (0, 20) [
+        cl haravatat (-37.5, 7.5) (-37.5, 7.5) (12, 4),
+        al faruzan (-37.5, 0),
+
+        cl rtawahist (-22.5, 7.5) (-22.5, 7.5) (12, 4),
+        al layla (-22.5, 0),
+
+        cl kshahrewar (-7.5, 7.5) (-7.5, 7.5) (12, 4),
+        al kaveh (-7.5, 0)
+    ])

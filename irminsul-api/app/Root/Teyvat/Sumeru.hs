@@ -90,5 +90,7 @@ sumeru = clusterNode "Sumeru" Country
         al wanderer (-30, -15),
         al scaramouche (-45, -15),
         al candace (15, -5),
-        al dehya (25, -15)
+        al dehya (25, -15),
+
+        cl akademiya (15, 5) (15, 5) (12, 5)
     ])

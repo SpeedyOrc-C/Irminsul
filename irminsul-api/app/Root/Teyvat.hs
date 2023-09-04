@@ -22,6 +22,7 @@ import Root.Teyvat.Fontaine
 import Root.Teyvat.Mondstadt.GunnhildrPegg
 import Root.Teyvat.Deshret
 import Root.Teyvat.Byakuyakoku
+import Root.Teyvat.Sumeru.GrandharvaVille
 
 heavenlyPrinciple = "HeavenlyPrinciple"
 sustainerOfHeavenlyPrinciple = "SustainerOfHeavenlyPrinciple"
@@ -32,6 +33,8 @@ teyvat = clusterNode "Teyvat" World
         sustainerOfHeavenlyPrinciple
     ]
     [
+        collei `friend` amber,
+
         alice `mother` klee,
         klee `daughter` alice,
         alice `friend` idyia,
@@ -58,16 +61,18 @@ teyvat = clusterNode "Teyvat" World
         hexenzirkel,
         byakuyakoku
     ]
-    (layout (0, 15) [
-        al orobaxi (6, -25.5),
-        al eiRaiden (24, -25.5),
+    (layout (0, 21) [
+        al collei (3, 6),
+        al amber (22.5, 13),
+        al eiRaiden (24, -30.5),
+        al orobaxi (6, -30.5),
 
-        cl mondstadt (24, 15) (24, 15) (12, 5),
+        cl mondstadt (24, 20) (24, 20) (12, 5),
         cl liyue (14, 0) (14, 0) (12, 5),
-        cl inazuma (24, -15) (24, -15) (12, 5),
-        cl byakuyakoku (6, -15) (6, -15) (12, 5),
+        cl inazuma (24, -20) (24, -20) (12, 5),
         cl sumeru (-6, 0) (-6, 0) (12, 5),
         cl deshret (-26, 0) (-26, 0) (12, 5),
-        cl fontaine (-26, 15) (-26, 15) (12, 5),
-        cl khaenriah (-41, 7.5) (-41, 7.5) (12, 5)
+        cl fontaine (-26, 20) (-26, 20) (12, 5),
+        cl khaenriah (-41, 7.5) (-41, 7.5) (12, 5),
+        cl byakuyakoku (6, -20) (6, -20) (12, 5)
     ])

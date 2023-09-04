@@ -84,7 +84,7 @@
 >
     <img class="avatar" src={avatarSrc} alt={label}/>
 
-    <div id="label" class="font-hywh-65w">
+    <div class="label font-hywh-65w">
         {glitched ? glitchedName : label}
     </div>
 
@@ -152,7 +152,7 @@
         }
     }
 
-    #label {
+    .label {
         position: absolute;
         transform: translate(-50%, -50%);
 

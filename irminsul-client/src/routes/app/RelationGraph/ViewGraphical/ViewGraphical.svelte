@@ -145,15 +145,15 @@
         } else {
             if (!e.shiftKey) {
                 if (e.deltaY > 0) {
-                    view.moveDelta(0, -7.5);
+                    view.moveDelta(0, -3.75);
                 } else {
-                    view.moveDelta(0, 7.5);
+                    view.moveDelta(0, 3.75);
                 }
             } else {
                 if (e.deltaY > 0) {
-                    view.moveDelta(-7.5, 0);
+                    view.moveDelta(-3.75, 0);
                 } else {
-                    view.moveDelta(7.5, 0);
+                    view.moveDelta(3.75, 0);
                 }
             }
         }

@@ -10,7 +10,7 @@ export default class Joystick {
     private lastY = 0;
     private moving = false;
 
-    constructor(innerCircle: HTMLElement, callback: (dx: number, dy: number) => void) {
+    constructor(innerCircle: HTMLElement, callback: (x: number, y: number, dx: number, dy: number) => void) {
         this.innerCircle = innerCircle;
         this.callback = callback;
     }
@@ -40,5 +40,3 @@ export default class Joystick {
 
     isMoving = () => this.moving;
 }
-
-export {}

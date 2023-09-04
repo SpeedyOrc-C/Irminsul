@@ -70,12 +70,7 @@
      on:touchend|preventDefault={touchEnd}
 >
     <div id="outer-circle" style:transform="translate(-50%, -50%) rotate({-angle + Math.PI / 4}rad)" class:moving={joystick?.isMoving()}>
-        <div id="pivot">
-            <svg id="direction-indicator" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 105 2.5 A 102.5 102.5 0 0 1 207.5 105"
-                      stroke-width="5" stroke="#0ff" fill-opacity="0"/>
-            </svg>
-        </div>
+        <div class="direction-indicator"/>
     </div>
     <div id="inner-circle" bind:this={innerCircle}/>
 </div>
@@ -119,26 +114,6 @@
         }
     }
 
-    #pivot {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        height: 14vw;
-        width: 14vw;
-
-        & > #direction-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            height: calc(14vw + 0.6rem);
-            width: calc(14vw + 0.6rem);
-        }
-    }
-
     #inner-circle {
         position: absolute;
         top: 50%;
@@ -149,5 +124,25 @@
         width: 2.5vw;
         border-radius: 100%;
         border: 0.3rem solid #fff3;
+    }
+
+    .direction-indicator {
+        $width: 0.3rem;
+
+        position: absolute;
+        height: calc(50% + $width); width: calc(50% + $width);
+        top: -$width; right: -$width;
+
+        overflow: hidden;
+
+        &:after {
+            content: "";
+            position: absolute;
+            height: calc(2 * (100% - $width)); width: calc(2 * (100% - $width));
+            right: $width; top: $width;
+
+            border-radius: 100%;
+            box-shadow: 0 0 0 $width #0ff;
+        }
     }
 </style>

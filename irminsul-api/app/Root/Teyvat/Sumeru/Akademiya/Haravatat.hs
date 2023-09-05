@@ -8,10 +8,12 @@ import CommonRelations
 import Root.Teyvat.Sumeru.GrandharvaVille
 
 faruzan = "Faruzan"
+alhaitham = "Alhaitham"
 
 haravatat = clusterLeaf "Haravatat" Organization
     [
-        faruzan
+        faruzan,
+        alhaitham
     ]
     [
         faruzan `teacher` collei

@@ -5,29 +5,30 @@ module Root.Teyvat.Sumeru where
 import Irminsul
 import CommonRelations
 
-import Root.Teyvat.Sumeru.Akademiya
 import Root.Teyvat.Sumeru.GrandharvaVille
 import Root.Teyvat.Inazuma
+import Root.Teyvat.Sumeru.Akademiya
 import Root.Teyvat.Sumeru.Akademiya.Haravatat
 import Root.Teyvat.Sumeru.Akademiya.Kshahrewar
-import Root.Teyvat.Sumeru.AlcazarzarayPalace
 import Root.Teyvat.Sumeru.Akademiya.Rtawahist
+import Root.Teyvat.Sumeru.Akademiya.Spantamad
+import Root.Teyvat.Sumeru.Akademiya.Vahumana
+import Root.Teyvat.Sumeru.AlcazarzarayPalace
 import Root.Teyvat.Deshret.AaruVillage
+import Root.Teyvat.Mondstadt.KnightsOfFavonius
 
 rukkhadevataGreaterLord = "RukkhadevataGreaterLord"
 
 nahida = "Nahida";
     buer = nahida
 
-wanderer = "Wanderer"
-
 dehya = "Dehya"
 kusayla = "Kusayla"
 
 nilou = "Nilou"
 
-sumeru = clusterNode "Sumeru" Country
-    [
+sumeru = clusterNodeWithExclusion "Sumeru" Country
+    ([
         nahida,
         rukkhadevataGreaterLord,
         scaramouche,
@@ -35,7 +36,9 @@ sumeru = clusterNode "Sumeru" Country
         dehya,
         kusayla,
         nilou
-    ]
+    ],[
+        lisa
+    ])
     [
         rukkhadevataGreaterLord `samsara` nahida,
         nahida `kill` rukkhadevataGreaterLord,

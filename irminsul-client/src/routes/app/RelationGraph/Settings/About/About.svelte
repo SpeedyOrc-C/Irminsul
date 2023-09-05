@@ -20,7 +20,7 @@
         new Name("ZY_", null, "https://space.bilibili.com/67662455"),
     ]
 
-    const version = "2023.0904.0";
+    const version = "2023.0905.0";
 </script>
 
 <h1>Irminsul</h1>

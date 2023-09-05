@@ -31,8 +31,7 @@
     <Separator width="2rem" />
 
     {#if relationGraph != null}
-        {@const pathElements = relationGraph.path.concat([{ id: id, translation: relationGraph.rootTranslation }])}
-        <Path enabled={!editing} on:jump-to {pathElements}/>
+        <Path enabled={!editing} on:jump-to {relationGraph}/>
     {/if}
 </div>
 

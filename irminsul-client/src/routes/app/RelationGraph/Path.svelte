@@ -1,14 +1,11 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import type { PathElement } from "./RelationGraph";
+    import type {PathElement, RelationGraph} from "./RelationGraph";
 
-    export let pathElements: Array<PathElement>;
+    export let relationGraph: RelationGraph;
     export let enabled = true;
 
-    function pathElementClick(pathElement: PathElement) {
-        if (!enabled) return;
-        // Prevent jumping if the user clicks on the last cluster
-        if (pathElement.id == pathElements[pathElements.length - 1].id) return;
+    function click(pathElement: PathElement) {
         dispatch("jump-to", pathElement.id);
     }
 
@@ -17,12 +14,13 @@
 
 <div class="path" class:enabled>
     <div class="path-elements">
-        {#each pathElements as pathElement}
+        {#each relationGraph.path as element}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="path-element" on:click={() => pathElementClick(pathElement)} tabindex="0">
-                {pathElement.translation}
+            <div class="path-element" on:click={() => click(element)} tabindex="0">
+                {element.translation}
             </div>
         {/each}
+        <div class="path-element">{relationGraph.rootTranslation}</div>
     </div>
 </div>
 

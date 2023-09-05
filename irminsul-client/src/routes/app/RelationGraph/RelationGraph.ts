@@ -51,30 +51,24 @@ export interface RelationGraph {
 
 export function dumpRelationGraph2Haskell(rg: RelationGraph): string {
     return [
-        '(Just $ RelationGraphLayout {',
-
-        `    rootProperty = rl (${rg.rootPosition.x}, ${rg.rootPosition.y}),`,
-
-        '    elementProperties = [',
+        `(layout (${rg.rootPosition.x}, ${rg.rootPosition.y}) [`,
         [
             ...(rg.atoms.length > 0 ?
                 [rg.atoms.map(atom =>
-                    `        al ` +
+                    `    al ` +
                     `${lowercaseFirstLetter(atom.id)} ` +
                     `(${atom.position.x}, ${atom.position.y})`
                 ).join(',\n')] : []),
 
             ...(rg.clusters.length > 0 ?
                 [rg.clusters.map(cluster =>
-                    `        cl ` +
+                    `    cl ` +
                     `${lowercaseFirstLetter(cluster.id)} ` +
                     `(${cluster.position.x}, ${cluster.position.y}) ` +
                     `(${cluster.anchor.x}, ${cluster.anchor.y}) ` +
                     `(${cluster.size.x}, ${cluster.size.y})`
                 ).join(',\n')] : []),
         ].join(',\n\n'),
-
-        '    ]',
-        '})',
+        '])',
     ].join('\n')
 }

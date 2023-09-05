@@ -80,5 +80,22 @@
     "view-options": {
         "show-coordinates": "Show coordinates",
         "edit-mode": "Edit mode"
+    },
+    "about": {
+        "what-is-this": {
+            "title": "What's this?",
+            "body": "This is a relation graph of characters in Genshin Impact."
+        },
+        "acknowledgements": {
+            "title": "Acknowledgements",
+            "data-provider": "Data Providers (Ordered by pronunciation)",
+            "software-used": {
+                "title": "Software Used",
+                "webstorm": {
+                    "copyright": "Copyright © 2023 JetBrains s.r.o.<br>WebStorm and the WebStorm logo are registered trademarks of JetBrains s.r.o."
+                }
+            }
+        },
+        "client-version": "Client Version: "
     }
 }

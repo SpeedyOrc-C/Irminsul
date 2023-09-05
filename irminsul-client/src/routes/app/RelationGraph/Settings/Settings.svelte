@@ -4,7 +4,7 @@
     import ButtonClose from "$lib/ui/Button/ButtonClose.svelte";
     import Language from "./Language.svelte";
     import SettingsCategories from "$lib/ui/Settings/SettingsCategories.svelte";
-    import About from "./About.svelte";
+    import About from "./About/About.svelte";
     import File from "./File.svelte";
     import { _ } from "svelte-i18n";
     import Other from "./Other.svelte";

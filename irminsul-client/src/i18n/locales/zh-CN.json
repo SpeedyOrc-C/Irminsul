@@ -80,5 +80,22 @@
     "view-options": {
         "show-coordinates": "显示坐标",
         "edit-mode": "编辑模式"
+    },
+    "about": {
+        "what-is-this": {
+            "title": "这是什么？",
+            "body": "这是一个展示电子游戏《原神》中部分人物的关系的东西。"
+        },
+        "acknowledgements": {
+            "title": "鸣谢",
+            "data-provider": "数据提供（读音顺序）",
+            "software-used": {
+                "title": "使用的软件",
+                "webstorm": {
+                    "copyright": "版权所有 © 2023 JetBrains s.r.o. <br>WebStorm 和 WebStorm 的图案是 JetBrains s.r.o. 的注册商标。"
+                }
+            }
+        },
+        "client-version": "客户端版本："
     }
 }

@@ -1,0 +1,15 @@
+%common {
+    color: #ece4d8;
+}
+
+a {
+    @extend %common;
+
+    text-decoration-color: #ffbd2288;
+    text-decoration-thickness: 2px;
+
+    &.text:hover {
+        text-decoration: none;
+        background-color: #ffbd2244;
+    }
+}

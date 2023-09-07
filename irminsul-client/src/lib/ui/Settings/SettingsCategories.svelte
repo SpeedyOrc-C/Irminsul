@@ -1,6 +1,6 @@
 <script lang="ts">
     import SettingsItemCloudyBackground from "$lib/Canvas/SettingsItemCloudyBackground.svelte";
-    import { createEventDispatcher } from "svelte";
+    import {afterUpdate, createEventDispatcher, onMount} from "svelte";
     import { _ } from "svelte-i18n";
 
     export let options: Array<string>;
@@ -8,29 +8,38 @@
     export let show: boolean;
     export let selectedCategory: string;
 
-    const dispatch = createEventDispatcher();
+    let categories: HTMLElement;
+
+    function click(category: string) {
+        selectedCategory = category;
+    }
+
+    function keydown(e: KeyboardEvent, category: string) {
+        if (document.activeElement == e.target && (e.code === "Enter" || e.code === "Space")) {
+            selectedCategory = category;
+        }
+    }
+
+    afterUpdate(() => {
+        if (show) {
+            categories.focus();
+        }
+    })
 </script>
 
-<div id="settings-categories" class:show>
+<div id="settings-categories" class:show bind:this={categories}>
     {#each options as option}
         {@const selected = option === selectedCategory}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- 小小的一个点竟然暗藏玄机，真有你的！ -->
-        <div class="option" class:selected
-            on:click={() => {
-                selectedCategory = option;
-                dispatch("settings-categories-change", {
-                    category: selectedCategory
-                });
-            }}
-        >
+        <div class="option" class:selected on:click={() => click(option)}>
             {#if selected && !reduceVisualEffect}
                 <SettingsItemCloudyBackground />
             {/if}
 
-            <div class="option-background"></div>
+            <div class="background"></div>
 
-            <div class="option-bullet">
+            <div class="bullet">
                 <div class="bullet-outer"></div>
                 {#if selected}
                     <div class="bullet-arrow-with-background">
@@ -42,7 +51,12 @@
                 {/if}
             </div>
 
-            <div class="option-label">{$_(`settings.category.${option}`)}</div>
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <div class="label">
+                <div class="label-text" style="width: fit-content" tabindex="0" on:keydown={e => keydown(e, option)}>
+                    {$_(`settings.category.${option}`)}
+                </div>
+            </div>
         </div>
     {/each}
 </div>
@@ -93,14 +107,14 @@
 
         cursor: pointer;
 
-        & > .option-background {
+        & > .background {
             position: absolute;
             height: 3.2rem;
             width: 20rem;
             border-radius: 3.2rem;
         }
 
-        & > .option-bullet {
+        & > .bullet {
             position: absolute;
             top: 1.6rem;
             left: 1.6rem;
@@ -147,17 +161,8 @@
             }
         }
 
-        & > .option-label {
-            transform: translate(2.7rem, 0.03rem) scale(100%);
-            font-size: 1.7rem;
-            color: #ece4d8cc;
-
-            transition-property: transform;
-            transition-duration: 0.1s;
-        }
-
         &:hover {
-            & > .option-background {
+            & > .background {
                 background-image: linear-gradient(
                     to right,
                     #ece4d818,
@@ -167,7 +172,7 @@
                 );
             }
 
-            & > .option-bullet {
+            & > .bullet {
                 & > .bullet-outer {
                     width: 0.75rem;
                     height: 0.75rem;
@@ -180,7 +185,7 @@
             }
         }
 
-        @keyframes option-background-blink {
+        @keyframes background-blink {
             0% {
                 background-image: linear-gradient(
                     to right,
@@ -214,24 +219,24 @@
         }
 
         &:active {
-            & > .option-background {
-                animation: option-background-blink 0.3s;
+            & > .background {
+                animation: background-blink 0.3s;
                 animation-fill-mode: forwards;
             }
         }
 
         &.selected {
-            & > .option-background {
+            & > .background {
                 animation: none;
                 background-image: none;
             }
 
-            & > .option-label {
+            & > .label {
                 transform: translate(5.2rem, 0.03rem) scale(120%);
                 color: #ece4d8;
             }
 
-            & > .option-bullet {
+            & > .bullet {
                 & > .bullet-outer {
                     width: 0.9rem;
                     height: 0.9rem;
@@ -277,5 +282,18 @@
                 }
             }
         }
+    }
+
+    .label {
+        transform: translate(2.7rem, 0.03rem) scale(100%);
+        font-size: 1.7rem;
+        color: #ece4d8cc;
+
+        transition-property: transform;
+        transition-duration: 0.1s;
+    }
+
+    .label-text {
+        width: fit-content;
     }
 </style>

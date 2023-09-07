@@ -5,15 +5,37 @@
 
     const dispatch = createEventDispatcher();
 
+    export let value = false;
+
     function click() {
         value = !value;
         dispatch("switch-change", value);
     }
 
-    export let value = false;
+    function keydown(e: KeyboardEvent) {
+        if (e.target !== document.activeElement) return;
+
+        if (e.code === "Enter" || e.code === "Space") {
+            click();
+            return;
+        }
+
+        if (e.code === "ArrowLeft") {
+            value = false;
+            dispatch("switch-change", value);
+            return;
+        }
+
+        if (e.code === "ArrowRight") {
+            value = true;
+            dispatch("switch-change", value);
+            return;
+        }
+    }
 </script>
 
-<div class="switch" class:checked={value} on:click={click}>
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div class="switch" class:checked={value} on:click={click} on:keydown={keydown} tabindex="0">
     <div class="inner">
         <div class="bullet">
             <div class="tick"><IconTick color="#808d9d"/></div>

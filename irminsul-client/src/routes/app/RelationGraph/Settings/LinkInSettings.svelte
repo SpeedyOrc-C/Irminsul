@@ -5,17 +5,14 @@
 
     export let text: string;
     export let link: string;
+
+    function click() {
+        window.open(link, "_blank");
+    }
 </script>
 
 <ItemBar {text}>
-    <a href={link}>
-        <ButtonInSettings>{$_("settings.msg.click-to-proceed")}</ButtonInSettings>
-    </a>
+    <ButtonInSettings on:button-clicked={click}>
+        {$_("settings.msg.click-to-proceed")}
+    </ButtonInSettings>
 </ItemBar>
-
-<style lang="scss">
-    a {
-        color: unset;
-        text-decoration: unset;
-    }
-</style>

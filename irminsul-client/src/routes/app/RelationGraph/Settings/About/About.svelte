@@ -23,38 +23,48 @@
     const version = "2023.0905.0";
 </script>
 
-<h1>Irminsul</h1>
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div class="about" tabindex="0">
+    <h1>Irminsul</h1>
 
-<h2>{$_("about.what-is-this.title")}</h2>
-<p>{$_("about.what-is-this.body")}</p>
+    <h2>{$_("about.what-is-this.title")}</h2>
+    <p>{$_("about.what-is-this.body")}</p>
 
-<h2>{$_("about.acknowledgements.title")}</h2>
+    <h2>{$_("about.acknowledgements.title")}</h2>
 
-<h3>{$_("about.acknowledgements.data-provider")}</h3>
-<p>
-    {#each dataProviders as name}
-        <NameC {name}/>
-        <br>
-    {/each}
-</p>
+    <h3>{$_("about.acknowledgements.data-provider")}</h3>
+    <p>
+        {#each dataProviders as name}
+            <NameC {name}/>
+            <br>
+        {/each}
+    </p>
 
-<h3>{$_("about.acknowledgements.software-used.title")}</h3>
-<p>
-    {#if $locale === "zh-CN"}
-        本网页由<a href="https://jb.gg/OpenSourceSupport" class="text" target="_blank">开源开发许可证</a>下的 WebStorm 编写。
-    {:else if $locale === "en-US"}
-        This website is developed with Webstorm under <a href="https://jb.gg/OpenSourceSupport" class="text" target="_blank">Open Source Development License</a>.
-    {/if}
-</p>
-<p></p>
-<p><a href="https://www.jetbrains.com/webstorm" target="_blank">
-    <img class="webstorm-logo" alt="WebStorm logo."
-         src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm.png">
-</a></p>
-<p class="copyright">{@html $_("about.acknowledgements.software-used.webstorm.copyright")}
-</p>
+    <h3>{$_("about.acknowledgements.software-used.title")}</h3>
+    <p>
+        {#if $locale === "zh-CN"}
+            本网页由
+            <a href="https://jb.gg/OpenSourceSupport" class="text" target="_blank">
+                开源开发许可证
+            </a>
+            下的 WebStorm 编写。
+        {:else if $locale === "en-US"}
+            This website is developed with Webstorm under
+            <a href="https://jb.gg/OpenSourceSupport" class="text" target="_blank">
+                Open Source Development License
+            </a>.
+        {/if}
+    </p>
+    <p></p>
+    <p><a href="https://www.jetbrains.com/webstorm" target="_blank">
+        <img class="webstorm-logo" alt="WebStorm logo."
+             src="https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm.png">
+    </a></p>
+    <p class="copyright">{@html $_("about.acknowledgements.software-used.webstorm.copyright")}
+    </p>
 
-<p>{$_("about.client-version") + version}</p>
+    <p>{$_("about.client-version") + version}</p>
+</div>
 
 <style lang="scss">
     @import "./global.scss";

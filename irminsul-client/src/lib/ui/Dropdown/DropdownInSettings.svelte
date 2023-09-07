@@ -25,10 +25,9 @@
     beforeUpdate(() => {label = options.find(op => op.value === value)?.label ?? "option";});
 </script>
 
-<Button inSettings={true}>
+<Button inSettings={true} on:button-clicked={click}>
     <div class="down-arrow"/>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="label" on:click={click}>{label}</div>
+    <div class="label">{label}</div>
     <DropdownList {options} bind:below bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
 </Button>
 

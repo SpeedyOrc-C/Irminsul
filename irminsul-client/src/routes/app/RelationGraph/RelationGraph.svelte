@@ -258,13 +258,13 @@
               bind:smoothMovement
               on:update-view={updateView}/>
 
-    <ViewOptions bind:showCoordinates bind:editing bind:hideUi />
-
     <Panel on:jump-to={e => loadRelationGraph(e.detail)}
            on:open-settings={openSettings}
            bind:relationGraph
            bind:hideUi
-           {editing} {id}/>
+           {editing}/>
+
+    <ViewOptions bind:showCoordinates bind:editing bind:hideUi />
 
     <DialogOk title={$_("error.layout-missing.self")} bind:show={showLayoutMissing}>
         {$_("error.layout-missing.detail")}

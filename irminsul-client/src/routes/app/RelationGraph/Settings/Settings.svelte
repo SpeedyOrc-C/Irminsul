@@ -9,7 +9,7 @@
     import { _ } from "svelte-i18n";
     import Other from "./Other.svelte";
     import RelationGraph from "./RelationGraph.svelte";
-    import {afterUpdate, createEventDispatcher, onMount} from "svelte";
+    import {afterUpdate, createEventDispatcher} from "svelte";
     import type RelationGraphSettings from "../RelationGraphSettings";
     import type {ShowJoystick} from "../RelationGraphSettings";
 
@@ -54,8 +54,8 @@
     <div class="top-bar">
         <img class="icon" src={Icon} alt="" />
 
-        <div class="button-close" on:click={close}>
-            <ButtonClose />
+        <div class="button-close">
+            <ButtonClose on:button-clicked={close} />
         </div>
 
         <div class="title">
@@ -64,9 +64,9 @@
     </div>
 
     <SettingsCategories options={["file", "relation-graph", "language", "other", "about"]}
-        bind:reduceVisualEffect bind:show
-        on:settings-categories-change={e => (selectedCategory = e.detail.category)}
-        {selectedCategory}
+        bind:show
+        bind:reduceVisualEffect
+        bind:selectedCategory
     />
 
     <div class="selected-category">

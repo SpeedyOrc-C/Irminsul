@@ -17,7 +17,7 @@
     }
 
     function keydown(e: KeyboardEvent) {
-        if (document.activeElement == self && (e.key === "Enter" || e.key === " ")) {
+        if (document.activeElement == self && (e.code === "Enter" || e.code === "Space")) {
             click();
         }
     }
@@ -49,7 +49,7 @@
         transition-property: background-color, box-shadow;
         transition-duration: 0.2s;
 
-        &:hover, &:focus {
+        &:hover {
             box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0.2rem white,
                 inset 0 0 0 0.1rem #0000001c;
             outline: none;

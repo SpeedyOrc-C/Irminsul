@@ -5,8 +5,14 @@
     export let relationGraph: RelationGraph;
     export let enabled = true;
 
-    function click(pathElement: PathElement) {
+    function jumpTo(pathElement: PathElement) {
         dispatch("jump-to", pathElement.id);
+    }
+
+    function keydown(e: KeyboardEvent, pathElement: PathElement) {
+        if (e.code == "Enter" || e.code == "Space") {
+            jumpTo(pathElement);
+        }
     }
 
     const dispatch = createEventDispatcher();
@@ -16,7 +22,11 @@
     <div class="path-elements">
         {#each relationGraph.path as element}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="path-element" on:click={() => click(element)} tabindex="0">
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <div class="path-element" tabindex="0"
+                 on:click={() => jumpTo(element)}
+                 on:keydown={e => keydown(e, element)}
+            >
                 {element.translation}
             </div>
         {/each}

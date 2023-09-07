@@ -33,6 +33,12 @@
         }
         show = false;
     }
+
+    function keydown(e: KeyboardEvent, newValue: string) {
+        if (document.activeElement == e.target && (e.code == "Enter" || e.code == "Space")) {
+            click(newValue);
+        }
+    }
 </script>
 
 <div class="dropdown-list" class:below bind:this={self}>
@@ -42,7 +48,8 @@
             <div class="option" class:triggered={option.value === value}
                 on:click={() => click(option.value)}
             >
-                <div class="option-background"></div>
+                <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                <div class="option-background" tabindex="0" on:keydown={e => keydown(e, option.value)} />
                 <div class="option-label">{option.label}</div>
             </div>
         {/each}

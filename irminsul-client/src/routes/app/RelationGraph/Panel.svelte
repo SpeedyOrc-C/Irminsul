@@ -8,7 +8,6 @@
     import Path from "./Path.svelte";
 
     export let relationGraph: RelationGraph | null;
-    export let id: string;
     export let editing: boolean;
     export let hideUi: boolean;
 

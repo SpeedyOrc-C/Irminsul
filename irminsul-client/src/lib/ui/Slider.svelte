@@ -10,49 +10,63 @@
     let sliderDom: HTMLElement;
     let slider: Slider;
 
-    let percentage: number;
-    let percentageValue: number;
-
     const dispatch = createEventDispatcher();
 
-    function callback(p: number) {
-        percentage = p;
-        percentageValue = percentage * 100;
-        value = slider.toValue(p);
+    function drag(x: number) {
+        slider.drag(x);
+
+        value = slider.value;
+        slider = slider;
     }
 
     function stop() {
         if (slider.dragging) {
             dispatch("slider-change", value);
             slider.stop();
+
+            value = slider.value;
+            slider = slider;
         }
     }
 
-    onMount(() => {
-        slider = new Slider(sliderDom, min, max, divisions, callback);
-        percentage = slider.fromValue(value);
-        percentageValue = percentage * 100;
-    })
+    function keydown(e: KeyboardEvent) {
+        switch (e.code) {
+            case "ArrowLeft": slider.decrease(); break;
+            case "ArrowRight": slider.increase(); break;
+            case "Home": slider.setPercentage(0); break;
+            case "End": slider.setPercentage(1); break;
+            default: return;
+        }
+
+        value = slider.value;
+        slider = slider;
+    }
+
+    onMount(() => slider = new Slider(sliderDom, min, max, value, divisions))
 </script>
 
+<!-- User may drag the slider beyond its boundary. -->
 <svelte:window
-    on:mousemove={e => slider.drag(e.clientX)}
-    on:touchmove={e => slider.drag(e.targetTouches[0].clientX)}
+    on:mousemove={e => drag(e.clientX)}
+    on:touchmove={e => drag(e.targetTouches[0].clientX)}
     on:mouseup={stop}
     on:touchend={stop}
 />
 
 <div class="slider" bind:this={sliderDom}>
     <div class="bar"/>
-    <div class="filled-bar" style:width="{percentageValue}%"></div>
-    <div class="bullet" style:left="{percentageValue}%"
-         on:mousedown={slider.start}
-         on:touchstart={slider.start}
-    >
-        <div class="outer-square"/>
-        <div class="inner-square"/>
-        <div class="touch-area"/>
-    </div>
+    {#if slider !== undefined}
+        <div class="filled-bar" style:width="{slider.percentage * 100}%"></div>
+        <div class="bullet" style:left="{slider.percentage * 100}%"
+             on:mousedown={slider.start}
+             on:touchstart={slider.start}
+        >
+            <div class="outer-square"/>
+            <div class="inner-square"/>
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <div class="touch-area" on:keydown={keydown} tabindex="0"/>
+        </div>
+    {/if}
 </div>
 
 <style lang="scss">

@@ -45,30 +45,35 @@
 </div>
 
 <style lang="scss">
+    $width: 5.5rem;
+    $height: 2.5rem;
+
     .switch {
         position: relative;
 
-        height: 2.5rem;
-        width: 5.5rem;
+        height: $height;
+        width: $width;
         border: 2px solid #ece5d8;
-        border-radius: 2.5rem;
+        border-radius: 999rem;
 
         cursor: pointer;
     }
 
     .inner {
+        position: relative;
         height: 100%;
         width: 100%;
-        border-radius: 2.5rem;
+        box-sizing: border-box;
+        border-radius: 999rem;
 
         transition-duration: 0.2s;
         transition-property: background-color;
 
-        box-shadow: inset 0 0 0 2px #0004;
+        border: 2px solid #0004;
         background-color: #353d4f;
 
         .switch.checked > & {
-            box-shadow: inset 0 0 0 2px #0002;
+            border: 2px solid #0002;
             background-color: #d3bc8e;
         }
     }
@@ -77,9 +82,8 @@
         position: absolute;
         top: 50%; left: 50%;
 
-        height: calc(2.5rem - 4px);
-        width: calc(2.5rem - 4px);
-        border-radius: 2.5rem;
+        height: 100%; aspect-ratio: 1;
+        border-radius: 999rem;
 
         background-color: #ece5d8;
         box-shadow: 0 0 0.2rem 0 white;
@@ -87,10 +91,12 @@
         transition-duration: 0.2s;
         transition-property: transform;
 
-        transform: translate(calc(-50% - 1.5rem), -50%);
+        $displacement: calc(($width - $height) / 2);
+
+        transform: translate(calc(-50% - $displacement), -50%);
 
         .switch.checked & {
-            transform: translate(calc(-50% + 1.5rem), -50%);
+            transform: translate(calc(-50% + $displacement), -50%);
         }
     }
 

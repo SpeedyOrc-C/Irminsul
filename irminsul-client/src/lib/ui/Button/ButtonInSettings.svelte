@@ -1,8 +1,24 @@
 <script lang="ts">
-    import Button from "../Button.svelte";
+    import {createEventDispatcher} from "svelte";
+
+    const dispatch = createEventDispatcher();
+
+    let self: HTMLElement;
+
+    function click() {
+        dispatch("button-clicked");
+        self.blur();
+    }
+
+    function keydown(e: KeyboardEvent) {
+        if (document.activeElement == self && (e.code === "Enter" || e.code === "Space")) {
+            click();
+        }
+    }
 </script>
 
-<Button inSettings={true} on:button-clicked>
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<div class="button-in-settings" bind:this={self} tabindex="0" on:click={click} on:keydown={keydown}>
     <div class="label">
         <slot />
     </div>
@@ -11,9 +27,32 @@
         <div class="big-arrow"></div>
         <div class="small-arrow"></div>
     </div>
-</Button>
+</div>
 
 <style lang="scss">
+    .button-in-settings {
+        width: 19rem;
+        height: 3.2rem;
+        border-radius: 0 99rem 99rem 0;
+
+        box-shadow: none;
+        background-color: #d8cdb9;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        cursor: pointer;
+
+        &:active {
+            background-image: radial-gradient(
+                rgba(255, 242, 205, 0.9),
+                rgba(255, 223, 164, 0.5),
+                #d8cdb9,
+                #d8cdb9
+            ) !important;
+        }
+    }
+
     .label {
         position: absolute;
         height: 3.2rem;

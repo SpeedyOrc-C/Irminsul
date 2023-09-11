@@ -1,12 +1,12 @@
 <script lang="ts">
     import type { Option } from "$lib/util/Option";
-    import {beforeUpdate, createEventDispatcher} from "svelte";
+    import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
     import Button from "../Button.svelte";
     import DropdownList from "../DropdownList.svelte";
+    import ButtonInSettings from "$lib/ui/Button/ButtonInSettings.svelte";
 
     export let options: Array<Option>;
     export let value: string;
-    export let below = true;
 
     const dispatch = createEventDispatcher();
 
@@ -19,17 +19,18 @@
     }
 
     function click() {
+        console.log("click");
         show = !show;
     }
 
-    beforeUpdate(() => {label = options.find(op => op.value === value)?.label ?? "option";});
+    afterUpdate(() => {label = options.find(op => op.value === value)?.label ?? "option";});
 </script>
 
-<Button inSettings={true} on:button-clicked={click}>
-    <div class="down-arrow"/>
-    <div class="label">{label}</div>
-    <DropdownList {options} bind:below bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
-</Button>
+<ButtonInSettings on:button-clicked={click}>
+        <div class="down-arrow"/>
+        <div class="label">{label}</div>
+        <DropdownList {options} bind:show bind:value on:dropdown-list-change={dropdownListChange}/>
+</ButtonInSettings>
 
 <style lang="scss">
     .label {

@@ -5,33 +5,30 @@
     export let options: Array<Option>;
     export let value: string;
     export let show: boolean;
-    export let below: boolean;
 
-    let displayed = false;
+    let below = true;
+    let initial = true;
     let self: HTMLElement;
 
     const dispatch = createEventDispatcher();
 
     afterUpdate(() => {
         if (show) {
-            if (displayed == false) {
-                below = self.getBoundingClientRect().bottom + 300 < document.body.getBoundingClientRect().bottom;
+            if (initial) {
+                initial = false;
             }
-            displayed = true;
+            below = self.getBoundingClientRect().bottom + 300 < document.body.getBoundingClientRect().bottom;
         } else {
-            setTimeout(() => {
-                displayed = false;
-                below = true;
-            }, 200);
+            setTimeout(() => below = true, 200);
         }
     })
 
     function click(newValue: string) {
+        show = false;
         if (value !== newValue) {
             dispatch("dropdown-list-change", newValue);
             value = newValue;
         }
-        show = false;
     }
 
     function keydown(e: KeyboardEvent, newValue: string) {
@@ -42,11 +39,11 @@
 </script>
 
 <div class="dropdown-list" class:below bind:this={self}>
-    <div class="options" class:show class:displayed>
+    <div class="options" class:show class:initial>
         {#each options as option}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div class="option" class:triggered={option.value === value}
-                on:click={() => click(option.value)}
+                on:click|stopPropagation={() => click(option.value)}
             >
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                 <div class="option-background" tabindex="0" on:keydown={e => keydown(e, option.value)} />
@@ -82,33 +79,41 @@
         background-color: #495366;
 
         animation-fill-mode: forwards;
-
-        animation: option-disappear 0.2s;
-        &.show {
-            animation: option-appear 0.2s;
+        animation-duration: 0.2s;
+        &.initial {
+            display: none;
         }
-
-        display: none;
-        &.displayed {
-            display: block;
+        animation-name: option-disappear;
+        &.show {
+            animation-name: option-appear;
         }
     }
 
     @keyframes option-appear {
-        from {
+        0% {
             opacity: 0%;
+            display: none;
         }
-        to {
+        99% {
+            display: block;
+        }
+        100% {
             opacity: 100%;
+            display: block;
         }
     }
 
     @keyframes option-disappear {
-        from {
+        0% {
             opacity: 100%;
+            display: block;
         }
-        to {
+        99% {
+            display: block;
+        }
+        100% {
             opacity: 0%;
+            display: none;
         }
     }
 

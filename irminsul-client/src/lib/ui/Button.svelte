@@ -23,7 +23,7 @@
     }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div class="button" tabindex="0" class:has-border={hasBorder} class:in-settings={inSettings}
     style:height style:width {style}
     on:click={click} on:keydown={keydown} bind:this={self}
@@ -76,25 +76,6 @@
 
                 animation: click-blink-ani 0.2s;
                 animation-fill-mode: forwards;
-            }
-        }
-
-        &.in-settings {
-            width: 19rem;
-            height: 3.2rem;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-
-            box-shadow: none;
-            background-color: #d8cdb9;
-
-            &:active {
-                background-image: radial-gradient(
-                    rgba(255, 242, 205, 0.9),
-                    rgba(255, 223, 164, 0.5),
-                    #d8cdb9,
-                    #d8cdb9
-                ) !important;
             }
         }
     }

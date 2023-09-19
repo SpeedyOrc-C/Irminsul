@@ -1,13 +1,22 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import RelationGraph from "./RelationGraph/RelationGraph.svelte";
-    import {page} from "$app/stores";
 
     import "../../global.scss";
 
-    let id: string;
+    let mounted = false;
+    let id = "Teyvat";
 
-    onMount(() => { id = $page.url.searchParams.get("id") ?? "Teyvat"; });
+    onMount(() => {
+        const shareId = sessionStorage.getItem("share_id");
+        if (shareId !== null) {
+            id = shareId;
+            sessionStorage.removeItem("share_id");
+        }
+        mounted = true;
+    });
 </script>
 
-{#if id !== undefined} <RelationGraph {id} /> {/if}
+{#if mounted}
+    <RelationGraph {id} />
+{/if}

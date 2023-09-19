@@ -14,7 +14,7 @@
     import ViewGraphical from "./ViewGraphical/ViewGraphical.svelte";
     import Editor from "./ViewGraphical/Editor";
 
-    export let id: string;
+    export let id = "Teyvat";
 
     let view = new ViewController();
     let editor: Editor;
@@ -72,8 +72,6 @@
         view.reset();
         updateView();
         id = loadId;
-
-        window.history.replaceState(undefined, "", `/app/?id=${id}`);
 
         console.info("Relation graph loaded: ", json);
     }

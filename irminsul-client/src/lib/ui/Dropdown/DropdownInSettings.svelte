@@ -19,7 +19,6 @@
     }
 
     function click() {
-        console.log("click");
         show = !show;
     }
 

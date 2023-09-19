@@ -7,21 +7,44 @@
     export let show: boolean;
 
     let below = true;
-    let initial = true;
     let self: HTMLElement;
 
     const dispatch = createEventDispatcher();
 
+    enum State { Hidden, Appearing, Shown, Disappearing }
+    let state = State.Hidden;
+
     afterUpdate(() => {
-        if (show) {
-            if (initial) {
-                initial = false;
-            }
-            below = self.getBoundingClientRect().bottom + 300 < document.body.getBoundingClientRect().bottom;
-        } else {
-            setTimeout(() => below = true, 200);
+        if (show)
+            open();
+        else
+            close();
+    });
+
+    function open() {
+        if (state == State.Hidden || state == State.Disappearing) {
+            if (state == State.Hidden)
+                below = self.getBoundingClientRect().bottom + 300 < document.body.getBoundingClientRect().bottom;
+            state = State.Appearing;
+            setTimeout(() => {
+                if (state == State.Appearing) {
+                    state = State.Shown;
+                }
+            }, 200);
         }
-    })
+    }
+
+    function close() {
+        if (state == State.Shown || state == State.Appearing) {
+            state = State.Disappearing;
+            setTimeout(() => {
+                if (state == State.Disappearing) {
+                    state = State.Hidden;
+                    below = true;
+                }
+            }, 200);
+        }
+    }
 
     function click(newValue: string) {
         show = false;
@@ -38,28 +61,38 @@
     }
 </script>
 
-<div class="dropdown-list" class:below bind:this={self}>
-    <div class="options" class:show class:initial>
-        {#each options as option}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="option" class:triggered={option.value === value}
-                on:click|stopPropagation={() => click(option.value)}
-            >
-                <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                <div class="option-background" tabindex="0" on:keydown={e => keydown(e, option.value)} />
-                <div class="option-label">{option.label}</div>
-            </div>
-        {/each}
-    </div>
+<div class="dropdown-list" class:below bind:this={self}
+     class:hidden={state === State.Hidden}
+     class:appearing={state === State.Appearing}
+     class:disappearing={state === State.Disappearing}
+>
+    {#each options as option}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div class="option" class:triggered={option.value === value}
+            on:click|stopPropagation={() => click(option.value)}
+        >
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <div class="option-background" tabindex="0" on:keydown={e => keydown(e, option.value)} />
+            <div class="option-label">{option.label}</div>
+        </div>
+    {/each}
 </div>
 
 <style lang="scss">
     .dropdown-list {
         position: absolute;
+        box-sizing: border-box;
         width: 100%;
+        padding: 0.1rem 0.3rem;
 
         top: unset;
         bottom: 3.5rem;
+
+        border-radius: 1.3rem;
+        max-height: calc(12 * (1.2rem + 2 * 0.5rem));
+        overflow-y: auto;
+
+        background-color: #495366;
 
         z-index: 1 !important;
 
@@ -67,53 +100,26 @@
             top: 3.2rem;
             bottom: unset;
         }
-    }
-    .options {
-        width: calc(100% - 2 * 0.3rem);
-
-        padding: 0.1rem 0.3rem;
-        border-radius: 1.3rem;
-        max-height: calc(12 * (1.2rem + 2 * 0.5rem));
-        overflow-y: auto;
-
-        background-color: #495366;
 
         animation-fill-mode: forwards;
         animation-duration: 0.2s;
-        &.initial {
+
+        &.hidden {
             display: none;
         }
-        animation-name: option-disappear;
-        &.show {
+        &.appearing {
+            @keyframes option-disappear {
+                from { opacity: 100%; }
+                to { opacity: 0%; }
+            }
             animation-name: option-appear;
         }
-    }
-
-    @keyframes option-appear {
-        0% {
-            opacity: 0%;
-            display: none;
-        }
-        99% {
-            display: block;
-        }
-        100% {
-            opacity: 100%;
-            display: block;
-        }
-    }
-
-    @keyframes option-disappear {
-        0% {
-            opacity: 100%;
-            display: block;
-        }
-        99% {
-            display: block;
-        }
-        100% {
-            opacity: 0%;
-            display: none;
+        &.disappearing {
+            @keyframes option-appear {
+                from { opacity: 0%; }
+                to { opacity: 100%; }
+            }
+            animation-name: option-disappear;
         }
     }
 

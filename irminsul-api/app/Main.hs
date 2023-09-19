@@ -28,7 +28,7 @@ main = do
         let portMaybe = readMaybe (head args) :: Maybe Int
         if isNothing portMaybe then putStrLn "Cannot read port number."
         else do
-            let port = fromJust portMaybe
+            let (Just port) = portMaybe
             if port < 0 || port > 65535 then putStrLn "Invalid port number."
             else runOn port
     where 
@@ -48,12 +48,17 @@ router :: [String] -> Response
 router params = showResponse $ case params of
     {-
     Relation Graph
-    Path: api/relation-graph/<cluster-id>/<language-code>
+    Path: api/relation-graph/<cluster ID>/<language code>/<who am I>
     -}
     "relation-graph" : [clusterId, lang, whoAmI] -> apiRelationGraph clusterId lang whoAmI
     "relation-graph" : [clusterId, lang]         -> apiRelationGraph clusterId lang "aether"
     "relation-graph" : [clusterId]               -> apiRelationGraph clusterId "en-us" "aether"
     "relation-graph" : _                         -> illegalRequest (ParamNumMismatch 3)
+
+    "all" : ["cluster"] -> apiAllClusters
+    "all" : ["clusters"] -> apiAllClusters
+    "all" : ["atom"] -> apiAllAtoms
+    "all" : ["atoms"] -> apiAllAtoms
 
     -- It goes here if the request doesn't match any of the paths above.
     _ -> illegalRequest UnknownApi

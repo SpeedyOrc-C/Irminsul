@@ -34,6 +34,7 @@ escapeCharUnicode char
         hexCode = showHex code ""
 
 instance Show JSON where
+    show :: JSON -> String
     show JNull              = "null"
     show (JBool True)       = "true"
     show (JBool False)      = "false"
@@ -45,3 +46,10 @@ instance Show JSON where
     show (JObject object)   = "{" ++ inner ++ "}" where
         inner = intercalate "," pairs where
             pairs = map (\(key, value) -> show key ++ ":" ++ show value) object
+
+instance Semigroup JSON where
+    (<>) :: JSON -> JSON -> JSON
+    (JArray xs) <> (JArray ys) = JArray $ xs <> ys
+    (JArray xs) <> y = JArray $ xs ++ [y]
+    x <> (JArray ys) = JArray $ x : ys
+    x <> y = JArray [x, y]

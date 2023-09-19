@@ -1,4 +1,4 @@
-module API (apiRelationGraph, illegalRequest, ApiStatusCode (..)) where
+module API (apiRelationGraph, apiAllClusters, apiAllAtoms, illegalRequest, ApiStatusCode (..)) where
 
 import Irminsul
 import Translation
@@ -8,6 +8,7 @@ import Data.JSON
 import Data.Maybe
 
 import API.RelationGraph
+import API.All
 
 {-
 API responses with a JSON that include a status code and a body.
@@ -57,4 +58,10 @@ apiRelationGraph inputId inputLang inputWhoAmI = let
         else apiResponse OK $ relationGraph lang entityId whoAmI
 
     in response maybeId maybeLang maybeWhoAmI
-    
+
+
+apiAllClusters :: JSON
+apiAllClusters = apiResponse OK allClusters
+
+apiAllAtoms :: JSON
+apiAllAtoms = apiResponse OK allAtoms

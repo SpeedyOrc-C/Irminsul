@@ -67,6 +67,7 @@ executable irminsul-api
         Irminsul,
         API,
         API.RelationGraph,
+        API.All,
 
         Data.Xml,
         Data.Vector,

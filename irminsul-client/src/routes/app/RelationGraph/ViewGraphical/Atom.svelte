@@ -1,9 +1,9 @@
 <script lang="ts">
-    import {afterUpdate, createEventDispatcher, onDestroy, onMount} from "svelte";
-    import {getImgAvatar} from "../../../../asset/Asset";
+    import {afterUpdate, createEventDispatcher, onDestroy} from "svelte";
     import Coordinate from "./Coordinate.svelte";
     import type {Vector2} from "$lib/util/Vector2";
     import type Editor from "./Editor";
+    import {getAvatar} from "$lib/AssigningAvatar";
 
     const dispatch = createEventDispatcher();
 
@@ -13,7 +13,6 @@
     export let showCoordinates = false;
     export let editor: Editor;
 
-    let avatarSrc: string;
     let selected = false;
     let dim = false;
     let glitched = false;
@@ -37,10 +36,6 @@
         } else {
             glitchEffectStop();
         }
-    });
-
-    onMount(() => {
-        getImgAvatar(id, result => { avatarSrc = result });
     });
 
     onDestroy(() => glitchEffectStop());
@@ -82,7 +77,7 @@
 <div class="atom" class:selected class:dim class:glitched on:click={click}
      style:left="{position.x}rem" style:top="{-position.y}rem"
 >
-    <img class="avatar" src={avatarSrc} alt={label}/>
+    <img class="avatar" src={getAvatar(id)} alt={label}/>
 
     <div class="label font-hywh-65w">
         {glitched ? glitchedName : label}

@@ -1,0 +1,16 @@
+{
+  "id": "irminsul-genshin-relation-graph",
+  "name": "Irminsul",
+  "short_name": "Irminsul",
+  "start_url": "/app/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

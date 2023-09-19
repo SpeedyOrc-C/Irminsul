@@ -15,21 +15,19 @@
 </script>
 
 <div class="panel font-hywh-65w" class:hidden={hideUi}>
-    <Separator />
-
     <ButtonInferior on:button-clicked={() => dispatch("open-settings")}>
         {$_("panel.settings")}
     </ButtonInferior>
 
-    <Separator width="2rem" />
-
-    <ButtonInferior on:button-clicked={() => hideUi = true}>
-        {$_("panel.hide-ui")}
-    </ButtonInferior>
-
-    <Separator width="2rem" />
-
     {#if relationGraph != null}
+        <Separator width="2rem" />
+
+        <ButtonInferior on:button-clicked={() => hideUi = true}>
+            {$_("panel.hide-ui")}
+        </ButtonInferior>
+
+        <Separator width="2rem" />
+
         <Path enabled={!editing} on:jump-to {relationGraph}/>
     {/if}
 </div>
@@ -44,6 +42,7 @@
         align-items: center;
         width: 100%;
         height: 4rem;
+        padding: 0 1rem;
 
         background-color: #3e4457cc;
         -webkit-backdrop-filter: blur(0.2rem);

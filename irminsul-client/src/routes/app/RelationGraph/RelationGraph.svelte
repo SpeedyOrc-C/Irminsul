@@ -262,7 +262,9 @@
            bind:hideUi
            {editing}/>
 
-    <ViewOptions bind:showCoordinates bind:editing bind:hideUi />
+    {#if relationGraph !== null}
+        <ViewOptions bind:showCoordinates bind:editing bind:hideUi />
+    {/if}
 
     <DialogOk title={$_("error.layout-missing.self")} bind:show={showLayoutMissing}>
         {$_("error.layout-missing.detail")}

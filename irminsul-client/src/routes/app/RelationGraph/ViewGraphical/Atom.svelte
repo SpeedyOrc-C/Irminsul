@@ -74,7 +74,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="atom" class:selected class:dim class:glitched on:click={click}
+<div class="atom no-select" class:selected class:dim class:glitched on:click={click}
      style:left="{position.x}rem" style:top="{-position.y}rem"
 >
     <img class="avatar" src={getAvatar(id)} alt={label}/>
@@ -94,11 +94,6 @@
         transform: translate(-50%, -50%);
 
         z-index: 100;
-
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        cursor: pointer;
 
         transition-property: filter;
         transition-duration: 0.2s;

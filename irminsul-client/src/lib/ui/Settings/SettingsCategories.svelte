@@ -105,8 +105,6 @@
         margin-bottom: 0.7rem;
         border-radius: 3.2rem;
 
-        cursor: pointer;
-
         & > .background {
             position: absolute;
             height: 3.2rem;

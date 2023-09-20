@@ -1,23 +1,35 @@
+//noinspection CssUnknownTarget
 @font-face {
     font-family: HYWenHei-65W;
     src: url("/font/HYWenHei-65W.ttf");
 }
 .font-hywh-65w { font-family: HYWenHei-65W, sans-serif; }
 
+//noinspection CssUnknownTarget
 @font-face {
     font-family: HYWenHei-85W;
     src: url("/font/HYWenHei-85W.ttf");
 }
 .font-hywh-85w { font-family: HYWenHei-85W, sans-serif; }
 
+//noinspection CssUnknownTarget
 @font-face {
     font-family: fira-code-regular;
     src: url("/font/FiraCode-Regular.ttf");
 }
 
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+//noinspection CssUnknownTarget
 body {
     overflow: hidden;
     margin: 0;
+    cursor: url("/cursor.png"), default;
 }
 
 @media (prefers-color-scheme: no-preference), (prefers-color-scheme: dark) {

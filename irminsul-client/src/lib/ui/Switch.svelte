@@ -55,8 +55,6 @@
         width: $width;
         border: 2px solid #ece5d8;
         border-radius: 999rem;
-
-        cursor: pointer;
     }
 
     .inner {

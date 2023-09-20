@@ -61,7 +61,7 @@
     }
 </script>
 
-<div class="dropdown-list" class:below bind:this={self}
+<div class="dropdown-list no-select" class:below bind:this={self}
      class:hidden={state === State.Hidden}
      class:appearing={state === State.Appearing}
      class:disappearing={state === State.Disappearing}
@@ -159,11 +159,6 @@
 
             text-align: center;
             font-size: 1.3rem;
-
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-            cursor: pointer;
 
             color: #ece4d8;
         }

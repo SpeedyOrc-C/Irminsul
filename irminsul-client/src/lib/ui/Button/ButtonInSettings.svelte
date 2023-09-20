@@ -18,7 +18,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<div class="button-in-settings" bind:this={self} tabindex="0" on:click={click} on:keydown={keydown}>
+<div class="button-in-settings no-select" bind:this={self} tabindex="0" on:click={click} on:keydown={keydown}>
     <div class="label">
         <slot />
     </div>
@@ -37,11 +37,6 @@
 
         box-shadow: none;
         background-color: #d8cdb9;
-
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        cursor: pointer;
 
         &:active {
             background-image: radial-gradient(

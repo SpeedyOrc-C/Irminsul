@@ -40,7 +40,7 @@
     }
 </script>
 
-<div class="cluster" class:dim class:selected on:mouseup={mouseup} on:dblclick={dblclick} on:touchend={touchend}
+<div class="cluster no-select" class:dim class:selected on:mouseup={mouseup} on:dblclick={dblclick} on:touchend={touchend}
      style:left="{position.x}rem" style:top="{-position.y}rem"
      style:width="{size.x}rem" style:height="{size.y}rem"
 >
@@ -65,11 +65,6 @@
         border-radius: 0.5rem;
 
         z-index: 10;
-
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        cursor: pointer;
 
         transition-property: filter;
         transition-duration: 0.2s;

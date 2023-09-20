@@ -18,7 +18,7 @@
     const dispatch = createEventDispatcher();
 </script>
 
-<div class="path" class:enabled>
+<div class="path no-select" class:enabled>
     <div class="path-elements">
         {#each relationGraph.path as element}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -79,7 +79,6 @@
         transition-duration: 0.1s;
 
         .path.enabled &:not(:last-child) {
-            cursor: pointer;
             &:hover, &:focus {
                 background-color: white;
             }

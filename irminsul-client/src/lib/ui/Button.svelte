@@ -24,7 +24,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<div class="button" tabindex="0" class:has-border={hasBorder} class:in-settings={inSettings}
+<div class="button no-select" tabindex="0" class:has-border={hasBorder} class:in-settings={inSettings}
     style:height style:width {style}
     on:click={click} on:keydown={keydown} bind:this={self}
 >
@@ -40,11 +40,6 @@
 
         box-shadow: 0 0 1rem 0.2rem #0004, 0 0 0 0 transparent,
             inset 0 0 0 0 transparent;
-
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-        cursor: pointer;
 
         transition-property: background-color, box-shadow;
         transition-duration: 0.2s;

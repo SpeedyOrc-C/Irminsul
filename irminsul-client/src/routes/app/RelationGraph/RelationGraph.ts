@@ -3,14 +3,14 @@ import type { Vector2 } from "$lib/util/Vector2";
 
 interface Atom {
     id: string
-    translation: string
+    name: string
 
     position: Vector2
 }
 
 interface Cluster {
     id: string
-    translation: string
+    name: string
     elements: Array<string>
 
     position: Vector2
@@ -29,20 +29,18 @@ export interface RelationBetween {
     width: number
     position: Vector2
     rotation: number
-
-    needReverse: boolean
 }
 
 export interface PathElement {
     id: string
-    translation: string
+    name: string
 }
 
 export interface RelationGraph {
     id: string
     path: Array<PathElement>
     rootPosition: Vector2
-    rootTranslation: string
+    rootName: string
 
     atoms: Array<Atom>
     clusters: Array<Cluster>

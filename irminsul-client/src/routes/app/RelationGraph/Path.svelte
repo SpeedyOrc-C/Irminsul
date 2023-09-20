@@ -27,10 +27,10 @@
                  on:click={() => jumpTo(element)}
                  on:keydown={e => keydown(e, element)}
             >
-                {element.translation}
+                {element.name}
             </div>
         {/each}
-        <div class="path-element">{relationGraph.rootTranslation}</div>
+        <div class="path-element">{relationGraph.rootName}</div>
     </div>
 </div>
 

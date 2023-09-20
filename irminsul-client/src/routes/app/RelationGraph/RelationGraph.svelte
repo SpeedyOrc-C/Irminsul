@@ -232,7 +232,7 @@
 <title>
     Irminsul
     {#if relationGraph != null}
-        - {relationGraph.rootTranslation}
+        - {relationGraph.rootName}
     {/if}
 </title>
 

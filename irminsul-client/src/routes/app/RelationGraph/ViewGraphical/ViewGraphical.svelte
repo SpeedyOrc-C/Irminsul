@@ -177,7 +177,7 @@
         {/each}
 
         {#each relationGraph.clusters as cluster}
-            <Cluster id={cluster.id} label={cluster.translation} size={cluster.size}
+            <Cluster id={cluster.id} name={cluster.name} size={cluster.size}
                      on:toggle-cluster={e => toggleCluster(e.detail)}
                      on:jump-to
                      {showCoordinates} {editor}
@@ -185,7 +185,7 @@
         {/each}
 
         {#each relationGraph.atoms as atom}
-            <Atom id={atom.id} label={atom.translation}
+            <Atom id={atom.id} name={atom.name}
                   on:toggle-atom={e => toggleAtom(e.detail)}
                   {editor} {showCoordinates}
             />

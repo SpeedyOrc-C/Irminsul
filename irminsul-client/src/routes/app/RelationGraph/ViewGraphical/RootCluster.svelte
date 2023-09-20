@@ -27,7 +27,7 @@
 >
     <img id="root-cluster-background" src={RootCluster_Background} alt=""/>
     <div id="label" class="font-hywh-85w">
-        {editor.relationGraph.rootTranslation}
+        {editor.relationGraph.rootName}
     </div>
 </div>
 

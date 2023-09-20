@@ -7,7 +7,7 @@
     const dispatch = createEventDispatcher();
 
     export let id: string;
-    export let label: string;
+    export let name: string;
     export let size: Vector2;
 
     export let showCoordinates = false;
@@ -44,7 +44,7 @@
      style:left="{position.x}rem" style:top="{-position.y}rem"
      style:width="{size.x}rem" style:height="{size.y}rem"
 >
-    <div class="label font-hywh-65w">{label}</div>
+    <div class="label font-hywh-65w">{name}</div>
 
     {#if showCoordinates}
         <Coordinate coordinate={position} {size}/>

@@ -8,7 +8,7 @@
     const dispatch = createEventDispatcher();
 
     export let id: string;
-    export let label: string;
+    export let name: string;
 
     export let showCoordinates = false;
     export let editor: Editor;
@@ -58,8 +58,8 @@
     function updateGlitchedText() {
         const characters = "!@#$%^&*()/|\\";
         glitchedName = "";
-        for (let i = 0; i < label.length; i++) {
-            const char = label.charAt(i);
+        for (let i = 0; i < name.length; i++) {
+            const char = name.charAt(i);
             if (Math.random() > 0.2 || char === " ") {
                 glitchedName += char;
             } else {
@@ -77,10 +77,10 @@
 <div class="atom no-select" class:selected class:dim class:glitched on:click={click}
      style:left="{position.x}rem" style:top="{-position.y}rem"
 >
-    <img class="avatar" src={getAvatar(id)} alt={label}/>
+    <img class="avatar" src={getAvatar(id)} alt={name}/>
 
     <div class="label font-hywh-65w">
-        {glitched ? glitchedName : label}
+        {glitched ? glitchedName : name}
     </div>
 
     {#if showCoordinates}

@@ -109,8 +109,8 @@ relationGraph lang notReplacedCluster
         let (Path path) = fromJust $ lookup cluster allPathsOfRoot
         entity <- path
         return $ JObject [
-            ("id",          JString $ entityId        entity),
-            ("translation", JString $ translateEntity entity)]
+            ("id",   JString $ entityId        entity),
+            ("name", JString $ translateEntity entity)]
 
     jsonRootPosition = toJSON $ position rootLayout
 
@@ -119,21 +119,21 @@ relationGraph lang notReplacedCluster
     jsonAtoms = JArray $ do
         renderedAtom <- renderedAtoms
         maybe empty (\layout -> return $ JObject [
-            ("id",          JString $ entityId        renderedAtom),
-            ("translation", JString $ translateEntity renderedAtom),
-            ("position",    toJSON  $ position layout)
+            ("id",       JString $ entityId        renderedAtom),
+            ("name",     JString $ translateEntity renderedAtom),
+            ("position", toJSON  $ position layout)
             ]) $ lookup renderedAtom entityLayouts
 
     jsonClusters = JArray $ do
         renderedCluster@(Cluster id _ (IndexedSetFamily _ allElements) _ _)
             <- renderedClusters
         maybe empty (\(Transform position anchor size) -> return $ JObject [
-            ("id",          JString id),
-            ("translation", JString $ translateEntity renderedCluster),
-            ("elements",    JArray $ JString . entityId <$> allElements),
-            ("position",    toJSON position),
-            ("anchor",      toJSON anchor),
-            ("size",        toJSON size)
+            ("id",       JString id),
+            ("name",     JString $ translateEntity renderedCluster),
+            ("elements", JArray $ JString . entityId <$> allElements),
+            ("position", toJSON position),
+            ("anchor",   toJSON anchor),
+            ("size",     toJSON size)
             ]) $ lookup renderedCluster entityLayouts
 
     jsonRelationsBetween = JArray $ do
@@ -151,8 +151,8 @@ relationGraph lang notReplacedCluster
             let translateActionsIn =
                     JArray . (JString . translateAction . action <$>)
             in [
-            ("subjectId",   JString $ entityId subject),
-            ("objectId",    JString $ entityId object),
+            ("subjectId", JString $ entityId subject),
+            ("objectId",  JString $ entityId object),
 
             ("forwardRelations",  translateActionsIn forwardRelations),
             ("backwardRelations", translateActionsIn backwardRelations),
@@ -163,7 +163,7 @@ relationGraph lang notReplacedCluster
         ("id", jsonId),
         ("path", jsonPath),
         ("rootPosition", jsonRootPosition),
-        ("rootTranslation", jsonRootTranslation),
+        ("rootName", jsonRootTranslation),
         ("atoms", jsonAtoms),
         ("clusters", jsonClusters),
         ("relationsBetween", jsonRelationsBetween)

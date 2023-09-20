@@ -1,6 +1,6 @@
 <script lang="ts">
     import SettingsItemCloudyBackground from "$lib/Canvas/SettingsItemCloudyBackground.svelte";
-    import {afterUpdate, createEventDispatcher, onMount} from "svelte";
+    import {afterUpdate} from "svelte";
     import { _ } from "svelte-i18n";
 
     export let options: Array<string>;

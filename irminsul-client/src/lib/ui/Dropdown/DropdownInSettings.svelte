@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Option } from "$lib/util/Option";
-    import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
-    import Button from "../Button.svelte";
+    import {afterUpdate, createEventDispatcher} from "svelte";
     import DropdownList from "../DropdownList.svelte";
     import ButtonInSettings from "$lib/ui/Button/ButtonInSettings.svelte";
 

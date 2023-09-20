@@ -154,6 +154,6 @@ const assigner = new Map<string, string>([
     ["Zhongli", Zhongli],
 ]);
 
-export function getAvatar(id: string) {
+export function getAvatar(id: string): string {
     return assigner.get(id) ?? Unknown;
 }

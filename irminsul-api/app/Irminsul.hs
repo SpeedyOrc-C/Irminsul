@@ -136,9 +136,12 @@ data ClusterType
 data IndexedSetFamily a = IndexedSetFamily { indices :: [a], elements :: [a] }
 
 instance Show a => Show (IndexedSetFamily a) where
-  show :: Show a => IndexedSetFamily a -> String
-  show = show . indices
+    show :: Show a => IndexedSetFamily a -> String
+    show = show . indices
 
+instance Functor IndexedSetFamily where
+    fmap :: (a -> b) -> IndexedSetFamily a -> IndexedSetFamily b
+    fmap f x = IndexedSetFamily (f <$> indices x) (f <$> elements x)
 
 
 data Layout = Layout {

@@ -5,7 +5,7 @@ import Irminsul
     ( Entity(Atom, Cluster, entityId, entities),
       Transform(position, Transform),
       Layout(Layout),
-      IndexedSetFamily(IndexedSetFamily, indices, elements),
+      IndexedSetFamily(IndexedSetFamily, indices),
       Relation(BiRelation, Relation, action),
       Path(..),
       isBiRelation,
@@ -59,27 +59,24 @@ replaceTraveller _ atom@(Atom {}) = atom
 
 replaceTraveller whoAmI (Cluster entityId clusterType entities relations layout) =
     Cluster entityId clusterType
-    (IndexedSetFamily
-        (entityReplacer <$> indices entities)
-        (entityReplacer <$> elements entities))
-    (IndexedSetFamily
-        (relationReplacer <$> indices relations)
-        (relationReplacer <$> elements relations))
-    (layoutReplacer <$> layout)
+    (replaceEntity <$> entities)
+    (replaceRelation <$> relations)
+    (replaceLayout <$> layout)
     where
-        entityReplacer = replaceTraveller whoAmI
+        replaceEntity :: Entity -> Entity
+        replaceEntity = replaceTraveller whoAmI
 
-        relationReplacer :: Relation -> Relation
-        relationReplacer (BiRelation action s o) =
-            BiRelation action (entityReplacer s) (entityReplacer o)
-        relationReplacer (Relation action s o) =
-            Relation action (entityReplacer s) (entityReplacer o)
+        replaceRelation :: Relation -> Relation
+        replaceRelation (BiRelation action s o) =
+            BiRelation action (replaceEntity s) (replaceEntity o)
+        replaceRelation (Relation action s o) =
+            Relation action (replaceEntity s) (replaceEntity o)
 
-        layoutReplacer :: Layout -> Layout
-        layoutReplacer (Layout elementProperties rootProperty) =
+        replaceLayout :: Layout -> Layout
+        replaceLayout (Layout elementProperties rootProperty) =
             Layout
                 elementProperties
-                (first entityReplacer <$> rootProperty)
+                (first replaceEntity <$> rootProperty)
 
 {-|
     This empowers the core functionality of the client.

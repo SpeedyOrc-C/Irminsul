@@ -4,6 +4,7 @@ module Root.Teyvat.Snezhnaya.Fatui where
 
 import Irminsul
 import Root.Teyvat.Inazuma
+import Root.Teyvat.Snezhnaya.Fatui.HouseOfTheHearth
 
 tartaglia = "Tartaglia";
     childe = tartaglia
@@ -21,6 +22,6 @@ fatui = clusterNode "Fatui" Organization
 
     ]
     [
-
+        houseOfTheHearth
     ]
     Nothing

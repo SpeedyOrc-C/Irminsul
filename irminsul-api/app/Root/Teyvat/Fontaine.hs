@@ -22,4 +22,6 @@ fontaine = clusterNode "Fontaine" Country
     [
         theSteambird
     ]
-    Nothing
+    (layout (0, 0) [
+        
+    ])

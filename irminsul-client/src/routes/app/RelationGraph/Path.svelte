@@ -23,7 +23,7 @@
         {#each relationGraph.path as element}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-            <div class="path-element" tabindex="0"
+            <div tabindex="0"
                  on:click={() => jumpTo(element)}
                  on:keydown={e => keydown(e, element)}
             >
@@ -59,32 +59,28 @@
 
     .path-elements {
         display: flex;
-    }
 
-    .path-element {
-        flex-shrink: 0;
+        & > div {
+            flex-shrink: 0;
 
-        padding: 0.3rem 0.8rem;
-        margin: 0.1rem;
-        border-radius: 0.2rem;
+            padding: 0.3rem 0.8rem;
+            margin: 0.1rem;
+            border-radius: 0.2rem;
 
-        background-color: #ece5d8;
-        color: #3b4255;
+            background-color: #ece5d8;
+            color: #3b4255;
 
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+            transition-property: color, background-color;
+            transition-duration: 0.1s;
 
-        transition-property: color, background-color;
-        transition-duration: 0.1s;
-
-        .path.enabled &:not(:last-child) {
-            &:hover, &:focus {
-                background-color: white;
-            }
-            &:active {
-                background-color: #3b4255;
-                color: #ece5d8;
+            .path.enabled &:not(:last-child) {
+                &:hover, &:focus {
+                    background-color: white;
+                }
+                &:active {
+                    background-color: #3b4255;
+                    color: #ece5d8;
+                }
             }
         }
     }

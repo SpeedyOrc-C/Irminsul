@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Liyue.Adepti.StreetwardRamblersAbode where
 
 import Irminsul

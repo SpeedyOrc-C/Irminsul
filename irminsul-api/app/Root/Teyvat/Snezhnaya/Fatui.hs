@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Snezhnaya.Fatui where
 
 import Irminsul

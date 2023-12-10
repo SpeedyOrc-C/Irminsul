@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Mondstadt.GunnhildrPegg where
 
 import Irminsul

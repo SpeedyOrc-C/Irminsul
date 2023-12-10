@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Mondstadt.FavoniusChurch where
 
 import Irminsul

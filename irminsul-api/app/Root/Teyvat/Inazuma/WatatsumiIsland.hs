@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Inazuma.WatatsumiIsland where
 
 import Irminsul

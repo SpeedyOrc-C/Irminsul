@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Liyue.Adepti.CloudRetainersAbode where
 
 import Irminsul

@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Sumeru.GrandharvaVille where
 
 import Irminsul

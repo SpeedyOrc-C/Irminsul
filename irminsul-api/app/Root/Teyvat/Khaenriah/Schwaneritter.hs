@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Khaenriah.Schwaneritter where
 
 import Irminsul

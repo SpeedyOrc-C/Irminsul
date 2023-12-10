@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Sumeru.AlcazarzarayPalace where
 
 import Irminsul

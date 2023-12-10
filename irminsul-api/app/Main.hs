@@ -2,8 +2,6 @@
 This is the main program of Irminsul API server.
 It will listen to port 50000 to handle API requests.
 -}
-{-# LANGUAGE OverloadedStrings #-}
-
 module Main where
 
 import API

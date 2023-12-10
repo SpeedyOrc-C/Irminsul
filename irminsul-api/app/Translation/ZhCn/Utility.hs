@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Translation.ZhCn.Utility where
 import Data.String (IsString)
 

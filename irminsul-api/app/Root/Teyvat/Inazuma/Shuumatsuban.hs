@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Root.Teyvat.Inazuma.Shuumatsuban where
 
 import Irminsul

@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Irminsul where
 
 import Data.List (intercalate, nub)

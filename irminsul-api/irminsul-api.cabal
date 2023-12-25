@@ -148,6 +148,8 @@ executable irminsul-api
     -- other-extensions:
     default-extensions:
         OverloadedStrings
+       ,ViewPatterns
+       ,LambdaCase
 
     -- Other library packages from which modules are imported.
     build-depends:

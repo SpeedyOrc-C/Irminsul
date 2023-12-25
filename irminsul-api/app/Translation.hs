@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase #-}
-
 module Translation where
 
 import Data.Maybe ( fromMaybe )

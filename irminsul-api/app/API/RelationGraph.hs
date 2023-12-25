@@ -1,4 +1,3 @@
-{-# LANGUAGE ViewPatterns #-}
 module API.RelationGraph (relationGraph, readWhoAmI) where
 
 import Irminsul

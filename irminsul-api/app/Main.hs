@@ -21,14 +21,18 @@ import Data.Maybe (isNothing, fromJust)
 main :: IO ()
 main = do
     args <- getArgs
-    if null args then runOn 50000
+    if null args then
+        runOn 50000
     else do
-        let portMaybe = readMaybe (head args) :: Maybe Int
-        if isNothing portMaybe then putStrLn "Cannot read port number."
+        let portMaybe = readMaybe (head args)
+        if isNothing portMaybe then
+            putStrLn "Cannot read port number."
         else do
-            let (Just port) = portMaybe
-            if port < 0 || port > 65535 then putStrLn "Invalid port number."
-            else runOn port
+            let port = fromJust portMaybe
+            if port < 0 || port > 65535 then
+                putStrLn "Invalid port number."
+            else
+                runOn port
     where 
         runOn port = do
             putStrLn $ "Irminsul API starts on port " ++ show port ++ "..."

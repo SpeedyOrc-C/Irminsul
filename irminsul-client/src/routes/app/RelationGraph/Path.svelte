@@ -6,7 +6,9 @@
     export let enabled = true;
 
     function jumpTo(pathElement: PathElement) {
-        dispatch("jump-to", pathElement.id);
+        if (enabled) {
+            dispatch("jump-to", pathElement.id);
+        }
     }
 
     function keydown(e: KeyboardEvent, pathElement: PathElement) {

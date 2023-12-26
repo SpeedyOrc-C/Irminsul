@@ -15,34 +15,36 @@
     let state = State.Hidden;
 
     afterUpdate(() => {
-        if (show)
-            open();
-        else
-            close();
-    });
-
-    function open() {
-        if (state == State.Hidden || state == State.Disappearing) {
-            if (state == State.Hidden)
-                below = self.getBoundingClientRect().bottom + 300 < document.body.getBoundingClientRect().bottom;
-            state = State.Appearing;
+        if (state == State.Appearing) {
+            below = self.getBoundingClientRect().bottom < document.body.getBoundingClientRect().bottom;
             setTimeout(() => {
                 if (state == State.Appearing) {
                     state = State.Shown;
                 }
             }, 200);
         }
+        if (state == State.Disappearing) {
+            setTimeout(() => {
+                if (state == State.Disappearing) {
+                    state = State.Hidden;
+                }
+            }, 200);
+        }
+        if (show && (state == State.Hidden || state == State.Disappearing))
+            open();
+        else if (!show && (state == State.Shown || state == State.Appearing))
+            close();
+    });
+
+    function open() {
+        if (state == State.Hidden || state == State.Disappearing) {
+            setTimeout(() => state = State.Appearing);
+        }
     }
 
     function close() {
         if (state == State.Shown || state == State.Appearing) {
-            state = State.Disappearing;
-            setTimeout(() => {
-                if (state == State.Disappearing) {
-                    state = State.Hidden;
-                    below = true;
-                }
-            }, 200);
+            setTimeout(() => state = State.Disappearing);
         }
     }
 

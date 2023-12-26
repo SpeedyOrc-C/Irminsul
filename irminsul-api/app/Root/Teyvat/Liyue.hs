@@ -63,7 +63,7 @@ liyue = clusterNodeWithExclusion "Liyue" Country
         jinYun `appreciate` xinyan,
         keqing `intrestedIn` xinyan,
 
-        Relation "Smuggle" beidou travellerArchonSide,
+        Relation "SmuggleIntoInazuma" beidou travellerArchonSide,
 
         Relation "YoungerSisterOfMother" shenhe chongyun,
 

@@ -23,6 +23,7 @@
     const theDisappeared: Array<string> = [
         "RukkhadevataGreaterLord",
         "KunikuzushiRaiden",
+        "Forcalos",
     ];
 
     afterUpdate(() => {

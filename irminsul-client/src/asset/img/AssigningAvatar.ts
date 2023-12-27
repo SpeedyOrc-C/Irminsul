@@ -11,6 +11,8 @@ import BarbaraPegg from "./avatar/BarbaraPegg.png";
 import Beidou from "./avatar/Beidou.png";
 import Bennett from "./avatar/Bennett.png";
 import Candace from "./avatar/Candace.png";
+import Charlotte from "./avatar/Charlotte.png";
+import Chevreuse from "./avatar/Chevreuse.png";
 import Chongyun from "./avatar/Chongyun.png";
 import Collei from "./avatar/Collei.png";
 import Cyno from "./avatar/Cyno.png";
@@ -24,6 +26,8 @@ import EiRaiden from "./avatar/EiRaiden.png";
 import EulaLawrence from "./avatar/EulaLawrence.png";
 import Faruzan from "./avatar/Faruzan.png";
 import FischlVonLuftschlossNarfidort from "./avatar/FischlVonLuftschlossNarfidort.png";
+import Freminet from "./avatar/Freminet.png";
+import Furina from "./avatar/Furina.png";
 import Ganyu from "./avatar/Ganyu.png";
 import Gorou from "./avatar/Gorou.png";
 import HeizouShikanoin from "./avatar/HeizouShikanoin.png";
@@ -41,10 +45,14 @@ import KokomiSangonomiya from "./avatar/KokomiSangonomiya.png";
 import Layla from "./avatar/Layla.png";
 import Lisa from "./avatar/Lisa.png";
 import Lumine from "./avatar/Lumine.png";
+import Lynette from "./avatar/Lynette.png";
+import Lyney from "./avatar/Lyney.png";
 import MikaSchmidt from "./avatar/MikaSchmidt.png";
 import MikoYae from "./avatar/MikoYae.png";
 import MonaAstrologistMegistus from "./avatar/MonaAstrologistMegistus.png";
 import Nahida from "./avatar/Nahida.png";
+import Navia from "./avatar/Navia.png";
+import Neuvillette from "./avatar/Neuvillette.png";
 import Nilou from "./avatar/Nilou.png";
 import Ningguang from "./avatar/Ningguang.png";
 import Noelle from "./avatar/Noelle.png";
@@ -66,6 +74,7 @@ import Thoma from "./avatar/Thoma.png";
 import Tighnari from "./avatar/Tighnari.png";
 import Venti from "./avatar/Venti.png";
 import Wanderer from "./avatar/Wanderer.png";
+import Wriothesley from "./avatar/Wriothesley.png";
 import Xiangling from "./avatar/Xiangling.png";
 import Xiao from "./avatar/Xiao.png";
 import Xingqiu from "./avatar/Xingqiu.png";
@@ -88,6 +97,8 @@ const assigner = new Map<string, string>([
     ["Beidou", Beidou],
     ["Bennett", Bennett],
     ["Candace", Candace],
+    ["Charlotte", Charlotte],
+    ["Chevreuse", Chevreuse],
     ["Chongyun", Chongyun],
     ["Collei", Collei],
     ["Cyno", Cyno],
@@ -101,6 +112,8 @@ const assigner = new Map<string, string>([
     ["EulaLawrence", EulaLawrence],
     ["Faruzan", Faruzan],
     ["FischlVonLuftschlossNarfidort", FischlVonLuftschlossNarfidort],
+    ["Freminet", Freminet],
+    ["Furina", Furina],
     ["Ganyu", Ganyu],
     ["Gorou", Gorou],
     ["HeizouShikanoin", HeizouShikanoin],
@@ -118,10 +131,14 @@ const assigner = new Map<string, string>([
     ["Layla", Layla],
     ["Lisa", Lisa],
     ["Lumine", Lumine],
+    ["Lynette", Lynette],
+    ["Lyney", Lyney],
     ["MikaSchmidt", MikaSchmidt],
     ["MikoYae", MikoYae],
     ["MonaAstrologistMegistus", MonaAstrologistMegistus],
     ["Nahida", Nahida],
+    ["Navia", Navia],
+    ["Neuvillette", Neuvillette],
     ["Nilou", Nilou],
     ["Ningguang", Ningguang],
     ["Noelle", Noelle],
@@ -143,6 +160,7 @@ const assigner = new Map<string, string>([
     ["Tighnari", Tighnari],
     ["Venti", Venti],
     ["Wanderer", Wanderer],
+    ["Wriothesley", Wriothesley],
     ["Xiangling", Xiangling],
     ["Xiao", Xiao],
     ["Xingqiu", Xingqiu],

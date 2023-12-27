@@ -3,7 +3,7 @@
     import Coordinate from "./Coordinate.svelte";
     import type {Vector2} from "$lib/util/Vector2";
     import type Editor from "./Editor";
-    import {getAvatar} from "$lib/AssigningAvatar";
+    import {getAvatar} from "../../../../asset/img/AssigningAvatar";
 
     const dispatch = createEventDispatcher();
 

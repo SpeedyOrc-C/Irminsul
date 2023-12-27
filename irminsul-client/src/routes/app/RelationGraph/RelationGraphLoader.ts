@@ -16,27 +16,31 @@ export class RelationGraphLoader {
         return Promise.resolve(cachedRelationGraph);
     }
 
-    downloadFromServer(id: string, lang: string, whoAmI: "aether" | "lumine" = "aether"): Promise<RelationGraph> {
-        return new Promise((resolve, reject) => {
-            fetch(`/api/relation-graph/${id}/${lang}/${whoAmI}`)
-                .then(response => {
-                    if (response.status < 200 || response.status > 299) {
-                        reject(response.status);
-                    } else {
-                        response.json()
-                            .then((json: ApiResponse<RelationGraph>) => {
-                                if (json.status === 'OK') {
-                                    this.saveToCache(id, lang, json.body);
-                                    resolve(json.body);
-                                } else {
-                                    reject(json.status);
-                                }
-                            })
-                            .catch(() => reject("Failed to decode JSON."));
-                    }
-                })
-                .catch(() => reject("Failed to download relation graph."));
-        });
+    async downloadFromServer(id: string, lang: string, whoAmI: "aether" | "lumine" = "aether"): Promise<RelationGraph> {
+        let response: Response;
+        try {
+            response = await fetch(`/api/relation-graph/${id}/${lang}/${whoAmI}`);
+        } catch (e) {
+            throw "Failed to download relation graph.";
+        }
+
+        if (response.status < 200 || response.status > 299) {
+            throw response.status;
+        }
+
+        let json: ApiResponse<RelationGraph>;
+        try {
+            json = await response.json();
+        } catch (e) {
+            throw "Failed to decode JSON.";
+        }
+
+        if (json.status !== 'OK') {
+            throw json.status;
+        }
+
+        this.saveToCache(id, lang, json.body);
+        return json.body;
     }
 
     loadFromCache(id: string, lang: string): RelationGraph | null {

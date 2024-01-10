@@ -8,6 +8,7 @@ import Translation.ZhCn.Entity (translationEntityZhCn)
 import Translation.ZhCn.Action (translationActionZhCn)
 import Translation.EnUs.Entity (translationEntityEnUs)
 import Translation.EnUs.Action (translationActionEnUs)
+import Data.Map (Map, (!?))
 
 data Language = ZhCn | EnUs
     deriving (Eq, Show)
@@ -25,7 +26,7 @@ readLanguageCode lang = lookup (toLower <$> lang) [
 data LanguagePack = LanguagePack {
     language :: Language,
     translationEntity :: [(String, Information)],
-    translationAction :: [(String, String)]
+    translationAction :: Map String String
     }
 
 getLanguagePack :: Language -> LanguagePack
@@ -41,4 +42,4 @@ translateEntityWith (LanguagePack _ translationEntities _) entity =
 
 translateActionWith :: LanguagePack -> String -> String
 translateActionWith (LanguagePack _ _ translationActions) action =
-    fromMaybe ("Action-" ++ action) (lookup action translationActions)
+    fromMaybe ("Action-" ++ action) (translationActions !? action)

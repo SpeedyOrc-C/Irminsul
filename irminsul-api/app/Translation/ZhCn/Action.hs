@@ -1,7 +1,9 @@
 module Translation.ZhCn.Action where
 
-translationActionZhCn :: [(String, String)]
-translationActionZhCn = [
+import Data.Map
+
+translationActionZhCn :: Map String String
+translationActionZhCn = fromList [
     ("ActingGrandMaster", "代理团长"),
     ("ActingGuardian", "代理监护人"),
     ("Admire", "仰慕"),

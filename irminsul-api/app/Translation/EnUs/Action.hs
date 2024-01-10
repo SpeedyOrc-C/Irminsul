@@ -1,7 +1,9 @@
 module Translation.EnUs.Action where
 
-translationActionEnUs :: [(String, String)]
-translationActionEnUs = [
+import Data.Map
+
+translationActionEnUs :: Map String String
+translationActionEnUs = fromList [
     ("ActingGrandMaster", "Acting grand master"),
     ("ActingGuardian", "Acting guardian"),
     ("Admire", "Admire"),

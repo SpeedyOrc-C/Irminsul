@@ -35,6 +35,7 @@
             "graphics": "Graphics",
             "show-axis": "Show axis",
             "show-grid": "Show grid",
+            "dead-name-glitch-effect": "Dead name glitch effect",
             "control": "Control",
             "show-joystick": { "self": "Show joystick",  "has-coarse-pointer": "When using fingers" },
             "joystick-sensibility": "Joystick sensibility",

@@ -19,6 +19,7 @@
     export let showAxis: boolean;
     export let showGrid: boolean;
     export let showJoystick: ShowJoystick;
+    export let deadNameGlitchEffect: boolean;
     export let joystickSensibility: number;
 
     const dispatch = createEventDispatcher();
@@ -81,6 +82,7 @@
                            on:set-show-axis bind:showAxis
                            on:set-show-grid bind:showGrid
                            on:set-show-joystick bind:showJoystick
+                           on:set-dead-name-glitch-effect bind:deadNameGlitchEffect
                            on:set-joystick-sensibility bind:joystickSensibility
                            on:set-reduce-visual-effect={e => {
                                reduceVisualEffect = e.detail;

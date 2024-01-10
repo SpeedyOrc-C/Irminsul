@@ -25,7 +25,7 @@
 
     const loader = new RelationGraphLoader();
 
-    const settings = new RelationGraphSettings("relation_graph_settings", "2023.08.30.1357");
+    const settings = new RelationGraphSettings("relation_graph_settings", "2023.12.27.0105");
 
     let relationGraph: RelationGraph | null = null;
     let jsonFileInput: HTMLInputElement;
@@ -35,6 +35,7 @@
     let showGrid = false;
     let showCoordinates = false;
     let showJoystick: ShowJoystick = ShowJoystick.Never;
+    let deadNameGlitchEffect = true;
     let showSettings = false;
     let joystickSensibility = 4;
     let smoothMovement = true;
@@ -138,6 +139,12 @@
         settings.save();
     }
 
+    function setDeadNameGlitchEffect(dead_name_glitch_effect: boolean) {
+        deadNameGlitchEffect = dead_name_glitch_effect;
+        settings.preference.dead_name_glitch_effect = dead_name_glitch_effect;
+        settings.save();
+    }
+
     function setReduceVisualEffect(reduce_visual_effect: boolean) {
         settings.preference.reduce_visual_effect = reduce_visual_effect;
         settings.save();
@@ -167,6 +174,7 @@
         showAxis = settings.preference.show_axis;
         showGrid = settings.preference.show_grid;
         showJoystick = settings.preference.show_joystick;
+        deadNameGlitchEffect = settings.preference.dead_name_glitch_effect;
         joystickSensibility = settings.preference.joystick_sensitivity;
         locale.set(settings.preference.language);
 
@@ -244,6 +252,7 @@
                bind:showAxis on:set-show-axis={e => setShowAxis(e.detail)}
                bind:showGrid on:set-show-grid={e => setShowGrid(e.detail)}
                bind:showCoordinates
+               bind:deadNameGlitchEffect
                bind:hideUi
                on:jump-to={e => loadRelationGraph(e.detail)}
                {settings} {smoothMovement}
@@ -278,6 +287,7 @@
               on:set-show-axis={e => setShowAxis(e.detail)} bind:showAxis
               on:set-show-grid={e => setShowGrid(e.detail)} bind:showGrid
               on:set-show-joystick={e => setShowJoystick(e.detail)} bind:showJoystick
+              on:set-dead-name-glitch-effect={e => setDeadNameGlitchEffect(e.detail)} bind:deadNameGlitchEffect
               on:set-joystick-sensibility={e => setJoystickSensibility(e.detail)} bind:joystickSensibility
               on:set-reduce-visual-effect={e => setReduceVisualEffect(e.detail)}
               on:set-language={e => setLanguage(e.detail)}

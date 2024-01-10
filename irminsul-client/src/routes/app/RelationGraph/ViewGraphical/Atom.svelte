@@ -11,6 +11,7 @@
     export let name: string;
 
     export let showCoordinates = false;
+    export let deadNameGlitchEffect = true;
     export let editor: Editor;
 
     let selected = false;
@@ -32,7 +33,7 @@
             && !editor.isEntityInSelectedCluster(id);
         position = editor.anchorOf(id);
 
-        if (!editor.isEditing() && theDisappeared.find(name => name === id) !== undefined) {
+        if (!editor.isEditing() && deadNameGlitchEffect && theDisappeared.find(name => name === id) !== undefined) {
             glitchEffectStart();
         } else {
             glitchEffectStop();

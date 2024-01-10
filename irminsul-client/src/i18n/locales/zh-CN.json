@@ -35,6 +35,7 @@
             "graphics": "画面",
             "show-axis": "显示坐标轴",
             "show-grid": "显示网格",
+            "dead-name-glitch-effect": "死亡名字乱码效果",
             "control": "控制",
             "show-joystick": { "self": "显示摇杆", "has-coarse-pointer": "用手指时" },
             "joystick-sensibility": "摇杆灵敏度",

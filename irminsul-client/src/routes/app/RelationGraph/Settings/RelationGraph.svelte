@@ -16,6 +16,7 @@
     export let showAxis: boolean;
     export let showGrid: boolean;
     export let showJoystick: ShowJoystick;
+    export let deadNameGlitchEffect: boolean;
     export let joystickSensibility: number;
 
     let options: Array<Option>;
@@ -40,6 +41,13 @@
     <DropdownInSettings {options}
         value={showGrid ? "on" : "off"}
         on:dropdown-change={e => dispatch("set-show-grid", e.detail === "on")}
+    />
+</ItemBar>
+
+<ItemBar text={$_("settings.relation-graph.dead-name-glitch-effect")}>
+    <DropdownInSettings {options}
+        value={deadNameGlitchEffect ? "on" : "off"}
+        on:dropdown-change={e => dispatch("set-dead-name-glitch-effect", e.detail === "on")}
     />
 </ItemBar>
 

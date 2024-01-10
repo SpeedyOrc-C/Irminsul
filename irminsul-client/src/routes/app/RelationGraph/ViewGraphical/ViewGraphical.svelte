@@ -18,6 +18,7 @@
     export let showGrid: boolean;
     export let showAxis: boolean;
     export let showCoordinates: boolean;
+    export let deadNameGlitchEffect: boolean;
     export let editor: Editor;
     export let settings: RelationGraphSettings;
     export let hideUi: boolean;
@@ -187,7 +188,7 @@
         {#each relationGraph.atoms as atom}
             <Atom id={atom.id} name={atom.name}
                   on:toggle-atom={e => toggleAtom(e.detail)}
-                  {editor} {showCoordinates}
+                  {editor} {showCoordinates} {deadNameGlitchEffect}
             />
         {/each}
 

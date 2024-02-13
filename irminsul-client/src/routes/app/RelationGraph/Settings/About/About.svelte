@@ -20,7 +20,7 @@
         new Name("ZY_", null, "https://space.bilibili.com/67662455"),
     ]
 
-    const version = "2024.0110.0";
+    const version = "2024.0213.0";
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->

@@ -16,8 +16,6 @@
 
     export let id = "Teyvat";
 
-    let title = "Irminsul";
-
     let view = new ViewController();
     let editor: Editor;
     let editing = false;
@@ -75,7 +73,6 @@
         view.reset();
         updateView();
         id = loadId;
-        title = `Irminsul - ${relationGraph.rootName}`;
 
         console.info("Relation graph loaded: ", json);
     }
@@ -241,7 +238,11 @@
 <svelte:window on:keydown={keydown} on:beforeunload={beforeunload} />
 
 <svelte:head>
-    <title>{title}</title>
+    <title>
+        Irminsul
+        {(relationGraph ? `- ${relationGraph.rootName}` : "")}
+        {(editing ? "*" : "")}
+    </title>
 </svelte:head>
 
 <div id="relation-graph">

@@ -121,6 +121,7 @@ translationEntityZhCn = [
     ipn "TenryouCommission" "天领奉行",
     ipn "Teyvat" "提瓦特",
     ipn "TheFourWinds" "四风守护",
+    ipn "TheSteambird" "蒸汽鸟报",
     ipn "Thoma" "托马",
     ipn "Tighnari" "提纳里",
     ipn "TriCommission" "三奉行",

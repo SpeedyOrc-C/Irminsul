@@ -35,5 +35,8 @@ fontaine = clusterNode "Fontaine" Country
     (layout (0, 15) [
         al neuvillette (-15, 0),
         al forcalos (0, 0),
-        al furina (0, -15)
+        al furina (0, -15),
+        al charlotte (15, -15),
+
+        cl theSteambird (15, 0) (15, 0) (15, 5)
     ])

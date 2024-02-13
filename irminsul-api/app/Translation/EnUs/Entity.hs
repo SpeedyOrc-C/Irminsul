@@ -119,6 +119,7 @@ translationEntityEnUs = [
     ipn "TenryouCommission" "Tenryou Commission",
     ipn "Teyvat" "Teyvat",
     ipn "TheFourWinds" "The Four Winds",
+    ipn "TheSteambird" "The Steambird",
     ipn "Thoma" "Thoma",
     ipn "Tighnari" "Tighnari",
     ipn "TriCommission" "Tri Commission",
